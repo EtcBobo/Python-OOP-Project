@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    {% from "includes/_formhelper.html" import render_field %}
+    <h1>User Profile</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <p>Username</p>
+        </div>
+        <div class="col-md-8">
+            <p>{{ user['Username'] }}</p>
+        </div>
+        <div class="col-md-4">
+            <p>Preferred price range</p>
+        </div>
+        <div class="col-md-8">
+            <p>{{ user['Price'] }}</p>
+        </div>
+        <div class="col-md-4">
+            <p>Preferred food type</p>
+        </div>
+        <div class="col-md-8">
+            <p>{{ user['Food Types'] }}</p>
+        </div>
+
+    </div>
+
+
+{% endblock %}

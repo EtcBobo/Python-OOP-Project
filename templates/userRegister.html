@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    {% from "includes/_formhelper.html" import render_field %}
+    <h1>Register</h1>
+    <form method=post>
+        <div class="form-group">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    {{ render_field(form.user, class_="form-control") }}
+                </div>
+                <div class="form-group col-md-6">
+                    {{ render_field(form.password, class_="form-control") }}
+                </div>
+
+                <div class="form-group col-md-4">
+                    {{ render_field(form.price, class_="form-control") }}
+                </div>
+                <div class="form-group col-md-4">
+                    {{ render_field(form.foodType, class_="form-control") }}
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+
+
+        <div class="form-group">
+            <div class="form-row">
+                <div class="form-group col-md-11">
+
+
+                </div>
+                <div class="form-group col-md-1">
+                    <input type="submit" value="Submit" class="btn btn-info"/>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+
+{% endblock %}

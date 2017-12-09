@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>{% extends 'layout.html' %}
+
+{% block body %}
+    <h1>View All Restaurants</h1>
+    <br/>
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Name of Restaurants</th>
+            <th>Description</th>
+            <th>Location</th>
+            <th>Opening Hours</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for i in Restaurant %}
+            <tr>
+
+                <td>{{ i['Name'] }}</td>
+
+                    <td> {{ i['Description'] }}</td>
+
+                    <td>{{ i['Location'] }}</td>
+
+                    <td>{{ i['Opening Hours'] }}</td>
+
+                <!--<td><a href="" class="btn btn-warning">Update</a></td>-->
+                <!--<td><form action="" method="post">-->
+                    <!--<input type="submit" value="Delete" class="btn btn-danger" onclick="return session['test']= True"></form></td>-->
+
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+{% endblock %}
