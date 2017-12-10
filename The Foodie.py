@@ -2,7 +2,7 @@ import firebase_admin
 from Registration import Registration
 from firebase_admin import credentials, db
 from flask import Flask, render_template, request, flash, redirect, url_for, session
-from wtforms import Form, StringField, TextAreaField, RadioField, SelectField, PasswordField, IntegerField, validators
+from wtforms import Form, StringField, TextAreaField, RadioField, SelectField, PasswordField, IntegerField, validators, SelectMultipleField
 from firebase import firebase
 from Restaurant import Restaurant
 
@@ -22,7 +22,7 @@ class RegisterForm(Form):
     user = StringField('Username',[validators.DataRequired()])
     password = PasswordField("Password",[validators.DataRequired()])
     price = StringField('Preferred Price Range')
-    foodType = SelectField(u'Preferred Food Type',
+    foodType = SelectMultipleField(u'Preferred Food Type',
                            choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'), ('Western Food', 'Western Food'),
                                     ('Chinese Food', 'Chinese Food'), ('Healthy Food', 'Healthy Food'),
                                     ('None', 'None')])
@@ -31,7 +31,7 @@ class RegisterForm(Form):
 
 class RestForm(Form):
     name = StringField('Restaurant Name',[validators.DataRequired()])
-    desc = StringField('Desciption')
+    desc = TextAreaField('Desciption')
     location = SelectField(u'Location', choices=[('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),('Central','Central')])
     price = StringField('Average Price')
     foodType = SelectField(u'Food Types',
@@ -56,8 +56,8 @@ class RestForm(Form):
                                     ('9 AM', '9 AM'), ('10 AM', '10 AM'), ('11 AM', '11 AM'), ('12 PM', '12 PM'),
                                     ('1 PM', '1 PM'),('2 PM', '2 PM'),('3 PM', '3 PM'),('4 PM', '4 PM'),('5 PM', '5 PM'),('6 PM', '6 PM'),('7 PM', '7 PM'),
                                     ('8 PM', '8 PM'),('9 PM', '9 PM'),('10 PM', '10 PM'),('11 PM', '11 PM'),])
-    address = StringField('Address')
-    comment = StringField('Comments')
+    address = TextAreaField('Address')
+    comment = TextAreaField('Comments')
 
 
 
@@ -106,7 +106,6 @@ def filter():
                 i = i - 1
             i = i + 1
 
-        print(filterList)
 
 
         if price != '':
