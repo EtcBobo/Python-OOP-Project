@@ -5,6 +5,7 @@ from flask import Flask, render_template, request, flash, redirect, url_for, ses
 from wtforms import Form, StringField, TextAreaField, RadioField, SelectField, PasswordField, IntegerField, validators, SelectMultipleField
 from firebase import firebase
 from Restaurant import Restaurant
+from flask_googlemaps import GoogleMaps,Map
 
 cred = credentials.Certificate('cred/python-oop-firebase-adminsdk-87ty7-eefcb6bc40.json')
 default_app = firebase_admin.initialize_app(cred, {
@@ -14,7 +15,7 @@ default_app = firebase_admin.initialize_app(cred, {
 root = db.reference()
 app = Flask(__name__)
 
-
+GoogleMaps(app, key="AIzaSyAN-25Ihf-_ndHtyzHEXF2SGjI6U-WqQKc")
 
 
 
@@ -235,6 +236,33 @@ def userLogin():
             session['logged_in'] = False
 
     return render_template('userLogin.html', form=form)
+
+@app.route('/heatmap')
+def heatmap():
+    centralmap1 = Map(
+        identifier="D10map",
+        lat=1.3343035,
+        lng=103.85632650000002,
+        markers=[
+            {
+                'icon': 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+                'lat': 1.324914617739032,
+                'lng': 103.85094881057739,
+                'infobox': "<b>360 Balestier Rd, Singapore"
+            },
+            {
+                'icon': 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+                'lat': 1.3209138285600572,
+                'lng': 103.89117121696472,
+                'infobox': "<b>70a Paya Lebar Rd, Singapore</b>"
+            }
+
+        ]
+    )
+
+
+    return render_template('heatmap.html', Centralmap1= centralmap1)
+
 
 
 @app.route('/logout')
