@@ -80,6 +80,7 @@ def filter():
         restFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
         totalRest = restFire.get('restaurants',None)
         for key in totalRest:
+
             print(totalRest[key]['Opening Hours'])
 
         for key in totalRest:
@@ -118,9 +119,6 @@ def filter():
         print(session['filtered'])
         return redirect(url_for('view'))
     return render_template('filter.html', form=form)
-
-
-
 
 @app.route('/viewRest',methods=['POST','GET'])
 def view():

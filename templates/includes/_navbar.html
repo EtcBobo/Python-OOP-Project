@@ -1,5 +1,6 @@
+<!--<link rel=stylesheet type=text/css href="\static\css\navbar.css">-->
 <nav class="navbar navbar-default">
-    <div class="container-fluid">
+    <div class="container-fluid" id="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
                     aria-expanded="false"
@@ -9,19 +10,22 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">The Foodie</a>
+            <li class="nav navbar-nav" style="display:inline-block;"><a href="/"><img src="http://www.freeiconspng.com/uploads/food-icon-7.png" style="width:40px;height:40px;display:inline-block;">The Foodie</a></li>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/">Home</a></li>
+                <li class=""><a href="/">Home</a></li>
+                <li class=""><a href="">Find Food</a></li>
+                <li class=""><a href="/filter">Find Me</a></li>
                 <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Restaurant<span
                         class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <!--<li><a href="/userRegister">Create an account</a></li>-->
                         <li><a href="/viewRest">View Restaurant</a></li>
                         <li><a href="/addRest">New Restaurant</a></li>
-                        <li><a href="/filter">Filter Restaurant</a></li>
+                        <li><a href="/filter">Filter Restaurant</a></li>-->
                     </ul>
+                    <li class=""><a href="/">ChatRoom</a></li>
                 </li>
             </ul>
 
@@ -38,3 +42,13 @@
         </div>
     </div>
 </nav>
+
+<style>
+    #container{
+    background-color: #edeff2;
+    color: white;
+
+}
+
+
+</style>
