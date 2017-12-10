@@ -21,7 +21,7 @@ app = Flask(__name__)
 class RegisterForm(Form):
     user = StringField('Username',[validators.DataRequired()])
     password = PasswordField("Password",[validators.DataRequired()])
-    price = StringField('Preferred Price Range')
+    price = StringField('Price Range')
     foodType = SelectField(u'Food Types',
                            choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'), ('Western Food', 'Western Food'),
                                     ('Chinese Food', 'Chinese Food'), ('Healthy Food', 'Healthy Food'),
@@ -32,7 +32,7 @@ class RegisterForm(Form):
 class RestForm(Form):
     name = StringField('Restaurant Name',[validators.DataRequired()])
     desc = StringField('Desciption')
-    location = SelectField(u'Location', choices=[('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),('Central','Central')])
+    location = SelectField(u'Location', choices=[('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South')])
     price = StringField('Average Price')
     foodType = SelectField(u'Food Types',
                            choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'), ('Western Food', 'Western Food'),
@@ -63,7 +63,7 @@ def filter():
         restFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
         totalRest = restFire.get('restaurants',None)
         for key in totalRest:
-            if location == totalRest[key]['Location']:
+            if location == totalRest[key]['Location'] or location == '':
                 filterList.append(totalRest[key])
         if price != '':
             for key in filterList:
@@ -83,9 +83,6 @@ def filter():
         print(session['filtered'])
         return redirect(url_for('view'))
     return render_template('filter.html', form=form)
-
-
-
 
 @app.route('/viewRest',methods=['POST','GET'])
 def view():
