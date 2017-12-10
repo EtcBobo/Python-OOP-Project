@@ -2,15 +2,20 @@
 
 {% block body %}
     {% from "includes/_formhelper.html" import render_field %}
-    <h1>Login</h1>
+<br>
+<br>
+<div id="logindiv">
+    <h1 id="login">Login</h1>
+    <p>Login to your foodie account!</p>
+    <br>
     <form method="POST" action="">
 
         <div class="form-group">
-            <div class="form-row">
-                <div class="form-group col-md-4">
+            <div class="form-group col-md-8">
+                <div class="form-group col-md-12">
                     {{ render_field(form.user, class_="form-control") }}
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-12">
                     {{ render_field(form.password, class_="form-control") }}
                 </div>
             </div>
@@ -19,12 +24,55 @@
         <div class="form-group">
             <div class="form-row">
                 <div class="form-group col-md-11">
-                </div>
-                <div class="form-group col-md-1">
-                    <input type="submit" value="Login" class="btn btn-info"/>
+
+
+                <!--</div>-->
+                <div class="form-group col-md-12">
+                    <input type="submit" value="login" class="btn btn-info" id="loginbtn"/>
                 </div>
             </div>
         </div>
 
+            </div>
+        </div>
+
     </form>
+    </div>
+<style>
+     #login{
+         font-weight: bold;
+    font-style: italic;
+    border-bottom: 2px solid darkred;
+    margin-bottom:20px;
+    font-size: 15px;
+    padding-bottom: 3px;
+    font-size:200%;
+
+    }
+
+     #logindiv {
+        max-width: 980px;
+        padding: 20px 12px 10px 20px;
+        font: 13px Arial, Helvetica, sans-serif;
+         align:center;
+
+
+    }
+#loginbtn{
+        /*border-radius: 4px;*/
+    background-color: darkred;
+    border: 0;
+    color: #fff!important;
+    display: inline-block;
+    font-size: 14px;
+    /*line-height: 40px;*/
+    /*min-width: 150px;*/
+    /*height: 42px;*/
+    text-align: center;
+        height: 42px;
+        width:250px
+
+    }
+
+</style>
 {% endblock %}

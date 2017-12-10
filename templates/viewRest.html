@@ -1,9 +1,30 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-    <h1>View All Restaurants</h1>
+<br>
+<br>
+<div id="viewdiv">
+    <h1 id="view">View All Restaurants</h1>
     <br/>
+    <p>2 results</p>
 
+    <div id="sort">
+        <span>Sort By:</span>
+        <td><select name="product" id="product" width="300" style="width: 300px">
+      <option id="az">Alphabetical Order(A~Z)</option>
+      <option id="za">Alphabetical Order(Z~A)</option>
+      <option id="low">Low to High</option>
+            <option id="high">High to Low</option>
+            <option id="ratelow">Ratings(Low to High)</option>
+            <option id="ratehigh">Ratings(High to Low)</option>
+
+    </select></td>
+
+
+    </div>
+
+    <br>
+    <br>
     <table class="table table-bordered">
         <thead>
         <tr>
@@ -38,5 +59,37 @@
 
         </tbody>
     </table>
+</div>
+<style>
+     #viewdiv{
+        max-width: 1480px;
+    padding: 20px 12px 10px 20px;
+    font: 13px Arial, Helvetica, sans-serif;
+        align:center;
 
+    }
+
+    #view{
+        font-weight: bold;
+    font-style: italic;
+    border-bottom: 2px solid darkred;
+    margin-bottom: 20px;
+    font-size: 15px;
+    padding-bottom: 3px;
+    font-size:200%;
+
+    }
+
+    #sort{
+        font-weight: bold;
+
+
+    }
+
+    p{
+        font-weight: bold;
+
+    }
+
+</style>
 {% endblock %}

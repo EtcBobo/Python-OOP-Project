@@ -1,6 +1,8 @@
 <!--<link rel=stylesheet type=text/css href="\static\css\navbar.css">-->
-<nav class="navbar navbar-default">
-    <div class="container-fluid" id="container">
+  <!--<nav class="navbar navbar-default">-->
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+     <div class="container-fluid" id="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
                     aria-expanded="false"
@@ -15,15 +17,15 @@
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class=""><a href="/">Home</a></li>
-                <li class=""><a href="">Find Food</a></li>
-                <li class=""><a href="/filter">Find Me</a></li>
+                <li class=""><a href="/filter">Find Food</a></li>
+                <li class=""><a href="/">Find Me</a></li>
                 <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Restaurant<span
                         class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <!--<li><a href="/userRegister">Create an account</a></li>-->
                         <li><a href="/viewRest">View Restaurant</a></li>
                         <li><a href="/addRest">New Restaurant</a></li>
-                        <li><a href="/filter">Filter Restaurant</a></li>-->
+                        <li><a href="/filter">Filter Restaurant</a></li>
                     </ul>
                     <li class=""><a href="/">ChatRoom</a></li>
                 </li>
@@ -44,11 +46,15 @@
 </nav>
 
 <style>
-    #container{
-    background-color: #edeff2;
-    color: white;
 
+    .navbar
+{
+    background-color: transparent;
 }
 
 
+    a { color:black !important; }
+a:hover { color:red !important;}
+
 </style>
+
