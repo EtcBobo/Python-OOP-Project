@@ -22,7 +22,7 @@ class RegisterForm(Form):
     user = StringField('Username',[validators.DataRequired()])
     password = PasswordField("Password",[validators.DataRequired()])
     price = StringField('Preferred Price Range')
-    foodType = SelectMultipleField(u'Preferred Food Type',
+    foodType = SelectField(u'Preferred Food Type',
                            choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'), ('Western Food', 'Western Food'),
                                     ('Chinese Food', 'Chinese Food'), ('Healthy Food', 'Healthy Food'),
                                     ('None', 'None')])
@@ -136,7 +136,8 @@ def filter():
 def view():
 
     list = session['filtered']
-    return render_template('viewRest.html', Restaurant=list)
+    listLen = len(list)
+    return render_template('viewRest.html', Restaurant=list, lengthList = listLen)
 
 @app.route('/addRest',methods=['POST','GET'])
 def addRest():
