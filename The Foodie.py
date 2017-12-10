@@ -38,7 +38,24 @@ class RestForm(Form):
                            choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'), ('Western Food', 'Western Food'),
                                     ('Chinese Food', 'Chinese Food'), ('Healthy Food', 'Healthy Food'),
                                     ('None', 'None')])
-    openH = StringField('Opening Hours')
+    openH = SelectField(u'Opening Hours',
+                           choices=[('12 AM', '12 AM'),('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'), ('4 AM', '4 AM'),
+                                    ('5 AM', '5 AM'), ('6 AM', '6 AM'), ('7 AM', '7 AM'), ('8 AM', '8 AM'),
+                                    ('9 AM', '9 AM'), ('10 AM', '10 AM'), ('11 AM', '11 AM'), ('12 PM', '12 PM'),
+                                    ('1 PM', '1 PM'),('2 PM', '2 PM'),('3 PM', '3 PM'),('4 PM', '4 PM'),('5 PM', '5 PM'),('6 PM', '6 PM'),('7 PM', '7 PM'),
+                                    ('8 PM', '8 PM'),('9 PM', '9 PM'),('10 PM', '10 PM'),('11 PM', '11 PM')])
+    closingH = SelectField(u'Opening Hours',
+                           choices=[('12 AM', '12 AM'),('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'), ('4 AM', '4 AM'),
+                                    ('5 AM', '5 AM'), ('6 AM', '6 AM'), ('7 AM', '7 AM'), ('8 AM', '8 AM'),
+                                    ('9 AM', '9 AM'), ('10 AM', '10 AM'), ('11 AM', '11 AM'), ('12 PM', '12 PM'),
+                                    ('1 PM', '1 PM'),('2 PM', '2 PM'),('3 PM', '3 PM'),('4 PM', '4 PM'),('5 PM', '5 PM'),('6 PM', '6 PM'),('7 PM', '7 PM'),
+                                    ('8 PM', '8 PM'),('9 PM', '9 PM'),('10 PM', '10 PM'),('11 PM', '11 PM'),])
+    openT = SelectField(u'Opening Hours',
+                           choices=[('12 AM', '12 AM'),('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'), ('4 AM', '4 AM'),
+                                    ('5 AM', '5 AM'), ('6 AM', '6 AM'), ('7 AM', '7 AM'), ('8 AM', '8 AM'),
+                                    ('9 AM', '9 AM'), ('10 AM', '10 AM'), ('11 AM', '11 AM'), ('12 PM', '12 PM'),
+                                    ('1 PM', '1 PM'),('2 PM', '2 PM'),('3 PM', '3 PM'),('4 PM', '4 PM'),('5 PM', '5 PM'),('6 PM', '6 PM'),('7 PM', '7 PM'),
+                                    ('8 PM', '8 PM'),('9 PM', '9 PM'),('10 PM', '10 PM'),('11 PM', '11 PM'),])
     address = StringField('Address')
     comment = StringField('Comments')
 
@@ -57,28 +74,46 @@ def filter():
         location = form.location.data
         price = form.price.data
         foodType = form.foodType.data
-        openH = form.openH.data
+        openT = form.openT.data
 
 
         restFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
         totalRest = restFire.get('restaurants',None)
         for key in totalRest:
-            if location == totalRest[key]['Location']:
+            print(totalRest[key]['Opening Hours'])
+
+        for key in totalRest:
+            if totalRest[key]['Opening Hours'][-2:] == 'PM':
+                openH = int(totalRest[key]['Opening Hours'][0:2]) + 12
+            else:
+                openH = int(totalRest[key]['Opening Hours'][0:2])
+
+            if totalRest[key]['Closing Hours'][-2:] == 'PM':
+                closingH = int(totalRest[key]['Closing Hours'][0:2]) + 12
+            else:
+                closingH = int(totalRest[key]['Closing Hours'][0:2])
+
+            if openT[-2:] == 'PM':
+                openT1 = int(openT[0:2]) +12
+            else:
+                openT1 = int(openT[0:2])
+
+            if openH <= openT1 < closingH or openT1 < closingH < openH or openT1 > openH > closingH or closingH == openH:
                 filterList.append(totalRest[key])
+
+        for key in filterList:
+            if location != key['Location']:
+                filterList.remove(key)
         if price != '':
             for key in filterList:
-                if price != filterList[key]['Price']:
-                    filterList.remove(filterList[key])
+                if price > key['Price']:
+                    filterList.remove(key)
 
         if foodType != 'None':
             for key in filterList:
-                if foodType != filterList[key]['Food Type']:
-                    filterList.remove(filterList[key])
+                if foodType != key['Food Type']:
+                    filterList.remove(key)
 
-        if openH != '':
-            for key in filterList:
-                if openH != filterList[key]['Opening Hours']:
-                    filterList.remove(filterList[key])
         session['filtered'] = filterList
         print(session['filtered'])
         return redirect(url_for('view'))
@@ -96,16 +131,18 @@ def view():
 @app.route('/addRest',methods=['POST','GET'])
 def addRest():
     form = RestForm(request.form)
-    if request.method == 'POST' and form.validate():
+    if request.method == 'POST':
         name = form.name.data
         desc = form.desc.data
         location = form.location.data
         price = form.price.data
         foodType = form.foodType.data
         openH = form.openH.data
+        closingH = form.closingH.data
         address = form.address.data
         comment = form.comment.data
-        res = Restaurant(name,desc,location,price,foodType,openH,address,comment)
+
+        res = Restaurant(name,desc,location,price,foodType,openH,closingH,address,comment)
 
         restFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
         try:
@@ -120,10 +157,12 @@ def addRest():
             'Price': res.get_price(),
             'Food Type': res.get_foodType(),
             'Opening Hours': res.get_openH(),
+            'Closing Hours': res.get_closingH(),
             'Address': res.get_address(),
             'Comments': res.get_comment()
 
         })
+
         return redirect(url_for('home'))
     return render_template('addRest.html', form=form)
 
@@ -141,6 +180,11 @@ def userRegister():
 
 
         userFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
+        allUser = userFire.get('allUsers',None)
+        for key in allUser:
+            if allUser[key]['Username'] == user:
+                flash('This username has already been used')
+                return redirect(url_for('userRegister'))
         try:
             totalUsers = userFire.get('allUsers',None)
             count = len(totalUsers)
@@ -153,6 +197,7 @@ def userRegister():
             'Food Types': reg.get_foodType()
 
         })
+        flash('You are succesfully registered')
         return redirect(url_for('home'))
     return render_template('userRegister.html', form=form)
 

@@ -12,10 +12,13 @@ default_app = firebase_admin.initialize_app(cred, {
 })
 
 
+#
+# restFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
+# totalRes = restFire.get('restaurants', None)
+# for key in totalRes:
+#     print(totalRes[key])
 
-restFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
-totalRes = restFire.get('restaurants', None)
-for key in totalRes:
-    print(totalRes[key])
-
+test = '10 am'
+test2 = '1 am'
+print(test2[-1:])
 

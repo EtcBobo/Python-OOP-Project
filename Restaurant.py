@@ -1,12 +1,13 @@
 class Restaurant:
 
-    def __init__(self,name,description,location,price,foodType,openH,address,comment):
+    def __init__(self,name,description,location,price,foodType,openH,closingH,address,comment):
         self.__name = name
         self.__description = description
         self.__location = location
         self.__price = price
         self.__foodType = foodType
         self.__openH = openH
+        self.__closingH = closingH
         self.__comment = comment
         self.__address = address
 
@@ -27,6 +28,9 @@ class Restaurant:
 
     def get_openH(self):
         return self.__openH
+
+    def get_closingH(self):
+        return self.__closingH
 
     def get_comment(self):
         return self.__comment
