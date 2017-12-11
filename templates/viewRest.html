@@ -1,6 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block body %}
+    {% from "includes/_formhelper.html" import render_field %}
 <br>
 <br>
 <div id="viewdiv">
@@ -8,10 +9,11 @@
     <br/>
     <p>{{ lengthList }} results</p>
 
+
     <div id="sort">
         <span>Sort By:</span>
         <td><select name="product" id="product" width="300" style="width: 300px">
-      <option id="az" function="abc()">Alphabetical Order(A~Z)</option>
+      <option id="az" onclick="{{ alphalist }}">Alphabetical Order(A~Z)</option>
       <option id="za">Alphabetical Order(Z~A)</option>
       <option id="low">Low to High</option>
             <option id="high">High to Low</option>
@@ -20,8 +22,6 @@
 
     </select></td>
 
-
-    </div>
 
     <br>
     <br>

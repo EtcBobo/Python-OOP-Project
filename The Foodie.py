@@ -7,6 +7,7 @@ from firebase import firebase
 from Restaurant import Restaurant
 from flask_googlemaps import GoogleMaps,Map
 
+
 cred = credentials.Certificate('cred/python-oop-firebase-adminsdk-87ty7-eefcb6bc40.json')
 default_app = firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://python-oop.firebaseio.com/'
@@ -33,7 +34,7 @@ class RegisterForm(Form):
 class RestForm(Form):
     name = StringField('Restaurant Name',[validators.DataRequired()])
     desc = TextAreaField('Desciption')
-    location = SelectField(u'Location', choices=[('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),('Central','Central')])
+    location = SelectField(u'Location', choices=[('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),('Central','Central'),('Any','Any')])
     price = StringField('Average Price')
     foodType = SelectField(u'Food Types',
                            choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'), ('Western Food', 'Western Food'),
@@ -101,11 +102,12 @@ def filter():
                 filterList.append(totalRest[key])
 
         i = 0
-        while i < len(filterList):
-            if filterList[i]['Location'] != location:
-                del filterList[i]
-                i = i - 1
-            i = i + 1
+        if location != 'Any':
+            while i < len(filterList):
+                if filterList[i]['Location'] != location:
+                    del filterList[i]
+                    i = i - 1
+                i = i + 1
 
 
 
@@ -139,6 +141,22 @@ def view():
     list = session['filtered']
     listLen = len(list)
     return render_template('viewRest.html', Restaurant=list, lengthList = listLen)
+
+def abc():
+    userFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
+    restaurants = userFire.get('restaurants ', None)
+    alphalist = []
+    for i in restaurants:
+        if " " in i:
+            i = i.replace(" ", "")
+        # i = i.isalpha()
+        alphalist.append(i)
+        alphalist.sort()
+        list = sorted(alphalist)
+        if list == restaurants[i]['Name']:
+            print(restaurants[i])
+
+    return render_template('viewRest.html', list=list)
 
 
 
@@ -268,7 +286,7 @@ def heatmap():
 @app.route('/restDet/<restName>')
 def restPage(restName):
     restName = restName
-    return render_template('restDet/<restName>',restName = restName)
+    return render_template('restDet.html',restName = restName)
 
 
 
