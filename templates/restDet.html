@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<br>
+<br>
+<div id="viewdiv">
+    <h1 id="view">View All Restaurants</h1>
+    <br/>
+    <p>{{ lengthList }} results</p>
+
+    <div id="sort">
+        <span>Sort By:</span>
+        <td><select name="product" id="product" width="300" style="width: 300px">
+      <option id="az" function="abc()">Alphabetical Order(A~Z)</option>
+      <option id="za">Alphabetical Order(Z~A)</option>
+      <option id="low">Low to High</option>
+            <option id="high">High to Low</option>
+            <option id="ratelow">Ratings(Low to High)</option>
+            <option id="ratehigh">Ratings(High to Low)</option>
+
+    </select></td>
+
+
+    </div>
+
+    <br>
+    <br>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Name of Restaurants</th>
+            <th>Description</th>
+            <th>Location</th>
+            <th>Opening Hours</th>
+            <th>Closing Hours</th>
+        </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+
+                <td>{{ restName }}</td>
+
+                    <td> {{ restName }}</td>
+
+                    <td>{{ restName }}</td>
+
+                    <td>{{ restName }}</td>
+
+                    <td>{{ restName }}</td>
+
+                <!--<td><a href="" class="btn btn-warning">Update</a></td>-->
+                <!--<td><form action="" method="post">-->
+                    <!--<input type="submit" value="Delete" class="btn btn-danger" onclick="return session['test']= True"></form></td>-->
+
+            </tr>
+
+
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

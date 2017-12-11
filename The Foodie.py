@@ -265,6 +265,11 @@ def heatmap():
 
     return render_template('heatmap.html', Centralmap1= centralmap1)
 
+@app.route('/restDet/<restName>')
+def restPage(restName):
+    restName = restName
+    return render_template('restDet/<restName>',restName = restName)
+
 
 
 @app.route('/logout')

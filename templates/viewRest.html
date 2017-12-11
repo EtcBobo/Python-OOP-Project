@@ -11,7 +11,7 @@
     <div id="sort">
         <span>Sort By:</span>
         <td><select name="product" id="product" width="300" style="width: 300px">
-      <option id="az">Alphabetical Order(A~Z)</option>
+      <option id="az" function="abc()">Alphabetical Order(A~Z)</option>
       <option id="za">Alphabetical Order(Z~A)</option>
       <option id="low">Low to High</option>
             <option id="high">High to Low</option>
@@ -40,7 +40,7 @@
         {% for i in Restaurant %}
             <tr>
 
-                <td>{{ i['Name'] }}</td>
+                <td><a href="/restDet/{{ i['Name'] }}">{{ i['Name'] }}</a></td>
 
                     <td> {{ i['Description'] }}</td>
 

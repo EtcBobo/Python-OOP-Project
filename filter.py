@@ -16,24 +16,30 @@ userFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
 restaurants = userFire.get('restaurants ', None)
 
 
-pricelist = []
-for key in restaurants:
-    pricelist.append(restaurants[key]['price'])
-    aprice = pricelist.sort()
-    aprice = sorted(pricelist)
-    dprice = sorted(pricelist, key=int, reverse=True)
+# pricelist = []
+# for key in restaurants:
+#     pricelist.append(restaurants[key]['price'])
+#     aprice = pricelist.sort()
+#     aprice = sorted(pricelist)
+#     dprice = sorted(pricelist, key=int, reverse=True)
+
+def abc():
+        userFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
+        restaurants = userFire.get('restaurants ', None)
+        alphalist = []
+        for i in restaurants:
+            if " " in i:
+                i = i.replace(" ", "")
+            #i = i.isalpha()
+            alphalist.append(i)
+            alphalist.sort()
+            list = sorted(alphalist)
+            if list == restaurants[i]['Name']:
+                print(restaurants[i])
 
 
-alphalist = []
-for i in restaurants:
-    if " " in i:
-        i = i.replace(" ", "")
-    #i = i.isalpha()
-    alphalist.append(i)
-    alphalist.sort
-    list = sorted(alphalist)
-    dlist = sorted(alphalist,reverse=True)
+                dlist = sorted(alphalist,reverse=True)
 
 
 print(list)
-print(dlist)
+
