@@ -1,59 +1,111 @@
 <!--<link rel=stylesheet type=text/css href="\static\css\home.css">-->
 {% extends 'layout.html' %}
 {% block body %}
-    <div class="jumbotron text-center">
+<br>
+<br>
+<br>
+<br>
+    <div class="jumbotron text-center" id="banner">
         <h1>Welcome To The Foodie</h1>
     </div>
-   <div class="form-row">
 
-                <div class="form-group col-md-6" id="popular">Hot & Popular restaurants!!</div>
+<div id="homediv">
+      <div class="form-group col-md-12" id="popular">Hot & Popular restaurants!!</div>
 				<hr/>
-				<div class="form-group col-md-4"><img style="height:300px;width:450px" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
+
+     <div class="form-group col-md-12" class="restdiv">
+                <div class="form-group col-md-4"><img style="height:300px;width:400px" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
   <h1>London</h1>
   <p>London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
   <p>Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its founding by the Romans, who named it Londinium.</p>
 </div>
-<div class="form-group col-md-4"><img style="height:300px;width:450px" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
-  <h1>London</h1>
-  <p>London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
-  <p>Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its founding by the Romans, who named it Londinium.</p>
-</div>
-<div class="form-group col-md-4"><img style="height:300px;width:450px" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
+
+          <div class="form-group col-md-4"><img style="height:300px;width:400px" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
   <h1>London</h1>
   <p>London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
   <p>Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its founding by the Romans, who named it Londinium.</p>
 </div>
 
 
+          <div class="form-group col-md-4"><img style="height:300px;width:400px" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
+  <h1>London</h1>
+  <p>London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
+  <p>Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its founding by the Romans, who named it Londinium.</p>
+</div>
+
+     </div>
+
+ <div class="form-group col-md-12" id="recommend">Recommended restaurants!!</div>
+				<hr/>
+
+     <div class="form-group col-md-12">
+                <div class="form-group col-md-4"><img style="height:300px;width:400px" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
+  <h1>London</h1>
+  <p>London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
+  <p>Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its founding by the Romans, who named it Londinium.</p>
+</div>
+
+          <div class="form-group col-md-4"><img style="height:300px;width:400px" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
+  <h1>London</h1>
+  <p>London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
+  <p>Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its founding by the Romans, who named it Londinium.</p>
+</div>
+
+
+          <div class="form-group col-md-4"><img style="height:300px;width:400px" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
+  <h1>London</h1>
+  <p>London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
+  <p>Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its founding by the Romans, who named it Londinium.</p>
+</div>
+
+         </div>
             </div>
 
-
+</div>
 <style>
 
-hr {
-    display:block;
-    border: 0;
-    border-top: solid black;
-    margin: 1em 0;
-    padding: 0;
-	float: none;
-	clear: left;
-	width:100%
+/*hr {*/
+    /*display:block;*/
+    /*border: 0;*/
+    /*border-top: solid black;*/
+    /*border-top-color: darkred;*/
+    /*margin: 1em 0;*/
+    /*padding: 0;*/
+	/*float: none;*/
+	/*clear: left;*/
+	/*width:100%*/
+/*}*/
+
+#popular, #recommend{
+    color: #000;
+    font-family: "hgw-HelveticaNeueBold",Arial,sans-serif;
+	 font-weight: bold;
+    border-bottom: 2px solid darkred;
+    margin-bottom: 20px;
+    font-size: 15px;
+    padding-bottom: 3px;
+    font-size:200%;
+
+
+
 }
 
-#popular{
-	color:red;
-	font-size:300%;
-	font-weight:bold;
 
-
-}
-
-    .form-row{
-        color:black;
-
+#homediv{
+        max-width: 1480px;
+    padding: 20px 12px 10px 20px;
+    font: 13px Arial, Helvetica, sans-serif;
+        align:center;
 
     }
+
+
+#banner{
+     background-image: url("http://lindyslanding.com/wp-content/uploads/2017/03/dining-food-Banner-1920-x-750.jpg");
+    color:white;
+    height:450px;
+
+}
 
 </style>
 

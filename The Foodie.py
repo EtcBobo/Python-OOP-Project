@@ -139,6 +139,8 @@ def view():
     listLen = len(list)
     return render_template('viewRest.html', Restaurant=list, lengthList = listLen)
 
+
+
 @app.route('/addRest',methods=['POST','GET'])
 def addRest():
     form = RestForm(request.form)
