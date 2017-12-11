@@ -7,6 +7,9 @@ from firebase import firebase
 from Restaurant import Restaurant
 from flask_googlemaps import GoogleMaps,Map
 
+# thefoodie.newsletter@gmail.com
+# p/s : foodie123
+
 cred = credentials.Certificate('cred/python-oop-firebase-adminsdk-87ty7-eefcb6bc40.json')
 default_app = firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://python-oop.firebaseio.com/'
@@ -95,7 +98,7 @@ def filter():
     filterList = []
     form = RestForm(request.form)
     if request.method == 'POST':
-        location = form.location.data
+        location = form.fLocation.data
         price = form.price.data
         foodType = form.foodType.data
         openT = form.openT.data
@@ -124,13 +127,13 @@ def filter():
 
             if openH <= openT1 < closingH or openT1 < closingH < openH or openT1 > openH > closingH or closingH == openH:
                 filterList.append(totalRest[key])
-
-        i = 0
-        while i < len(filterList):
-            if filterList[i]['Location'] != location:
-                del filterList[i]
-                i = i - 1
-            i = i + 1
+        if location !='Any':
+            i = 0
+            while i < len(filterList):
+                if filterList[i]['Location'] != location:
+                    del filterList[i]
+                    i = i - 1
+                i = i + 1
 
 
 
