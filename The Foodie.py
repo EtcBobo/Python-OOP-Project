@@ -8,6 +8,7 @@ from Restaurant import Restaurant
 from flask_googlemaps import GoogleMaps,Map
 
 
+
 cred = credentials.Certificate('cred/python-oop-firebase-adminsdk-87ty7-eefcb6bc40.json')
 default_app = firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://python-oop.firebaseio.com/'
@@ -34,7 +35,14 @@ class RegisterForm(Form):
 class RestForm(Form):
     name = StringField('Restaurant Name',[validators.DataRequired()])
     desc = TextAreaField('Desciption')
+
     location = SelectField(u'Location', choices=[('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),('Central','Central'),('Any','Any')])
+
+    location = SelectField(u'Location', choices=[('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),('Central','Central')])
+    fLocation = SelectField(u'Location',
+                           choices=[('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),
+                                    ('Central', 'Central'),('Any','Any')])
+
     price = StringField('Average Price')
     foodType = SelectField(u'Food Types',
                            choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'), ('Western Food', 'Western Food'),
@@ -61,6 +69,9 @@ class RestForm(Form):
     address = TextAreaField('Address')
     comment = TextAreaField('Comments')
 
+class theSearch(Form):
+    name = StringField('Name')
+    watever = StringField('asdasda')
 
 
 @app.route('/')
@@ -68,12 +79,29 @@ def home():
     return render_template('home.html')
 
 
+@app.route('/theSearch',methods=['POST','GET'])
+def tsearch():
+    nameList = []
+    form = theSearch(request.form)
+    if request.method == 'POST':
+        name = form.name.data
+        restFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
+        totalRest = restFire.get('restaurants', None)
+
+        for key in totalRest:
+            if totalRest[key]['Name'] == name:
+                nameList.append(totalRest[key])
+        session['filtered'] = nameList
+        return redirect(url_for('view'))
+    return render_template('theSearch.html', form=form)
+
+
 @app.route('/filter',methods=['POST','GET'])
 def filter():
     filterList = []
     form = RestForm(request.form)
     if request.method == 'POST':
-        location = form.location.data
+        location = form.fLocation.data
         price = form.price.data
         foodType = form.foodType.data
         openT = form.openT.data
@@ -81,6 +109,8 @@ def filter():
 
         restFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
         totalRest = restFire.get('restaurants',None)
+
+
 
         for key in totalRest:
             if totalRest[key]['Opening Hours'][-2:] == 'PM':
@@ -101,13 +131,14 @@ def filter():
             if openH <= openT1 < closingH or openT1 < closingH < openH or openT1 > openH > closingH or closingH == openH:
                 filterList.append(totalRest[key])
 
-        i = 0
-        if location != 'Any':
-            while i < len(filterList):
-                if filterList[i]['Location'] != location:
-                    del filterList[i]
-                    i = i - 1
-                i = i + 1
+            if location !='Any':
+                i = 0
+
+                while i < len(filterList):
+                    if filterList[i]['Location'] != location:
+                        del filterList[i]
+                        i = i - 1
+                    i = i + 1
 
 
 

@@ -16,7 +16,7 @@ server.login("omgnooopython@gmail.com", "pythonnopython")
 msg = EmailMessage()
 msg['Subject'] = 'The Foodie'
 msg['From'] = 'thefoodie.newsletter@gmail.com'
-msg['To'] = '170193G@mymail.nyp.edu.sg'
+msg['To'] = '172862A@mymail.nyp.edu.sg'
 
 msg.set_content("Thank you for subscribing with The Foodie Newsletter! Look forward to monthly newsletters and also exclusive discount codes for subscribers!")
 server.send_message(msg)
