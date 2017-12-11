@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    {% from "includes/_formhelper.html" import render_field %}
+    <form method=post>
+        <div class="form-group col-md-6">
+   {{ render_field(form.name, class_="form-control") }}
+        </div>
+        <div class="form-group col-md-12">
+                    <input type="submit" value="Find Food" class="btn btn-info" id="filterbtn"/>
+                </div>
+    </form>
+{% endblock %}

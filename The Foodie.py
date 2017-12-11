@@ -34,6 +34,9 @@ class RestForm(Form):
     name = StringField('Restaurant Name',[validators.DataRequired()])
     desc = TextAreaField('Desciption')
     location = SelectField(u'Location', choices=[('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),('Central','Central')])
+    fLocation = SelectField(u'Location',
+                           choices=[('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),
+                                    ('Central', 'Central'),('Any','Any')])
     price = StringField('Average Price')
     foodType = SelectField(u'Food Types',
                            choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'), ('Western Food', 'Western Food'),
@@ -60,11 +63,31 @@ class RestForm(Form):
     address = TextAreaField('Address')
     comment = TextAreaField('Comments')
 
+class theSearch(Form):
+    name = StringField('Name')
+    watever = StringField('asdasda')
 
 
 @app.route('/')
 def home():
     return render_template('home.html')
+
+
+@app.route('/theSearch',methods=['POST','GET'])
+def tsearch():
+    nameList = []
+    form = theSearch(request.form)
+    if request.method == 'POST':
+        name = form.name.data
+        restFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
+        totalRest = restFire.get('restaurants', None)
+
+        for key in totalRest:
+            if totalRest[key]['Name'] == name:
+                nameList.append(totalRest[key])
+        session['filtered'] = nameList
+        return redirect(url_for('view'))
+    return render_template('theSearch.html', form=form)
 
 
 @app.route('/filter',methods=['POST','GET'])
@@ -80,6 +103,8 @@ def filter():
 
         restFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
         totalRest = restFire.get('restaurants',None)
+
+
 
         for key in totalRest:
             if totalRest[key]['Opening Hours'][-2:] == 'PM':
