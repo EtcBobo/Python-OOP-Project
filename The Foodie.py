@@ -68,7 +68,7 @@ class RestForm(Form):
 
 class theSearch(Form):
     name = StringField('Name')
-    watever = StringField('asdasda')
+    password = StringField('meh')
 
 
 @app.route('/')
