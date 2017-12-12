@@ -362,10 +362,13 @@ def restPage(restName):
             restDetail = totalRest[key]
     feedback = restFire.get(restName, None)
     newFeed = []
-    for key in range(int(len(feedback) / 3)):
-        newFeed.append({'Comment': feedback['CommentNo' + str(key)]['Comment'],
-                                            'Rating': feedback['RatingNo' + str(key)]['Rating'],
-                                            'User': feedback['UserNo' + str(key)]['User']})
+    try:
+        for key in range(int(len(feedback) / 3)):
+            newFeed.append({'Comment': feedback['CommentNo' + str(key)]['Comment'],
+                                                'Rating': feedback['RatingNo' + str(key)]['Rating'],
+                                                'User': feedback['UserNo' + str(key)]['User']})
+    except TypeError:
+        pass
     print(newFeed)
 
     if request.method == 'POST':
