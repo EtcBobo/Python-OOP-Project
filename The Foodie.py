@@ -73,7 +73,7 @@ class RestForm(Form):
 
 class theSearch(Form):
     name = StringField('Name')
-    watever = StringField('asdasda')
+    password = StringField('meh')
 
 
 @app.route('/')
@@ -320,8 +320,15 @@ def heatmap():
 @app.route('/restDet/<restName>')
 def restPage(restName):
     restName = restName
+
     return render_template('restDet.html',restName = restName)
 
+    restFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
+    totalRest = restFire.get('restaurants', None)
+    for key in totalRest:
+        if restName == totalRest[key]['Name']:
+            restDetail = totalRest[key]
+    return render_template('restDet.html',restDetail = restDetail)
 
 
 @app.route('/logout')

@@ -4,8 +4,18 @@
 <br>
 <br>
 <div id="viewdiv">
-    <h1 id="view">Details of {{ restName }}</h1>
+
+    <h1 id="view">Details of {{ restDetail['Name'] }}</h1>
     <br/>
+
+
+
+
+    <div id="sort">
+
+
+
+    </div>
 
 
     <br>
@@ -24,15 +34,23 @@
 
             <tr>
 
-                <td>{{ restName }}</td>
+                <td>{{ restDetail['Name'] }}</td>
 
-                    <td> {{ restName }}</td>
+                    <td> {{ restDetail['Description'] }}</td>
 
-                    <td>{{ restName }}</td>
+                    <td>{{ restDetail['Food Type'] }}</td>
 
-                    <td>{{ restName }}</td>
+                    <td>{{ restDetail['Location'] }}</td>
 
-                    <td>{{ restName }}</td>
+                    <td>{{ restDetail['Address'] }}</td>
+
+                <td>{{ restDetail['Opening Hours'] }}</td>
+
+                <td>{{ restDetail['Closing Hours'] }}</td>
+
+                <td>{{ restDetail['Price'] }}</td>
+
+                <td>{{ restDetail['Comments'] }}</td>
 
                 <!--<td><a href="" class="btn btn-warning">Update</a></td>-->
                 <!--<td><form action="" method="post">-->
