@@ -75,7 +75,7 @@ class RestForm(Form):
                                     ('5 AM', '5 AM'), ('6 AM', '6 AM'), ('7 AM', '7 AM'), ('8 AM', '8 AM'),
                                     ('9 AM', '9 AM'), ('10 AM', '10 AM'), ('11 AM', '11 AM'), ('12 PM', '12 PM'),
                                     ('1 PM', '1 PM'),('2 PM', '2 PM'),('3 PM', '3 PM'),('4 PM', '4 PM'),('5 PM', '5 PM'),('6 PM', '6 PM'),('7 PM', '7 PM'),
-                                    ('8 PM', '8 PM'),('9 PM', '9 PM'),('10 PM', '10 PM'),('11 PM', '11 PM'),])
+                                    ('8 PM', '8 PM'),('9 PM', '9 PM'),('10 PM', '10 PM'),('11 PM', '11 PM')])
     address = TextAreaField('Address')
 
 
@@ -185,7 +185,7 @@ def filter():
         if foodType != 'None':
             i = 0
             while i < len(filterList):
-                if filterList[i]['Food Types'] != foodType:
+                if filterList[i]['Food Type'] != foodType:
                     del filterList[i]
                     i = i - 1
                 i = i + 1
@@ -201,6 +201,7 @@ def view():
 
     list = session['filtered']
     listLen = len(list)
+    print(list)
 
     return render_template('viewRest.html', Restaurant=list, lengthList = listLen)
 
@@ -349,7 +350,7 @@ def heatmap():
 
     return render_template('heatmap.html', Centralmap1= centralmap1)
 
-@app.route('/restDet/<restName>')
+@app.route('/restDet/<restName>',methods=['POST','GET'])
 def restPage(restName):
     restName = restName
     form = Feedbacks(request.form)
@@ -359,25 +360,33 @@ def restPage(restName):
         if restName == totalRest[key]['Name']:
             totalRest[key]['Price'] = '$'+ totalRest[key]['Price']
             restDetail = totalRest[key]
-    # feedback = restFire.get('allFeedback', restName)
-
+    feedback = restFire.get(restName, None)
+    newFeed = []
+    for key in range(int(len(feedback) / 3)):
+        newFeed.append({'Comment': feedback['CommentNo' + str(key)]['Comment'],
+                                            'Rating': feedback['RatingNo' + str(key)]['Rating'],
+                                            'User': feedback['UserNo' + str(key)]['User']})
+    print(newFeed)
 
     if request.method == 'POST':
         comments = form.comments.data
         ratings = form.ratings.data
         try:
-            totalCom = restFire.get('allFeedback',restName)
-            count = len(totalCom)
+            totalCom = restFire.get(restName,None)
+            count = int(len(totalCom) / 3)
         except TypeError:
             count = 0
-        restFire.put('allFeedback',restName,{
-            'Comments'+str(count): comments,
-            'Ratings': ratings,
-            'UserC': session['username']
-
+        restFire.put(restName,'CommentNo'+str(count),{
+            'Comment': comments
         })
-        return redirect(url_for('restPage'))
-    return render_template('restDet.html',restDetail = restDetail, form=form)
+        restFire.put(restName,'RatingNo'+str(count), {
+            'Rating': ratings
+        })
+        restFire.put(restName,'UserNo'+str(count) ,{
+            'User': session['username']
+        })
+        return redirect(url_for('home'))
+    return render_template('restDet.html',restDetail = restDetail, form=form,feedback=newFeed)
 
 
 @app.route('/logout')
