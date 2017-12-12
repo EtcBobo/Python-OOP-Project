@@ -6,7 +6,9 @@ from wtforms import Form, StringField, TextAreaField, RadioField, SelectField, P
 from firebase import firebase
 from Restaurant import Restaurant
 from flask_googlemaps import GoogleMaps,Map
+from flask_socketio import SocketIO, emit
 
+#pip install flask-socketio
 # thefoodie.newsletter@gmail.com
 # p/s : foodie123
 
@@ -17,6 +19,9 @@ default_app = firebase_admin.initialize_app(cred, {
 
 root = db.reference()
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'jsbcfsbfjefebw237u3gdbdc'
+socketio = SocketIO( app )
+
 
 GoogleMaps(app, key="AIzaSyAN-25Ihf-_ndHtyzHEXF2SGjI6U-WqQKc")
 
@@ -71,9 +76,28 @@ class theSearch(Form):
     password = StringField('meh')
 
 
+
+
 @app.route('/')
 def home():
     return render_template('home.html')
+
+
+@app.route('/chat')
+def hello():
+  return render_template( '/chat.html' )
+
+
+def messagereceived():
+  print( 'message was received!!!' )
+
+@socketio.on( 'my event' )
+def handle_my_custom_event( json ):
+  print( 'recived my event: ' + str( json ) )
+  socketio.emit( 'my response', json, callback=messagereceived())
+
+
+
 
 
 @app.route('/theSearch',methods=['POST','GET'])
@@ -323,5 +347,6 @@ def userProfile():
 
 
 if __name__ == '__main__':
-    app.secret_key = 'secret123'
-    app.run(debug=True)
+    # app.run(debug=True)
+    socketio.run(app, debug=True)
+
