@@ -90,14 +90,17 @@ class Feedbacks(Form):
 
 @app.route('/')
 def home():
-    userPref = session['userPref']
+    try:
+        userPref = session['userPref']
+    except KeyError:
+        userPref = {'Food Types':'None'}
     print(userPref)
     recommend = []
     randRec = []
     restFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
     totalRest = restFire.get('restaurants', None)
     for key in totalRest:
-        if totalRest[key]['Food Type'] == userPref['Food Types']:
+        if totalRest[key]['Food Type'] == userPref['Food Types'] or userPref['Food Types']== 'None':
             recommend.append(totalRest[key])
     option1, option2, option3 = random.sample(range(0, len(recommend)), 3)
     randRec.append(recommend[option1])
@@ -404,6 +407,41 @@ def restPage(restName):
         })
         return redirect(url_for('home'))
     return render_template('restDet.html',restDetail = restDetail, form=form,feedback=newFeed)
+
+@app.route('/userEdit',methods=['POST','GET'])
+def userEdit():
+    form = RegisterForm(request.form)
+    if request.method == 'POST':
+        user = form.user.data
+        email = form.email.data
+        price = form.price.data
+        foodType = form.foodType.data
+        password = form.password.data
+        userFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
+        allUser = userFire.get('allUsers', None)
+        for key in allUser:
+            if allUser[key]['Username'] == user:
+                flash('This username has already been used')
+                return redirect(url_for('userEdit'))
+            try:
+                if allUser[key]['Email'] == email and email != '':
+                    flash('This email has already been used')
+                    return redirect(url_for('userEdit'))
+            except KeyError:
+                email = ''
+        for key in allUser:
+            if allUser[key]['Username'] == session['username']:
+                userid = key
+        userFire.put('allUsers', userid, {
+            'Username': user,
+            'Price': price,
+            'Food Types': foodType,
+            'Email': email,
+            'Password': password
+        })
+        flash('You have succesfully edited your profile!')
+        return redirect(url_for('home'))
+    return render_template('userEdit.html', form=form)
 
 
 @app.route('/logout')
