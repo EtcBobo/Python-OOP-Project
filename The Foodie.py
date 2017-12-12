@@ -259,7 +259,7 @@ def addRest():
 
 
         })
-
+        flash('You have added a new Restaurant!')
         return redirect(url_for('home'))
     return render_template('addRest.html', form=form)
 
