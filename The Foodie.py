@@ -7,14 +7,14 @@ from wtforms.fields.html5 import EmailField
 from firebase import firebase
 from Restaurant import Restaurant
 from flask_googlemaps import GoogleMaps,Map
+import smtplib
+from email.message import EmailMessage
 from flask_socketio import SocketIO, emit
 
 
 #pip install flask-socketio
 # thefoodie.newsletter@gmail.com
 # p/s : foodie123
-
-
 
 
 cred = credentials.Certificate('cred/python-oop-firebase-adminsdk-87ty7-eefcb6bc40.json')
@@ -268,6 +268,20 @@ def userRegister():
         price = form.price.data
         foodType = form.foodType.data
         email = form.email.data
+
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login("omgnooopython@gmail.com", "pythonnopython")
+        msg = EmailMessage()
+        msg['Subject'] = 'The Foodie'
+        msg['From'] = 'thefoodie.newsletter@gmail.com'
+        msg['To'] = email
+
+        msg.set_content(
+            "Thank you for subscribing with The Foodie Newsletter! Look forward to monthly newsletters and also exclusive discount codes for subscribers!")
+        server.send_message(msg)
+        server.quit()
+
         reg = Registration(user,password,price,foodType,email)
 
 
@@ -289,7 +303,7 @@ def userRegister():
             'Food Types': reg.get_foodType(),
             'Email':reg.get_email()
         })
-        flash('You are succesfully registered')
+        flash('Congrats! You have succesfully registered!')
         return redirect(url_for('home'))
     return render_template('userRegister.html', form=form)
 
@@ -346,9 +360,6 @@ def heatmap():
 @app.route('/restDet/<restName>')
 def restPage(restName):
     restName = restName
-
-    return render_template('restDet.html',restName = restName)
-
     restFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
     totalRest = restFire.get('restaurants', None)
     for key in totalRest:
