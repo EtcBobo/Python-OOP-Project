@@ -9,8 +9,12 @@ from Restaurant import Restaurant
 from flask_googlemaps import GoogleMaps,Map
 import smtplib
 from email.message import EmailMessage
+from flask_socketio import SocketIO, emit
 
 
+#pip install flask-socketio
+# thefoodie.newsletter@gmail.com
+# p/s : foodie123
 
 cred = credentials.Certificate('cred/python-oop-firebase-adminsdk-87ty7-eefcb6bc40.json')
 default_app = firebase_admin.initialize_app(cred, {
@@ -19,6 +23,9 @@ default_app = firebase_admin.initialize_app(cred, {
 
 root = db.reference()
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'jsbcfsbfjefebw237u3gdbdc'
+socketio = SocketIO( app )
+
 
 GoogleMaps(app, key="AIzaSyAN-25Ihf-_ndHtyzHEXF2SGjI6U-WqQKc")
 
@@ -39,8 +46,6 @@ class RegisterForm(Form):
 class RestForm(Form):
     name = StringField('Restaurant Name',[validators.DataRequired()])
     desc = TextAreaField('Desciption')
-
-    location = SelectField(u'Location', choices=[('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),('Central','Central'),('Any','Any')])
 
     location = SelectField(u'Location', choices=[('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),('Central','Central')])
     fLocation = SelectField(u'Location',
@@ -78,9 +83,28 @@ class theSearch(Form):
     password = StringField('meh')
 
 
+
+
 @app.route('/')
 def home():
     return render_template('home.html')
+
+
+@app.route('/chat')
+def hello():
+  return render_template( '/chat.html' )
+
+
+def messagereceived():
+  print( 'message was received!!!' )
+
+@socketio.on( 'my event' )
+def handle_my_custom_event( json ):
+  print( 'recived my event: ' + str( json ) )
+  socketio.emit( 'my response', json, callback=messagereceived())
+
+
+
 
 
 @app.route('/theSearch',methods=['POST','GET'])
@@ -137,7 +161,6 @@ def filter():
 
             if location !='Any':
                 i = 0
-
                 while i < len(filterList):
                     if filterList[i]['Location'] != location:
                         del filterList[i]
@@ -362,5 +385,6 @@ def userProfile():
 
 
 if __name__ == '__main__':
-    app.secret_key = 'secret123'
-    app.run(debug=True)
+    # app.run(debug=True)
+    socketio.run(app, debug=True)
+
