@@ -13,7 +13,7 @@ from flask_socketio import SocketIO, emit
 #pip install flask-socketio
 # thefoodie.newsletter@gmail.com
 # p/s : foodie123
-=======
+
 
 
 
