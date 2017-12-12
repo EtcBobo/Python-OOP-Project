@@ -50,8 +50,8 @@ class RestForm(Form):
 
     location = SelectField(u'Location', choices=[('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),('Central','Central')])
     fLocation = SelectField(u'Location',
-                           choices=[('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),
-                                    ('Central', 'Central'),('Any','Any')])
+                           choices=[('Any','Any'),('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),
+                                    ('Central', 'Central')])
 
     price = StringField('Average Price')
     foodType = SelectField(u'Food Types',
@@ -77,13 +77,15 @@ class RestForm(Form):
                                     ('1 PM', '1 PM'),('2 PM', '2 PM'),('3 PM', '3 PM'),('4 PM', '4 PM'),('5 PM', '5 PM'),('6 PM', '6 PM'),('7 PM', '7 PM'),
                                     ('8 PM', '8 PM'),('9 PM', '9 PM'),('10 PM', '10 PM'),('11 PM', '11 PM'),])
     address = TextAreaField('Address')
-    comment = TextAreaField('Comments')
+
 
 class theSearch(Form):
     name = StringField('Name')
     password = StringField('meh')
 
-
+class Feedbacks(Form):
+    comments = TextAreaField('Comments')
+    ratings = SelectField(u'Ratings of the restaurants (higher score means better rating)',choices=[('1','1'),('2','2'),('3','3'),('4','4'),('5','5')])
 
 
 @app.route('/')
@@ -199,23 +201,10 @@ def view():
 
     list = session['filtered']
     listLen = len(list)
+
     return render_template('viewRest.html', Restaurant=list, lengthList = listLen)
 
-def abc():
-    userFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
-    restaurants = userFire.get('restaurants ', None)
-    alphalist = []
-    for i in restaurants:
-        if " " in i:
-            i = i.replace(" ", "")
-        # i = i.isalpha()
-        alphalist.append(i)
-        alphalist.sort()
-        list = sorted(alphalist)
-        if list == restaurants[i]['Name']:
-            print(restaurants[i])
 
-    return render_template('viewRest.html', list=list)
 
 
 
@@ -231,9 +220,9 @@ def addRest():
         openH = form.openH.data
         closingH = form.closingH.data
         address = form.address.data
-        comment = form.comment.data
 
-        res = Restaurant(name,desc,location,price,foodType,openH,closingH,address,comment)
+
+        res = Restaurant(name,desc,location,price,foodType,openH,closingH,address)
 
         restFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
         try:
@@ -250,7 +239,7 @@ def addRest():
             'Opening Hours': res.get_openH(),
             'Closing Hours': res.get_closingH(),
             'Address': res.get_address(),
-            'Comments': res.get_comment()
+
 
         })
 
@@ -291,6 +280,9 @@ def userRegister():
             if allUser[key]['Username'] == user:
                 flash('This username has already been used')
                 return redirect(url_for('userRegister'))
+            if allUser[key]['Email'] == email:
+                flash('This email has already been used')
+                return redirect(url_for('userRegister'))
         try:
             totalUsers = userFire.get('allUsers',None)
             count = len(totalUsers)
@@ -303,7 +295,7 @@ def userRegister():
             'Food Types': reg.get_foodType(),
             'Email':reg.get_email()
         })
-        flash('Congrats! You have succesfully registered!')
+        flash('You have succesfully registered!')
         return redirect(url_for('home'))
     return render_template('userRegister.html', form=form)
 
@@ -360,12 +352,32 @@ def heatmap():
 @app.route('/restDet/<restName>')
 def restPage(restName):
     restName = restName
+    form = Feedbacks(request.form)
     restFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
     totalRest = restFire.get('restaurants', None)
     for key in totalRest:
         if restName == totalRest[key]['Name']:
+            totalRest[key]['Price'] = '$'+ totalRest[key]['Price']
             restDetail = totalRest[key]
-    return render_template('restDet.html',restDetail = restDetail)
+    # feedback = restFire.get('allFeedback', restName)
+
+
+    if request.method == 'POST':
+        comments = form.comments.data
+        ratings = form.ratings.data
+        try:
+            totalCom = restFire.get('allFeedback',restName)
+            count = len(totalCom)
+        except TypeError:
+            count = 0
+        restFire.put('allFeedback',restName,{
+            'Comments'+str(count): comments,
+            'Ratings': ratings,
+            'UserC': session['username']
+
+        })
+        return redirect(url_for('restPage'))
+    return render_template('restDet.html',restDetail = restDetail, form=form)
 
 
 @app.route('/logout')
@@ -386,6 +398,5 @@ def userProfile():
 
 
 if __name__ == '__main__':
-    # app.run(debug=True)
     socketio.run(app, debug=True)
 

@@ -50,7 +50,6 @@
 
                 <td>{{ restDetail['Price'] }}</td>
 
-                <td>{{ restDetail['Comments'] }}</td>
 
                 <!--<td><a href="" class="btn btn-warning">Update</a></td>-->
                 <!--<td><form action="" method="post">-->
@@ -60,7 +59,26 @@
 
 
         </tbody>
-    </table>
+{#    </table>#}
+{##}
+{#    <table>#}
+{#        <tbody>#}
+{#        {% for i in feedback %}#}
+{#        <tr></tr>#}
+{##}
+{##}
+{#                    <td> {{ feedback[i] }}</td>#}
+{#        {% endfor %}#}
+{#        </tbody>#}
+{#    </table>#}
+<form method=post>
+    <div class="form-group col-md-6">
+                    {{ render_field(form.comments, class_="form-control") }}
+                </div>
+    <div class="form-group col-md-6">
+                    {{ render_field(form.ratings, class_="form-control") }}
+                </div>
+</form>
 </div>
 
 {% endblock %}
