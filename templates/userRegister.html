@@ -5,11 +5,17 @@
 <br>
 <br>
 <div id="registerdiv">
+    <div class="form-group col-md-4">
+
+            </div>
     <h1 id="register">Sign Up Now!</h1>
     <p>Register for the Foodie Account now and start sharing your dining experience!</p>
     <br>
     <form method=post>
         <div class="form-group">
+            <div class="form-group col-md-4">
+
+            </div>
             <div class="form-group col-md-8">
                 <div class="form-group col-md-12">
                     {{ render_field(form.user, class_="form-control") }}
@@ -23,6 +29,10 @@
                 </div>
                 <div class="form-group col-md-12">
                     {{ render_field(form.foodType, class_="form-control") }}
+                </div>
+                <div class="form-group col-md-12">
+                    {{ render_field(form.email, class_="form-control")  }}
+                    <p id="email">(Optional) Sign up with your email to recieve monthly subscription letter of The Foodie and exclusive discount codes!</>
                 </div>
 
 
@@ -94,6 +104,13 @@
     text-align: center;
         height: 42px;
         width:250px
+
+    }
+
+    #email {
+        font-size:12px;
+        font-weight: bold;
+        color: black;
 
     }
 

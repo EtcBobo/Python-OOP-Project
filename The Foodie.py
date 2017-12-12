@@ -3,6 +3,7 @@ from Registration import Registration
 from firebase_admin import credentials, db
 from flask import Flask, render_template, request, flash, redirect, url_for, session
 from wtforms import Form, StringField, TextAreaField, RadioField, SelectField, PasswordField, IntegerField, validators, SelectMultipleField
+from wtforms.fields.html5 import EmailField
 from firebase import firebase
 from Restaurant import Restaurant
 from flask_googlemaps import GoogleMaps,Map
@@ -29,6 +30,7 @@ class RegisterForm(Form):
                            choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'), ('Western Food', 'Western Food'),
                                     ('Chinese Food', 'Chinese Food'), ('Healthy Food', 'Healthy Food'),
                                     ('None', 'None')])
+    email = EmailField("Email", [validators.optional()])
 
 
 
@@ -239,7 +241,8 @@ def userRegister():
         password = form.password.data
         price = form.price.data
         foodType = form.foodType.data
-        reg = Registration(user,password,price,foodType)
+        email = form.email.data
+        reg = Registration(user,password,price,foodType,email)
 
 
         userFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
@@ -257,8 +260,8 @@ def userRegister():
             'Username': reg.get_user(),
             'Password': reg.get_password(),
             'Price': reg.get_price(),
-            'Food Types': reg.get_foodType()
-
+            'Food Types': reg.get_foodType(),
+            'Email':reg.get_email()
         })
         flash('You are succesfully registered')
         return redirect(url_for('home'))
