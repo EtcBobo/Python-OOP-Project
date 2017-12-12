@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
   <component name="JavaScriptSettings">
     <option name="languageLevel" value="ES6" />
   </component>
+=======
+<<<<<<< HEAD
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.6.3 (C:\Users\Jieyi\AppData\Local\Programs\Python\Python36-32\python.exe)" project-jdk-type="Python SDK" />
+=======
+>>>>>>> 36d9f27c191359df1881c7e97b5ac5f16466c701
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.6.3 (C:\Users\hello\AppData\Local\Programs\Python\Python36-32\python.exe)" project-jdk-type="Python SDK" />
+>>>>>>> 123a3296f82c4d01763ac86fb2919eb03086e032
 </project>

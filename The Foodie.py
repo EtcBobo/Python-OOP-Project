@@ -3,14 +3,19 @@ from Registration import Registration
 from firebase_admin import credentials, db
 from flask import Flask, render_template, request, flash, redirect, url_for, session
 from wtforms import Form, StringField, TextAreaField, RadioField, SelectField, PasswordField, IntegerField, validators, SelectMultipleField
+from wtforms.fields.html5 import EmailField
 from firebase import firebase
 from Restaurant import Restaurant
 from flask_googlemaps import GoogleMaps,Map
 from flask_socketio import SocketIO, emit
 
+
 #pip install flask-socketio
 # thefoodie.newsletter@gmail.com
 # p/s : foodie123
+=======
+
+
 
 cred = credentials.Certificate('cred/python-oop-firebase-adminsdk-87ty7-eefcb6bc40.json')
 default_app = firebase_admin.initialize_app(cred, {
@@ -35,16 +40,19 @@ class RegisterForm(Form):
                            choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'), ('Western Food', 'Western Food'),
                                     ('Chinese Food', 'Chinese Food'), ('Healthy Food', 'Healthy Food'),
                                     ('None', 'None')])
+    email = EmailField("Email", [validators.optional()])
 
 
 
 class RestForm(Form):
     name = StringField('Restaurant Name',[validators.DataRequired()])
     desc = TextAreaField('Desciption')
+
     location = SelectField(u'Location', choices=[('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),('Central','Central')])
     fLocation = SelectField(u'Location',
                            choices=[('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),
                                     ('Central', 'Central'),('Any','Any')])
+
     price = StringField('Average Price')
     foodType = SelectField(u'Food Types',
                            choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'), ('Western Food', 'Western Food'),
@@ -151,13 +159,14 @@ def filter():
 
             if openH <= openT1 < closingH or openT1 < closingH < openH or openT1 > openH > closingH or closingH == openH:
                 filterList.append(totalRest[key])
-        if location !='Any':
-            i = 0
-            while i < len(filterList):
-                if filterList[i]['Location'] != location:
-                    del filterList[i]
-                    i = i - 1
-                i = i + 1
+
+            if location !='Any':
+                i = 0
+                while i < len(filterList):
+                    if filterList[i]['Location'] != location:
+                        del filterList[i]
+                        i = i - 1
+                    i = i + 1
 
 
 
@@ -191,6 +200,22 @@ def view():
     list = session['filtered']
     listLen = len(list)
     return render_template('viewRest.html', Restaurant=list, lengthList = listLen)
+
+def abc():
+    userFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
+    restaurants = userFire.get('restaurants ', None)
+    alphalist = []
+    for i in restaurants:
+        if " " in i:
+            i = i.replace(" ", "")
+        # i = i.isalpha()
+        alphalist.append(i)
+        alphalist.sort()
+        list = sorted(alphalist)
+        if list == restaurants[i]['Name']:
+            print(restaurants[i])
+
+    return render_template('viewRest.html', list=list)
 
 
 
@@ -242,7 +267,8 @@ def userRegister():
         password = form.password.data
         price = form.price.data
         foodType = form.foodType.data
-        reg = Registration(user,password,price,foodType)
+        email = form.email.data
+        reg = Registration(user,password,price,foodType,email)
 
 
         userFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
@@ -260,8 +286,8 @@ def userRegister():
             'Username': reg.get_user(),
             'Password': reg.get_password(),
             'Price': reg.get_price(),
-            'Food Types': reg.get_foodType()
-
+            'Food Types': reg.get_foodType(),
+            'Email':reg.get_email()
         })
         flash('You are succesfully registered')
         return redirect(url_for('home'))
@@ -320,13 +346,15 @@ def heatmap():
 @app.route('/restDet/<restName>')
 def restPage(restName):
     restName = restName
+
+    return render_template('restDet.html',restName = restName)
+
     restFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
     totalRest = restFire.get('restaurants', None)
     for key in totalRest:
         if restName == totalRest[key]['Name']:
             restDetail = totalRest[key]
     return render_template('restDet.html',restDetail = restDetail)
-
 
 
 @app.route('/logout')
