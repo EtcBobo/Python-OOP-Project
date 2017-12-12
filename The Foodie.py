@@ -10,7 +10,7 @@ from flask_googlemaps import GoogleMaps,Map
 import smtplib
 from email.message import EmailMessage
 from flask_socketio import SocketIO, emit
-
+import random
 
 #pip install flask-socketio
 # thefoodie.newsletter@gmail.com
@@ -90,7 +90,20 @@ class Feedbacks(Form):
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    userPref = session['userPref']
+    print(userPref)
+    recommend = []
+    randRec = []
+    restFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
+    totalRest = restFire.get('restaurants', None)
+    for key in totalRest:
+        if totalRest[key]['Food Type'] == userPref['Food Types']:
+            recommend.append(totalRest[key])
+    option1, option2, option3 = random.sample(range(0, len(recommend)), 3)
+    randRec.append(recommend[option1])
+    randRec.append(recommend[option2])
+    randRec.append(recommend[option3])
+    return render_template('home.html',recommend=randRec)
 
 
 @app.route('/chat')
@@ -316,6 +329,7 @@ def userLogin():
                 session['logged_in'] = True
                 session['username'] = totalUsers[key]['Username']
                 flash('You were successfully logged in')
+                session['userPref'] = totalUsers[key]
                 logCheck = True
                 return redirect(url_for('home'))
         if logCheck == False:
