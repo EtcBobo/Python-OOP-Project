@@ -8,7 +8,10 @@ from firebase import firebase
 from Restaurant import Restaurant
 from flask_googlemaps import GoogleMaps,Map
 import smtplib
-from email.message import EmailMessage
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from email.mime.base import MIMEBase
+from email import encoders
 from flask_socketio import SocketIO, emit
 import random
 
@@ -294,17 +297,39 @@ def userRegister():
         foodType = form.foodType.data
         email = form.email.data
 
+        email_user = 'thefoodie.newsletter@gmail.com'
+        email_password = 'foodie123'
+        email_send = email
+
+        subject = 'Warm welcome from TheFoodie team!'
+
+        msg = MIMEMultipart()
+        msg['From'] = email_user
+        msg['To'] = email_send
+        msg['Subject'] = subject
+
+        body = '\n Hi '  + user + '! Thank you for subscribing with TheFoodie Newsletter! \n As a welcome gift, get a free sundae and mcwings by using the codes given below ' \
+               '\n \nPlease continue to look forward to our monthly newsletters and get exclusive promotion codes only for subscribers! ' \
+               '\n \n \n Sincerely, ' \
+               '\n \nThenFoodie Team'
+
+        msg.attach(MIMEText(body, 'plain'))
+
+        filename = 'promo.jpg'
+        attachment = open(filename, 'rb')
+
+        part = MIMEBase('application', 'octet-stream')
+        part.set_payload((attachment).read())
+        encoders.encode_base64(part)
+        part.add_header('Content-Disposition', "attachment; filename= " + filename)
+
+        msg.attach(part)
+        text = msg.as_string()
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
-        server.login("omgnooopython@gmail.com", "pythonnopython")
-        msg = EmailMessage()
-        msg['Subject'] = 'The Foodie'
-        msg['From'] = 'thefoodie.newsletter@gmail.com'
-        msg['To'] = email
+        server.login(email_user, email_password)
 
-        msg.set_content(
-            "Thank you for subscribing with The Foodie Newsletter! Look forward to monthly newsletters and also exclusive discount codes for subscribers!")
-        server.send_message(msg)
+        server.sendmail(email_user, email_send, text)
         server.quit()
 
         reg = Registration(user,password,price,foodType,email)
