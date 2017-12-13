@@ -1,7 +1,7 @@
 {% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
     {% for category, message in messages %}
-      <div class="alert alert-{{ category }} alert-dismissable">
+      <div class="alert alert-{{ category }} alert-dismissable" style="border:2px solid salmon;border-radius: 8px;background-color:salmon;">
                  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
           {{ message }}
 
@@ -17,7 +17,7 @@
 {% endif %}
 
 {% if msg %}
-  <div class="alert alert-success alert-dismissable">
+  <div class="alert alert-success alert-dismissable w3-container w3-border w3-round-xlarge">
              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
       {{msg}}</div>
 {% endif %}
