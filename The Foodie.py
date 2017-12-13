@@ -35,6 +35,7 @@ GoogleMaps(app, key="AIzaSyAN-25Ihf-_ndHtyzHEXF2SGjI6U-WqQKc")
 class RegisterForm(Form):
     user = StringField('Username',[validators.DataRequired()])
     password = PasswordField("Password",[validators.DataRequired()])
+    passwordC = PasswordField("Confirm Password",[validators.DataRequired()])
     price = StringField('Preferred Price Range')
     foodType = SelectField(u'Preferred Food Type',
                            choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'), ('Western Food', 'Western Food'),
@@ -143,23 +144,7 @@ class theSearch(Form):
     name = StringField('Enter the Food You Want')   # line you will see above search form
     plswork = StringField('try')
 
-# @app.route('/theSearch',methods=['POST','GET'])
-# def tsearch():
-#     nameList = []
-#     form = theSearch(request.form)
-#     if request.method == 'POST':
-#
-#         name = form.name.data
-#
-#         data = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
-#         firebaseData = data.get('restaurants', None)
-#
-#         for key in firebaseData:
-#             if firebaseData[key]['Name'] == name:
-#                 nameList.append(firebaseData[key])
-#         session['filtered'] = nameList
-#         return redirect(url_for('view'))
-#     return render_template('theSearch.html', form=form)
+
 
 
 @app.route('/filter',methods=['POST','GET'])
@@ -279,7 +264,6 @@ def addRest():
 
         })
         flash('You have added a new Restaurant!')
-        return redirect(url_for('home'))
     return render_template('addRest.html', form=form)
 
 
@@ -293,19 +277,23 @@ def userRegister():
         price = form.price.data
         foodType = form.foodType.data
         email = form.email.data
+        passwordC = form.passwordC.data
+        if password != passwordC:
+            flash('The passwords does not match')
+            return redirect(url_for('userRegister'))
+        if email != '':
+            server = smtplib.SMTP('smtp.gmail.com', 587)
+            server.starttls()
+            server.login("omgnooopython@gmail.com", "pythonnopython")
+            msg = EmailMessage()
+            msg['Subject'] = 'The Foodie'
+            msg['From'] = 'thefoodie.newsletter@gmail.com'
+            msg['To'] = email
 
-        server = smtplib.SMTP('smtp.gmail.com', 587)
-        server.starttls()
-        server.login("omgnooopython@gmail.com", "pythonnopython")
-        msg = EmailMessage()
-        msg['Subject'] = 'The Foodie'
-        msg['From'] = 'thefoodie.newsletter@gmail.com'
-        msg['To'] = email
-
-        msg.set_content(
-            "Thank you for subscribing with The Foodie Newsletter! Look forward to monthly newsletters and also exclusive discount codes for subscribers!")
-        server.send_message(msg)
-        server.quit()
+            msg.set_content(
+                "Thank you for subscribing with The Foodie Newsletter! Look forward to monthly newsletters and also exclusive discount codes for subscribers!")
+            server.send_message(msg)
+            server.quit()
 
         reg = Registration(user,password,price,foodType,email)
 
@@ -340,10 +328,9 @@ def userRegister():
 def userLogin():
     logCheck = False
     form = RegisterForm(request.form)
-    if request.method == 'POST' and form.validate():
+    if request.method == 'POST':
         user = form.user.data
         password = form.password.data
-
         userFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
         totalUsers = userFire.get('allUsers',None)
         for key in totalUsers:
@@ -403,31 +390,49 @@ def restPage(restName):
             newFeed.append({'User': feedback['UserNo' + str(key)]['User'],
                             'Comment': feedback['CommentNo' + str(key)]['Comment'],
                              'Rating': int(feedback['RatingNo' + str(key)]['Rating'])})
-            # newFeed.append({'Comment': feedback['CommentNo' + str(key)]['Comment'],
-            #                                     'Rating': feedback['RatingNo' + str(key)]['Rating'],
-            #                                     'User': feedback['UserNo' + str(key)]['User']})
+
     except TypeError:
         pass
-    print(newFeed)
+
 
     if request.method == 'POST':
         comments = form.comments.data
         ratings = form.ratings.data
         try:
-            totalCom = restFire.get(restName,None)
-            count = int(len(totalCom) / 3)
-        except TypeError:
-            count = 0
-        restFire.put(restName,'CommentNo'+str(count),{
-            'Comment': comments
-        })
-        restFire.put(restName,'RatingNo'+str(count), {
-            'Rating': ratings
-        })
-        restFire.put(restName,'UserNo'+str(count) ,{
-            'User': session['username']
-        })
-        return redirect(url_for('home'))
+            try:
+                totalCom = restFire.get(restName,None)
+                count = int(len(totalCom) / 3)
+            except TypeError:
+                count = 0
+            restFire.put(restName,'CommentNo'+str(count),{
+                'Comment': comments
+            })
+            restFire.put(restName,'RatingNo'+str(count), {
+                'Rating': ratings
+            })
+            restFire.put(restName,'UserNo'+str(count) ,{
+                'User': session['username']
+            })
+            restFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
+            totalRest = restFire.get('restaurants', None)
+            for key in totalRest:
+                if restName == totalRest[key]['Name']:
+                    totalRest[key]['Price'] = '$' + totalRest[key]['Price']
+                    restDetail = totalRest[key]
+            feedback = restFire.get(restName, None)
+            newFeed = []
+            try:
+                for key in range(int(len(feedback) / 3)):
+                    newFeed.append({'User': feedback['UserNo' + str(key)]['User'],
+                                    'Comment': feedback['CommentNo' + str(key)]['Comment'],
+                                    'Rating': int(feedback['RatingNo' + str(key)]['Rating'])})
+
+            except TypeError:
+                pass
+            return render_template('restDet.html', restDetail=restDetail, form=form, feedback=newFeed)
+        except KeyError:
+            flash('You must login to be able to comment or rate restaurants')
+            return render_template('restDet.html', restDetail=restDetail, form=form, feedback=newFeed)
     return render_template('restDet.html',restDetail = restDetail, form=form,feedback=newFeed)
 
 @app.route('/userEdit',methods=['POST','GET'])
@@ -439,6 +444,10 @@ def userEdit():
         price = form.price.data
         foodType = form.foodType.data
         password = form.password.data
+        passwordC = form.passwordC.data
+        if password != passwordC:
+            flash('The passwords does not match')
+            return redirect(url_for('userEdit'))
         userFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
         allUser = userFire.get('allUsers', None)
         for key in allUser:
