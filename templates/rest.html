@@ -1,0 +1,150 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+        {% from "includes/_formhelper.html" import render_field %}
+<br>
+<br>
+
+<div id="viewdiv">
+
+    <h1 id="view">Details of {{ restDetail['Name'] }}
+    </h1>
+    <br/>
+</div>
+
+
+    <div id="sort">
+     <div class="form-group col-md-8">
+        <div>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVoweWwEb_UQKtBhQfwA78S2QXub1JHoyCox-rj8B3gnOC9M5_aQ">
+
+
+     <h2>{{ restDetail['Description'] }}
+ </h2>
+    </div>
+
+
+
+     </div>
+
+    <br>
+    <br>
+     <div class="form-group">
+            <div class="form-group col-md-4">
+
+            </div>
+            <div class="form-group col-md-8">
+                <div class="form-group col-md-12">
+                  <div>  Price Range : </div>
+                    <div class="value" class="form-group col-md-4">
+                        {{ restDetail['Price'] }}</div>
+                </div>
+                <div class="form-group col-md-12">
+                </div>
+
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Name of Restaurants</th>
+            <th>Description</th>
+            <th>Location</th>
+            <th>Opening Hours</th>
+            <th>Closing Hours</th>
+        </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+
+                <td>{{ restDetail['Name'] }}</td>
+
+                    <td> {{ restDetail['Description'] }}</td>
+
+                    <td>{{ restDetail['Food Type'] }}</td>
+
+                    <td>{{ restDetail['Location'] }}</td>
+
+                    <td>{{ restDetail['Address'] }}</td>
+
+                <td>{{ restDetail['Opening Hours'] }}</td>
+
+                <td>{{ restDetail['Closing Hours'] }}</td>
+
+                <td>{{ restDetail['Price'] }}</td>
+
+
+                <!--<td><a href="" class="btn btn-warning">Update</a></td>-->
+                <!--<td><form action="" method="post">-->
+                    <!--<input type="submit" value="Delete" class="btn btn-danger" onclick="return session['test']= True"></form></td>-->
+
+            </tr>
+
+
+        </tbody>
+    </table>
+
+    <table>
+        <tbody>
+        {% for i in feedback %}
+        <tr></tr>
+
+
+                    <td> {{ feedback[i] }}</td>
+        {% endfor %}
+        </tbody>
+    </table>
+<form method=post>
+    <div class="form-group col-md-6">
+                    {{ render_field(form.comments, class_="form-control") }}
+                </div>
+    <div class="form-group col-md-6">
+                    {{ render_field(form.ratings, class_="form-control") }}
+                </div>
+</form>
+
+
+    <style>
+    #viewdiv{
+         max-width: 980px;
+        padding: 20px 12px 10px 20px;
+        font: 13px Arial, Helvetica, sans-serif;
+         align:center;
+
+
+
+    }
+
+    #view{
+         font-weight: bold;
+    font-style: italic;
+    border-bottom: 2px solid darkred;
+    margin-bottom:20px;
+    font-size: 15px;
+    padding-bottom: 3px;
+    font-size:200%;
+    }
+
+    .h2 {
+        display: inline-block;
+        float: left;
+    }
+
+
+    h2 {
+        font-size: 16px;
+        float:right;
+        display:inline-block;
+        text-align:right;
+{#        vertical-align: middle;#}
+
+    }
+
+{#    .value{#}
+{#        float:right;#}
+{#        display: inline-block;#}
+{##}
+{#    }#}
+
+    </style>
+{% endblock %}
