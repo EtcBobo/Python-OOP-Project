@@ -223,52 +223,52 @@
 
 
     <div class="form-group col-md-12">
-{#        <table class="table table-bordered">#}
-{#        <thead>#}
-{#        <br>#}
-{#        <br>#}
-{#        <tr>#}
-{#            <th>Users</th>#}
-{#            <th>Comments</th>#}
-{#            <th>Ratings</th>#}
-{#        </tr>#}
-{#        </thead>#}
-{#        <tbody>#}
-{#        {% for i in feedback %}#}
-{#            <tr>#}
-{##}
-{##}
-{#                    <td> {{ i['User'] }}</td>#}
-{#                    <td> {{ i['Comment'] }}</td>#}
-{#                    <td>#}
-{#                {% for i in range(i['Rating']) %}#}
-{#                    <img src="https://t3.ftcdn.net/jpg/01/09/84/42/160_F_109844239_A7MdQSDf4y1H80cfvHZuSa0zKBkZ68S7.jpg">#}
-{##}
-{#                {% endfor %}#}
-{#                    </td>#}
-{##}
-{##}
-{#            </tr>#}
-{#        {% endfor %}#}
-{#        </tbody>#}
-{#    </table>#}
-    </div>
+        <table class="table table-bordered">
+        <thead>
+        <br>
+        <br>
+        <tr>
+            <th>Users</th>
+            <th>Comments</th>
+            <th>Ratings</th>
+        </tr>
+        </thead>
+        <tbody>
         {% for i in feedback %}
-
-<div class="form-group col-md-8">
-    <p id="puser"> Past Comments</p>
-    </div>
-
-    <div class="form-group col-md-6">
-    <p id="user"> {{ i['User'] }}</p>
-     <div class="form-group col-md-12">
-    <p id="comment">Comment: {{ i['Comment'] }} </p>
-    </div>
-    </div>
+            <tr>
 
 
+                    <td> {{ i['User'] }}</td>
+                    <td> {{ i['Comment'] }}</td>
+                    <td>
+                {% for i in range(i['Rating']) %}
+                    <img src="https://t3.ftcdn.net/jpg/01/09/84/42/160_F_109844239_A7MdQSDf4y1H80cfvHZuSa0zKBkZ68S7.jpg">
 
+                {% endfor %}
+                    </td>
+
+
+            </tr>
         {% endfor %}
+        </tbody>
+    </table>
+    </div>
+{#        {% for i in feedback %}#}
+{##}
+{#<div class="form-group col-md-8">#}
+{#    <p id="puser"> Past Comments</p>#}
+{#    </div>#}
+{##}
+{#    <div class="form-group col-md-6">#}
+{#    <p id="user"> {{ i['User'] }}</p>#}
+{#     <div class="form-group col-md-12">#}
+{#    <p id="comment">Comment: {{ i['Comment'] }} </p>#}
+{#    </div>#}
+{#    </div>#}
+{##}
+{##}
+{##}
+{#        {% endfor %}#}
 
 
 
