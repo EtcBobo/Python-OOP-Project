@@ -54,7 +54,7 @@ class RestForm(Form):
                            choices=[('Any','Any'),('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),
                                     ('Central', 'Central')])
 
-    price = StringField('Average Price')
+    price = StringField('Average Price',[validators.DataRequired()])
     foodType = SelectField(u'Food Types',
                            choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'), ('Western Food', 'Western Food'),
                                     ('Chinese Food', 'Chinese Food'), ('Healthy Food', 'Healthy Food'),
@@ -232,7 +232,7 @@ def view():
 @app.route('/addRest',methods=['POST','GET'])
 def addRest():
     form = RestForm(request.form)
-    if request.method == 'POST':
+    if request.method == 'POST' and form.validate():
         name = form.name.data
         desc = form.desc.data
         location = form.location.data
@@ -304,7 +304,7 @@ def userRegister():
             if allUser[key]['Username'] == user:
                 flash('This username has already been used')
                 return redirect(url_for('userRegister'))
-            if allUser[key]['Email'] == email:
+            if allUser[key]['Email'] == email and email != '':
                 flash('This email has already been used')
                 return redirect(url_for('userRegister'))
         try:
