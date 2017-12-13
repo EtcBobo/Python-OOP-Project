@@ -120,7 +120,7 @@ def home():
         firebaseData = data.get('restaurants', None)
 
         for key in firebaseData:
-            if firebaseData[key]['Name'] == name:
+            if firebaseData[key]['Name'].lower() == name.lower():
                 nameList.append(firebaseData[key])
         session['filtered'] = nameList
         return redirect(url_for('view'))
@@ -140,10 +140,10 @@ def handle_my_custom_event( json ):
   print( 'recived my event: ' + str( json ) )
   socketio.emit( 'my response', json, callback=messagereceived())
 
+
 class theSearch(Form):
     name = StringField('Enter the Food You Want')   # line you will see above search form
     plswork = StringField('try')
-
 
 
 
