@@ -382,9 +382,12 @@ def restPage(restName):
     newFeed = []
     try:
         for key in range(int(len(feedback) / 3)):
-            newFeed.append({'Comment': feedback['CommentNo' + str(key)]['Comment'],
-                                                'Rating': feedback['RatingNo' + str(key)]['Rating'],
-                                                'User': feedback['UserNo' + str(key)]['User']})
+            newFeed.append({'User': feedback['UserNo' + str(key)]['User'],
+                            'Comment': feedback['CommentNo' + str(key)]['Comment'],
+                             'Rating': int(feedback['RatingNo' + str(key)]['Rating'])})
+            # newFeed.append({'Comment': feedback['CommentNo' + str(key)]['Comment'],
+            #                                     'Rating': feedback['RatingNo' + str(key)]['Rating'],
+            #                                     'User': feedback['UserNo' + str(key)]['User']})
     except TypeError:
         pass
     print(newFeed)
