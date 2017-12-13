@@ -364,7 +364,7 @@ def userLogin():
             if password == totalUsers[key]['Password'] and user == totalUsers[key]['Username']:
                 session['logged_in'] = True
                 session['username'] = totalUsers[key]['Username']
-                flash('You were successfully logged in')
+                flash('You are successfully logged in')
                 session['userPref'] = totalUsers[key]
                 logCheck = True
                 return redirect(url_for('home'))
