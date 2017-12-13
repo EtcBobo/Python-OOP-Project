@@ -1,0 +1,108 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+ <h1 id="view">Restaurants Near Your Location</h1>
+    <div id="map"></div>
+
+    <script>
+    var map, infoWindow;
+      function initMap() {
+          var amkFoodnMarket = {lat:1.372121 , lng:103.846678};
+          var amk628 = {lat:1.380936 , lng:103.840664};
+
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 13
+        });
+
+        infoWindow = new google.maps.InfoWindow;
+
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('Location found.');
+            infoWindow.open(map);
+            map.setCenter(pos);
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+            // {#Add Markers#}
+          var amkFoodnMarket_Marker = new google.maps.Marker({
+          position: amkFoodnMarket,
+          map: map,
+          title: 'Ang Mo Kio Marker and Food'
+        });
+
+          var amk628_Marker = new google.maps.Marker({
+          position: amk628,
+          map: map,
+          title: 'Ang Mo Kio 628'
+        });
+      }
+
+        // {#Location Error#}
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrGeXVb96USi1ujzqQ7wlCwc_8LzUB-yY&callback=initMap"
+    async defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+      #map {
+        height: 50%;
+        width: 40%;
+        margin:auto;
+      }
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #view{
+        font-weight: bold;
+        font-style: italic;
+        border-bottom: 2px solid darkred;
+        margin-bottom: 20px;
+        font-size: 15px;
+        padding-bottom: 3px;
+        font-size:200%;
+      }
+        a { color:black !important; }
+        a:hover { color:red !important;}
+    </style>
+{% endblock %}

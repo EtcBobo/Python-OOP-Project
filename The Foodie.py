@@ -78,17 +78,18 @@ class RestForm(Form):
                                     ('8 PM', '8 PM'),('9 PM', '9 PM'),('10 PM', '10 PM'),('11 PM', '11 PM')])
     address = TextAreaField('Address')
 
-
-class theSearch(Form):
-    name = StringField('Name')
-    password = StringField('meh')
-
 class Feedbacks(Form):
     comments = TextAreaField('Comments')
     ratings = SelectField(u'Ratings of the restaurants (higher score means better rating)',choices=[('1','1'),('2','2'),('3','3'),('4','4'),('5','5')])
 
 
-@app.route('/')
+@app.route('/findgps')
+def findgps():
+    return render_template('findgps.html')
+
+
+
+@app.route('/', methods=['POST', 'GET'])
 def home():
     try:
         userPref = session['userPref']
@@ -106,7 +107,23 @@ def home():
     randRec.append(recommend[option1])
     randRec.append(recommend[option2])
     randRec.append(recommend[option3])
-    return render_template('home.html',recommend=randRec)
+
+
+    nameList = []
+    form = theSearch(request.form)
+    if request.method == 'POST':
+
+        name = form.name.data
+
+        data = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
+        firebaseData = data.get('restaurants', None)
+
+        for key in firebaseData:
+            if firebaseData[key]['Name'] == name:
+                nameList.append(firebaseData[key])
+        session['filtered'] = nameList
+        return redirect(url_for('view'))
+    return render_template('home.html', recommend=randRec , form=form)
 
 
 @app.route('/chat')
@@ -122,25 +139,27 @@ def handle_my_custom_event( json ):
   print( 'recived my event: ' + str( json ) )
   socketio.emit( 'my response', json, callback=messagereceived())
 
+class theSearch(Form):
+    name = StringField('Enter the Food You Want')   # line you will see above search form
+    plswork = StringField('try')
 
-
-
-
-@app.route('/theSearch',methods=['POST','GET'])
-def tsearch():
-    nameList = []
-    form = theSearch(request.form)
-    if request.method == 'POST':
-        name = form.name.data
-        restFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
-        totalRest = restFire.get('restaurants', None)
-
-        for key in totalRest:
-            if totalRest[key]['Name'] == name:
-                nameList.append(totalRest[key])
-        session['filtered'] = nameList
-        return redirect(url_for('view'))
-    return render_template('theSearch.html', form=form)
+# @app.route('/theSearch',methods=['POST','GET'])
+# def tsearch():
+#     nameList = []
+#     form = theSearch(request.form)
+#     if request.method == 'POST':
+#
+#         name = form.name.data
+#
+#         data = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
+#         firebaseData = data.get('restaurants', None)
+#
+#         for key in firebaseData:
+#             if firebaseData[key]['Name'] == name:
+#                 nameList.append(firebaseData[key])
+#         session['filtered'] = nameList
+#         return redirect(url_for('view'))
+#     return render_template('theSearch.html', form=form)
 
 
 @app.route('/filter',methods=['POST','GET'])
