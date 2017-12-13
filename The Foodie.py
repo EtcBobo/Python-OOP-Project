@@ -119,12 +119,15 @@ def home():
         firebaseData = data.get('restaurants', None)
 
         for key in firebaseData:
-            if firebaseData[key]['Name'] == name:
+            if firebaseData[key]['Name'].lower() == name.lower():
                 nameList.append(firebaseData[key])
         session['filtered'] = nameList
         return redirect(url_for('view'))
     return render_template('home.html', recommend=randRec , form=form)
 
+class theSearch(Form):
+    name = StringField('') # line you will see above search form
+    plswork = StringField('try')
 
 @app.route('/chat')
 def hello():
@@ -139,27 +142,6 @@ def handle_my_custom_event( json ):
   print( 'recived my event: ' + str( json ) )
   socketio.emit( 'my response', json, callback=messagereceived())
 
-class theSearch(Form):
-    name = StringField('Enter the Food You Want')   # line you will see above search form
-    plswork = StringField('try')
-
-# @app.route('/theSearch',methods=['POST','GET'])
-# def tsearch():
-#     nameList = []
-#     form = theSearch(request.form)
-#     if request.method == 'POST':
-#
-#         name = form.name.data
-#
-#         data = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
-#         firebaseData = data.get('restaurants', None)
-#
-#         for key in firebaseData:
-#             if firebaseData[key]['Name'] == name:
-#                 nameList.append(firebaseData[key])
-#         session['filtered'] = nameList
-#         return redirect(url_for('view'))
-#     return render_template('theSearch.html', form=form)
 
 
 @app.route('/filter',methods=['POST','GET'])

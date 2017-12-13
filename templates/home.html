@@ -12,15 +12,20 @@
 
         {% from "includes/_formhelper.html" import render_field %}
     <form method=post>
-        <div class="form-group col-md-6">
-   {{ render_field(form.name, class_="form-control") }}
+
+        <h3>Search Here for Amazing Food</h3>
+
+        <div id='searchthing' class="form-group col-md-4" >
+            {{ render_field(form.name, class_="form-control") }}
         </div>
-        <div class="form-group col-md-12">
-                    <input type="submit" value="Find Food" class="btn btn-info" id="filterbtn"/>
-                </div>
+        <div class="form-group col-md-4">
+            <input type="submit" value="Search" class="btn btn-info" id="searchbtn"/>
+        </div>
+        <div class="form-group col-md-4">
+
+        </div>
+
     </form>
-
-
 
 
 <div id="homediv">
@@ -93,24 +98,33 @@
 #popular, #recommend{
     color: #000;
     font-family: "hgw-HelveticaNeueBold",Arial,sans-serif;
-	 font-weight: bold;
+    font-weight: bold;
     border-bottom: 2px solid darkred;
     margin-bottom: 20px;
     font-size: 15px;
     padding-bottom: 3px;
     font-size:200%;
-
-
-
 }
 
+#searchbtn{
+    margin-top: 20px;
+}
+
+h3{
+    text-align: center;
+    font-family: "hgw-HelveticaNeueBold",Arial,sans-serif;
+    font-weight: bold;
+}
+
+#searchthing{
+    margin-left: 400px;
+}
 
 #homediv{
         max-width: 1480px;
-    padding: 20px 12px 10px 20px;
-    font: 13px Arial, Helvetica, sans-serif;
+        padding: 20px 12px 10px 20px;
+        font: 13px Arial, Helvetica, sans-serif;
         align:center;
-
     }
 
 
