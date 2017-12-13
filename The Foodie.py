@@ -10,7 +10,7 @@ from flask_googlemaps import GoogleMaps,Map
 import smtplib
 from email.message import EmailMessage
 from flask_socketio import SocketIO, emit
-
+import random
 
 #pip install flask-socketio
 # thefoodie.newsletter@gmail.com
@@ -71,11 +71,11 @@ class RestForm(Form):
                                     ('1 PM', '1 PM'),('2 PM', '2 PM'),('3 PM', '3 PM'),('4 PM', '4 PM'),('5 PM', '5 PM'),('6 PM', '6 PM'),('7 PM', '7 PM'),
                                     ('8 PM', '8 PM'),('9 PM', '9 PM'),('10 PM', '10 PM'),('11 PM', '11 PM'),])
     openT = SelectField(u'Operating Time',
-                           choices=[('12 AM', '12 AM'),('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'), ('4 AM', '4 AM'),
+                           choices=[('12 PM', '12 AM'),('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'), ('4 AM', '4 AM'),
                                     ('5 AM', '5 AM'), ('6 AM', '6 AM'), ('7 AM', '7 AM'), ('8 AM', '8 AM'),
-                                    ('9 AM', '9 AM'), ('10 AM', '10 AM'), ('11 AM', '11 AM'), ('12 PM', '12 PM'),
+                                    ('9 AM', '9 AM'), ('10 AM', '10 AM'), ('11 AM', '11 AM'), ('12 AM', '12 AM'),
                                     ('1 PM', '1 PM'),('2 PM', '2 PM'),('3 PM', '3 PM'),('4 PM', '4 PM'),('5 PM', '5 PM'),('6 PM', '6 PM'),('7 PM', '7 PM'),
-                                    ('8 PM', '8 PM'),('9 PM', '9 PM'),('10 PM', '10 PM'),('11 PM', '11 PM'),])
+                                    ('8 PM', '8 PM'),('9 PM', '9 PM'),('10 PM', '10 PM'),('11 PM', '11 PM')])
     address = TextAreaField('Address')
 
 
@@ -90,7 +90,23 @@ class Feedbacks(Form):
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    try:
+        userPref = session['userPref']
+    except KeyError:
+        userPref = {'Food Types':'None'}
+    print(userPref)
+    recommend = []
+    randRec = []
+    restFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
+    totalRest = restFire.get('restaurants', None)
+    for key in totalRest:
+        if totalRest[key]['Food Type'] == userPref['Food Types'] or userPref['Food Types']== 'None':
+            recommend.append(totalRest[key])
+    option1, option2, option3 = random.sample(range(0, len(recommend)), 3)
+    randRec.append(recommend[option1])
+    randRec.append(recommend[option2])
+    randRec.append(recommend[option3])
+    return render_template('home.html',recommend=randRec)
 
 
 @app.route('/chat')
@@ -201,6 +217,7 @@ def view():
 
     list = session['filtered']
     listLen = len(list)
+    print(list)
 
     return render_template('viewRest.html', Restaurant=list, lengthList = listLen)
 
@@ -242,7 +259,7 @@ def addRest():
 
 
         })
-
+        flash('You have added a new Restaurant!')
         return redirect(url_for('home'))
     return render_template('addRest.html', form=form)
 
@@ -315,6 +332,7 @@ def userLogin():
                 session['logged_in'] = True
                 session['username'] = totalUsers[key]['Username']
                 flash('You were successfully logged in')
+                session['userPref'] = totalUsers[key]
                 logCheck = True
                 return redirect(url_for('home'))
         if logCheck == False:
@@ -389,6 +407,42 @@ def restPage(restName):
         })
         return redirect(url_for('home'))
     return render_template('restDet.html',restDetail = restDetail, form=form,feedback=newFeed)
+
+@app.route('/userEdit',methods=['POST','GET'])
+def userEdit():
+    form = RegisterForm(request.form)
+    if request.method == 'POST':
+        user = form.user.data
+        email = form.email.data
+        price = form.price.data
+        foodType = form.foodType.data
+        password = form.password.data
+        userFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
+        allUser = userFire.get('allUsers', None)
+        for key in allUser:
+            if allUser[key]['Username'] == user:
+                flash('This username has already been used')
+                return redirect(url_for('userEdit'))
+            try:
+                if allUser[key]['Email'] == email and email != '':
+                    flash('This email has already been used')
+                    return redirect(url_for('userEdit'))
+            except KeyError:
+                email = ''
+        for key in allUser:
+            if allUser[key]['Username'] == session['username']:
+                userid = key
+        userFire.put('allUsers', userid, {
+            'Username': user,
+            'Price': price,
+            'Food Types': foodType,
+            'Email': email,
+            'Password': password
+        })
+        flash('You have succesfully edited your profile!')
+        return redirect(url_for('home'))
+    return render_template('userEdit.html', form=form)
+
 
 @app.route('/logout')
 def logout():
