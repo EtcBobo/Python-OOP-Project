@@ -235,7 +235,7 @@ def view():
 @app.route('/addRest',methods=['POST','GET'])
 def addRest():
     form = RestForm(request.form)
-    if request.method == 'POST' and form.validate():
+    if request.method == 'POST':
         name = form.name.data
         desc = form.desc.data
         location = form.location.data
@@ -244,7 +244,9 @@ def addRest():
         openH = form.openH.data
         closingH = form.closingH.data
         address = form.address.data
-
+        if price == '':
+            flash('Please enter an average price for the restaurant')
+            return redirect(url_for('addRest'))
 
         res = Restaurant(name,desc,location,price,foodType,openH,closingH,address)
 
@@ -267,6 +269,7 @@ def addRest():
 
         })
         flash('You have added a new Restaurant!')
+        return redirect(url_for('home'))
     return render_template('addRest.html', form=form)
 
 
