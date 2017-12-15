@@ -1,4 +1,4 @@
-{#{% extends 'layout.html' %}#}
+{% extends 'layout.html' %}
 
 
 <head>
@@ -57,7 +57,7 @@
         } )
         var form = $( 'form' ).on( 'submit', function( e ) {
           e.preventDefault()
-          let user_name = $( 'input.username' ).val()
+          let user_name = $( 'input.username' ).val() + ':'
           let user_input = $( 'input.message' ).val()
           socket.emit( 'my event', {
             user_name : user_name,

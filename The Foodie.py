@@ -75,7 +75,7 @@ class RestForm(Form):
                                     ('1 PM', '1 PM'),('2 PM', '2 PM'),('3 PM', '3 PM'),('4 PM', '4 PM'),('5 PM', '5 PM'),('6 PM', '6 PM'),('7 PM', '7 PM'),
                                     ('8 PM', '8 PM'),('9 PM', '9 PM'),('10 PM', '10 PM'),('11 PM', '11 PM'),])
     openT = SelectField(u'Operating Time',
-                           choices=[('12 PM', '12 AM'),('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'), ('4 AM', '4 AM'),
+                           choices=[('12 PM', '12 PM'),('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'), ('4 AM', '4 AM'),
                                     ('5 AM', '5 AM'), ('6 AM', '6 AM'), ('7 AM', '7 AM'), ('8 AM', '8 AM'),
                                     ('9 AM', '9 AM'), ('10 AM', '10 AM'), ('11 AM', '11 AM'), ('12 AM', '12 AM'),
                                     ('1 PM', '1 PM'),('2 PM', '2 PM'),('3 PM', '3 PM'),('4 PM', '4 PM'),('5 PM', '5 PM'),('6 PM', '6 PM'),('7 PM', '7 PM'),
@@ -167,17 +167,29 @@ def filter():
 
 
         for key in totalRest:
-            if totalRest[key]['Opening Hours'][-2:] == 'PM':
+            if totalRest[key]['Opening Hours'] == '12 PM':
+                openH = 12
+            elif totalRest[key]['Opening Hours'] == '12 AM':
+                openH = 0
+            elif totalRest[key]['Opening Hours'][-2:] == 'PM':
                 openH = int(totalRest[key]['Opening Hours'][0:2]) + 12
             else:
                 openH = int(totalRest[key]['Opening Hours'][0:2])
 
-            if totalRest[key]['Closing Hours'][-2:] == 'PM':
+            if totalRest[key]['Closing Hours'] == '12 PM':
+                closingH = 12
+            elif totalRest[key]['Closing Hours'] == '12 AM':
+                closingH = 0
+            elif totalRest[key]['Closing Hours'][-2:] == 'PM':
                 closingH = int(totalRest[key]['Closing Hours'][0:2]) + 12
             else:
                 closingH = int(totalRest[key]['Closing Hours'][0:2])
 
-            if openT[-2:] == 'PM':
+            if openT == '12 PM':
+                openT1 = 12
+            elif openT == '12 AM':
+                openT1 = 0
+            elif openT[-2:] == 'PM':
                 openT1 = int(openT[0:2]) +12
             else:
                 openT1 = int(openT[0:2])
@@ -288,6 +300,21 @@ def userRegister():
         if password != passwordC:
             flash('The passwords does not match')
             return redirect(url_for('userRegister'))
+
+
+        reg = Registration(user,password,price,foodType,email)
+
+
+        userFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
+        allUser = userFire.get('allUsers',None)
+        for key in allUser:
+            if allUser[key]['Username'] == user:
+                flash('This username has already been used')
+                return redirect(url_for('userRegister'))
+            if allUser[key]['Email'] == email and email != '':
+                flash('This email has already been used')
+                return redirect(url_for('userRegister'))
+
         if email != '':
 
             email_user = 'thefoodie.newsletter@gmail.com'
@@ -304,7 +331,7 @@ def userRegister():
             body = '\n Hi '  + user + '! Thank you for subscribing with TheFoodie Newsletter! \n As a welcome gift, get a free sundae and mcwings by using the codes given below ' \
                    '\n \nPlease continue to look forward to our monthly newsletters and get exclusive promotion codes only for subscribers! ' \
                    '\n \n \n Sincerely, ' \
-                   '\n \nThenFoodie Team'
+                   '\n \nTheFoodie Team'
 
             msg.attach(MIMEText(body, 'plain'))
 
@@ -325,18 +352,6 @@ def userRegister():
             server.sendmail(email_user, email_send, text)
             server.quit()
 
-        reg = Registration(user,password,price,foodType,email)
-
-
-        userFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
-        allUser = userFire.get('allUsers',None)
-        for key in allUser:
-            if allUser[key]['Username'] == user:
-                flash('This username has already been used')
-                return redirect(url_for('userRegister'))
-            if allUser[key]['Email'] == email and email != '':
-                flash('This email has already been used')
-                return redirect(url_for('userRegister'))
         try:
             totalUsers = userFire.get('allUsers',None)
             count = len(totalUsers)
@@ -500,6 +515,7 @@ def userEdit():
             'Email': email,
             'Password': password
         })
+        session['username'] = user
         flash('You have succesfully edited your profile!')
         return redirect(url_for('home'))
     return render_template('userEdit.html', form=form)
