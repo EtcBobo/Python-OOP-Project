@@ -99,6 +99,12 @@ class Feedbacks(Form):
 def mapview():
     trdmap = Map(
         identifier="trdmap",
+        style=(
+            "height:50%;"
+            "width:100%;"
+            "top:100px;"
+            "position:absolute;"
+        ),
         lat=1.3786539,
         lng=103.8493234,
         markers=[
