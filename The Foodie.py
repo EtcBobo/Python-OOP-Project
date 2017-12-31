@@ -97,8 +97,8 @@ class Feedbacks(Form):
 
 @app.route("/location")
 def mapview():
-    trdmap = Map(
-        identifier="trdmap",
+    map = Map(
+        identifier="map",
         style=(
             "height:50%;"
             "width:100%;"
@@ -137,7 +137,7 @@ def mapview():
             }
         ]
     )
-    return render_template('location.html', trdmap=trdmap)
+    return render_template('location.html', map=map)
 
 
 
