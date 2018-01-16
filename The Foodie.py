@@ -14,6 +14,8 @@ from email.mime.base import MIMEBase
 from email import encoders
 from flask_socketio import SocketIO, emit
 import random
+from flask_googlemaps import GoogleMaps
+from flask_googlemaps import Map
 
 #pip install flask-socketio
 # thefoodie.newsletter@gmail.com
@@ -31,7 +33,9 @@ app.config['SECRET_KEY'] = 'jsbcfsbfjefebw237u3gdbdc'
 socketio = SocketIO( app )
 
 
-GoogleMaps(app, key="AIzaSyAN-25Ihf-_ndHtyzHEXF2SGjI6U-WqQKc")
+# GoogleMaps(app, key="AIzaSyAN-25Ihf-_ndHtyzHEXF2SGjI6U-WqQKc")
+
+GoogleMaps(app, key="AIzaSyCrGeXVb96USi1ujzqQ7wlCwc_8LzUB-yY")
 
 
 
@@ -87,9 +91,53 @@ class Feedbacks(Form):
     ratings = SelectField(u'Ratings of the restaurants (higher score means better rating)',choices=[('1','1'),('2','2'),('3','3'),('4','4'),('5','5')])
 
 
-@app.route('/findgps')
-def findgps():
-    return render_template('findgps.html')
+# @app.route('/findgps')
+# def findgps():
+#     return render_template('findgps.html')
+
+@app.route("/location")
+def mapview():
+    map = Map(
+        identifier="map",
+        style=(
+            "height:50%;"
+            "width:100%;"
+            "top:100px;"
+            "position:absolute;"
+        ),
+        lat=1.3786539,
+        lng=103.8493234,
+        markers=[
+            {
+                'lat':  1.372121,
+                'lng':  103.846678,
+                'infobox': (
+                    "<h3>Ang Mo Kio Market & Food Centre</h3>"
+                    "<p>Address: 724 Ang Mo Kio Ave 6, Singapore 560724</p>" 
+                    "<p>Hours: 7AM–9PM</p>" 
+                    "<p>Phone: 6225 5632</p>"
+                    "<img src='//placehold.it/50'>")
+            },
+            {
+                'lat': 1.380936,
+                'lng': 103.840664,
+                'infobox': (
+                    "<h3>Ang Mo Kio 628 Market</h3>" 
+                    "<p>Address: 724 Ang Mo Kio Ave 6, Singapore 560724</p>" 
+                    "<p>Hours: Wednesday\t6:30AM–1:30PM</p>" 
+                    "<p>Thursday\t6:30AM–1:30PM</p>" 
+                    "<p>Friday\t6:30AM–1:30PM</p>" 
+                    "<p>Saturday\t6:30AM–1:30PM</p>" 
+                    "<p>Sunday\t6:30AM–1:30PM</p>" 
+                    "<p>Monday\tClosed</p>" 
+                    "<p>Tuesday\t6:30AM–1:30PM</p>" 
+                    "<p>Phone: 9067 5142</p>"
+                    "<img src='//placehold.it/50'>"
+                )
+            }
+        ]
+    )
+    return render_template('location.html', map=map)
 
 
 
