@@ -2,72 +2,43 @@
 
 {% block body %}
     {% from "includes/_formhelper.html" import render_field %}
-<br>
-<br>
-<div id="registerdiv">
-    <div class="form-group col-md-4">
-
-            </div>
+    <div class="container" id="profilediv">
+    <br>
+        <br>
     <h1 id="register">Edit Your Profile</h1>
     <br>
     <form method=post>
-        <div class="form-group">
-            <div class="form-group col-md-4">
-
-            </div>
-            <div class="form-group col-md-8">
-                <div class="form-group col-md-12">
-                    {{ render_field(form.user, class_="form-control") }}
-                </div>
-
-                <div class="form-group col-md-12">
-                    {{ render_field(form.password, class_="form-control") }}
-                </div>
-
-                <div class="form-group col-md-12">
-                    {{ render_field(form.passwordC, class_="form-control") }}
-                </div>
-
-                <div class="form-group col-md-12">
-                    {{ render_field(form.price, class_="form-control") }}
-                </div>
-                <div class="form-group col-md-12">
-                    {{ render_field(form.foodType, class_="form-control") }}
-                </div>
-                <div class="form-group col-md-12">
-                    {{ render_field(form.email, class_="form-control")  }}
-                </div>
-
-
-<div class="form-group">
-            <div class="form-row">
-                <div class="form-group col-md-11">
-
-
-                </div>
-                <div class="form-group col-md-12">
-                    <input type="submit" value="Edit" class="btn btn-info" id="registerbtn"/>
+            <div class="row">
+            <div  class="col-md-8 col-md-offset-2" class="edit">
+                <img src="https://www.revenueriver.co/hs-fs/hub/177047/file-2110622193-png/user_profile_img.png" class="img-responsive" class="img-circle" width="304" height="236">
+                <br>
+                <br>
+                <button class="btn btn-default" id="imgbtn" type="submit">Choose Image</button>
+                <br>
+                <br>
+                <br>
+                 {{ render_field(form.user, class_="form-control") }}
+                  <br>
+                 {{ render_field(form.password, class_="form-control") }}
+                <br>
+                   {{ render_field(form.passwordC, class_="form-control") }}
+                <br>
+                 {{ render_field(form.price, class_="form-control") }}
+                <br>
+                {{ render_field(form.foodType, class_="form-control") }}
+                <br>
+                {{ render_field(form.email, class_="form-control")  }}
+                <br>
+                <br>
+               <div class='btn-toolbar'>
+                 <input class="btn btn-success" type="submit" value="Save Changes" class="btn btn-info" id="registerbtn"/>
+                <input class="btn btn-Basic" type="submit" value="Cancel" id="cancelbtn"/>
                 </div>
             </div>
-        </div>
-
             </div>
-        </div>
+        <br>
+        <br>
 
-
-
-
-                 <!--<div class="form-group">-->
-            <!--<div class="form-row">-->
-                <!--<div class="form-group col-md-11">-->
-
-
-                <!--</div>-->
-                <!--<div class="form-group col-md-1">-->
-                    <!--<input type="submit" value="Submit" class="btn btn-info"/>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
 
     </form>
 </div>
@@ -84,38 +55,63 @@
 
     }
 
-     #registerdiv {
-        max-width: 980px;
-        padding: 20px 12px 10px 20px;
-        font: 13px Arial, Helvetica, sans-serif;
-         align:center;
-
-
-
-    }
 
     #registerbtn{
         border-radius: 4px;
-    background-color: darkred;
     border: 0;
     color: #fff!important;
     display: inline-block;
     font-size: 14px;
-    /*line-height: 40px;*/
-    /*min-width: 150px;*/
-    /*height: 42px;*/
     text-align: center;
         height: 42px;
-        width:250px
+        width:370px;
+        font-size:120%;
 
     }
 
-    #email {
-        font-size:12px;
-        font-weight: bold;
-        color: black;
+.row img{
+    margin-left:200px;
+}
 
+ #profilediv {
+         align: center;
+         background-color: white;
+         display:block;
+     }
+
+.edit{
+   margin-left:120px;
+}
+
+#imgbtn{
+    margin-left:300px;
+
+}
+
+#cancelbtn{
+     text-align: center;
+        height: 42px;
+        width:370px;
+        font-size:120%;
+    float:right;
+
+}
+
+@media (max-width: 991px) {
+    .row img{
+        float:left;
+        margin-left:0px;
     }
+
+    #imgbtn{
+        margin-left:100px;
+    }
+
+}
+
+
+
+
 
 </style>
 

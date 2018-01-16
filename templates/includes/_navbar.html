@@ -1,6 +1,7 @@
 <!--<link rel=stylesheet type=text/css href="\static\css\navbar.css">-->
   <!--<nav class="navbar navbar-default">-->
 
+<div class="container">
 <nav class=".navbar.navbar-default.navbar-static-top">
      <div class="container-fluid" id="container">
         <div class="navbar-header">
@@ -12,10 +13,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand"><a href="/"><img src="http://www.freeiconspng.com/uploads/food-icon-7.png" style="width:40px;height:40px;display:inline-block;">The Foodie</a></a>
+            <ul class="navbar-brand">
+                <img src="http://www.freeiconspng.com/uploads/food-icon-7.png" style="width:40px;height:40px;display:inline-block;">The Foodie
+            </ul>
         </div>
         <!--<div id="navbar" class="collapse navbar-collapse">-->
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav" style="margin-top:10px;">
                 <li class=""><a href="/">Home</a></li>
                 <li class=""><a href="/filter">Find Food</a></li>
                 <li class=""><a href="/findgps">Find Me</a></li>
@@ -26,11 +29,12 @@
                         <li><a href="/filter">Filter Restaurant</a></li>
                     </ul>
                     <li class=""><a href="/chat">ChatRoom</a></li>
+                    <li class=""><a href="/">Events</a></li>
                 </li>
 
             </ul>
 
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right" style="margin-top:10px;">
                 {% if session['logged_in'] %}
                     <li><a href="/userProfile">{{ session['username'] }}</a></li>
                     <li><a href="/logout">Logout</a></li>
@@ -44,10 +48,14 @@
 
 </div>
 </nav>
+</div>
+
 
 <style>
 
-
+.container{
+   background:white;
+}
 
 
     a { color:black !important; }

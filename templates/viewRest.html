@@ -1,9 +1,9 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-    {% from "includes/_formhelper.html" import render_field %}
-<br>
-<br>
+  <div class="container" id="filterdiv">
+         <br>
+        <br>
 <div id="viewdiv">
     <h1 id="view">View All Restaurants</h1>
     <br/>
@@ -11,17 +11,16 @@
 
 
     <div id="sort">
-{#        <span>Sort By:</span>#}
-{#        <td><select name="product" id="product" width="300" style="width: 300px">#}
-{#      <option id="az" onclick="{{ alphalist }}">Alphabetical Order(A~Z)</option>#}
-{#      <option id="za">Alphabetical Order(Z~A)</option>#}
-{#      <option id="low">Low to High</option>#}
-{#            <option id="high">High to Low</option>#}
-{#            <option id="ratelow">Ratings(Low to High)</option>#}
-{#            <option id="ratehigh">Ratings(High to Low)</option>#}
-{##}
-{#    </select></td>#}
+        <span>Sort By:</span>
+        <td><select name="product" id="product" width="300" style="width: 300px">
+      <option id="az" onclick="{{ alphalist }}">Alphabetical Order(A~Z)</option>
+      <option id="za">Alphabetical Order(Z~A)</option>
+      <option id="low">Low to High</option>
+            <option id="high">High to Low</option>
+            <option id="ratelow">Ratings(Low to High)</option>
+            <option id="ratehigh">Ratings(High to Low)</option>
 
+    </select></td>
 
     <br>
     <br>
@@ -91,6 +90,18 @@
         font-weight: bold;
 
     }
+
+td a {
+    font-size:120%;
+    font-weight:bold;
+    font-
+
+}
+
+td{
+    font-weight:normal;
+     font-size:120%;
+}
 
 </style>
 

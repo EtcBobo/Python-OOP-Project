@@ -2,9 +2,9 @@
 
 {% block body %}
     {% from "includes/_formhelper.html" import render_field %}
-<br>
-<br>
-<div id="filterdiv">
+     <div class="container" id="filterdiv">
+         <br>
+        <br>
     <h1 id="find">Find Food</h1>
     <form method="POST" >
         <br>
@@ -31,11 +31,11 @@
 
         <div class="form-group">
             <div class="form-row">
-                <div class="form-group col-md-11">
-
-
-                </div>
+                <br>
+                <br>
                 <div class="form-group col-md-12">
+                        <br>
+                        <br>
                     <input type="submit" value="Find Food" class="btn btn-info" id="filterbtn"/>
                 </div>
             </div>
@@ -46,11 +46,9 @@
 
 <style>
     #filterdiv{
-        max-width: 1480px;
-    padding: 20px 12px 10px 20px;
-    font: 13px Arial, Helvetica, sans-serif;
-        align:center;
-
+         align: center;
+         background-color: white;
+         display:block;
     }
 
     #find{
@@ -80,6 +78,16 @@
         float:right;
 
     }
+body{
+    background:url("http://hotmillion.ca/wp-content/uploads/2015/03/Best-Indian-Food-Wallpaper.jpg");
+    background-color: rgba(255,255,255,0.2);
+     background-blend-mode: lighten;
+    background-repeat: no-repeat;
+     background-size: cover;
+    opacity:0.9;
+
+}
+
 
 
 </style>

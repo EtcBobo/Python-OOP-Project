@@ -2,42 +2,35 @@
 
 {% block body %}
     {% from "includes/_formhelper.html" import render_field %}
-<br>
-<br>
-<div id="profilediv">
+    <div class="container" id="profilediv">
+    <br>
+        <br>
     <h1 id="profile">Your Profile!</h1>
-    <a href="/userEdit" id="edit">Edit profile</a>
     <div class="row">
-        <div class="col-md-4">
-            <p>Username</p>
+{#        <div class="col-md-12">#}
+        <figure class="col-md-6">
+             <img src="https://www.revenueriver.co/hs-fs/hub/177047/file-2110622193-png/user_profile_img.png" class="img-responsive" class="img-circle" width="304" height="236">
+            <figcaption style="font-weight:bold;font-size:300%;margin-left:40px;margin-bottom:20px;"> {{ user['Username'] }} </figcaption>
+        </figure>
+            <br>
+            <br>
+            <br>
+            <p class="userinfo">Preferred price range: <span style="font-weight: bold;"> {{  user['Price'] }} </span></p>
+            <br>
+            <p class="userinfo">Preferred Food Type:<span style="font-weight: bold;"> {{  user['Food Types'] }} </span></p>
+            <br>
+            <p class="userinfo">Email: <span style="font-weight: bold;">{{ user['Email']  }} </span></p>
+            <br>
+            <br>
+              <button id="btn" class="btn btn-basic"><a href="/userEdit" id="edit">Edit profile</a></button>
         </div>
-        <div class="col-md-8">
-            <p>{{ user['Username'] }}</p>
-        </div>
-        <div class="col-md-4">
-            <p>Preferred price range</p>
-        </div>
-        <div class="col-md-8">
-            <p>{{ user['Price'] }}</p>
-        </div>
-        <div class="col-md-4">
-            <p>Preferred food type</p>
-        </div>
-        <div class="col-md-8">
-            <p>{{ user['Food Types'] }}</p>
-        </div>
-        <div class="col-md-4">
-            <p>Email</p>
-        </div>
-        <div class="col-md-8">
-            <p>{{ user['Email'] }}</p>
-        </div>
-
     </div>
-</div>
+    </div>
+
+
 <style>
      #profile{
-         font-weight: bold;
+          font-weight: bold;
     font-style: italic;
     border-bottom: 2px solid darkred;
     margin-bottom:20px;
@@ -48,28 +41,11 @@
     }
 
      #profilediv {
-        max-width: 980px;
-        padding: 20px 12px 10px 20px;
-        font: 13px Arial, Helvetica, sans-serif;
-         align:center;
+         align: center;
+         background-color: white;
+         display:block;
+     }
 
-
-    }
-#loginbtn{
-        /*border-radius: 4px;*/
-    background-color: darkred;
-    border: 0;
-    color: #fff!important;
-    display: inline-block;
-    font-size: 14px;
-    /*line-height: 40px;*/
-    /*min-width: 150px;*/
-    /*height: 42px;*/
-    text-align: center;
-        height: 42px;
-        width:250px
-
-    }
 
 #edit{
      font-weight: bold;
@@ -78,6 +54,26 @@
 
 }
 
+
+.userinfo{
+    margin-left:30px;
+    font-size:150%;
+}
+
+#btn{
+    float:right;
+     width:200px;
+    margin-right:20px;
+}
+
+a:hover{
+     text-decoration: none;
+}
+
+
+
+
 </style>
 
 {% endblock %}
+

@@ -2,31 +2,33 @@
 
 {% block body %}
     {% from "includes/_formhelper.html" import render_field %}
-<br>
-<br>
-<div  id="adddiv">
-    <h1 id="add">Add New Restaurant!</h1>
+<div class="container" id="profilediv">
+    <br>
+    <br>
+    <h1 id="register">Add New restaurant!</h1>
     <p>Do you feel that that restaurants you visited deserve more recognition? Help them by adding the restaurant informations below!</p>
     <br>
-</div>
-         <form method="POST" >
-        <div class="form-group">
-             <!--<div class="form-group col-md-2">
-
-            </div>-->
-            <div class="form-group col-md-8">
+    <br>
+    <form method="POST">
+        <div class="form-group col-md-12">
+            <div class="row">
+            <div  class="col-md-8 col-md-offset-2" class="edit">
                 <div class="form-group col-md-12" class="name">
                     {{ render_field(form.name, class_="form-control") }}
                 </div>
+
                 <div class="form-group col-md-12" class="desc">
                     {{ render_field(form.desc, class_="form-control") }}
                 </div>
+
                 <div class="form-group col-md-12">
                     {{ render_field(form.address, class_="form-control") }}
                 </div>
+
                 <div class="form-group col-md-12" class="location">
                     {{ render_field(form.location, class_="form-control") }}
                 </div>
+
                 <div class="form-group col-md-12" class="type">
                     {{ render_field(form.foodType, class_="form-control") }}
                 </div>
@@ -34,6 +36,7 @@
                 <div class="form-group col-md-12" class="price">
                     {{ render_field(form.price, class_="form-control") }}
                 </div>
+
                 <div class="form-group col-md-12" class="openhr">
                     {{ render_field(form.openH, class_="form-control") }}
                 </div>
@@ -41,30 +44,31 @@
                 <div class="form-group col-md-12">
                     {{ render_field(form.closingH, class_="form-control") }}
                 </div>
-
-
-        <div class="form-group">
-            <div class="form-row">
-                <div class="form-group col-md-11">
-
-
-                </div>
-                <div class="form-group col-md-12">
-                    <input type="submit" value="Submit" class="btn btn-info" id="submitbtn"/>
-                </div>
+                <br>
+                <br>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <br>
+                                <br>
+                                <input type="submit" value="Submit" id="submitbtn"/>
+                             </div>
+                        </div>
+                    </div>
+              </div>
             </div>
         </div>
-
-            </div>
-        </div>
-
-
 
     </form>
-</div>
+
+
+
+
 <style>
-   #add{
-       font-weight: bold;
+
+
+      #register{
+         font-weight: bold;
     font-style: italic;
     border-bottom: 2px solid darkred;
     margin-bottom:20px;
@@ -72,21 +76,15 @@
     padding-bottom: 3px;
     font-size:200%;
 
-   }
-
-    #adddiv {
-        max-width: 980px;
-        padding: 20px 12px 10px 20px;
-        font: 13px Arial, Helvetica, sans-serif;
-
     }
-
-
+#profilediv {
+         align: center;
+         background-color: white;
+         display:block;
+     }
 
     form{
         display: inline-block;
-
-
     }
 
     #submitbtn{
@@ -96,13 +94,33 @@
     color: #fff!important;
     display: inline-block;
     font-size: 14px;
-    /*line-height: 40px;*/
-    /*min-width: 150px;*/
-    /*height: 42px;*/
     text-align: center;
         height: 42px;
-        width:300px
+        width:300px;
     }
+p{
+   font-style: italic;
+}
+
+@media (max-width: 991px) {
+    .edit{
+        float:left;
+    }
+
+    #profilediv{
+        float:left;
+    }
+
+}
+
+body{
+ background:url("http://www.arteasan.com/mag/wp-content/uploads/2016/02/fresh-vegetables-on-the-wooden-table-wallpaper-5000x3745-690x455.jpg");
+    background-color: rgba(255,255,255,0.2);
+     background-blend-mode: lighten;
+    background-repeat: no-repeat;
+     background-size: cover;
+    opacity:0.9;
+}
 
 
 </style>
