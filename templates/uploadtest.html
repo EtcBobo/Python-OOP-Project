@@ -1,51 +1,92 @@
-{% extends 'layout.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
 
-{% block body %}
-    {% from "includes/_formhelper.html" import render_field %}
-    <div class="container" id="profilediv">
-    <br>
-        <br>
-    <h1 id="register">Edit Your Profile</h1>
-    <br>
-    <form method=post>
-            <div class="row">
-            <div  class="col-md-8 col-md-offset-2" class="edit">
-                <img src="https://www.revenueriver.co/hs-fs/hub/177047/file-2110622193-png/user_profile_img.png" class="img-responsive" class="img-circle" width="304" height="236">
+    <!--<title>Title</title>-->
+    <style  media='screen'>
+        body{
+            margin: 0;
+        }
+        label {
+            display: none;
+        }
+        #myProgress {
+                  width: 70%;
+                  background-color: #ddd;
+                  text-align: center;
+                    margin-left: 15%;
+        }
+        #myBar {
+          width: 0;
+          height: 30px;
+          background-color: #4CAF50;
+          text-align: center;
+          line-height: 30px;
+          color: white;
+        }#myProgress2 {
+                  width: 70%;
+                  background-color: #ddd;
+                  text-align: center;
+                    margin-left: 15%;
+        }
+        #myBar2 {
+          width: 0;
+          height: 30px;
+          background-color: #4CAF50;
+          text-align: center;
+          line-height: 30px;
+          color: white;
+        }
+        #file, #file2{
+            margin:0;
+        }
+
+    </style>
+
+</head>
+<body>
+    {% extends 'layout.html' %}
+    {% block body %}
+        <h1 class="display-3 text-center">Register (Driver)</h1>
+
+        <div class=" row">
+            <div class="text-center col-md-6" >
+                <h2 class="display-5 text-center">Choose a profile picture</h2>
+                    <br>
+                    <br>
+                    <img id = 'img' class="img-responsive" style="width: 275px; height: 275px;" src="../static/images/driver_profile_icon.png">
+
+                    <br>
+                    <br>
+                    <div class="row">
+                        <div class="col-4">
+
+                        </div>
+                    <div id="myProgress">
+                        <div id="myBar"></div>
+                    </div>
+                        <div class="col-2"></div>
+                    </div>
+                    <br>
+                    <br>
+                <input type="file" id="file"  required/>
                 <br>
                 <br>
-                <input type="file" id="file"/>
-                <br>
-                <br>
-                <br>
-                 {{ render_field(form.password, class_="form-control") }}
-                <br>
-                   {{ render_field(form.passwordC, class_="form-control") }}
-                <br>
-                 {{ render_field(form.price, class_="form-control") }}
-                <br>
-                {{ render_field(form.foodType, class_="form-control") }}
-                <br>
-                {{ render_field(form.email, class_="form-control")  }}
-                <br>
-                <br>
-               <div class='btn-toolbar'>
-                 <input class="btn btn-success" type="submit" value="Save Changes" class="btn btn-info" id="registerbtn"/>
-                <input class="btn btn-Basic" type="submit" value="Cancel" id="cancelbtn"/>
-                </div>
             </div>
-            </div>
-        <br>
-        <br>
 
 
-    </form>
-</div>
+        <div id="clear" style="clear: both;"></div>
+        </div>
+         <button type="button" class="btn btn-primary btn-lg upload-group text-center" id="uploadButton" onclick="setTimeout(myFunction,8000)" style="margin-left:47%">Upload</button>
 
 
-            <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+
+
+        <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
 <script>
-   function upload() {
-    window.location = "/userProfile"
+   function myFunction() {
+    window.location = "/"
 }
     function readURL2(input) {
 
@@ -142,76 +183,7 @@
 
         </script>
 
-<style>
-    #register{
-         font-weight: bold;
-    font-style: italic;
-    border-bottom: 2px solid darkred;
-    margin-bottom:20px;
-    font-size: 15px;
-    padding-bottom: 3px;
-    font-size:200%;
 
-    }
-
-
-    #registerbtn{
-        border-radius: 4px;
-    border: 0;
-    color: #fff!important;
-    display: inline-block;
-    font-size: 14px;
-    text-align: center;
-        height: 42px;
-        width:370px;
-        font-size:120%;
-
-    }
-
-.row img{
-    margin-left:200px;
-}
-
- #profilediv {
-         align: center;
-         background-color: white;
-         display:block;
-     }
-
-.edit{
-   margin-left:120px;
-}
-
-#imgbtn{
-    margin-left:300px;
-
-}
-
-#cancelbtn{
-     text-align: center;
-        height: 42px;
-        width:370px;
-        font-size:120%;
-    float:right;
-
-}
-
-@media (max-width: 991px) {
-    .row img{
-        float:left;
-        margin-left:0px;
-    }
-
-    #imgbtn{
-        margin-left:100px;
-    }
-
-}
-
-
-
-
-
-</style>
-
-{% endblock %}
+    {% endblock %}
+</body>
+</html>

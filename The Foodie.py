@@ -48,7 +48,10 @@ class RegisterForm(Form):
                            choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'), ('Western Food', 'Western Food'),
                                     ('Chinese Food', 'Chinese Food'), ('Healthy Food', 'Healthy Food'),
                                     ('None', 'None')])
-    email = EmailField("Email", [validators.optional()])
+    email = EmailField("Email")
+
+
+
 
 
 
@@ -137,7 +140,7 @@ def mapview():
             }
         ]
     )
-    return render_template('location.html', map=map)
+    return render_template('findgps.html', map=map)
 
 
 
@@ -279,6 +282,12 @@ def filter():
         return redirect(url_for('view'))
     return render_template('filter.html', form=form)
 
+
+@app.route('/uploadtest',methods=['POST','GET'])
+def uploadtest():
+    return render_template('uploadtest.html')
+
+
 @app.route('/viewRest',methods=['POST','GET'])
 def view():
 
@@ -287,9 +296,6 @@ def view():
     print(list)
 
     return render_template('viewRest.html', Restaurant=list, lengthList = listLen)
-
-
-
 
 
 @app.route('/addRest',methods=['POST','GET'])
@@ -426,12 +432,18 @@ def userLogin():
         password = form.password.data
         userFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
         totalUsers = userFire.get('allUsers',None)
+        allPic = userFire.get('userPic',None)
         for key in totalUsers:
             if password == totalUsers[key]['Password'] and user == totalUsers[key]['Username']:
                 session['logged_in'] = True
                 session['username'] = totalUsers[key]['Username']
                 flash('You are successfully logged in')
                 session['userPref'] = totalUsers[key]
+                session['userDetail'] = totalUsers[key]
+                for key2 in allPic:
+                    if user == allPic[key2]['user']:
+                        session['proPic'] = allPic[key2]['urlProfile']
+                print(totalUsers[key])
                 logCheck = True
                 return redirect(url_for('home'))
         if logCheck == False:
@@ -474,7 +486,6 @@ def restPage(restName):
     totalRest = restFire.get('restaurants', None)
     for key in totalRest:
         if restName == totalRest[key]['Name']:
-            totalRest[key]['Price'] = '$'+ totalRest[key]['Price']
             restDetail = totalRest[key]
     feedback = restFire.get(restName, None)
     newFeed = []
@@ -510,7 +521,6 @@ def restPage(restName):
             totalRest = restFire.get('restaurants', None)
             for key in totalRest:
                 if restName == totalRest[key]['Name']:
-                    totalRest[key]['Price'] = '$' + totalRest[key]['Price']
                     restDetail = totalRest[key]
             feedback = restFire.get(restName, None)
             newFeed = []
@@ -528,11 +538,22 @@ def restPage(restName):
             return render_template('restDet.html', restDetail=restDetail, form=form, feedback=newFeed)
     return render_template('restDet.html',restDetail = restDetail, form=form,feedback=newFeed)
 
+
+
 @app.route('/userEdit',methods=['POST','GET'])
 def userEdit():
-    form = RegisterForm(request.form)
+    class UserEdit(Form):
+        password = PasswordField("Password", [validators.DataRequired()])
+        passwordC = PasswordField("Confirm Password", [validators.DataRequired()])
+        price = StringField('Preferred Price Range',default=session['userDetail']['Price'])
+        foodType = SelectField(u'Preferred Food Type',
+                               choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'),
+                                        ('Western Food', 'Western Food'),
+                                        ('Chinese Food', 'Chinese Food'), ('Healthy Food', 'Healthy Food'),
+                                        ('None', 'None')], default=session['userDetail']['Food Types'])
+        email = EmailField("Email", [validators.optional()], default=session['userDetail']['Email'])
+    form = UserEdit(request.form)
     if request.method == 'POST':
-        user = form.user.data
         email = form.email.data
         price = form.price.data
         foodType = form.foodType.data
@@ -543,30 +564,32 @@ def userEdit():
             return redirect(url_for('userEdit'))
         userFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
         allUser = userFire.get('allUsers', None)
+        allPic = userFire.get('userPic',None)
         for key in allUser:
-            if allUser[key]['Username'] == user:
-                flash('This username has already been used')
-                return redirect(url_for('userEdit'))
             try:
                 if allUser[key]['Email'] == email and email != '':
                     flash('This email has already been used')
                     return redirect(url_for('userEdit'))
             except KeyError:
                 email = ''
-        for key in allUser:
-            if allUser[key]['Username'] == session['username']:
-                userid = key
-        userFire.put('allUsers', userid, {
-            'Username': user,
+
+        userFire.put('allUsers', session['username'], {
+            'Username': session['username'],
             'Price': price,
             'Food Types': foodType,
             'Email': email,
             'Password': password
         })
-        session['username'] = user
         flash('You have succesfully edited your profile!')
+        for key in allUser:
+            if session['username'] == allUser[key]['Username']:
+                session['userDetail'] = allUser[key]
+        for key in allPic:
+            if session['username'] == allPic[key]['user']:
+                session['proPic'] = allPic[key]['urlProfile']
+        print(session['proPic'])
         return redirect(url_for('home'))
-    return render_template('userEdit.html', form=form)
+    return render_template('userEdit.html', form=form, user=session['userDetail'], proPic=session['proPic'])
 
 
 @app.route('/logout')
@@ -586,6 +609,7 @@ def userProfile():
     return render_template('userProfile.html' , user = theUser)
 
 
+
+
 if __name__ == '__main__':
     socketio.run(app, debug=True)
-
