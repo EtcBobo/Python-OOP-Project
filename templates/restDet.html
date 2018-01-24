@@ -2,93 +2,119 @@
 
 {% block body %}
         {% from "includes/_formhelper.html" import render_field %}
-  <div class="container" id="filterdiv">
-         <br>
-        <br>
-
+<div class="container" id="filterdiv">
+    <br>
+    <br>
 <div id="viewdiv">
 
-    <h1 id="view">Details of {{ restDetail['Name'] }}
-    </h1>
-    <br/>
+    <h1 id="view">Details of {{ restDetail['Name'] }}</h1>
+    <div class="form-group col-md-12" id="filterdiv" >
+      <span class="info2"><p class="glyphicon glyphicon-usd"></p> {{ restDetail['Price'] }}</span>
+        <span class="verticalLine"></span>
+        <span class="info2"><p class="glyphicon glyphicon-bell"></p> {{ restDetail['Opening Hours'] }} to {{ restDetail['Closing Hours'] }}</span>
+         <span class="verticalLine"></span>
+        <span class="info2"><p class="glyphicon glyphicon-map-marker"></p> {{ restDetail['Location'] }}</span>
+         <span class="verticalLine"></span>
+          <span class="info2"><p class="glyphicon glyphicon-globe"></p> {{ restDetail['Address'] }}</span>
+         <p id="heart" class="glyphicon glyphicon-heart-empty"><span id="fav"> favourite</span></p>
+
+    </div>
 </div>
 
 <div class="form-group col-md-8">
 </div>
 
-       <div class="container" id="filterdiv">
-         <br>
-        <br>
+
 
 <div id="sort">
-  <div class="form-group col-md-12">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVoweWwEb_UQKtBhQfwA78S2QXub1JHoyCox-rj8B3gnOC9M5_aQ">
-{# <div class="form-group col-md-12" class="desc">#}
-        {{ restDetail['Description'] }}
+
+
+
+    <div class="container" id="filterdiv">
+        <div id="viewdiv">
+    <img id="detailimg" class="img-responsive" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVoweWwEb_UQKtBhQfwA78S2QXub1JHoyCox-rj8B3gnOC9M5_aQ">
+    </div>
+    <div class="form-group col-md-6">
+         <div class="form-group col-md-6" class="value">
+                 {{ restDetail['Description'] }}</div>
+
+
+        </div>
+    </div>
+
 
 <form method=post>
-      <div class="form-group col-md-6" id="ratings">
-                     {{ render_field(form.ratings, class_="form-control") }}
 
+      <div class="form-group col-md-12">
+          <div class="form-group col-md-6" id="ratings">
+              <br>
+              <br>
+              {{ render_field(form.ratings, class_="form-control") }}
+          </div>
 
+          <div class="form-group col-md-6" id="commentbox">
+                {{ render_field(form.comments, class_="form-control") }}
                 </div>
-  </div>
-
-  </div>
-
-<div class="form-group col-md-6" class="value">
-      {{ restDetail['Price'] }}
-    <div class="form-group col-md-8" class="value">
-    P r i c e  R a n g e:  </div>
+                    <div class="form-group col-md-12">
+                    <input type="submit" value="Submit" class="btn btn-info" id="submitbtn"/>
+                </div>
+      </div>
+</form>
+        <div class="form-group col-md-12">
+           <h2 id="pastcomments">Past Comments</h2>
+       {% for i in feedback %}
+           <div class="form-group col-md-12">
+               <br>
+               <br>
+           <img src="https://www.revenueriver.co/hs-fs/hub/177047/file-2110622193-png/user_profile_img.png" class="img-responsive" class="img-circle" id="userpic">
+           <div class="form-group col-md-12">
+           <div class="form-group col-md-4" id="usernames">{{ i['User'] }}</div>
+               {% for i in range(i['Rating']) %}
+                   {{ i['Comment'] }}
+                   <img id="ratingstar" src="https://t3.ftcdn.net/jpg/01/09/84/42/160_F_109844239_A7MdQSDf4y1H80cfvHZuSa0zKBkZ68S7.jpg">
+                   {% endfor %}
+           </div>
+           </div>
+       {% endfor %}
+{#        <table class="table table-bordered">#}
+{#        <thead>#}
+{#        <br>#}
+{#        <br>#}
+{#        <tr>#}
+{#            <th>Users</th>#}
+{#            <th>Comments</th>#}
+{#            <th>Ratings</th>#}
+{#        </tr>#}
+{#        </thead>#}
+{#        <tbody>#}
+{#        {% for i in feedback %}#}
+{#            <tr>#}
+{##}
+{##}
+{#                    <td> {{ i['User'] }}</td>#}
+{#                    <td> {{ i['Comment'] }}</td>#}
+{#                    <td>#}
+{#                {% for i in range(i['Rating']) %}#}
+{#                    <img src="https://t3.ftcdn.net/jpg/01/09/84/42/160_F_109844239_A7MdQSDf4y1H80cfvHZuSa0zKBkZ68S7.jpg">#}
+{##}
+{#                {% endfor %}#}
+{#                    </td>#}
+{##}
+{##}
+{#            </tr>#}
+{#        {% endfor %}#}
+{#        </tbody>#}
+{#    </table>#}
+    </div>
 </div>
-
-
-    <div class="form-group col-md-6" class="value">
-      {{ restDetail['Closing Hours'] }}
-    <div class="form-group col-md-8" class="value">
-        C l o s i n g  H o u r: </div>
 </div>
-
-
-<div class="form-group col-md-6" class="value">
-      {{ restDetail['Address'] }}
-    <div class="form-group col-md-8" class="value">
-        A d d r e s s: </div>
-</div>
-
-<div class="form-group col-md-6" class="value">
-      {{ restDetail['Opening Hours'] }}
-    <div class="form-group col-md-8" class="value">
-        O p e n i n g  H o u r: </div>
-</div>
-
-<div class="form-group col-md-6" class="value">
-      {{ restDetail['Location'] }}
-    <div class="form-group col-md-8" class="value">
-        L o c a t i o n: </div>
-</div>
-
-
-</div>
-
 
    <style>
+   #infodiv{
+       margin: 0;
+    padding: 0;
+   }
     #viewdiv{
-{#         max-width: 980px;#}
-{#        padding: 20px 12px 10px 20px;#}
-{#        font: 13px Arial, Helvetica, sans-serif;#}
-{#         align:center;#}
-
-{#       display:block;#}
-{#    border: 0;#}
-{#    border-top: solid black;#}
-{#    border-top-color: darkred;#}
-{#    margin: 1em 0;#}
-{#    padding: 0;#}
-{#	float: none;#}
-{#	clear: left;#}
-{#	width:100%#}
-
    max-width: 1480px;
     padding: 20px 12px 10px 20px;
     font: 13px Arial, Helvetica, sans-serif;
@@ -105,27 +131,20 @@
     font-size: 15px;
     padding-bottom: 3px;
     font-size:200%;
-
-{#         font-weight: bold;#}
-{#    font-style: italic;#}
-{#    border-bottom: 2px solid darkred;#}
-{#    margin-bottom:20px;#}
-{#    font-size: 15px;#}
-{#    padding-bottom: 3px;#}
-{#    font-size:200%;#}
     }
 
-    img {
-        display: inline-block;
-        float: left;
+    #pastcomments{
+         color: #000;
+    font-family: "hgw-HelveticaNeueBold",Arial,sans-serif;
+	 font-weight: bold;
+    font-size: 15px;
+    padding-bottom: 3px;
+    font-size:200%;
     }
 
 
     .value {
         font-size: 30px;
-{#        float:right;#}
-{#        display:inline-block;#}
-{#        text-align:right;#}
         font-weight: bold;
 
     }
@@ -133,7 +152,6 @@
    #ratings{
        display:block;
        float:right;
-
    }
 
    #submitbtn{
@@ -143,9 +161,6 @@
     color: #fff!important;
     display: inline-block;
     font-size: 14px;
-    /*line-height: 40px;*/
-    /*min-width: 150px;*/
-    /*height: 42px;*/
     text-align: center;
         height: 42px;
         width:250px;
@@ -167,96 +182,77 @@
 
    }
 
-   #commentdiv{
-        max-width: 980px;
+   #commentbox{
+        max-width: 525px;
         padding: 20px 12px 10px 20px;
         font: 13px Arial, Helvetica, sans-serif;
          align:center;
+   }
 
+   .verticalLine{
+       border-left:2px solid darkred;
+     height:150px;
+     right:249px;
+     top:10px;
+     margin-right: 17px;
+   }
+
+
+   .info2{
+       font-size:150%;
+         margin-right: 17px;
+   }
+
+   #detailimg{
+        display: inline-block;
+        float: left;
+        height:250px;
+        width:450px;
 
    }
 
-    #user {
-         color: #000;
-    font-family: "hgw-HelveticaNeueBold",Arial,sans-serif;
-	 font-weight: bold;
-    margin-bottom: 20px;
-    padding-bottom: 3px;
-    font-size:150%;
-
-
-
-    }
-
-    #puser{
-        color: #000;
-    font-family: "hgw-HelveticaNeueBold",Arial,sans-serif;
-	 font-weight: bold;
-    border-bottom: 2px solid darkred;
-    margin-bottom: 20px;
-    font-size: 15px;
-    padding-bottom: 3px;
-    font-size:200%;
-        text-align:center;
-
-    }
-
-   #comment{
-        color: black;
-    font-family: "hgw-HelveticaNeueBold",Arial,sans-serif;
-	 font-weight: bold;
-    font-size: 13px;
-
+   #fav{
+       float:right;
+       font-size:15px;
 
    }
+
+   #heart{
+       float:right;
+   }
+
+
+   #userpic{
+       height:120px;
+       width:120px;
+   }
+
+   #usernames{
+       font-weight:bold;
+       font-size:110%;
+   }
+
+   #ratingstar{
+        height:20px;
+       width:20px;
+        display: inline-block;
+       text-align:center;
+   }
+@media (max-width: 991px) {
+
+
+
+
+}
+
+
+
+
 
 
 
 
     </style>
-
-
-    <div class="form-group col-md-12">
-         {{ render_field(form.comments, class_="form-control") }}
-                </div>
-                    <div class="form-group col-md-12">
-                    <input type="submit" value="Submit" class="btn btn-info" id="submitbtn"/>
-                </div>
-
-</form>
-
-
-    <div class="form-group col-md-12">
-        <table class="table table-bordered">
-        <thead>
-        <br>
-        <br>
-        <tr>
-            <th>Users</th>
-            <th>Comments</th>
-            <th>Ratings</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for i in feedback %}
-            <tr>
-
-
-                    <td> {{ i['User'] }}</td>
-                    <td> {{ i['Comment'] }}</td>
-                    <td>
-                {% for i in range(i['Rating']) %}
-                    <img src="https://t3.ftcdn.net/jpg/01/09/84/42/160_F_109844239_A7MdQSDf4y1H80cfvHZuSa0zKBkZ68S7.jpg">
-
-                {% endfor %}
-                    </td>
-
-
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    </div>
 {#        {% for i in feedback %}#}
 {##}
 {#<div class="form-group col-md-8">#}

@@ -3,82 +3,85 @@
 {% block body %}
 <br>
 <br>
-<br>
-<br>
+    {% from "includes/_formhelper.html" import render_field %}
+    <form method=post>
     <div class="jumbotron text-center" id="banner">
         <h1>Welcome To The Foodie</h1>
+        <br>
     </div>
 
 
-        {% from "includes/_formhelper.html" import render_field %}
-    <form method=post>
 
+<div class="container" id="profilediv">
         <h3>Search Here for Amazing Food</h3>
-
-        <div id='searchthing' class="form-group col-md-4">
+        <br>
+{#        <div id='searchthing' class="form-group col-md-6">#}
+{#            <div class="form-group col-md-8">#}
+    <div class="form-group col-md-8">
             {{ render_field(form.name, class_="form-control") }}
-        </div>
-        <div class="form-group col-md-4">
             <input type="submit" value="Search" class="btn btn-info" id="searchbtn"/>
-        </div>
-        <div class="form-group col-md-4">
+    </div>
 
-        </div>
-
+</div>
+{#        <div class="form-group col-md-4">#}
+{##}
+{#        </div>#}
+</div>
     </form>
 
 
-<div id="homediv">
+<div class="container" id="profilediv">
       <div class="form-group col-md-12" id="popular">Hot & Popular restaurants!!</div>
 				<hr/>
 
-     <div class="form-group col-md-12" class="restdiv">
-                <div class="form-group col-md-4"><img style="height:300px;width:400px" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
-  <h1>London</h1>
-  <p>London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
-  <p>Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its founding by the Romans, who named it Londinium.</p>
+
+<div class="form-group col-md-12">
+
+<div class="form-group col-md-12" class="wrapper">
+	<div class="parent" onclick="">
+		<div class="child bg-one">
+			<a class="hometext" href="#">description</a>
+		</div>
+    </div>
+        <div class="parent" onclick="" id="featured">
+		<div class="child bg-one">
+			<a class="hometext" href="#">description</a>
+		</div>
+	</div>
+	    <div class="parent" onclick="" id="btnimg">
+		<div class="child bg-one">
+			<a class="hometext" href="#">description</a>
+		</div>
+	</div>
+         </div>
 </div>
 
-          <div class="form-group col-md-4"><img style="height:300px;width:400px" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
-  <h1>London</h1>
-  <p>London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
-  <p>Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its founding by the Romans, who named it Londinium.</p>
-</div>
-
-
-          <div class="form-group col-md-4"><img style="height:300px;width:400px" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
-  <h1>London</h1>
-  <p>London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
-  <p>Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its founding by the Romans, who named it Londinium.</p>
-</div>
-
-     </div>
 
  <div class="form-group col-md-12" id="recommend">Recommended restaurants!!</div>
 				<hr/>
 
-     <div class="form-group col-md-12">
-                <div class="form-group col-md-4"><img style="height:300px;width:400px" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
+
+                <div class="form-group col-md-4"><img class="homerec" class="img responsive" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
                     <h1><a href="/restDet/{{ recommend[0]['Name'] }}">{{ recommend[0]['Name'] }}</a></h1>
-  <p>{{ recommend[0]['Description'] }}</p>
-  <p></p>
-</div>
+                    <p>{{ recommend[0]['Description'] }}</p>
+                    <p></p>
+                </div>
 
-          <div class="form-group col-md-4"><img style="height:300px;width:400px" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
+          <div class="form-group col-md-4"><img class="homerec" class="img responsive" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
               <h1><a href="/restDet/{{ recommend[1]['Name'] }}">{{ recommend[1]['Name'] }}</a></h1>
-  <p>{{ recommend[1]['Description'] }}</p>
-  <p></p>
-</div>
+              <p>{{ recommend[1]['Description'] }}</p>
+
+          </div>
 
 
-          <div class="form-group col-md-4"><img style="height:300px;width:400px" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
+          <div class="form-group col-md-4"><img class="homerec" class="img responsive" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
               <h1><a href="/restDet/{{ recommend[2]['Name'] }}">{{ recommend[2]['Name'] }}</a></h1>
-  <p>{{ recommend[2]['Description'] }}</p>
-  <p></p>
-</div>
+              <p>{{ recommend[2]['Description'] }}</p>
+              <p></p>
+          </div>
 
-         </div>
-            </div>
+     </div>
+
 
 </div>
 <style>
@@ -93,6 +96,10 @@
 	/*clear: left;*/
 	/*width:100%*/
 /*}*/
+.homerec{
+    height:300px;
+    width:350px;
+}
 #popular, #recommend{
     color: #000;
     font-family: "hgw-HelveticaNeueBold",Arial,sans-serif;
@@ -104,27 +111,131 @@
     font-size:200%;
 }
 #searchbtn{
-    margin-top: 20px;
+    margin-top: 25px;
 }
 h3{
     text-align: center;
     font-family: "hgw-HelveticaNeueBold",Arial,sans-serif;
     font-weight: bold;
 }
-#searchthing{
-    margin-left: 400px;
+
+#searchbox{
+    width:300px;
+    margin-left:550px;
 }
-#homediv{
-        max-width: 1480px;
-        padding: 20px 12px 10px 20px;
-        font: 13px Arial, Helvetica, sans-serif;
-        align:center;
+
+@media (max-width: 991px){
+    #searchbox{
+        margin-right:550px;
     }
+
+}
 #banner{
      background-image: url("http://lindyslanding.com/wp-content/uploads/2017/03/dining-food-Banner-1920-x-750.jpg");
     color:white;
-    height:450px;
+      height:500px;
+    width:100%;
 }
+
+.wrapper {
+    padding: 50px 50px;
+    max-width: 1200px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+		margin-top: 80px;
+}
+
+.parent {
+    width: 45%;
+    height: 300px;
+    overflow: hidden;
+    position: relative;
+    float: left;
+    display: inline-block;
+	cursor: pointer;
+}
+
+.bg-one {background-image: url("https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg");
+height:300px;
+width:350px;
+margin-left:25px;}
+
+.hometext {
+    display: none;
+    font-size: 35px;
+    color: #ffffff !important;
+    font-family: sans-serif;
+    text-align: center;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 50px;
+    cursor: pointer;
+    /*text-decoration: none;*/
+}
+
+.parent:hover .child, .parent:focus .child {
+    -ms-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    transform: scale(1.2);
+}
+
+.parent:hover .child:before, .parent:focus .child:before {
+    display: block;
+}
+
+.parent:hover a, .parent:focus a {
+    display: block;
+}
+
+.child:before {
+    content: "";
+    display: none;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(52,73,94,0.75);
+}
+
+/* Media Queries */
+@media screen and (max-width: 960px) {
+    .parent {width: 100%; margin: 20px 0px}
+		.wrapper {padding: 20px 20px;}
+}
+
+.child {
+    height: 100%;
+    width: 90%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    -o-transition: all .5s;
+    transition: all .5s;
+}
+
+#featured{
+    height:650px;
+    float:right;
+    width:580px;
+}
+
+#btnimg {
+    display:inline-block;
+    margin-top:50px;
+}
+
+
+
 </style>
+
 
 {% endblock %}

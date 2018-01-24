@@ -137,7 +137,7 @@ def mapview():
             }
         ]
     )
-    return render_template('location.html', map=map)
+    return render_template('findgps.html', map=map)
 
 
 
@@ -474,7 +474,6 @@ def restPage(restName):
     totalRest = restFire.get('restaurants', None)
     for key in totalRest:
         if restName == totalRest[key]['Name']:
-            totalRest[key]['Price'] = '$'+ totalRest[key]['Price']
             restDetail = totalRest[key]
     feedback = restFire.get(restName, None)
     newFeed = []
@@ -510,7 +509,6 @@ def restPage(restName):
             totalRest = restFire.get('restaurants', None)
             for key in totalRest:
                 if restName == totalRest[key]['Name']:
-                    totalRest[key]['Price'] = '$' + totalRest[key]['Price']
                     restDetail = totalRest[key]
             feedback = restFire.get(restName, None)
             newFeed = []
@@ -584,6 +582,8 @@ def userProfile():
             theUser = totalUsers[key]
 
     return render_template('userProfile.html' , user = theUser)
+
+
 
 
 if __name__ == '__main__':

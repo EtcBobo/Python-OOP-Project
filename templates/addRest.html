@@ -5,15 +5,15 @@
 <div class="container" id="profilediv">
     <br>
     <br>
-    <h1 id="register">Add New restaurant!</h1>
-    <p>Do you feel that that restaurants you visited deserve more recognition? Help them by adding the restaurant informations below!</p>
+    <h1 id="addrest">Add New restaurant!</h1>
+    <p id="rest">Do you feel that that restaurants you visited deserve more recognition? Help them by adding the restaurant informations below!</p>
     <br>
     <br>
     <form method="POST">
         <div class="form-group col-md-12">
             <div class="row">
             <div  class="col-md-8 col-md-offset-2" class="edit">
-                <div class="form-group col-md-12" class="name">
+                <div class="form-group col-md-12">
                     {{ render_field(form.name, class_="form-control") }}
                 </div>
 
@@ -67,7 +67,7 @@
 <style>
 
 
-      #register{
+      #addrest{
          font-weight: bold;
     font-style: italic;
     border-bottom: 2px solid darkred;
@@ -75,7 +75,6 @@
     font-size: 15px;
     padding-bottom: 3px;
     font-size:200%;
-
     }
 #profilediv {
          align: center;
@@ -98,7 +97,7 @@
         height: 42px;
         width:300px;
     }
-p{
+#rest{
    font-style: italic;
 }
 

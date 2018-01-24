@@ -24,40 +24,61 @@
 
     <br>
     <br>
-    <table class="table table-bordered">
-        <thead>
-        <tr>
-            <th>Name of Restaurants</th>
-            <th>Description</th>
-            <th>Location</th>
-            <th>Opening Hours</th>
-            <th>Closing Hours</th>
-        </tr>
-        </thead>
-        <tbody>
-
         {% for i in Restaurant %}
-            <tr>
+            <hr>
+<div class="col-md-12">
+    <div class="col-md-4">
+        <br>
+        <br>
+         <img id="detailimg" class="img-responsive" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVoweWwEb_UQKtBhQfwA78S2QXub1JHoyCox-rj8B3gnOC9M5_aQ">
+    <br>
+    </div>
+    <div class="col-md-4">
+       <br>
+     <h1 id="restnames"> {{ i['Name'] }} </h1>
+        <p id="description"> {{ i['Description'] }} </p>
+    </div>
+</div>
 
-                <td><a href="/restDet/{{ i['Name'] }}">{{ i['Name'] }}</a></td>
 
-                    <td> {{ i['Description'] }}</td>
-
-                    <td>{{ i['Location'] }}</td>
-
-                    <td>{{ i['Opening Hours'] }}</td>
-
-                    <td>{{ i['Closing Hours'] }}</td>
-
-                <!--<td><a href="" class="btn btn-warning">Update</a></td>-->
-                <!--<td><form action="" method="post">-->
-                    <!--<input type="submit" value="Delete" class="btn btn-danger" onclick="return session['test']= True"></form></td>-->
-
-            </tr>
         {% endfor %}
 
-        </tbody>
-    </table>
+    </div>
+
+{#    <table class="table table-bordered">#}
+{#        <thead>#}
+{#        <tr>#}
+{#            <th>Name of Restaurants</th>#}
+{#            <th>Description</th>#}
+{#            <th>Location</th>#}
+{#            <th>Opening Hours</th>#}
+{#            <th>Closing Hours</th>#}
+{#        </tr>#}
+{#        </thead>#}
+{#        <tbody>#}
+{##}
+{#        {% for i in Restaurant %}#}
+{#            <tr>#}
+{##}
+{#                <td><a href="/restDet/{{ i['Name'] }}">{{ i['Name'] }}</a></td>#}
+{##}
+{#                    <td> {{ i['Description'] }}</td>#}
+{##}
+{#                    <td>{{ i['Location'] }}</td>#}
+{##}
+{#                    <td>{{ i['Opening Hours'] }}</td>#}
+{##}
+{#                    <td>{{ i['Closing Hours'] }}</td>#}
+{##}
+{#                <!--<td><a href="" class="btn btn-warning">Update</a></td>-->#}
+{#                <!--<td><form action="" method="post">-->#}
+{#                    <!--<input type="submit" value="Delete" class="btn btn-danger" onclick="return session['test']= True"></form></td>-->#}
+{##}
+{#            </tr>#}
+{#        {% endfor %}#}
+{##}
+{#        </tbody>#}
+{#    </table>#}
 </div>
     </div>
 <style>
@@ -86,23 +107,27 @@
 
     }
 
-    p{
-        font-weight: bold;
 
-    }
+ #restnames{
+     font-size:230%;
+     font-family: Playfair Display, serif;
+     font-weight:bold;
 
-td a {
-    font-size:120%;
-    font-weight:bold;
-    font-
+ }
 
-}
-
-td{
+#description{
     font-weight:normal;
-     font-size:120%;
+    font-size:120%;
 }
 
+hr{
+     font-weight: bold;
+    font-style: italic;
+    border-bottom: 1px darkgrey;
+    width:1000px;
+    margin-bottom: 20px;
+    padding-bottom: 3px;
+}
 </style>
 
 {% endblock %}
