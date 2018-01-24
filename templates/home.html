@@ -3,23 +3,25 @@
 {% block body %}
 <br>
 <br>
+
+    {% from "includes/_formhelper.html" import render_field %}
+    <form method=post>
+
     <div class="jumbotron text-center" id="banner">
         <h1>Welcome To The Foodie</h1>
+        <br>
     </div>
 
 
-        {% from "includes/_formhelper.html" import render_field %}
-    <form method=post>
+
 <div class="container" id="profilediv">
         <h3>Search Here for Amazing Food</h3>
         <br>
 {#        <div id='searchthing' class="form-group col-md-6">#}
 {#            <div class="form-group col-md-8">#}
     <div class="form-group col-md-8">
-        <div class="form-group col-md-8" id="searchbox">
             {{ render_field(form.name, class_="form-control") }}
             <input type="submit" value="Search" class="btn btn-info" id="searchbtn"/>
-        </div>
     </div>
 
 </div>
@@ -33,6 +35,7 @@
 <div class="container" id="profilediv">
       <div class="form-group col-md-12" id="popular">Hot & Popular restaurants!!</div>
 				<hr/>
+
 
 
 <div class="form-group col-md-12">
@@ -57,58 +60,31 @@
 </div>
 
 
-
-
-
-
-
-     <div class="form-group col-md-12" class="restdiv">
-                <div class="form-group col-md-4"><img style="height:300px;width:400px" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
-  <h1>London</h1>
-  <p>London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
-  <p>Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its founding by the Romans, who named it Londinium.</p>
-</div>
-
-          <div class="form-group col-md-4"><img style="height:300px;width:400px" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
-  <h1>London</h1>
-  <p>London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
-  <p>Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its founding by the Romans, who named it Londinium.</p>
-</div>
-
-
-          <div class="form-group col-md-4"><img style="height:300px;width:400px" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
-  <h1>London</h1>
-  <p>London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
-  <p>Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its founding by the Romans, who named it Londinium.</p>
-</div>
-
-     </div>
-
  <div class="form-group col-md-12" id="recommend">Recommended restaurants!!</div>
 				<hr/>
 
-     <div class="form-group col-md-12">
-                <div class="form-group col-md-4"><img style="height:300px;width:400px" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
+
+                <div class="form-group col-md-4"><img class="homerec" class="img responsive" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
                     <h1><a href="/restDet/{{ recommend[0]['Name'] }}">{{ recommend[0]['Name'] }}</a></h1>
-  <p>{{ recommend[0]['Description'] }}</p>
-  <p></p>
-</div>
+                    <p>{{ recommend[0]['Description'] }}</p>
+                    <p></p>
+                </div>
 
-          <div class="form-group col-md-4"><img style="height:300px;width:400px" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
+          <div class="form-group col-md-4"><img class="homerec" class="img responsive" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
               <h1><a href="/restDet/{{ recommend[1]['Name'] }}">{{ recommend[1]['Name'] }}</a></h1>
-  <p>{{ recommend[1]['Description'] }}</p>
-  <p></p>
-</div>
+              <p>{{ recommend[1]['Description'] }}</p>
+
+          </div>
 
 
-          <div class="form-group col-md-4"><img style="height:300px;width:400px" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
+          <div class="form-group col-md-4"><img class="homerec" class="img responsive" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
               <h1><a href="/restDet/{{ recommend[2]['Name'] }}">{{ recommend[2]['Name'] }}</a></h1>
-  <p>{{ recommend[2]['Description'] }}</p>
-  <p></p>
-</div>
+              <p>{{ recommend[2]['Description'] }}</p>
+              <p></p>
+          </div>
 
-         </div>
-            </div>
+     </div>
+
 
 </div>
 <style>
@@ -123,6 +99,10 @@
 	/*clear: left;*/
 	/*width:100%*/
 /*}*/
+.homerec{
+    height:300px;
+    width:350px;
+}
 #popular, #recommend{
     color: #000;
     font-family: "hgw-HelveticaNeueBold",Arial,sans-serif;
@@ -141,15 +121,27 @@ h3{
     font-family: "hgw-HelveticaNeueBold",Arial,sans-serif;
     font-weight: bold;
 }
+
 #searchthing{
     margin-left: 365px;
 }
 
 @media (max-width: 991px){
-    #searchthing{
-        width:100%;
-        display:inline-block;
-        text-align:center;
+    #searchthing {
+        width: 100%;
+        display: inline-block;
+        text-align: center;
+    }
+
+#searchbox{
+    width:300px;
+    margin-left:550px;
+}
+
+@media (max-width: 991px){
+    #searchbox{
+        margin-right:550px;
+
     }
 
 }
@@ -158,6 +150,7 @@ h3{
     color:white;
       height:500px;
     width:100%;
+
 }
 
 .wrapper {
@@ -200,6 +193,51 @@ margin-left:25px;}
     cursor: pointer;
     /*text-decoration: none;*/
 }
+
+
+}
+
+.wrapper {
+    padding: 50px 50px;
+    max-width: 1200px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+		margin-top: 80px;
+}
+
+.parent {
+    width: 45%;
+    height: 300px;
+    overflow: hidden;
+    position: relative;
+    float: left;
+    display: inline-block;
+	cursor: pointer;
+}
+
+.bg-one {background-image: url("https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg");
+height:300px;
+width:350px;
+margin-left:25px;}
+
+.hometext {
+    display: none;
+    font-size: 35px;
+    color: #ffffff !important;
+    font-family: sans-serif;
+    text-align: center;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 50px;
+    cursor: pointer;
+    /*text-decoration: none;*/
+}
+
 
 .parent:hover .child, .parent:focus .child {
     -ms-transform: scale(1.2);

@@ -608,8 +608,5 @@ def userProfile():
 
     return render_template('userProfile.html' , user = theUser)
 
-
-
-
 if __name__ == '__main__':
     socketio.run(app, debug=True)

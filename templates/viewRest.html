@@ -25,6 +25,7 @@
     <br>
     <br>
         {% for i in Restaurant %}
+
 <div class="col-md-12">
     <div class="col-md-4">
         <br>
@@ -34,11 +35,13 @@
     </div>
     <div class="col-md-4">
        <br>
+
      <h1 id="restnames"><a href="/restDet/{{ i['Name'] }}">{{ i['Name'] }}</a></h1>
         <p id="description"> {{ i['Description'] }} </p>
     </div>
 </div>
             <hr>
+
 
         {% endfor %}
 
