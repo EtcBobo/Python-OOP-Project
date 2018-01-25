@@ -6,7 +6,6 @@ from wtforms import Form, StringField, TextAreaField, RadioField, SelectField, P
 from wtforms.fields.html5 import EmailField
 from firebase import firebase
 from Restaurant import Restaurant
-from flask_googlemaps import GoogleMaps,Map
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -93,11 +92,6 @@ class Feedbacks(Form):
     comments = TextAreaField('Comments')
     ratings = SelectField(u'Ratings of the restaurants (higher score means better rating)',choices=[('1','1'),('2','2'),('3','3'),('4','4'),('5','5')])
 
-
-# @app.route('/findgps')
-# def findgps():
-#     return render_template('findgps.html')
-
 @app.route("/location")
 def mapview():
     map = Map(
@@ -140,8 +134,7 @@ def mapview():
             }
         ]
     )
-    return render_template('findgps.html', map=map)
-
+    return render_template('location.html', map=map)
 
 
 @app.route('/', methods=['POST', 'GET'])
