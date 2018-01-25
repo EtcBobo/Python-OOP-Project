@@ -1,6 +1,9 @@
 <!DOCTYPE html>
     <html>
     <head>
+        {% extends 'layout.html' %}
+    {% block body %}
+    {% from "includes/_formhelper.html" import render_field %}
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>The Foodie</title>
@@ -27,3 +30,4 @@
 
     </style>
 </html>
+{% endblock %}
