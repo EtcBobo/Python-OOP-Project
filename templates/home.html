@@ -17,9 +17,10 @@
         <br>
 {#        <div id='searchthing' class="form-group col-md-6">#}
 {#            <div class="form-group col-md-8">#}
-    <div class="form-group col-md-8">
+    <div id='searchF' class="form-group col-md-8">
             {{ render_field(form.name, class_="form-control") }}
-            <input type="submit" value="Search" class="btn btn-info" id="searchbtn"/>
+        <input type="submit" value="Search" class="btn btn-info" id="searchbtn"/>
+
     </div>
 
 </div>
@@ -121,7 +122,11 @@
     font-size:200%;
 }
 #searchbtn{
-    margin-top: 25px;
+    margin-top: 15px;
+    margin-left: 330px;
+}
+#searchF{
+    margin-left:180px;
 }
 h3{
     text-align: center;

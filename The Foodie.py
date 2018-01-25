@@ -15,6 +15,7 @@ from flask_socketio import SocketIO, emit
 import random
 from flask_googlemaps import GoogleMaps
 from flask_googlemaps import Map
+from flask_share import Share
 
 #pip install flask-socketio
 # thefoodie.newsletter@gmail.com
@@ -30,6 +31,7 @@ root = db.reference()
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'jsbcfsbfjefebw237u3gdbdc'
 socketio = SocketIO( app )
+share = Share(app)
 
 
 # GoogleMaps(app, key="AIzaSyAN-25Ihf-_ndHtyzHEXF2SGjI6U-WqQKc")
@@ -110,8 +112,8 @@ def mapview():
                 'lng':  103.846678,
                 'infobox': (
                     "<h3>Ang Mo Kio Market & Food Centre</h3>"
-                    "<p>Address: 724 Ang Mo Kio Ave 6, Singapore 560724</p>" 
-                    "<p>Hours: 7AM–9PM</p>" 
+                    "<p>Address: 724 Ang Mo Kio Ave 6, Singapore 560724</p>"
+                    "<p>Hours: 7AM–9PM</p>"
                     "<p>Phone: 6225 5632</p>"
                     "<img src='//placehold.it/50'>")
             },
@@ -119,15 +121,15 @@ def mapview():
                 'lat': 1.380936,
                 'lng': 103.840664,
                 'infobox': (
-                    "<h3>Ang Mo Kio 628 Market</h3>" 
-                    "<p>Address: 724 Ang Mo Kio Ave 6, Singapore 560724</p>" 
-                    "<p>Hours: Wednesday\t6:30AM–1:30PM</p>" 
-                    "<p>Thursday\t6:30AM–1:30PM</p>" 
-                    "<p>Friday\t6:30AM–1:30PM</p>" 
-                    "<p>Saturday\t6:30AM–1:30PM</p>" 
-                    "<p>Sunday\t6:30AM–1:30PM</p>" 
-                    "<p>Monday\tClosed</p>" 
-                    "<p>Tuesday\t6:30AM–1:30PM</p>" 
+                    "<h3>Ang Mo Kio 628 Market</h3>"
+                    "<p>Address: 724 Ang Mo Kio Ave 6, Singapore 560724</p>"
+                    "<p>Hours: Wednesday\t6:30AM–1:30PM</p>"
+                    "<p>Thursday\t6:30AM–1:30PM</p>"
+                    "<p>Friday\t6:30AM–1:30PM</p>"
+                    "<p>Saturday\t6:30AM–1:30PM</p>"
+                    "<p>Sunday\t6:30AM–1:30PM</p>"
+                    "<p>Monday\tClosed</p>"
+                    "<p>Tuesday\t6:30AM–1:30PM</p>"
                     "<p>Phone: 9067 5142</p>"
                     "<img src='//placehold.it/50'>"
                 )
