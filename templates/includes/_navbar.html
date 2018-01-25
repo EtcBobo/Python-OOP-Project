@@ -29,17 +29,19 @@
                         <li><a href="/filter">Filter Restaurant</a></li>
                     </ul>
                     <li class=""><a href="/chat">ChatRoom</a></li>
-                    <li class=""><a href="/">Events</a></li>
+                    <li class=""><a href="/events">Events</a></li>
                 </li>
 
             </ul>
 
-            <ul class="nav navbar-nav navbar-right" style="margin-top:10px;">
+             <ul class="nav navbar-nav navbar-right" style="margin-top:10px;">
+
                 {% if session['logged_in'] %}
                     <li><a href="/userProfile">{{ session['username'] }}</a></li>
                     <li><a href="/logout" >Logout</a></li>
                 {% else %}
-
+                    <li><a href="/userLogin">Login</a></li>
+                    <li><a href="/userRegister" >Register</a></li>
                 {% endif %}
 
             </ul>
@@ -163,7 +165,7 @@
 <style>
 
 .container{
-   background:white;
+background-color: white;
 }
 
 

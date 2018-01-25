@@ -608,5 +608,9 @@ def userProfile():
 
     return render_template('userProfile.html' , user = theUser)
 
+@app.route('/events')
+def event():
+    return render_template('events.html')
+
 if __name__ == '__main__':
     socketio.run(app, debug=True)
