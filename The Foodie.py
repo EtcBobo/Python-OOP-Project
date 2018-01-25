@@ -80,7 +80,7 @@ class RestForm(Form):
                                     ('9 AM', '9 AM'), ('10 AM', '10 AM'), ('11 AM', '11 AM'), ('12 PM', '12 PM'),
                                     ('1 PM', '1 PM'),('2 PM', '2 PM'),('3 PM', '3 PM'),('4 PM', '4 PM'),('5 PM', '5 PM'),('6 PM', '6 PM'),('7 PM', '7 PM'),
                                     ('8 PM', '8 PM'),('9 PM', '9 PM'),('10 PM', '10 PM'),('11 PM', '11 PM'),])
-    openT = SelectField(u'Operating Time',
+    openT = SelectField(u'Preferred Meal Time',
                            choices=[('12 PM', '12 PM'),('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'), ('4 AM', '4 AM'),
                                     ('5 AM', '5 AM'), ('6 AM', '6 AM'), ('7 AM', '7 AM'), ('8 AM', '8 AM'),
                                     ('9 AM', '9 AM'), ('10 AM', '10 AM'), ('11 AM', '11 AM'), ('12 AM', '12 AM'),
@@ -164,11 +164,17 @@ def home():
         name = form.name.data
 
         data = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
+
+
+        counter = 9999
+
+
         firebaseData = data.get('restaurants', None)
 
         for key in firebaseData:
             if firebaseData[key]['Name'].lower() == name.lower():
                 nameList.append(firebaseData[key])
+
         session['filtered'] = nameList
         return redirect(url_for('view'))
     return render_template('home.html', recommend=randRec , form=form)
@@ -294,7 +300,7 @@ def view():
 @app.route('/addRest',methods=['POST','GET'])
 def addRest():
     form = RestForm(request.form)
-    if request.method == 'POST':
+    if request.method == 'POST' and form.validate():
         name = form.name.data
         desc = form.desc.data
         location = form.location.data
@@ -350,7 +356,6 @@ def userRegister():
 
 
         reg = Registration(user,password,price,foodType,email)
-
 
         userFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
         allUser = userFire.get('allUsers',None)
@@ -412,6 +417,16 @@ def userRegister():
             'Email':reg.get_email()
         })
         flash('You have succesfully registered!')
+        theBreak = False
+        while theBreak != True:
+            allPic = userFire.get('userPic', None)
+            for key in allPic:
+                if allPic[key]['user'] == 'placeholder':
+                    rightUser = root.child('userPic/'+key)
+                    rightUser.update({
+                        'user': reg.get_user()
+                    })
+                    theBreak = True
         return redirect(url_for('home'))
     return render_template('userRegister.html', form=form)
 
@@ -546,7 +561,16 @@ def userEdit():
                                         ('None', 'None')], default=session['userDetail']['Food Types'])
         email = EmailField("Email", [validators.optional()], default=session['userDetail']['Email'])
     form = UserEdit(request.form)
-    if request.method == 'POST':
+    userFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
+    allUser = userFire.get('allUsers', None)
+    allPic = userFire.get('userPic', None)
+    count = 0
+    for key in allPic:
+        if session['username'] == allPic[key]['user']:
+            count = int(allPic[key]['counter']) +1
+
+
+    if request.method == 'POST' and form.validate():
         email = form.email.data
         price = form.price.data
         foodType = form.foodType.data
@@ -555,18 +579,13 @@ def userEdit():
         if password != passwordC:
             flash('The passwords does not match')
             return redirect(url_for('userEdit'))
-        userFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
-        allUser = userFire.get('allUsers', None)
-        allPic = userFire.get('userPic',None)
-        for key in allUser:
-            try:
-                if allUser[key]['Email'] == email and email != '':
-                    flash('This email has already been used')
-                    return redirect(url_for('userEdit'))
-            except KeyError:
-                email = ''
 
-        userFire.put('allUsers', session['username'], {
+        for key in allUser:
+            if session['username'] == allUser[key]['Username']:
+                thekey = key
+
+
+        userFire.put('allUsers', thekey, {
             'Username': session['username'],
             'Price': price,
             'Food Types': foodType,
@@ -577,12 +596,23 @@ def userEdit():
         for key in allUser:
             if session['username'] == allUser[key]['Username']:
                 session['userDetail'] = allUser[key]
+
+        theBreak = False
+        while theBreak == False:
+            userFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
+            allPic = userFire.get('userPic', None)
+            for key in allPic:
+                if session['username'] == allPic[key]['user'] and int(allPic[key]['counter']) == count-1:
+                    toDelete = key
+                    theBreak = True
+        result = userFire.delete('userPic', toDelete)
+
         for key in allPic:
             if session['username'] == allPic[key]['user']:
                 session['proPic'] = allPic[key]['urlProfile']
-        print(session['proPic'])
+        print(session['userDetail'])
         return redirect(url_for('home'))
-    return render_template('userEdit.html', form=form, user=session['userDetail'], proPic=session['proPic'])
+    return render_template('userEdit.html', form=form, user=session['userDetail'], proPic=session['proPic'], count=str(count))
 
 
 @app.route('/logout')
@@ -599,7 +629,7 @@ def userProfile():
         if totalUsers[key]['Username'] == session['username']:
             theUser = totalUsers[key]
 
-    return render_template('userProfile.html' , user = theUser)
+    return render_template('userProfile.html' , user = theUser, proPic = session['proPic'])
 
 @app.route('/events')
 def event():

@@ -14,6 +14,23 @@ default_app = firebase_admin.initialize_app(cred, {
 
 
 
-restFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
-option1, option2, option3 = random.sample(range(1, 8), 3)
-print(option1,option2,option3)
+root = db.reference()
+
+
+some = input('start')
+
+onlineDriver=root.child('forTesting')
+onlineDriver.update({
+'test': '123',
+    'another':'345'
+})
+
+somef = input('del')
+userFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
+result = userFire.delete('forTesting','test')
+
+while True:
+    count = input('s')
+    if count == 'a':
+        break
+print('ok')

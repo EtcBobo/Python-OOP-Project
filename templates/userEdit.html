@@ -10,7 +10,7 @@
     <form method=post>
             <div class="row">
             <div  class="col-md-8 col-md-offset-2" class="edit">
-                <img src="https://www.revenueriver.co/hs-fs/hub/177047/file-2110622193-png/user_profile_img.png" class="img-responsive" class="img-circle" width="304" height="236">
+                <img id = 'img' class="img-responsive" style="width: 275px; height: 275px;" src={{ proPic }}>
                 <br>
                 <br>
                 <input type="file" id="file"/>
@@ -29,7 +29,8 @@
                 <br>
                 <br>
                <div class='btn-toolbar'>
-                 <input class="btn btn-success" type="submit" value="Save Changes" class="btn btn-info" id="registerbtn"/>
+                   <button type="submit" class="btn btn-primary btn-lg upload-group text-center" id="uploadButton" onclick="myFunction()">Save Changes</button>
+
                 <input class="btn btn-Basic" type="submit" value="Cancel" id="cancelbtn"/>
                 </div>
             </div>
@@ -42,9 +43,10 @@
 </div>
 
 
-            <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+
+              <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
 <script>
-   function upload() {
+   function myFunction() {
     window.location = "/userProfile"
 }
     function readURL2(input) {
@@ -130,8 +132,9 @@
             var updates = {};
             var postData = {
                 urlProfile: downloadURL,
+                counter: {{ count }} ,
 
-                user: 'test'
+                user: '{{ user['Username'] }}'
             };
             updates['/userPic/' + postKey] = postData;
 
@@ -155,7 +158,7 @@
     }
 
 
-    #registerbtn{
+    #uploadButton{
         border-radius: 4px;
     border: 0;
     color: #fff!important;
@@ -182,8 +185,8 @@
    margin-left:120px;
 }
 
-#imgbtn{
-    margin-left:300px;
+#file{
+    margin-top:300px;
 
 }
 
@@ -202,7 +205,7 @@
         margin-left:0px;
     }
 
-    #imgbtn{
+    #file{
         margin-left:100px;
     }
 
