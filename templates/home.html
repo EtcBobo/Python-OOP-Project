@@ -3,10 +3,8 @@
 {% block body %}
 <br>
 <br>
-
     {% from "includes/_formhelper.html" import render_field %}
     <form method=post>
-
     <div class="jumbotron text-center" id="banner">
         <h1>Welcome To The Foodie</h1>
         <br>
@@ -38,28 +36,32 @@
 				<hr/>
 
 
-
 <div class="form-group col-md-12">
 
 <div class="form-group col-md-12" class="wrapper">
-	<div class="parent" onclick="">
-		<div class="child bg-one">
+
+	<div class="parent" onclick="" id="firstimg">
+		<img class="child bg-one" class="img responsive" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
 			<a class="hometext" href="#">description</a>
 		</div>
-    </div>
+
+
         <div class="parent" onclick="" id="featured">
-		<div class="child bg-one">
+		<img class="child bg-one" class="img responsive" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
 			<a class="hometext" href="#">description</a>
+            <div class="ribbon"><span>Featured</span></div>
 		</div>
-	</div>
+
+
 	    <div class="parent" onclick="" id="btnimg">
-		<div class="child bg-one">
+		<img class="child bg-one" class="img responsive" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
 			<a class="hometext" href="#">description</a>
 		</div>
-	</div>
+</div>
          </div>
 </div>
 
+    <div class="container" id="profilediv">
 
  <div class="form-group col-md-12" id="recommend">Recommended restaurants!!</div>
 				<hr/>
@@ -89,21 +91,26 @@
 
 </div>
 <style>
-/*hr {*/
-    /*display:block;*/
-    /*border: 0;*/
-    /*border-top: solid black;*/
-    /*border-top-color: darkred;*/
-    /*margin: 1em 0;*/
-    /*padding: 0;*/
-	/*float: none;*/
-	/*clear: left;*/
-	/*width:100%*/
-/*}*/
 .homerec{
     height:300px;
     width:350px;
 }
+
+#features{
+    margin-top: 5px;
+    margin-left: -5px;
+    transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    display: block;
+    width: 55px;
+    height: 55px;
+    font-weight: 300;
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+}
+
 #popular, #recommend{
     color: #000;
     font-family: "hgw-HelveticaNeueBold",Arial,sans-serif;
@@ -127,17 +134,6 @@ h3{
     font-weight: bold;
 }
 
-#searchthing{
-    margin-left: 365px;
-}
-
-@media (max-width: 991px){
-    #searchthing {
-        width: 100%;
-        display: inline-block;
-        text-align: center;
-    }
-
 #searchbox{
     width:300px;
     margin-left:550px;
@@ -146,25 +142,19 @@ h3{
 @media (max-width: 991px){
     #searchbox{
         margin-right:550px;
-
+    }
+    #featured{
+        width:100%;
+        height:300px;
     }
 
 }
+
 #banner{
      background-image: url("http://lindyslanding.com/wp-content/uploads/2017/03/dining-food-Banner-1920-x-750.jpg");
     color:white;
       height:500px;
     width:100%;
-
-}
-
-.wrapper {
-    padding: 50px 50px;
-    max-width: 1200px;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-		margin-top: 80px;
 }
 
 .parent {
@@ -200,65 +190,7 @@ margin-left:25px;}
 }
 
 
-}
 
-.wrapper {
-    padding: 50px 50px;
-    max-width: 1200px;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-		margin-top: 80px;
-}
-
-.parent {
-    width: 45%;
-    height: 300px;
-    overflow: hidden;
-    position: relative;
-    float: left;
-    display: inline-block;
-	cursor: pointer;
-}
-
-.bg-one {background-image: url("https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg");
-height:300px;
-width:350px;
-margin-left:25px;}
-
-.hometext {
-    display: none;
-    font-size: 35px;
-    color: #ffffff !important;
-    font-family: sans-serif;
-    text-align: center;
-    margin: auto;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    height: 50px;
-    cursor: pointer;
-    /*text-decoration: none;*/
-}
-
-
-.parent:hover .child, .parent:focus .child {
-    -ms-transform: scale(1.2);
-    -moz-transform: scale(1.2);
-    -webkit-transform: scale(1.2);
-    -o-transform: scale(1.2);
-    transform: scale(1.2);
-}
-
-.parent:hover .child:before, .parent:focus .child:before {
-    display: block;
-}
-
-.parent:hover a, .parent:focus a {
-    display: block;
-}
 
 .child:before {
     content: "";
@@ -279,7 +211,7 @@ margin-left:25px;}
 
 .child {
     height: 100%;
-    width: 90%;
+    width: 100%;
     background-size: cover;
     background-repeat: no-repeat;
     -webkit-transition: all .5s;
@@ -297,6 +229,31 @@ margin-left:25px;}
 #btnimg {
     display:inline-block;
     margin-top:50px;
+}
+
+
+.ribbon {
+  position: absolute;
+  right: -5px; top: -5px;
+  z-index: 1;
+  overflow: hidden;
+  width: 150px; height: 150px;
+  text-align: right;
+}
+.ribbon span {
+  font-size: 10px;
+  font-weight: bold;
+  color: #FFF;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 20px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  width: 100px;
+  display: block;
+  background: linear-gradient(#F70505 0%, #8F0808 100%);
+  position: absolute;
+  top: 19px; right: -21px;
 }
 
 

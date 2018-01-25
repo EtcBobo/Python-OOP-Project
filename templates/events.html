@@ -1,10 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'layout.html' %}
 
-</body>
-</html>
+{% block body %}
+        {% from "includes/_formhelper.html" import render_field %}
+
+       <div class="jumbotron text-center" id="eventbanner">
+        <h1>Events</h1>
+        <br>
+       </div>
+<div class="container" id="filterdiv">
+<ul class="nav nav-pills nav-fill">
+  <li class="nav-item">
+    <a class="nav-link active" href="#">Home</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Add Events!</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Past Events</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Future Events</a>
+  </li>
+</ul>
+</div>
+
+
+
+
+
+<style>
+    #eventbanner{
+     background-image: url("https://prods3.imgix.net/images/articles/2016_01/Hero-Dinner-Party-Papdi-Chaat-Babu-Ji-NYC-East-Village-Melbourne-Indian-Recipes-Tamarind-Nachos-Yogurt-Mint.jpg?auto=format,compress");
+    color:white;
+    height:500px;
+    width:100%;
+}
+
+</style>
+
+{% endblock %}
