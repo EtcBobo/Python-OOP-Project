@@ -67,15 +67,16 @@
 {#-----------------------------------------------------------------------------#}
         <div class="form-group col-md-12">
            <h2 id="pastcomments">Past Comments</h2>
-       {% for i in feedback %}
+       {% for i in range(comments | length) %}
            <div class="form-group col-md-12">
                <br>
                <br>
            <img src="https://www.revenueriver.co/hs-fs/hub/177047/file-2110622193-png/user_profile_img.png" class="img-responsive" class="img-circle" id="userpic">
            <div class="form-group col-md-12">
-           <div class="form-group col-md-4" id="usernames">{{ i['User'] }}</div>
-               {% for i in range(i['Rating']) %}
-                   {{ i['Comment'] }}
+           <div class="form-group col-md-4" id="usernames">{{ users[i] }}</div>
+           <h2>{{ comments[i] }}</h2>
+               {% for i in range(ratings[i]) %}
+
                    <img id="ratingstar" src="https://t3.ftcdn.net/jpg/01/09/84/42/160_F_109844239_A7MdQSDf4y1H80cfvHZuSa0zKBkZ68S7.jpg">
                    {% endfor %}
            </div>
