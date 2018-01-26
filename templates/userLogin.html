@@ -2,19 +2,17 @@
 
 {% block body %}
     {% from "includes/_formhelper.html" import render_field %}
-<br>
-<br>
-<div id="logindiv">
+<div class="container" id="profilediv">
+    <br>
+    <br>
+
     <h1 id="login">Login</h1>
     <p>Login to your foodie account!</p>
     <br>
     <form method=post>
 
         <div class="form-group">
-            <div class="form-group col-md-4">
-
-            </div>
-            <div class="form-group col-md-8">
+             <div class="form-group col-md-8">
                 <div class="form-group col-md-12">
                     {{ render_field(form.user, class_="form-control") }}
                 </div>
@@ -38,7 +36,7 @@
 
             <!--</div>-->
         <!--</div>-->
-
+        </div>
     </form>
     </div>
 <style>

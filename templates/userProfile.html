@@ -9,7 +9,7 @@
     <div class="row">
 {#        <div class="col-md-12">#}
         <figure class="col-md-6">
-             <img src={{ proPic }} class="img-responsive" class="img-circle" width="304" height="236">
+             <img src={{ proPic }} class="img-circle" width="304" height="304">
             <figcaption style="font-weight:bold;font-size:300%;margin-left:40px;margin-bottom:20px;"> {{ user['Username'] }} </figcaption>
         </figure>
             <br>
@@ -22,13 +22,20 @@
             <p class="userinfo">Email: <span style="font-weight: bold;">{{ user['Email']  }} </span></p>
             <br>
             <br>
-              <button id="btn" class="btn btn-basic"><a href="/userEdit" id="edit">Edit profile</a></button>
+{#              <a href="/userEdit" >#}
+                  <button id="edit" onclick="clickEdit()">Edit profile</button>
         </div>
     </div>
     </div>
 
+<script>
+function clickEdit() {
+    window.location = "/userEdit"
+}
 
-<style>
+</script>
+
+    <style>
      #profile{
           font-weight: bold;
     font-style: italic;
@@ -48,9 +55,15 @@
 
 
 #edit{
-     font-weight: bold;
-    font-style: italic;
-    font-size:120%;
+     background-color: darkred;
+    border: 0;
+    color: #fff!important;
+    display: inline-block;
+    font-size: 14px;
+    text-align: center;
+        height: 42px;
+        width:250px;
+    float:right;
 
 }
 
@@ -60,11 +73,6 @@
     font-size:150%;
 }
 
-#btn{
-    float:right;
-     width:200px;
-    margin-right:20px;
-}
 
 a:hover{
      text-decoration: none;

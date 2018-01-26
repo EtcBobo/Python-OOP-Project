@@ -143,8 +143,10 @@ def mapview():
 def home():
     try:
         userPref = session['userPref']
+        proPic = session['proPic']
     except KeyError:
         userPref = {'Food Types':'None'}
+        proPic =''
     print(userPref)
     recommend = []
     randRec = []
@@ -179,7 +181,7 @@ def home():
 
         session['filtered'] = nameList
         return redirect(url_for('view'))
-    return render_template('home.html', recommend=randRec , form=form)
+    return render_template('home.html', recommend=randRec , form=form, proPic = proPic)
 
 
 @app.route('/chat')

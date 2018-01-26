@@ -37,6 +37,9 @@
              <ul class="nav navbar-nav navbar-right" style="margin-top:10px;">
 
                 {% if session['logged_in'] %}
+                    <li>
+                   <img id ='profileimg' class="img-circle" style="width:40px;height:40px;display:inline-block;margin-top:5px;" src={{ proPic }}>
+                        </li>
                     <li><a href="/userProfile">{{ session['username'] }}</a></li>
                     <li><a href="/logout" >Logout</a></li>
                 {% else %}
@@ -50,6 +53,7 @@
 
 </nav>
 </div>
+
 {##}
 {#this is login box#}
 {#<div id="login" class="modal fade" role="dialog">#}
@@ -170,7 +174,7 @@ background-color: white;
 
 
     a { color:black !important; }
-a:hover { color:red !important;}
+nav a:hover { color:red !important;}
 
 /* Full-width input fields */
 .info {
@@ -197,7 +201,11 @@ a:hover { color:red !important;}
     width:100%;
 }
 
+@media (max-width:991px){
+#profileimg{
 
+}
+    }
 
 /* Add padding to container elements */
 .container {

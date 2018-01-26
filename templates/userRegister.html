@@ -3,16 +3,18 @@
 {% block body %}
     {% from "includes/_formhelper.html" import render_field %}
 
-<div id="registerdiv">
+ <div class="container" id="profilediv">
+    <br>
+        <br>
 
     <h1 id="register">Sign Up Now!</h1>
     <p>Register for the Foodie Account now and start sharing your dining experience!</p>
     <br>
     <form method=post >
         <div class="form-group">
-            <div class="row">
+            <div class="row" id="profile">
             <div  class="col-md-8 col-md-offset-2" class="edit">
-                <img id="img" src="https://www.revenueriver.co/hs-fs/hub/177047/file-2110622193-png/user_profile_img.png" class="img-responsive" width="304" height="236">
+                <img id="img" src="https://www.revenueriver.co/hs-fs/hub/177047/file-2110622193-png/user_profile_img.png" class="img-circle" width="304" height="304">
                 <br>
                 <br>
                 <input type="file" id="file"/>
@@ -20,7 +22,6 @@
                 <br>
                 <br>
             </div>
-
 
             <div class="form-group col-md-8">
                 <div class="form-group col-md-12">
@@ -44,7 +45,6 @@
                     {{ render_field(form.email, class_="form-control")  }}
                     <p id="email">(Optional) Sign up with your email to recieve monthly subscription letter of The Foodie and exclusive discount codes!</p>
                 </div>
-
 
 
                     <div class='btn-toolbar'>
@@ -183,14 +183,15 @@
 
     }
 
-     #registerdiv {
-        max-width: 980px;
-        padding: 20px 12px 10px 20px;
-        font: 13px Arial, Helvetica, sans-serif;
-         align:center;
-
+       #profilediv {
+         align: center;
+         background-color: white;
+         display:block;
      }
 
+       #profile{
+
+       }
 
      #file{
     margin-top:300px;

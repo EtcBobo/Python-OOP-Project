@@ -2,24 +2,29 @@
 
 {% block body %}
         {% from "includes/_formhelper.html" import render_field %}
+<br>
+<br>
+<br>
 
-       <div class="jumbotron text-center" id="eventbanner">
-        <h1>Events</h1>
-        <br>
-       </div>
-<div class="container" id="filterdiv">
+
+<section id="photo" src="https://prods3.imgix.net/images/articles/2016_01/Hero-Dinner-Party-Papdi-Chaat-Babu-Ji-NYC-East-Village-Melbourne-Indian-Recipes-Tamarind-Nachos-Yogurt-Mint.jpg?auto=format,compress">
+<div class="text-container" id="eventheader">
+<h2>Events</h2>
+</div>
+</section>
+<div class="container" id="eventnav">
 <ul class="nav nav-pills nav-fill">
   <li class="nav-item">
     <a class="nav-link active" href="#">Home</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#">Add Events!</a>
+    <a class="nav-link" href="#">Organize Event!</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="#">Past Events</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#">Future Events</a>
+    <a class="nav-link" href="#">Coming up events</a>
   </li>
 </ul>
 </div>
@@ -27,14 +32,35 @@
 
 
 
-
 <style>
-    #eventbanner{
-     background-image: url("https://prods3.imgix.net/images/articles/2016_01/Hero-Dinner-Party-Papdi-Chaat-Babu-Ji-NYC-East-Village-Melbourne-Indian-Recipes-Tamarind-Nachos-Yogurt-Mint.jpg?auto=format,compress");
-    color:white;
-    height:500px;
-    width:100%;
+#photo{
+background-image: url("https://prods3.imgix.net/images/articles/2016_01/Hero-Dinner-Party-Papdi-Chaat-Babu-Ji-NYC-East-Village-Melbourne-Indian-Recipes-Tamarind-Nachos-Yogurt-Mint.jpg?auto=format,compress");
+background-repeat: no-repeat;
+background-size: cover;
+background-position:center;
+width:100%;
+height:550px;
 }
+#eventheader{
+align:center;
+color:white;
+}
+
+#eventnav{
+    position: relative;
+}
+
+@media (max-width: 991px) {
+    #eventnav {
+        max-width: 100%;
+    }
+}
+
+
+div {
+    display: block;
+}
+
 
 </style>
 
