@@ -97,7 +97,7 @@ class EventForm(Form):
     eventDescription = TextAreaField('Desciption')
     eventLocation = SelectField(u'Location', choices=[('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),('Central','Central')])
     eventAddress = TextAreaField('Place where your event is held')
-    ticket = IntegerField('Entry Fee')
+    ticket = IntegerField('Entry Fee', [validators.DataRequired()])
     startDate = DateTimeField('Start date (e.g.2018-01-12)*', format='%Y-%m-%d')
     endDate = DateTimeField('End date (e.g.2018-01-12)*', format='%Y-%m-%d')
     startTime = SelectField(u'Start Time(Hr)*',
@@ -331,7 +331,30 @@ def view():
         proPic = session['proPic']
     except KeyError:
         proPic =''
+    allItemr = root.child('allRatings')
+    allItemg = allItemr.get()
     list = session['filtered']
+
+    for key in list:
+        totalRatings = 0
+        for key2 in allItemg:
+            if key['Name'] == key2:
+                for key3 in allItemg[key2]:
+                    totalRatings = totalRatings + int(allItemg[key2][key3])
+                avgRatings = round(totalRatings / len(allItemg[key2]),1)
+                numRaters = len(allItemg[key2])
+                key['Average Rating'] = avgRatings
+                key['Number of Raters'] = numRaters
+                allRestr = root.child('restaurants/'+key['Name'])
+                allRestr.update({
+                    'Average Rating':avgRatings,
+                    'Number of Raters':numRaters
+                })
+
+
+
+
+
     listLen = len(list)
     print(list)
 
@@ -588,6 +611,7 @@ def restPage(restName):
         allRatings = []
 
 
+
     if request.method == 'POST':
         try:
             comments = form.comments.data
@@ -610,7 +634,23 @@ def restPage(restName):
 
             allRestr = root.child('restaurants/' + restName)
             print('all', allRestr.get())
+
+
+            currRatg = pushRatr.get()
+            totalRating = 0
+
+            for key in currRatg:
+                totalRating = totalRating + int(currRatg[key])
+            numRaters = len(currRatg)
+            avgRatings = round(totalRating/numRaters,1)
+            allRestr.update({
+                'Average Rating':avgRatings,
+                'Number of Raters':numRaters
+            })
+            print(avgRatings,numRaters)
             restDetail = allRestr.get()
+
+
 
             try:
                 counter = 0
@@ -634,12 +674,10 @@ def restPage(restName):
                     if key == restName:
                         for co in allRatg[key]:
                             allRatings.insert(0,int(allRatg[key][co]))
-
             except:
                 allComments = []
                 allUsers = []
                 allRatings = []
-
 
 
 
