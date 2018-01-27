@@ -9,10 +9,21 @@
     <p id="rest">Do you feel that that restaurants you visited deserve more recognition? Help them by adding the restaurant informations below!</p>
     <br>
     <br>
-    <form method="POST">
-        <div class="form-group col-md-12">
+    <form method=post>
+    <form method=post >
+         <div class="form-group col-md-12">
             <div class="row">
             <div  class="col-md-8 col-md-offset-2" class="edit">
+                <div class="form-group col-md-12">
+                <img id="img" src="https://www.revenueriver.co/hs-fs/hub/177047/file-2110622193-png/user_profile_img.png" class="img-circle" width="304" height="304">
+                <br>
+                <br>
+                <input type="file" id="file"/>
+                <br>
+                <br>
+                <br>
+                </div>
+
                 <div class="form-group col-md-12">
                     {{ render_field(form.name, class_="form-control") }}
                 </div>
@@ -50,8 +61,9 @@
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <br>
-                                <br>
-                                <input type="submit" value="Submit" id="submitbtn"/>
+                    <div class='btn-toolbar'>
+                        <button type="submit" class="btn btn-primary btn-lg upload-group text-center" id="uploadButton" onclick="myFunction()">Register</button>
+                    </div>
                              </div>
                         </div>
                     </div>
@@ -61,6 +73,107 @@
 
     </form>
 
+
+
+  <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+<script>
+   function myFunction() {
+    window.location = "/userProfile"
+}
+    function readURL2(input) {
+
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+          $('#img2').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+     $("#file2").change(function() {
+      readURL2(this);
+    });
+    function readURL(input) {
+
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+          $('#img').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    $("#file").change(function() {
+      readURL(this);
+    });
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyAbX0KjCpu-WKGrnj9snTRolEqomOXy0oA",
+        authDomain: "python-oop.firebaseapp.com",
+        databaseURL: "https://python-oop.firebaseio.com/",
+        projectId: "python-oop",
+        storageBucket: "python-oop.appspot.com",
+        messagingSenderId: "397421551766"
+      };
+      firebase.initializeApp(config);
+    var fileButton = document.getElementById('uploadButton');
+    $("#file").on("change",function (event) {
+        selectedFile=event.target.files[0];
+
+
+    });
+    $("#file2").on("change",function (event) {
+        selectedFile2=event.target.files[0];
+
+
+    });
+
+    fileButton.addEventListener('click',function(e) {
+
+        var elem = document.getElementById("myBar");
+        var elem2 = document.getElementById("myBar2");
+
+
+
+
+        var filename = selectedFile.name;
+        var storageRef = firebase.storage().ref('/images/profilePic/' + filename);
+        var fileRef = storageRef.child(filename);
+        var uploadTask = storageRef.put(selectedFile);
+
+
+        uploadTask.on('state_changed', function (snapshot) {
+        var percentage = snapshot.bytesTransferred / snapshot.totalBytes * 100;
+            //uploader.value = percentage;
+             elem.style.width = parseInt(percentage) + '%';
+             elem.innerHTML=parseInt(percentage)+'%';
+             elem2.style.width = parseInt(percentage) + '%';
+             elem2.innerHTML=parseInt(percentage)+'%';
+        }, function (error) {
+
+        }, function () {
+            var postKey = firebase.database().ref('Posts/').push().key;
+            var downloadURL = uploadTask.snapshot.downloadURL;
+
+            var updates = {};
+            var postData = {
+                urlProfile: downloadURL,
+                counter: 0 ,
+                user: 'placeholder'
+            };
+            updates['/userPic/' + postKey] = postData;
+
+            firebase.database().ref().update(updates);
+        });
+    })
+
+
+        </script>
 
 
 
@@ -86,7 +199,7 @@
         display: inline-block;
     }
 
-    #submitbtn{
+    #uploadButton{
          border-radius: 4px;
     background-color: darkred;
     border: 0;

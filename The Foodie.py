@@ -226,7 +226,6 @@ def hello():
     return render_template( '/chat.html' ,proPic=proPic)
 
 
-
 def messagereceived():
   print( 'message was received!!!' )
 
