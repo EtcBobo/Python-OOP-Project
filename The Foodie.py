@@ -830,6 +830,9 @@ def events():
 
     return render_template('events.html', form=form )
 
+@app.route('/editRest')
+def edit():
+    return render_template('editRest.html')
 # @app.route('/events')
 # def event():
 #     try:

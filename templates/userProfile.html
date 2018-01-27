@@ -5,119 +5,186 @@
     <div class="container" id="profilediv">
     <br>
     <br>
-    <h1 id="profile">My Profile!</h1>
-    <div class="row">
 
-<div class="container" id="profilediv">
-  <div class="tab">
-      <figure class="col-md-12">
-    <br>
+<ul class="nav nav-tabs nav-justified" role="tablist">
+  <li class="active">
+    <a href="#tab1" data-toggle="tab">My Profile!</a>
+  </li>
+  <li>
+    <a href="#tab2" data-toggle="tab">My Favourites</a>
+  </li>
+  <li>
+    <a href="#tab3" data-toggle="tab">My Events</a>
+  </li>
+    <li>
+    <a href="#tab4" data-toggle="tab">My Restaurants</a>
+  </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content  clearfix">
+  <div class="tab-pane active" id="tab1">
+      <br>
+      <br>
+      <div class="col-md-12">
+          <div class="col-md-4">
+            <figure>
              <img src={{ proPic }} class="img-responsive" id="profilepic">
-            <p id="profilename"> {{ user['Username'] }} </p>
-        </figure>
-   <button class="tablinks" id="defaultOpen" onclick="openCity(event, 'Profile')">My Profile</button>
-  <button class="tablinks" onclick="openCity(event, 'restaurants')">My Favorites</button>
-  <button class="tablinks" onclick="openCity(event, 'events')">My Events</button>
-</div>
-
-{#    my profile tab content#}
-<div id="Profile" class="tabcontent">
-<br>
-      <p class="userinfo">Preferred price range: <span style="font-weight: bold;"> {{  user['Price'] }} </span></p>
+             <p id="profilename"> {{ user['Username'] }} </p>
+            </figure>
+          </div>
+            <div class="col-md-8">
+            <p class="userinfo">Preferred price range: <span style="font-weight: bold;"> {{  user['Price'] }} </span></p>
             <br>
             <p class="userinfo">Preferred Food Type:<span style="font-weight: bold;"> {{  user['Food Types'] }} </span></p>
             <br>
             <p class="userinfo">Email: <span style="font-weight: bold;">{{ user['Email']  }} </span></p>
             <br>
             <br>
-{#              <a href="/userEdit" >#}
-                  <button id="edit" onclick="clickEdit()">Edit profile</button>
-</div>
+            </div>
+              <button class="edit" onclick="clickEdit()">Edit profile</button>
+        </div>
+  </div>
 
-<div id="restaurants" class="tabcontent">
-  <h3>Bookmarked Restaurants</h3>
-<br>
-    <br>
+  <div class="tab-pane" id="tab2">
+       <h3>Bookmarked Restaurants</h3>
+       <br>
+       <br>
     <div class="col-md-12">
-     <div class="col-md-3">
-<br>
+         <div class="col-md-3">
+         <br>
          <img id="detailimg" class="img-responsive" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVoweWwEb_UQKtBhQfwA78S2QXub1JHoyCox-rj8B3gnOC9M5_aQ">
-     <br>
-     </div>
-        <div class="col-md-8">
-     <h1>Restaurant Name Title</h1>
-        <p> Description of Restaurant</p>
-     </div>
+         <br>
+         </div>
+           <div class="col-md-8">
+           <h1>Restaurant Name Title</h1>
+           <p> Description of Restaurant</p>
+           </div>
     <div class="col-md-1">
         <br>
         <br>
         <span class="glyphicon glyphicon-heart"></span>
     </div>
-</div>
-    <hr>
-     <div class="col-md-12">
-     <div class="col-md-3">
-<br>
+  </div>
+
+       <div class="col-md-12">
+         <div class="col-md-3">
+         <br>
          <img id="detailimg" class="img-responsive" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVoweWwEb_UQKtBhQfwA78S2QXub1JHoyCox-rj8B3gnOC9M5_aQ">
-     <br>
-     </div>
-        <div class="col-md-8">
-     <h1>Restaurant Name</h1>
-        <p> Description of Restaurant</p>
-     </div>
+         <br>
+         </div>
+           <div class="col-md-8">
+           <h1>Restaurant Name Title</h1>
+           <p> Description of Restaurant</p>
+           </div>
     <div class="col-md-1">
         <br>
         <br>
         <span class="glyphicon glyphicon-heart"></span>
     </div>
+  </div>
 
-</div>
-</div>
+  </div>
 
-<div id="events" class="tabcontent">
-  <h3>Events Interestd</h3>
+  <div class="tab-pane" id="tab3">
+  <h3>Events Interested</h3>
      <div class="col-md-12">
-     <div class="col-md-3">
-<br>
+        <div class="col-md-3">
+         <br>
          <img id="detailimg" class="img-responsive" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVoweWwEb_UQKtBhQfwA78S2QXub1JHoyCox-rj8B3gnOC9M5_aQ">
-     <br>
+         <br>
+        </div>
+          <div class="col-md-6">
+            <h1>Event Name</h1>
+            <p> Description of Event</p>
+           </div>
+               <div class="col-md-3">
+               <br>
+               <br>
+               <span><small>status: interested in going</small></span>
+                </div>
      </div>
-     <div class="col-md-6">
-     <h1>Event Name</h1>
-        <p> Description of Event</p>
-     </div>
-    <div class="col-md-3">
-        <br>
-        <br>
-        <span><small>interested in going</small></span>
-    </div>
+   </div>
 
+  <div class="tab-pane" id="tab4">
+  <h3>Restaurants recommended</h3>
+      <div class="col-md-12">
+         <div class="col-md-3">
+         <br>
+         <img id="detailimg" class="img-responsive" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVoweWwEb_UQKtBhQfwA78S2QXub1JHoyCox-rj8B3gnOC9M5_aQ">
+         <br>
+         </div>
+           <div class="col-md-8">
+           <h1>Restaurant Name Title</h1>
+           <p> Description of Restaurant</p>
+           </div>
+          <div class="col-md-1">
+               <br>
+               <br>
+               <button class="edit">Edit Restaurant</button>
+                </div>
+        </div>
+
+       <div class="col-md-12">
+         <div class="col-md-3">
+         <br>
+         <img id="detailimg" class="img-responsive" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVoweWwEb_UQKtBhQfwA78S2QXub1JHoyCox-rj8B3gnOC9M5_aQ">
+         <br>
+         </div>
+           <div class="col-md-8">
+           <h1>Restaurant Name Title</h1>
+           <p> Description of Restaurant</p>
+           </div>
+          <div class="col-md-1">
+               <br>
+               <br>
+               <button class="edit">Edit Restaurant</button>
+                </div>
+        </div>
 
 </div>
+  </div>
+<script>
+
+</script>
 
 
-    </div>
-    </div>
-    </div>
+
+
+
+
+
+{#    <hr>#}
+{#     <div class="col-md-12">#}
+{#     <div class="col-md-3">#}
+{#<br>#}
+{#         <img id="detailimg" class="img-responsive" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVoweWwEb_UQKtBhQfwA78S2QXub1JHoyCox-rj8B3gnOC9M5_aQ">#}
+{#     <br>#}
+{#     </div>#}
+{#        <div class="col-md-8">#}
+{#     <h1>Restaurant Name</h1>#}
+{#        <p> Description of Restaurant</p>#}
+{#     </div>#}
+{#    <div class="col-md-1">#}
+{#        <br>#}
+{#        <br>#}
+{#        <span class="glyphicon glyphicon-heart"></span>#}
+{#    </div>#}
+{##}
+{#</div>#}
+{#</div>#}
+
+{##}
+{#    </div>#}
+{#    </div>#}
+{#    </div>#}
+{##}
+{#    <div id="restaurant" class="tabcontent">#}
+{##}
+{##}
+{#    </div>#}
 
 <script>
-function clickEdit() {
-    window.location = "/userEdit"
-}
-
-function openCity(evt, cityName) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    document.getElementById(cityName).style.display = "block";
-    evt.currentTarget.className += " active";
-}
 
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
@@ -125,7 +192,7 @@ document.getElementById("defaultOpen").click();
 </script>
 
     <style>
-     #profile{
+     .profile{
           font-weight: bold;
     font-style: italic;
     border-bottom: 2px solid darkred;
@@ -138,6 +205,8 @@ document.getElementById("defaultOpen").click();
 
      #profilepic{
          align:center;
+         width:300px;
+         height:300px;
      }
 
      #profilediv {
@@ -146,8 +215,7 @@ document.getElementById("defaultOpen").click();
          display:block;
      }
 
-
-#edit{
+     .edit{
      background-color: darkred;
     border: 0;
     color: #fff!important;
