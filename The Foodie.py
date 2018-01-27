@@ -394,7 +394,7 @@ def view():
             for key in newList:
                 for key2 in list:
                     if key[0] == key2['Name']:
-                        newList2.append(key2)
+                        newList2.insert(0,key2)
             list = newList2
 
         return render_template('viewRest.html', Restaurant=list, lengthList=listLen, proPic=proPic, form=form)
