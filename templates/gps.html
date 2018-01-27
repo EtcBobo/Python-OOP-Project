@@ -1,0 +1,84 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyC--79-GroQCVtdHMXATTAd2gZTeG5vIos",
+        authDomain: "jsmap-a2929.firebaseapp.com",
+        databaseURL: "https://jsmap-a2929.firebaseio.com",
+        projectId: "jsmap-a2929",
+        storageBucket: "jsmap-a2929.appspot.com",
+        messagingSenderId: "785554707528"
+    };
+    firebase.initializeApp(config);
+</script>
+<div id="map"></div>
+<script>
+    function initMap() {
+        var latlng = new google.maps.LatLng(1.372121, 103.846678);
+        var myOptions = { zoom: 13, center: latlng, mapTypeId: google.maps.MapTypeId.ROADMAP };
+        var map = new google.maps.Map(document.getElementById("map"), myOptions);
+        var ref = firebase.database().ref('location');
+
+        infoWindow = new google.maps.InfoWindow;
+
+        if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(function (position) {
+                  var pos = {
+                      lat: position.coords.latitude,
+                      lng: position.coords.longitude
+                  };
+
+                  infoWindow.setPosition(pos);
+                  infoWindow.setContent('Your Location');
+                  infoWindow.open(map);
+                  map.setCenter(pos);
+              }, function () {
+                  handleLocationError(true, infoWindow, map.getCenter());
+              });
+          } else {
+              // Browser doesn't support Geolocation
+              handleLocationError(false, infoWindow, map.getCenter());
+          }
+
+            ref.on('value', function(snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                  var childData = childSnapshot.val();
+                  // console.log(childData) //to get content, info, lat n lng
+
+                  var food = {lat: parseFloat(childData.lat), lng: parseFloat(childData.lng)};
+                  var info = childData.info
+                  var content = childData.content
+
+
+                  var marker = new google.maps.Marker({
+                  position: food,
+                  map: map,
+                  title: info });
+
+                  google.maps.event.addListener(marker, 'click', function () {
+                  var infowindow = new google.maps.InfoWindow({
+                  content: content });
+              infowindow.open(map, marker);
+          });
+
+          });
+
+                });
+
+            };
+
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrGeXVb96USi1ujzqQ7wlCwc_8LzUB-yY&callback=initMap" async defer></script>
+  <style>
+    #map {
+       height: 400px;
+        width: 1200px;
+        margin:auto;
+    }
+</style>
+
+{% endblock %}
