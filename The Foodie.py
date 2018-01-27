@@ -405,9 +405,7 @@ def addRest():
             'Opening Hours': res.get_openH(),
             'Closing Hours': res.get_closingH(),
             'Address': res.get_address(),
-            'User':session['username'],
-            'Average Rating':0,
-            'Number of Raters':0
+            'User':session['username']
         })
         flash('You have added a new Restaurant!')
         return redirect(url_for('home'))
@@ -681,6 +679,8 @@ def restPage(restName):
                 allUsers = []
                 allRatings = []
 
+
+
             return render_template('restDet.html', restDetail=restDetail, form=form, comments=allComments, users=allUsers,
                                    ratings=allRatings, proPic=proPic)
         except:
@@ -805,6 +805,11 @@ def events():
 
         event = Events(eventName, eventDescription, eventLocation, eventAddress, startDate,endDate, startTime, endTime, startTimeMin, endTimeMin, ticket, event)
         eventFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
+        allevents = root.reference('events')
+        for key in allevents:
+            if eventName == key:
+                flash('This restaurant already exist')
+                return redirect(url_for('addRest'))
         eventFire.put('events', eventName,{
             'Name': event.get_eventName(),
             'Description': event.get_eventDescription(),
@@ -819,19 +824,19 @@ def events():
             'ticket': event.get_ticket(),
             'people': 0
         })
-        # for key in totalevent:
-        #     if totalevent[key]['']
         flash('You have added a new event!')
         return redirect(url_for('home'))
-    return render_template('events.html', form=form)
 
-@app.route('/events')
-def event():
-    try:
-        proPic = session['proPic']
-    except KeyError:
-        proPic =''
-    return render_template('events.html',proPic=proPic)
+
+    return render_template('events.html', form=form )
+
+# @app.route('/events')
+# def event():
+#     try:
+#         proPic = session['proPic']
+#     except KeyError:
+#         proPic =''
+#     return render_template('events.html',proPic=proPic)
 
 
 if __name__ == '__main__':
