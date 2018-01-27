@@ -305,7 +305,24 @@ def view():
         proPic = session['proPic']
     except KeyError:
         proPic =''
+    allItemr = root.child('allRatings')
+    allItemg = allItemr.get()
     list = session['filtered']
+
+    for key in list:
+        totalRatings = 0
+        for key2 in allItemg:
+            if key['Name'] == key2:
+                for key3 in allItemg[key2]:
+                    totalRatings = totalRatings + int(allItemg[key2][key3])
+                avgRatings = int(totalRatings / len(allItemg[key2]))
+                numRaters = len(allItemg[key2])
+                list[key]['Average Rating'] = avgRatings
+                list[key]['Number of Raters'] = numRaters
+            else:
+                list[key]['Average Rating'] = 0
+                list[key]['Number of Raters'] = 0
+
     listLen = len(list)
     print(list)
 

@@ -16,15 +16,9 @@ default_app = firebase_admin.initialize_app(cred, {
 
 root = db.reference()
 
-
-theId = 'Candy Land'
-count = 0
-rest=root.child('allComments/'+theId)
-
-rest.update({
-    'comment'+str(count):'my first comment',
-    'user'+str(count):3
-})
+dict = {'one':'1'}
+dict['two'] = '2'
+print(dict)
 
 # rest = root.child('allComments')
 # allRest = rest.get()
