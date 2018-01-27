@@ -2,33 +2,164 @@
 
 {% block body %}
         {% from "includes/_formhelper.html" import render_field %}
-<br>
-<br>
-<br>
+
 
 
 <section id="photo" src="https://prods3.imgix.net/images/articles/2016_01/Hero-Dinner-Party-Papdi-Chaat-Babu-Ji-NYC-East-Village-Melbourne-Indian-Recipes-Tamarind-Nachos-Yogurt-Mint.jpg?auto=format,compress">
 <div class="text-container" id="eventheader">
-<h2>Events</h2>
+<h2 id="eventsheader">Events</h2>
 </div>
 </section>
-    <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#home" aria-controls="basics" role="tab" data-toggle="tab">Home</a></li>
-    <li role="presentation"><a href="#addEvent" aria-controls="addEvent" role="tab" data-toggle="tab">Organize Events!</a></li>
-    <li role="presentation"><a href="#pastEvent" aria-controls="pastEvent" role="tab" data-toggle="tab">Past Events</a></li>
-
+     <div class="container" id="profilediv">
+    <br>
+    <br>
+    <ul class="nav nav-tabs nav-justified" role="tablist">
+    <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+    <li><a href="#addEvent" data-toggle="tab">Organize Events!</a></li>
+    <li><a href="#pastEvent" data-toggle="tab">Past Events</a></li>
+    <li><a href="#futureEvent" data-toggle="tab">Future Events</a></li>
   </ul>
 
 {#    home tab#}
 
-    <div class="tab-content">
-  <div role="tabpanel" class="tab-pane fade in active" id="home">
+  <div class="tab-content  clearfix">
+  <div class="tab-pane active" id="home">
+      <br>
+      <div class="col-md-12">
+          <div class="col-md-4">
+              <br>
+                <br>
+              <h3 class="eventTitle">Food Tasting <button type="button" class="btn btn-warning" class="upcoming">Upcoming</button></h3>
+              <br>
+              <img id='eventimg' class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
+          </div>
+          <div class="col-md-4" id="eventdesc">
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <span>Description Of event</span>
+              <br>
+              <br>
+                <span class="glyphicon glyphicon-map-marker"> North</span>
+              <br>
+              <br>
+                <span class="glyphicon glyphicon-globe"> NYP</span>
+              <br>
+              <br>
+                <span class="glyphicon glyphicon-tag"> Free Entry</span>
+              <br>
+              <br>
+              <span class="glyphicon glyphicon-calendar"> 2018-01-12 to 2018-01-15 </span>
+              <br>
+              <br>
+              <span class="glyphicon glyphicon-time"> 10:15 - 18:00</span>
+          </div>
+          <div class="col-md-4">
+              <br>
+              <br>
+              <br>
+              <br>
+               <button type="button" class="btn btn-primary" class="int">I'm Interested In Going</button>
+              <br>
+               <small> 180 people interested in going</small>
+          </div>
+          </div>
 
-  </div>
+
+
+             <div class="col-md-12">
+          <div class="col-md-4">
+              <br>
+      <br>
+              <h3 class="eventTitle">Food Tasting <button type="button" class="btn btn-danger" class="upcoming">Ended</button></h3>
+              <br>
+              <img id='eventimg' class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
+          </div>
+          <div class="col-md-4" id="eventdesc">
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <span>Description Of event</span>
+              <br>
+              <br>
+                <span class="glyphicon glyphicon-map-marker"> North</span>
+              <br>
+              <br>
+                <span class="glyphicon glyphicon-globe"> NYP</span>
+              <br>
+              <br>
+                <span class="glyphicon glyphicon-tag"> Free Entry</span>
+              <br>
+              <br>
+              <span class="glyphicon glyphicon-calendar"> 2018-01-12 to 2018-01-15 </span>
+              <br>
+              <br>
+              <span class="glyphicon glyphicon-time"> 10:15 - 18:00</span>
+          </div>
+          <div class="col-md-4">
+              <br>
+              <br>
+              <br>
+          </div>
+          </div>
+
+         <div class="col-md-12">
+          <div class="col-md-4">
+              <br>
+      <br>
+              <h3 class="eventTitle">Food Tasting <button type="button" class="btn btn-success" class="upcoming">Ongoing</button></h3>
+              <br>
+              <img id='eventimg' class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
+          </div>
+          <div class="col-md-4" id="eventdesc">
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <span>Description Of event</span>
+              <br>
+              <br>
+                <span class="glyphicon glyphicon-map-marker"> North</span>
+              <br>
+              <br>
+                <span class="glyphicon glyphicon-globe"> NYP</span>
+              <br>
+              <br>
+                <span class="glyphicon glyphicon-tag"> Free Entry</span>
+              <br>
+              <br>
+              <span class="glyphicon glyphicon-calendar"> 2018-01-12 to 2018-01-15 </span>
+              <br>
+              <br>
+              <span class="glyphicon glyphicon-time"> 10:15 - 18:00</span>
+          </div>
+          <div class="col-md-4">
+              <br>
+              <br>
+              <br>
+      <br>
+               <button type="button" class="btn btn-primary" class="int">I'm Interested In Going</button>
+              <br>
+               <small> 180 people interested in going</small>
+          </div>
+          </div>
+
+
+      </div>
+
+
 
 
 {#        organize events tab#}
-  <div role="tabpanel" class="tab-pane fade" id="addEvent">
+  <div class="tab-pane" id="addEvent">
           <form action="https://python-oop.firebaseio.com/" method="POST">
         <div class="form-group col-md-12">
             <div class="row">
@@ -92,19 +223,21 @@
               </div>
             </div>
         </div>
-
   </div>
 
+
 {#        past events tab#}
-  <div role="tabpanel" class="tab-pane fade" id="pastEvent">
+  <div class="tab-pane" id="pastEvent">
        <p>potato</p>
   </div>
 
-</div>
+    <div class="tab-pane" id="futureEvent">
+       <p>rebtbgrb</p>
+  </div>
 
 </div>
  </form>
-
+     </div>
 
 <style>
 #photo{
@@ -138,12 +271,28 @@ color:white;
     }
 }
 
+#eventimg{
+    width:500px;
+    height:300px;
+}
 
 div {
     display: block;
 }
 
+.upcoming{
+    float:right;
+}
 
+.int{
+    float:right;
+}
+
+#eventsheader{
+    text-align:center;
+    font-size:63px;
+    padding:128px;
+}
 </style>
 
 {% endblock %}
