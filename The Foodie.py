@@ -98,6 +98,7 @@ class Sort(Form):
                           choices=[('Alphabetical Order', 'Alphabetical Order'), ('Lowest Price', 'Lowest Price'), ('Ratings (Higest to Lowest)', 'Ratings (Higest to Lowest)')])
 
 
+
 class EventForm(Form):
     eventName = StringField('Event Name',[validators.DataRequired()])
     eventDescription = TextAreaField('Desciption')
@@ -329,6 +330,21 @@ def filter():
 @app.route('/uploadtest',methods=['POST','GET'])
 def uploadtest():
     return render_template('uploadtest.html')
+
+
+@app.route('/data')
+def data():
+    list =[]
+    data = firebase.FirebaseApplication("https://jsmap-a2929.firebaseio.com/")
+    firebaseData = data.get('location', None)
+    list.append(firebaseData)
+
+    # for key in firebaseData:
+    #     data = firebaseData[key]
+    #     list.append(data)
+
+    json_string = json.dumps(list)
+    return render_template('data.html' , s_data = json_string)
 
 
 @app.route('/viewRest',methods=['POST','GET'])
