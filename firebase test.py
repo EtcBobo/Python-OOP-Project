@@ -4,7 +4,6 @@ from firebase import firebase
 import firebase_admin
 from firebase_admin import credentials, db
 import random
-
 app = Flask(__name__)
 app.secret_key = 'secret123'
 cred = credentials.Certificate('cred/python-oop-firebase-adminsdk-87ty7-eefcb6bc40.json')
@@ -15,9 +14,10 @@ default_app = firebase_admin.initialize_app(cred, {
 
 
 root = db.reference()
+mydict = {2:3, 1:89, 4:5, 3:0}
 
-num = 3.3333333
-print(round(num,1))
+mydict = sorted(mydict.items(),key = lambda t: t[0])
+print(mydict)
 
 # rest = root.child('allComments')
 # allRest = rest.get()
