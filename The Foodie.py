@@ -849,11 +849,12 @@ def userProfile():
     for key in totalUsers:
         if totalUsers[key]['Username'] == session['username']:
             theUser = totalUsers[key]
+    print(theUser)
     allRestr = root.child('restaurants')
     allRestg = allRestr.get()
     allEdit = []
     for key in allRestg:
-        if allRestg[key]['User'] == theUser:
+        if allRestg[key]['User'] == theUser['Username']:
             allEdit.append(allRestg[key])
 
     return render_template('userProfile.html' , user = theUser, proPic = session['proPic'],allEdit=allEdit)
