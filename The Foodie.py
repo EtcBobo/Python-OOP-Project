@@ -341,13 +341,19 @@ def view():
             if key['Name'] == key2:
                 for key3 in allItemg[key2]:
                     totalRatings = totalRatings + int(allItemg[key2][key3])
-                avgRatings = int(totalRatings / len(allItemg[key2]))
+                avgRatings = round(totalRatings / len(allItemg[key2]),1)
                 numRaters = len(allItemg[key2])
-                list[key]['Average Rating'] = avgRatings
-                list[key]['Number of Raters'] = numRaters
-            else:
-                list[key]['Average Rating'] = 0
-                list[key]['Number of Raters'] = 0
+                key['Average Rating'] = avgRatings
+                key['Number of Raters'] = numRaters
+                allRestr = root.child('restaurants/'+key['Name'])
+                allRestr.update({
+                    'Average Rating':avgRatings,
+                    'Number of Raters':numRaters
+                })
+
+
+
+
 
     listLen = len(list)
     print(list)
@@ -399,7 +405,9 @@ def addRest():
             'Opening Hours': res.get_openH(),
             'Closing Hours': res.get_closingH(),
             'Address': res.get_address(),
-            'User':session['username']
+            'User':session['username'],
+            'Average Rating':0,
+            'Number of Raters':0
         })
         flash('You have added a new Restaurant!')
         return redirect(url_for('home'))
@@ -605,6 +613,7 @@ def restPage(restName):
         allRatings = []
 
 
+
     if request.method == 'POST':
         try:
             comments = form.comments.data
@@ -627,7 +636,23 @@ def restPage(restName):
 
             allRestr = root.child('restaurants/' + restName)
             print('all', allRestr.get())
+
+
+            currRatg = pushRatr.get()
+            totalRating = 0
+
+            for key in currRatg:
+                totalRating = totalRating + int(currRatg[key])
+            numRaters = len(currRatg)
+            avgRatings = round(totalRating/numRaters,1)
+            allRestr.update({
+                'Average Rating':avgRatings,
+                'Number of Raters':numRaters
+            })
+            print(avgRatings,numRaters)
             restDetail = allRestr.get()
+
+
 
             try:
                 counter = 0
@@ -655,8 +680,6 @@ def restPage(restName):
                 allComments = []
                 allUsers = []
                 allRatings = []
-
-
 
             return render_template('restDet.html', restDetail=restDetail, form=form, comments=allComments, users=allUsers,
                                    ratings=allRatings, proPic=proPic)

@@ -16,9 +16,8 @@ default_app = firebase_admin.initialize_app(cred, {
 
 root = db.reference()
 
-dict = {'one':'1'}
-dict['two'] = '2'
-print(dict)
+num = 3.3333333
+print(round(num,1))
 
 # rest = root.child('allComments')
 # allRest = rest.get()
