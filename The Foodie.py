@@ -2,10 +2,11 @@ import firebase_admin
 from Registration import Registration
 from firebase_admin import credentials, db
 from flask import Flask, render_template, request, flash, redirect, url_for, session
-from wtforms import Form, StringField, TextAreaField, RadioField, SelectField, PasswordField, IntegerField, validators, SelectMultipleField
-from wtforms.fields.html5 import EmailField
+from wtforms import Form, StringField, TextAreaField, RadioField, SelectField, PasswordField, IntegerField, validators, SelectMultipleField, DateTimeField
+from wtforms.fields.html5 import EmailField, DateTimeField
 from firebase import firebase
 from Restaurant import Restaurant
+from Events import Events
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -16,6 +17,7 @@ import random
 from flask_googlemaps import GoogleMaps
 from flask_googlemaps import Map
 from flask_share import Share
+
 
 #pip install flask-socketio
 # thefoodie.newsletter@gmail.com
@@ -50,10 +52,6 @@ class RegisterForm(Form):
                                     ('Chinese Food', 'Chinese Food'), ('Healthy Food', 'Healthy Food'),
                                     ('None', 'None')])
     email = EmailField("Email")
-
-
-
-
 
 
 class RestForm(Form):
@@ -93,6 +91,34 @@ class RestForm(Form):
 class Feedbacks(Form):
     comments = TextAreaField('Comments')
     ratings = SelectField(u'Ratings of the restaurants (higher score means better rating)',choices=[('1','1'),('2','2'),('3','3'),('4','4'),('5','5')])
+
+class EventForm(Form):
+    eventName = StringField('Event Name',[validators.DataRequired()])
+    eventDescription = TextAreaField('Desciption')
+    eventLocation = SelectField(u'Location', choices=[('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),('Central','Central')])
+    eventAddress = TextAreaField('Place where your event is held')
+    ticket = IntegerField('Entry Fee', [validators.DataRequired()])
+    startDate = DateTimeField('Start date (e.g.2018-01-12)*', format='%Y-%m-%d')
+    endDate = DateTimeField('End date (e.g.2018-01-12)*', format='%Y-%m-%d')
+    startTime = SelectField(u'Start Time(Hr)*',
+                           choices=[('12 AM', '12 AM'),('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'), ('4 AM', '4 AM'),
+                                    ('5 AM', '5 AM'), ('6 AM', '6 AM'), ('7 AM', '7 AM'), ('8 AM', '8 AM'),
+                                    ('9 AM', '9 AM'), ('10 AM', '10 AM'), ('11 AM', '11 AM'), ('12 PM', '12 PM'),
+                                    ('1 PM', '1 PM'),('2 PM', '2 PM'),('3 PM', '3 PM'),('4 PM', '4 PM'),('5 PM', '5 PM'),('6 PM', '6 PM'),('7 PM', '7 PM'),
+                                    ('8 PM', '8 PM'),('9 PM', '9 PM'),('10 PM', '10 PM'),('11 PM', '11 PM')])
+    endTime =  SelectField(u'Start Time(Hr)*',
+                           choices=[('12 AM', '12 AM'),('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'), ('4 AM', '4 AM'),
+                                    ('5 AM', '5 AM'), ('6 AM', '6 AM'), ('7 AM', '7 AM'), ('8 AM', '8 AM'),
+                                    ('9 AM', '9 AM'), ('10 AM', '10 AM'), ('11 AM', '11 AM'), ('12 PM', '12 PM'),
+                                    ('1 PM', '1 PM'),('2 PM', '2 PM'),('3 PM', '3 PM'),('4 PM', '4 PM'),('5 PM', '5 PM'),('6 PM', '6 PM'),('7 PM', '7 PM'),
+                                    ('8 PM', '8 PM'),('9 PM', '9 PM'),('10 PM', '10 PM'),('11 PM', '11 PM')])
+    startTimeMin = SelectField(u'Start Time(Min)*',
+                            choices= [('00', '00'), ('05', '05'), ('10', '10'), ('15', '15'), ('20', '20'), ('25', '25'), ('30', '30'), ('35', '35'),
+                                      ('40', '40'), ('45', '45'), ('50', '50'), ('55','55')])
+    endTimeMin = SelectField(u'End Time(Min)*',
+                            choices= [('00', '00'), ('05', '05'), ('10', '10'), ('15', '15'), ('20', '20'), ('25', '25'), ('30', '30'), ('35', '35'),
+                                      ('40', '40'), ('45', '45'), ('50', '50'), ('55','55')])
+    people = 0
 
 @app.route("/location")
 def mapview():
@@ -153,7 +179,7 @@ def home():
     restFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
     totalRest = restFire.get('restaurants', None)
     for key in totalRest:
-        if totalRest[key]['Food Type'] == userPref['Food Types'] or userPref['Food Types']== 'None':
+        if totalRest[key]['Food Type'] == userPref['Food Types'] or userPref['Food Types'] == 'None':
             recommend.append(totalRest[key])
     option1, option2, option3 = random.sample(range(0, len(recommend)), 3)
     randRec.append(recommend[option1])
@@ -635,9 +661,61 @@ def userProfile():
 
     return render_template('userProfile.html' , user = theUser, proPic = session['proPic'])
 
-@app.route('/events')
-def event():
-    return render_template('events.html')
+@app.route('/events', methods=['POST','GET'])
+def events():
+    form = EventForm(request.form)
+    if request.method =='POST' and form.validate():
+        eventName = form.eventName.data
+        eventDescription = form.eventDescription.data
+        eventLocation = form.eventLocation.data
+        eventAddress = form.eventAddress.data
+        startDate = form.startDate.data
+        endDate = form.endDate.data
+        startTime = form.startTime.data
+        endTime = form.endTime.data
+        startTimeMin = form.startTimeMin.data
+        endTimeMin = form.endTimeMin.data
+        ticket = form.ticket.data
+        event = 0
+        if ticket == '':
+            flash('Please enter an average price for the restaurant')
+            return redirect(url_for('events'))
+
+        event = Events(eventName, eventDescription, eventLocation, eventAddress, startDate,endDate, startTime, endTime, startTimeMin, endTimeMin, ticket, event)
+        eventFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
+        eventFire.put('events', eventName,{
+            'Name': event.get_eventName(),
+            'Description': event.get_eventDescription(),
+            'Location': event.get_eventLocation(),
+            'Address': event.get_eventAddress(),
+            'Start': event.get_startDate(),
+            'End': event.get_endDate(),
+            'Time Start': event.get_startTime(),
+            'Time End': event.get_endTime(),
+            'Min Start': event.get_startTimeMin(),
+            'Min End': event.get_endTimeMin(),
+            'ticket': event.get_ticket(),
+            'people': 0
+        })
+        # for key in totalevent:
+        #     if totalevent[key]['']
+        flash('You have added a new event!')
+        return redirect(url_for('home'))
+    return render_template('events.html', form=form)
 
 if __name__ == '__main__':
     socketio.run(app, debug=True)
+
+ # for key in totalRest:
+ #            if totalRest[key]['Opening Hours'] == '12 PM':
+ #                openH = 12
+ #            elif totalRest[key]['Opening Hours'] == '12 AM':
+ #                openH = 0
+ #            elif totalRest[key]['Opening Hours'][-2:] == 'PM':
+ #                openH = int(totalRest[key]['Opening Hours'][0:2]) + 12
+ #            else:
+ #                openH = int(totalRest[key]['Opening Hours'][0:2])
+ #
+ #            if totalRest[key]['Closing Hours'] == '12 PM':
+ #                closingH = 12
+ #            elif totalRest[key]['Closing Hours'] == '12 AM':
