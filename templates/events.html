@@ -2,39 +2,147 @@
 
 {% block body %}
         {% from "includes/_formhelper.html" import render_field %}
+<br>
+<br>
+<br>
 
-       <div class="jumbotron text-center" id="eventbanner">
-        <h1>Events</h1>
-        <br>
-       </div>
-<div class="container" id="filterdiv">
-<ul class="nav nav-pills nav-fill">
-  <li class="nav-item">
-    <a class="nav-link active" href="#">Home</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Add Events!</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Past Events</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Future Events</a>
-  </li>
-</ul>
+
+<section id="photo" src="https://prods3.imgix.net/images/articles/2016_01/Hero-Dinner-Party-Papdi-Chaat-Babu-Ji-NYC-East-Village-Melbourne-Indian-Recipes-Tamarind-Nachos-Yogurt-Mint.jpg?auto=format,compress">
+<div class="text-container" id="eventheader">
+<h2>Events</h2>
+</div>
+</section>
+    <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#home" aria-controls="basics" role="tab" data-toggle="tab">Home</a></li>
+    <li role="presentation"><a href="#addEvent" aria-controls="addEvent" role="tab" data-toggle="tab">Organize Events!</a></li>
+    <li role="presentation"><a href="#pastEvent" aria-controls="pastEvent" role="tab" data-toggle="tab">Past Events</a></li>
+
+  </ul>
+
+{#    home tab#}
+
+    <div class="tab-content">
+  <div role="tabpanel" class="tab-pane fade in active" id="home">
+
+  </div>
+
+
+{#        organize events tab#}
+  <div role="tabpanel" class="tab-pane fade" id="addEvent">
+          <form action="https://python-oop.firebaseio.com/" method="POST">
+        <div class="form-group col-md-12">
+            <div class="row">
+                <br>
+                <br>
+            <div  class="col-md-8 col-md-offset-2" class="eventName">
+                <div class="form-group col-md-12">
+                    {{ render_field(form.eventName, class_="form-control") }}
+                </div>
+
+                <div class="form-group col-md-12" class="eventDesc">
+                    {{ render_field(form.eventDescription, class_="form-control") }}
+                </div>
+
+                <div class="form-group col-md-12" class="'eventLocation">
+                    {{ render_field(form.eventLocation, class_="form-control") }}
+                </div>
+
+                <div class="form-group col-md-12" class="eventAddress">
+                    {{ render_field(form.eventAddress, class_="form-control") }}
+                </div>
+
+                <div class="form-group col-md-6" class="startDate">
+                    {{ render_field(form.startDate, class_="form-control") }}
+                </div>
+
+                <div class="form-group col-md-6" class="endDate">
+                    {{ render_field(form.endDate, class_="form-control") }}
+                </div>
+
+                 <div class="form-group col-md-6" class="startTime">
+                    {{ render_field(form.startTime, class_="form-control") }}
+                </div>
+
+                 <div class="form-group col-md-6" class="startTimeMin">
+                    {{ render_field(form.startTimeMin, class_="form-control") }}
+                </div>
+
+                 <div class="form-group col-md-6" class="endTime">
+                    {{ render_field(form.endTime, class_="form-control") }}
+                </div>
+
+                 <div class="form-group col-md-6" class="endTimeMin">
+                    {{ render_field(form.endTimeMin, class_="form-control") }}
+                </div>
+
+                <div class="form-group col-md-12" class="ticket">
+                    {{ render_field(form.ticket, class_="form-control") }}
+                </div>
+                <br>
+                <br>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <br>
+                                <br>
+                                <input type="submit" value="Submit" id="submitbtn"/>
+                             </div>
+                        </div>
+                    </div>
+              </div>
+            </div>
+        </div>
+
+  </div>
+
+{#        past events tab#}
+  <div role="tabpanel" class="tab-pane fade" id="pastEvent">
+       <p>potato</p>
+  </div>
+
 </div>
 
-
-
+</div>
+ </form>
 
 
 <style>
-    #eventbanner{
-     background-image: url("https://prods3.imgix.net/images/articles/2016_01/Hero-Dinner-Party-Papdi-Chaat-Babu-Ji-NYC-East-Village-Melbourne-Indian-Recipes-Tamarind-Nachos-Yogurt-Mint.jpg?auto=format,compress");
-    color:white;
-    height:500px;
-    width:100%;
+#photo{
+background-image: url("https://prods3.imgix.net/images/articles/2016_01/Hero-Dinner-Party-Papdi-Chaat-Babu-Ji-NYC-East-Village-Melbourne-Indian-Recipes-Tamarind-Nachos-Yogurt-Mint.jpg?auto=format,compress");
+background-repeat: no-repeat;
+background-size: cover;
+background-position:center;
+width:100%;
+height:550px;
 }
+#eventheader{
+align:center;
+color:white;
+}
+
+  #submitbtn{
+         border-radius: 4px;
+    background-color: darkred;
+    border: 0;
+    color: #fff!important;
+    display: inline-block;
+    font-size: 14px;
+    text-align: center;
+        height: 42px;
+        width:300px;
+    }
+
+@media (max-width: 991px) {
+    #eventnav {
+        max-width: 100%;
+    }
+}
+
+
+div {
+    display: block;
+}
+
 
 </style>
 

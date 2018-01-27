@@ -3,19 +3,27 @@
 {% block body %}
     {% from "includes/_formhelper.html" import render_field %}
 
-<div id="registerdiv">
-    <div class="form-group col-md-4">
+ <div class="container" id="profilediv">
+    <br>
+        <br>
 
-            </div>
     <h1 id="register">Sign Up Now!</h1>
     <p>Register for the Foodie Account now and start sharing your dining experience!</p>
     <br>
-    <form method="POST" >
-        <div class="form-group">
-            <div class="form-group col-md-4">
+    <form method=post >
+         <div class="form-group col-md-12">
+            <div class="row">
+            <div  class="col-md-8 col-md-offset-2" class="edit">
+                <div class="form-group col-md-12">
+                <img id="img" src="https://www.revenueriver.co/hs-fs/hub/177047/file-2110622193-png/user_profile_img.png" class="img-circle" width="304" height="304">
+                <br>
+                <br>
+                <input type="file" id="file"/>
+                <br>
+                <br>
+                <br>
+                </div>
 
-            </div>
-            <div class="form-group col-md-8">
                 <div class="form-group col-md-12">
                     {{ render_field(form.user, class_="form-control") }}
                 </div>
@@ -39,20 +47,13 @@
                 </div>
 
 
-<div class="form-group">
-            <div class="form-row">
-                <div class="form-group col-md-11">
-
-
-                </div>
-                <div class="form-group col-md-12">
-                    <input type="submit" value="Register" class="btn btn-info" id="registerbtn"/>
+                    <div class='btn-toolbar'>
+                        <button type="submit" class="btn btn-primary btn-lg upload-group text-center" id="uploadButton" onclick="myFunction()">Register</button>
+                    </div>
                 </div>
             </div>
         </div>
-
-            </div>
-        </div>
+    </form>
 
 
 
@@ -68,8 +69,106 @@
                 <!--</div>-->
             <!--</div>-->
         <!--</div>-->
+              <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+<script>
+   function myFunction() {
+    window.location = "/userProfile"
+}
+    function readURL2(input) {
 
-    </form>
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+          $('#img2').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+     $("#file2").change(function() {
+      readURL2(this);
+    });
+    function readURL(input) {
+
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+          $('#img').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    $("#file").change(function() {
+      readURL(this);
+    });
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyAbX0KjCpu-WKGrnj9snTRolEqomOXy0oA",
+        authDomain: "python-oop.firebaseapp.com",
+        databaseURL: "https://python-oop.firebaseio.com/",
+        projectId: "python-oop",
+        storageBucket: "python-oop.appspot.com",
+        messagingSenderId: "397421551766"
+      };
+      firebase.initializeApp(config);
+    var fileButton = document.getElementById('uploadButton');
+    $("#file").on("change",function (event) {
+        selectedFile=event.target.files[0];
+
+
+    });
+    $("#file2").on("change",function (event) {
+        selectedFile2=event.target.files[0];
+
+
+    });
+
+    fileButton.addEventListener('click',function(e) {
+
+        var elem = document.getElementById("myBar");
+        var elem2 = document.getElementById("myBar2");
+
+
+
+
+        var filename = selectedFile.name;
+        var storageRef = firebase.storage().ref('/images/profilePic/' + filename);
+        var fileRef = storageRef.child(filename);
+        var uploadTask = storageRef.put(selectedFile);
+
+
+        uploadTask.on('state_changed', function (snapshot) {
+        var percentage = snapshot.bytesTransferred / snapshot.totalBytes * 100;
+            //uploader.value = percentage;
+             elem.style.width = parseInt(percentage) + '%';
+             elem.innerHTML=parseInt(percentage)+'%';
+             elem2.style.width = parseInt(percentage) + '%';
+             elem2.innerHTML=parseInt(percentage)+'%';
+        }, function (error) {
+
+        }, function () {
+            var postKey = firebase.database().ref('Posts/').push().key;
+            var downloadURL = uploadTask.snapshot.downloadURL;
+
+            var updates = {};
+            var postData = {
+                urlProfile: downloadURL,
+                counter: 0 ,
+                user: 'placeholder'
+            };
+            updates['/userPic/' + postKey] = postData;
+
+            firebase.database().ref().update(updates);
+        });
+    })
+
+
+        </script>
+
 </div>
 
 <style>
@@ -84,31 +183,33 @@
 
     }
 
-     #registerdiv {
-        max-width: 980px;
-        padding: 20px 12px 10px 20px;
-        font: 13px Arial, Helvetica, sans-serif;
-         align:center;
+    body{
+    background-image: url("https://wallpapertag.com/wallpaper/full/7/1/0/60015-cool-food-background-3800x2500-iphone.jpg") ;
+    background-color: rgba(255,255,255,0.2);
+     background-blend-mode: lighten;
+    background-repeat: no-repeat;
+     background-size: cover;
+    opacity:0.9;
+}
 
 
+     #file{
+    margin-top:300px;
 
-    }
+}
 
-    #registerbtn{
-        border-radius: 4px;
-    background-color: darkred;
+    #uploadButton{
+        background-color: darkred;
     border: 0;
     color: #fff!important;
     display: inline-block;
     font-size: 14px;
-    /*line-height: 40px;*/
-    /*min-width: 150px;*/
-    /*height: 42px;*/
     text-align: center;
         height: 42px;
-        width:250px
-
+        width:250px;
+        margin-left:20px;
     }
+
 
     #email {
         font-size:12px;
