@@ -92,6 +92,11 @@ class Feedbacks(Form):
     comments = TextAreaField('Comments')
     ratings = SelectField(u'Ratings of the restaurants (higher score means better rating)',choices=[('1','1'),('2','2'),('3','3'),('4','4'),('5','5')])
 
+class Sort(Form):
+    sort = SelectField(u'Sort By:',
+                          choices=[('Alphabetical Order', 'Alphabetical Order'), ('Lowest Price', 'Lowest Price'), ('Ratings (Higest to Lowest)', 'Ratings (Higest to Lowest)')])
+
+
 class EventForm(Form):
     eventName = StringField('Event Name',[validators.DataRequired()])
     eventDescription = TextAreaField('Desciption')
@@ -335,30 +340,40 @@ def view():
     allItemg = allItemr.get()
     list = session['filtered']
 
-    for key in list:
-        totalRatings = 0
-        for key2 in allItemg:
-            if key['Name'] == key2:
-                for key3 in allItemg[key2]:
-                    totalRatings = totalRatings + int(allItemg[key2][key3])
-                avgRatings = round(totalRatings / len(allItemg[key2]),1)
-                numRaters = len(allItemg[key2])
-                key['Average Rating'] = avgRatings
-                key['Number of Raters'] = numRaters
-                allRestr = root.child('restaurants/'+key['Name'])
-                allRestr.update({
-                    'Average Rating':avgRatings,
-                    'Number of Raters':numRaters
-                })
-
-
-
-
-
     listLen = len(list)
     print(list)
 
-    return render_template('viewRest.html', Restaurant=list, lengthList = listLen,proPic=proPic)
+    form = Sort(request.form)
+    if request.method == 'POST':
+        sort = form.sort.data
+        if sort == 'Alphabetical Order':
+            allAlpha =[]
+            for key in list:
+                allAlpha.append(list[key]['Name'])
+            sorted(allAlpha)
+            newList = []
+            for i in range(len(list)):
+                for key in list:
+                    if list[key]['Name'] == allAlpha[i]:
+                        newList.append(list[key][allAlpha[i]])
+            list = newList
+
+        elif sort == 'Lowest Price':
+            allPrice = {}
+            for key in list:
+                allPrice[(list[key]['Price'])] = list[key]['Name']
+
+            newList = sorted(allPrice.items(), key=lambda t: t[0])
+            newList2 = []
+            for i in range(len(list)):
+                for key in list:
+                    pass
+
+        elif sort == 'Ratings':
+            pass
+        elif sort == 'Ratings (Higest to Lowest)':
+            pass
+    return render_template('viewRest.html', Restaurant=list, lengthList = listLen,proPic=proPic,form=form)
 
 
 @app.route('/addRest',methods=['POST','GET'])
@@ -366,8 +381,10 @@ def addRest():
 
     try:
         proPic = session['proPic']
+        user = session['username']
     except KeyError:
         proPic =''
+        user = ''
     form = RestForm(request.form)
     if request.method == 'POST' :     # need to fix validation
         print('ok')
@@ -390,9 +407,7 @@ def addRest():
                     return redirect(url_for('addRest'))
         except:
             pass
-        try:
-            user = session['username']
-        except:
+        if user == '':
             flash('You must be logged in to recommend a Restaurant')
             return redirect(url_for('addRest'))
         restFireu = root.child('restaurants/'+name)
@@ -405,11 +420,24 @@ def addRest():
             'Opening Hours': res.get_openH(),
             'Closing Hours': res.get_closingH(),
             'Address': res.get_address(),
-            'User':session['username']
+            'User':session['username'],
+            'Average Rating':0,
+            'Number of Raters':0
         })
         flash('You have added a new Restaurant!')
+        # theBreak = False
+        # while theBreak != True:
+        #     allPicr = root.child('restPic')
+        #     allPicg = allPicr.get()
+        #     for key in allPicg:
+        #         if allPicg[key]['rest'] == 'placeholder':
+        #             rightUser = root.child('restPic/' + key)
+        #             rightUser.update({
+        #                 'rest': res.get_name()
+        #             })
+        #             theBreak = True
         return redirect(url_for('home'))
-    return render_template('addRest.html', form=form,proPic=proPic)
+    return render_template('addRest.html', form=form,proPic=proPic,user=user)
 
 
 @app.route('/userRegister',methods=['POST','GET'])
@@ -588,6 +616,8 @@ def restPage(restName):
         allComments = []
         allUsers = []
         allCommr = root.child('allComments')
+        allPicr = root.child('userPic')
+        allPicg = allPicr.get()
         allCommg = allCommr.get()
         for key in allCommg:
             if key == restName:
@@ -597,6 +627,13 @@ def restPage(restName):
                     else:
                         allUsers.insert(0,allCommg[key][i])
                     counter = counter +1
+
+        allPic = []
+        for i in range(len(allUsers)):
+            for key in allPicg:
+                if allUsers[i] == allPicg[key]['user']:
+                   allPic.append(allPicg[key]['urlProfile'])
+
 
         allRatings =[]
         allRatr = root.child('allRatings')
@@ -609,6 +646,7 @@ def restPage(restName):
         allComments = []
         allUsers = []
         allRatings = []
+        allPic = []
 
 
 
@@ -667,6 +705,12 @@ def restPage(restName):
                                 allUsers.insert(0,allCommg[key][i])
                             counter = counter + 1
 
+                allPic = []
+                for i in range(len(allUsers)):
+                    for key in allPicg:
+                        if allUsers[i] == allPicg[key]['user']:
+                            allPic.append(allPicg[key]['urlProfile'])
+
                 allRatings = []
                 allRatr = root.child('allRatings')
                 allRatg = allRatr.get()
@@ -678,16 +722,17 @@ def restPage(restName):
                 allComments = []
                 allUsers = []
                 allRatings = []
+                allPic = []
 
 
 
             return render_template('restDet.html', restDetail=restDetail, form=form, comments=allComments, users=allUsers,
-                                   ratings=allRatings, proPic=proPic)
+                                   ratings=allRatings, proPic=proPic, pic=allPic)
         except:
             flash('You must login to be able to comment or rate restaurants')
-            return render_template('restDet.html',restDetail = restDetail, form=form,comments=allComments,users=allUsers,ratings=allRatings,proPic=proPic)
+            return render_template('restDet.html',restDetail = restDetail, form=form,comments=allComments,users=allUsers,ratings=allRatings,proPic=proPic, pic=allPic)
 
-    return render_template('restDet.html',restDetail = restDetail, form=form,comments=allComments,users=allUsers,ratings=allRatings,proPic=proPic)
+    return render_template('restDet.html',restDetail = restDetail, form=form,comments=allComments,users=allUsers,ratings=allRatings,proPic=proPic, pic=allPic)
 
 
 
@@ -779,8 +824,14 @@ def userProfile():
     for key in totalUsers:
         if totalUsers[key]['Username'] == session['username']:
             theUser = totalUsers[key]
+    allRestr = root.child('restaurants')
+    allRestg = allRestr.get()
+    allEdit = []
+    for key in allRestg:
+        if allRestg[key]['User'] == theUser:
+            allEdit.append(allRestg[key])
 
-    return render_template('userProfile.html' , user = theUser, proPic = session['proPic'])
+    return render_template('userProfile.html' , user = theUser, proPic = session['proPic'],allEdit=allEdit)
 
 
 @app.route('/events', methods=['POST','GET'])

@@ -17,7 +17,7 @@
          <span class="verticalLine"></span>
           <span class="info2"><p class="glyphicon glyphicon-globe"></p> {{ restDetail['Address'] }}</span>
         <span class="verticalLine"></span>
-         <span class="info2"><p class="glyphicon glyphicon-star"></p> Avg Ratings: 3.7/5</span>
+         <span class="info2"><p class="glyphicon glyphicon-star"></p> Avg Ratings:{{ restDetail['Average Rating'] }}/5</span>
 
     </div>
 <p id="heart" class="glyphicon glyphicon-heart-empty"><span id="fav"> favourite</span></p>
@@ -73,7 +73,7 @@
            <div class="form-group col-md-12">
                <br>
                <br>
-           <img src="https://www.revenueriver.co/hs-fs/hub/177047/file-2110622193-png/user_profile_img.png" class="img-responsive" class="img-circle" id="userpic">
+           <img src={{ pic[i] }} class="img-responsive" class="img-circle" id="userpic">
            <div class="form-group col-md-12">
            <div class="form-group col-md-4" id="usernames">{{ users[i] }}</div>
            <h2>{{ comments[i] }}</h2>
@@ -116,6 +116,8 @@
     </div>
 </div>
 </div>
+
+
 
    <style>
    #infodiv{
