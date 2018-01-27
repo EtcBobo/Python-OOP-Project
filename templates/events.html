@@ -12,24 +12,98 @@
 <h2>Events</h2>
 </div>
 </section>
-<div class="container" id="eventnav">
-<ul class="nav nav-pills nav-fill">
-  <li class="nav-item">
-    <a class="nav-link active" href="#">Home</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Organize Event!</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Past Events</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Coming up events</a>
-  </li>
-</ul>
+    <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#home" aria-controls="basics" role="tab" data-toggle="tab">Home</a></li>
+    <li role="presentation"><a href="#addEvent" aria-controls="addEvent" role="tab" data-toggle="tab">Organize Events!</a></li>
+    <li role="presentation"><a href="#pastEvent" aria-controls="pastEvent" role="tab" data-toggle="tab">Past Events</a></li>
+
+  </ul>
+
+{#    home tab#}
+
+    <div class="tab-content">
+  <div role="tabpanel" class="tab-pane fade in active" id="home">
+
+  </div>
+
+
+{#        organize events tab#}
+  <div role="tabpanel" class="tab-pane fade" id="addEvent">
+          <form action="https://python-oop.firebaseio.com/" method="POST">
+        <div class="form-group col-md-12">
+            <div class="row">
+                <br>
+                <br>
+            <div  class="col-md-8 col-md-offset-2" class="edit">
+                <div class="form-group col-md-12">
+                    {{ render_field(form.eventName, class_="form-control") }}
+                </div>
+
+                <div class="form-group col-md-12" class="desc">
+                    {{ render_field(form.eventDescription, class_="form-control") }}
+                </div>
+
+                <div class="form-group col-md-12">
+                    {{ render_field(form.eventLocation, class_="form-control") }}
+                </div>
+
+                <div class="form-group col-md-12" class="location">
+                    {{ render_field(form.eventAddress, class_="form-control") }}
+                </div>
+
+                <div class="form-group col-md-6" class="type">
+                    {{ render_field(form.startDate, class_="form-control") }}
+                </div>
+
+                <div class="form-group col-md-6" class="price">
+                    {{ render_field(form.endDate, class_="form-control") }}
+                </div>
+
+                 <div class="form-group col-md-6" class="location">
+                    {{ render_field(form.startTime, class_="form-control") }}
+                </div>
+
+                 <div class="form-group col-md-6" class="location">
+                    {{ render_field(form.startTimeMin, class_="form-control") }}
+                </div>
+
+                 <div class="form-group col-md-6" class="location">
+                    {{ render_field(form.endTime, class_="form-control") }}
+                </div>
+
+                 <div class="form-group col-md-6" class="location">
+                    {{ render_field(form.endTimeMin, class_="form-control") }}
+                </div>
+
+                <div class="form-group col-md-12" class="openhr">
+                    {{ render_field(form.ticket, class_="form-control") }}
+                </div>
+                <br>
+                <br>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <br>
+                                <br>
+                                <input type="submit" value="Submit" id="submitbtn"/>
+                             </div>
+                        </div>
+                    </div>
+              </div>
+            </div>
+        </div>
+
+  </div>
+
+{#        past events tab#}
+  <div role="tabpanel" class="tab-pane fade" id="pastEvent">
+       <p>potato</p>
+  </div>
+
 </div>
 
-
+</div>
+ </form>
 
 
 <style>
@@ -46,9 +120,17 @@ align:center;
 color:white;
 }
 
-#eventnav{
-    position: relative;
-}
+  #submitbtn{
+         border-radius: 4px;
+    background-color: darkred;
+    border: 0;
+    color: #fff!important;
+    display: inline-block;
+    font-size: 14px;
+    text-align: center;
+        height: 42px;
+        width:300px;
+    }
 
 @media (max-width: 991px) {
     #eventnav {

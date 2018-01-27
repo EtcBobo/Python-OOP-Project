@@ -2,40 +2,38 @@
 
 {% block body %}
     {% from "includes/_formhelper.html" import render_field %}
+
 <div class="container" id="profilediv">
     <br>
     <br>
-
     <h1 id="login">Login</h1>
     <p>Login to your foodie account!</p>
     <br>
     <form method=post>
-
-        <div class="form-group">
-             <div class="form-group col-md-8">
-                <div class="form-group col-md-12">
+        <div class="form-group col-md-12">
+            <div class="row">
+            <div  class="col-md-8 col-md-offset-2" class="edit">
+                <div class="form-group col-md-12"><span class="glyphicon glyphicon-user"></span>
                     {{ render_field(form.user, class_="form-control") }}
                 </div>
-                <div class="form-group col-md-12">
+                <div class="form-group col-md-12"><span class="glyphicon glyphicon-lock"></span>
                     {{ render_field(form.password, class_="form-control") }}
                 </div>
-            <!--</div>-->
-        <!--</div>-->
 
-        <div class="form-group">
+                <div class="form-group">
             <div class="form-row">
                 <div class="form-group col-md-11">
 
 
-                <!--</div>-->
+                </div>
                 <div class="form-group col-md-12">
                     <input type="submit" value="login" class="btn btn-info" id="loginbtn"/>
                 </div>
             </div>
         </div>
 
-            <!--</div>-->
-        <!--</div>-->
+            </div>
+        </div>
         </div>
     </form>
     </div>
@@ -60,20 +58,22 @@
 
     }
 #loginbtn{
-        /*border-radius: 4px;*/
     background-color: darkred;
     border: 0;
     color: #fff!important;
     display: inline-block;
     font-size: 14px;
-    /*line-height: 40px;*/
-    /*min-width: 150px;*/
-    /*height: 42px;*/
     text-align: center;
         height: 42px;
         width:250px;
-
     }
-
+body{
+     background-image: url("http://www.foodphotographyandstyling.se/wp-content/uploads/2016/02/eat-clean%C2%A9Bianca_Brandon-Cox.jpg") ;
+    background-color: rgba(255,255,255,0.2);
+     background-blend-mode: lighten;
+    background-repeat: no-repeat;
+     background-size: cover;
+    opacity:0.9;
+}
 </style>
 {% endblock %}
