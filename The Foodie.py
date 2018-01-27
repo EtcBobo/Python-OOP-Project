@@ -16,6 +16,7 @@ import random
 from flask_googlemaps import GoogleMaps
 from flask_googlemaps import Map
 from flask_share import Share
+import json
 
 #pip install flask-socketio
 # thefoodie.newsletter@gmail.com
@@ -94,50 +95,69 @@ class Feedbacks(Form):
     comments = TextAreaField('Comments')
     ratings = SelectField(u'Ratings of the restaurants (higher score means better rating)',choices=[('1','1'),('2','2'),('3','3'),('4','4'),('5','5')])
 
-@app.route("/location")
-def mapview():
-    map = Map(
-        identifier="map",
-        style=(
-            "height:50%;"
-            "width:100%;"
-            "top:100px;"
-            "position:absolute;"
-        ),
-        lat=1.3786539,
-        lng=103.8493234,
-        markers=[
-            {
-                'lat':  1.372121,
-                'lng':  103.846678,
-                'infobox': (
-                    "<h3>Ang Mo Kio Market & Food Centre</h3>"
-                    "<p>Address: 724 Ang Mo Kio Ave 6, Singapore 560724</p>"
-                    "<p>Hours: 7AM–9PM</p>"
-                    "<p>Phone: 6225 5632</p>"
-                    "<img src='//placehold.it/50'>")
-            },
-            {
-                'lat': 1.380936,
-                'lng': 103.840664,
-                'infobox': (
-                    "<h3>Ang Mo Kio 628 Market</h3>"
-                    "<p>Address: 724 Ang Mo Kio Ave 6, Singapore 560724</p>"
-                    "<p>Hours: Wednesday\t6:30AM–1:30PM</p>"
-                    "<p>Thursday\t6:30AM–1:30PM</p>"
-                    "<p>Friday\t6:30AM–1:30PM</p>"
-                    "<p>Saturday\t6:30AM–1:30PM</p>"
-                    "<p>Sunday\t6:30AM–1:30PM</p>"
-                    "<p>Monday\tClosed</p>"
-                    "<p>Tuesday\t6:30AM–1:30PM</p>"
-                    "<p>Phone: 9067 5142</p>"
-                    "<img src='//placehold.it/50'>"
-                )
-            }
-        ]
-    )
-    return render_template('location.html', map=map)
+# @app.route("/location")
+# def mapview():
+#     map = Map(
+#         identifier="map",
+#         style=(
+#             "height:50%;"
+#             "width:100%;"
+#             "top:100px;"
+#             "position:absolute;"
+#         ),
+#         lat=1.3786539,
+#         lng=103.8493234,
+#         markers=[
+#             {
+#                 'lat':  1.372121,
+#                 'lng':  103.846678,
+#                 'infobox': (
+#                     "<h3>Ang Mo Kio Market & Food Centre</h3>"
+#                     "<p>Address: 724 Ang Mo Kio Ave 6, Singapore 560724</p>"
+#                     "<p>Hours: 7AM–9PM</p>"
+#                     "<p>Phone: 6225 5632</p>"
+#                     "<img src='//placehold.it/50'>")
+#             },
+#             {
+#                 'lat': 1.380936,
+#                 'lng': 103.840664,
+#                 'infobox': (
+#                     "<h3>Ang Mo Kio 628 Market</h3>"
+#                     "<p>Address: 724 Ang Mo Kio Ave 6, Singapore 560724</p>"
+#                     "<p>Hours: Wednesday\t6:30AM–1:30PM</p>"
+#                     "<p>Thursday\t6:30AM–1:30PM</p>"
+#                     "<p>Friday\t6:30AM–1:30PM</p>"
+#                     "<p>Saturday\t6:30AM–1:30PM</p>"
+#                     "<p>Sunday\t6:30AM–1:30PM</p>"
+#                     "<p>Monday\tClosed</p>"
+#                     "<p>Tuesday\t6:30AM–1:30PM</p>"
+#                     "<p>Phone: 9067 5142</p>"
+#                     "<img src='//placehold.it/50'>"
+#                 )
+#             }
+#         ]
+#     )
+#     return render_template('location.html', map=map)
+# @app.route('/findgps')
+# def findgps():
+#     return render_template('findgps.html')
+# @app.route('/gps')
+# def gps():
+#     return render_template('gps.html')
 
+@app.route('/data')
+def data():
+    list =[]
+    data = firebase.FirebaseApplication("https://jsmap-a2929.firebaseio.com/")
+    firebaseData = data.get('location', None)
+    list.append(firebaseData)
+
+    # for key in firebaseData:
+    #     data = firebaseData[key]
+    #     list.append(data)
+
+    json_string = json.dumps(list)
+    return render_template('data.html' , s_data = json_string)
 
 @app.route('/', methods=['POST', 'GET'])
 def home():
@@ -178,7 +198,7 @@ def home():
 
 @app.route('/chat')
 def hello():
-  return render_template( '/chat.html' )
+  return render_template( '/chat.html', currentUser=session['username'])
 
 
 def messagereceived():
