@@ -93,7 +93,40 @@ class Feedbacks(Form):
     comments = TextAreaField('Comments')
     ratings = SelectField(u'Ratings of the restaurants (higher score means better rating)',choices=[('1','1'),('2','2'),('3','3'),('4','4'),('5','5')])
 
-<<<<<<< HEAD
+class Sort(Form):
+    sort = SelectField(u'Sort By:',
+                          choices=[('Alphabetical Order', 'Alphabetical Order'), ('Lowest Price', 'Lowest Price'), ('Ratings (Higest to Lowest)', 'Ratings (Higest to Lowest)')])
+
+
+
+class EventForm(Form):
+    eventName = StringField('Event Name',[validators.DataRequired()])
+    eventDescription = TextAreaField('Desciption')
+    eventLocation = SelectField(u'Location', choices=[('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),('Central','Central')])
+    eventAddress = TextAreaField('Place where your event is held')
+    ticket = IntegerField('Entry Fee', [validators.DataRequired()])
+    startDate = DateTimeField('Start date (e.g.2018-01-12)*', format='%Y-%m-%d')
+    endDate = DateTimeField('End date (e.g.2018-01-12)*', format='%Y-%m-%d')
+    startTime = SelectField(u'Start Time(Hr)*',
+                           choices=[('12 AM', '12 AM'),('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'), ('4 AM', '4 AM'),
+                                    ('5 AM', '5 AM'), ('6 AM', '6 AM'), ('7 AM', '7 AM'), ('8 AM', '8 AM'),
+                                    ('9 AM', '9 AM'), ('10 AM', '10 AM'), ('11 AM', '11 AM'), ('12 PM', '12 PM'),
+                                    ('1 PM', '1 PM'),('2 PM', '2 PM'),('3 PM', '3 PM'),('4 PM', '4 PM'),('5 PM', '5 PM'),('6 PM', '6 PM'),('7 PM', '7 PM'),
+                                    ('8 PM', '8 PM'),('9 PM', '9 PM'),('10 PM', '10 PM'),('11 PM', '11 PM')])
+    endTime =  SelectField(u'Start Time(Hr)*',
+                           choices=[('12 AM', '12 AM'),('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'), ('4 AM', '4 AM'),
+                                    ('5 AM', '5 AM'), ('6 AM', '6 AM'), ('7 AM', '7 AM'), ('8 AM', '8 AM'),
+                                    ('9 AM', '9 AM'), ('10 AM', '10 AM'), ('11 AM', '11 AM'), ('12 PM', '12 PM'),
+                                    ('1 PM', '1 PM'),('2 PM', '2 PM'),('3 PM', '3 PM'),('4 PM', '4 PM'),('5 PM', '5 PM'),('6 PM', '6 PM'),('7 PM', '7 PM'),
+                                    ('8 PM', '8 PM'),('9 PM', '9 PM'),('10 PM', '10 PM'),('11 PM', '11 PM')])
+    startTimeMin = SelectField(u'Start Time(Min)*',
+                            choices= [('00', '00'), ('05', '05'), ('10', '10'), ('15', '15'), ('20', '20'), ('25', '25'), ('30', '30'), ('35', '35'),
+                                      ('40', '40'), ('45', '45'), ('50', '50'), ('55','55')])
+    endTimeMin = SelectField(u'End Time(Min)*',
+                            choices= [('00', '00'), ('05', '05'), ('10', '10'), ('15', '15'), ('20', '20'), ('25', '25'), ('30', '30'), ('35', '35'),
+                                      ('40', '40'), ('45', '45'), ('50', '50'), ('55','55')])
+    people = 0
+
 # @app.route("/location")
 # def mapview():
 #     map = Map(
@@ -137,100 +170,7 @@ class Feedbacks(Form):
 #         ]
 #     )
 #     return render_template('location.html', map=map)
-# @app.route('/findgps')
-# def findgps():
-#     return render_template('findgps.html')
-# @app.route('/gps')
-# def gps():
-#     return render_template('gps.html')
 
-@app.route('/data')
-def data():
-    list =[]
-    data = firebase.FirebaseApplication("https://jsmap-a2929.firebaseio.com/")
-    firebaseData = data.get('location', None)
-    list.append(firebaseData)
-
-    # for key in firebaseData:
-    #     data = firebaseData[key]
-    #     list.append(data)
-
-    json_string = json.dumps(list)
-    return render_template('data.html' , s_data = json_string)
-=======
-class EventForm(Form):
-    eventName = StringField('Event Name',[validators.DataRequired()])
-    eventDescription = TextAreaField('Desciption')
-    eventLocation = SelectField(u'Location', choices=[('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),('Central','Central')])
-    eventAddress = TextAreaField('Place where your event is held')
-    ticket = IntegerField('Entry Fee', [validators.DataRequired()])
-    startDate = DateTimeField('Start date (e.g.2018-01-12)*', format='%Y-%m-%d')
-    endDate = DateTimeField('End date (e.g.2018-01-12)*', format='%Y-%m-%d')
-    startTime = SelectField(u'Start Time(Hr)*',
-                           choices=[('12 AM', '12 AM'),('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'), ('4 AM', '4 AM'),
-                                    ('5 AM', '5 AM'), ('6 AM', '6 AM'), ('7 AM', '7 AM'), ('8 AM', '8 AM'),
-                                    ('9 AM', '9 AM'), ('10 AM', '10 AM'), ('11 AM', '11 AM'), ('12 PM', '12 PM'),
-                                    ('1 PM', '1 PM'),('2 PM', '2 PM'),('3 PM', '3 PM'),('4 PM', '4 PM'),('5 PM', '5 PM'),('6 PM', '6 PM'),('7 PM', '7 PM'),
-                                    ('8 PM', '8 PM'),('9 PM', '9 PM'),('10 PM', '10 PM'),('11 PM', '11 PM')])
-    endTime =  SelectField(u'Start Time(Hr)*',
-                           choices=[('12 AM', '12 AM'),('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'), ('4 AM', '4 AM'),
-                                    ('5 AM', '5 AM'), ('6 AM', '6 AM'), ('7 AM', '7 AM'), ('8 AM', '8 AM'),
-                                    ('9 AM', '9 AM'), ('10 AM', '10 AM'), ('11 AM', '11 AM'), ('12 PM', '12 PM'),
-                                    ('1 PM', '1 PM'),('2 PM', '2 PM'),('3 PM', '3 PM'),('4 PM', '4 PM'),('5 PM', '5 PM'),('6 PM', '6 PM'),('7 PM', '7 PM'),
-                                    ('8 PM', '8 PM'),('9 PM', '9 PM'),('10 PM', '10 PM'),('11 PM', '11 PM')])
-    startTimeMin = SelectField(u'Start Time(Min)*',
-                            choices= [('00', '00'), ('05', '05'), ('10', '10'), ('15', '15'), ('20', '20'), ('25', '25'), ('30', '30'), ('35', '35'),
-                                      ('40', '40'), ('45', '45'), ('50', '50'), ('55','55')])
-    endTimeMin = SelectField(u'End Time(Min)*',
-                            choices= [('00', '00'), ('05', '05'), ('10', '10'), ('15', '15'), ('20', '20'), ('25', '25'), ('30', '30'), ('35', '35'),
-                                      ('40', '40'), ('45', '45'), ('50', '50'), ('55','55')])
-    people = 0
-
-@app.route("/location")
-def mapview():
-    map = Map(
-        identifier="map",
-        style=(
-            "height:50%;"
-            "width:100%;"
-            "top:100px;"
-            "position:absolute;"
-        ),
-        lat=1.3786539,
-        lng=103.8493234,
-        markers=[
-            {
-                'lat':  1.372121,
-                'lng':  103.846678,
-                'infobox': (
-                    "<h3>Ang Mo Kio Market & Food Centre</h3>"
-                    "<p>Address: 724 Ang Mo Kio Ave 6, Singapore 560724</p>"
-                    "<p>Hours: 7AM–9PM</p>"
-                    "<p>Phone: 6225 5632</p>"
-                    "<img src='//placehold.it/50'>")
-            },
-            {
-                'lat': 1.380936,
-                'lng': 103.840664,
-                'infobox': (
-                    "<h3>Ang Mo Kio 628 Market</h3>"
-                    "<p>Address: 724 Ang Mo Kio Ave 6, Singapore 560724</p>"
-                    "<p>Hours: Wednesday\t6:30AM–1:30PM</p>"
-                    "<p>Thursday\t6:30AM–1:30PM</p>"
-                    "<p>Friday\t6:30AM–1:30PM</p>"
-                    "<p>Saturday\t6:30AM–1:30PM</p>"
-                    "<p>Sunday\t6:30AM–1:30PM</p>"
-                    "<p>Monday\tClosed</p>"
-                    "<p>Tuesday\t6:30AM–1:30PM</p>"
-                    "<p>Phone: 9067 5142</p>"
-                    "<img src='//placehold.it/50'>"
-                )
-            }
-        ]
-    )
-    return render_template('location.html', map=map)
-
->>>>>>> 8f1753c466277423870f108d5ff2c78592eba28f
 
 @app.route('/', methods=['POST', 'GET'])
 def home():
@@ -279,15 +219,12 @@ def home():
 
 @app.route('/chat')
 def hello():
-<<<<<<< HEAD
-  return render_template( '/chat.html', currentUser=session['username'])
-=======
     try:
         proPic = session['proPic']
     except KeyError:
         proPic = ''
     return render_template( '/chat.html' ,proPic=proPic)
->>>>>>> 8f1753c466277423870f108d5ff2c78592eba28f
+
 
 
 def messagereceived():
@@ -396,6 +333,21 @@ def uploadtest():
     return render_template('uploadtest.html')
 
 
+@app.route('/data')
+def data():
+    list =[]
+    data = firebase.FirebaseApplication("https://jsmap-a2929.firebaseio.com/")
+    firebaseData = data.get('location', None)
+    list.append(firebaseData)
+
+    # for key in firebaseData:
+    #     data = firebaseData[key]
+    #     list.append(data)
+
+    json_string = json.dumps(list)
+    return render_template('data.html' , s_data = json_string)
+
+
 @app.route('/viewRest',methods=['POST','GET'])
 def view():
     try:
@@ -406,30 +358,40 @@ def view():
     allItemg = allItemr.get()
     list = session['filtered']
 
-    for key in list:
-        totalRatings = 0
-        for key2 in allItemg:
-            if key['Name'] == key2:
-                for key3 in allItemg[key2]:
-                    totalRatings = totalRatings + int(allItemg[key2][key3])
-                avgRatings = round(totalRatings / len(allItemg[key2]),1)
-                numRaters = len(allItemg[key2])
-                key['Average Rating'] = avgRatings
-                key['Number of Raters'] = numRaters
-                allRestr = root.child('restaurants/'+key['Name'])
-                allRestr.update({
-                    'Average Rating':avgRatings,
-                    'Number of Raters':numRaters
-                })
-
-
-
-
-
     listLen = len(list)
     print(list)
 
-    return render_template('viewRest.html', Restaurant=list, lengthList = listLen,proPic=proPic)
+    form = Sort(request.form)
+    if request.method == 'POST':
+        sort = form.sort.data
+        if sort == 'Alphabetical Order':
+            allAlpha =[]
+            for key in list:
+                allAlpha.append(list[key]['Name'])
+            sorted(allAlpha)
+            newList = []
+            for i in range(len(list)):
+                for key in list:
+                    if list[key]['Name'] == allAlpha[i]:
+                        newList.append(list[key][allAlpha[i]])
+            list = newList
+
+        elif sort == 'Lowest Price':
+            allPrice = {}
+            for key in list:
+                allPrice[(list[key]['Price'])] = list[key]['Name']
+
+            newList = sorted(allPrice.items(), key=lambda t: t[0])
+            newList2 = []
+            for i in range(len(list)):
+                for key in list:
+                    pass
+
+        elif sort == 'Ratings':
+            pass
+        elif sort == 'Ratings (Higest to Lowest)':
+            pass
+    return render_template('viewRest.html', Restaurant=list, lengthList = listLen,proPic=proPic,form=form)
 
 
 @app.route('/addRest',methods=['POST','GET'])
@@ -437,8 +399,10 @@ def addRest():
 
     try:
         proPic = session['proPic']
+        user = session['username']
     except KeyError:
         proPic =''
+        user = ''
     form = RestForm(request.form)
     if request.method == 'POST' :     # need to fix validation
         print('ok')
@@ -461,9 +425,7 @@ def addRest():
                     return redirect(url_for('addRest'))
         except:
             pass
-        try:
-            user = session['username']
-        except:
+        if user == '':
             flash('You must be logged in to recommend a Restaurant')
             return redirect(url_for('addRest'))
         restFireu = root.child('restaurants/'+name)
@@ -476,11 +438,24 @@ def addRest():
             'Opening Hours': res.get_openH(),
             'Closing Hours': res.get_closingH(),
             'Address': res.get_address(),
-            'User':session['username']
+            'User':session['username'],
+            'Average Rating':0,
+            'Number of Raters':0
         })
         flash('You have added a new Restaurant!')
+        # theBreak = False
+        # while theBreak != True:
+        #     allPicr = root.child('restPic')
+        #     allPicg = allPicr.get()
+        #     for key in allPicg:
+        #         if allPicg[key]['rest'] == 'placeholder':
+        #             rightUser = root.child('restPic/' + key)
+        #             rightUser.update({
+        #                 'rest': res.get_name()
+        #             })
+        #             theBreak = True
         return redirect(url_for('home'))
-    return render_template('addRest.html', form=form,proPic=proPic)
+    return render_template('addRest.html', form=form,proPic=proPic,user=user)
 
 
 @app.route('/userRegister',methods=['POST','GET'])
@@ -659,6 +634,8 @@ def restPage(restName):
         allComments = []
         allUsers = []
         allCommr = root.child('allComments')
+        allPicr = root.child('userPic')
+        allPicg = allPicr.get()
         allCommg = allCommr.get()
         for key in allCommg:
             if key == restName:
@@ -668,6 +645,13 @@ def restPage(restName):
                     else:
                         allUsers.insert(0,allCommg[key][i])
                     counter = counter +1
+
+        allPic = []
+        for i in range(len(allUsers)):
+            for key in allPicg:
+                if allUsers[i] == allPicg[key]['user']:
+                   allPic.append(allPicg[key]['urlProfile'])
+
 
         allRatings =[]
         allRatr = root.child('allRatings')
@@ -680,6 +664,7 @@ def restPage(restName):
         allComments = []
         allUsers = []
         allRatings = []
+        allPic = []
 
 
 
@@ -738,6 +723,12 @@ def restPage(restName):
                                 allUsers.insert(0,allCommg[key][i])
                             counter = counter + 1
 
+                allPic = []
+                for i in range(len(allUsers)):
+                    for key in allPicg:
+                        if allUsers[i] == allPicg[key]['user']:
+                            allPic.append(allPicg[key]['urlProfile'])
+
                 allRatings = []
                 allRatr = root.child('allRatings')
                 allRatg = allRatr.get()
@@ -749,16 +740,17 @@ def restPage(restName):
                 allComments = []
                 allUsers = []
                 allRatings = []
+                allPic = []
 
 
 
             return render_template('restDet.html', restDetail=restDetail, form=form, comments=allComments, users=allUsers,
-                                   ratings=allRatings, proPic=proPic)
+                                   ratings=allRatings, proPic=proPic, pic=allPic)
         except:
             flash('You must login to be able to comment or rate restaurants')
-            return render_template('restDet.html',restDetail = restDetail, form=form,comments=allComments,users=allUsers,ratings=allRatings,proPic=proPic)
+            return render_template('restDet.html',restDetail = restDetail, form=form,comments=allComments,users=allUsers,ratings=allRatings,proPic=proPic, pic=allPic)
 
-    return render_template('restDet.html',restDetail = restDetail, form=form,comments=allComments,users=allUsers,ratings=allRatings,proPic=proPic)
+    return render_template('restDet.html',restDetail = restDetail, form=form,comments=allComments,users=allUsers,ratings=allRatings,proPic=proPic, pic=allPic)
 
 
 
@@ -850,8 +842,14 @@ def userProfile():
     for key in totalUsers:
         if totalUsers[key]['Username'] == session['username']:
             theUser = totalUsers[key]
+    allRestr = root.child('restaurants')
+    allRestg = allRestr.get()
+    allEdit = []
+    for key in allRestg:
+        if allRestg[key]['User'] == theUser:
+            allEdit.append(allRestg[key])
 
-    return render_template('userProfile.html' , user = theUser, proPic = session['proPic'])
+    return render_template('userProfile.html' , user = theUser, proPic = session['proPic'],allEdit=allEdit)
 
 
 @app.route('/events', methods=['POST','GET'])
