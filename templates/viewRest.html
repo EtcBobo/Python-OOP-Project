@@ -1,6 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block body %}
+        {% from "includes/_formhelper.html" import render_field %}
   <div class="container" id="filterdiv">
          <br>
         <br>
@@ -9,18 +10,19 @@
     <br/>
     <p>{{ lengthList }} results</p>
 
+<form method="post">
+    <div class="row">
+    <div class="form-group col-md-2">
+        {{ render_field(form.sort, class_="form-control") }}
+    </div>
+        <div class="form-group col-md-2">
 
-    <div id="sort">
-        <span>Sort By:</span>
-        <td><select name="product" id="product" width="300" style="width: 300px">
-      <option id="az" onclick="{{ alphalist }}">Alphabetical Order(A~Z)</option>
-      <option id="za">Alphabetical Order(Z~A)</option>
-      <option id="low">Low to High</option>
-            <option id="high">High to Low</option>
-            <option id="ratelow">Ratings(Low to High)</option>
-            <option id="ratehigh">Ratings(High to Low)</option>
+            <button type="submit" >Sort</button>
 
-    </select></td>
+        </div>
+        </div>
+</form>
+
 
     <br>
     <br>

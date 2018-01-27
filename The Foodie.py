@@ -353,12 +353,9 @@ def view():
         proPic = session['proPic']
     except KeyError:
         proPic =''
-    allItemr = root.child('allRatings')
-    allItemg = allItemr.get()
     list = session['filtered']
-
     listLen = len(list)
-    print(list)
+
 
     form = Sort(request.form)
     if request.method == 'POST':
@@ -366,30 +363,41 @@ def view():
         if sort == 'Alphabetical Order':
             allAlpha =[]
             for key in list:
-                allAlpha.append(list[key]['Name'])
-            sorted(allAlpha)
+                allAlpha.append(key['Name'])
+            allAlpha = sorted(allAlpha)
             newList = []
             for i in range(len(list)):
                 for key in list:
-                    if list[key]['Name'] == allAlpha[i]:
-                        newList.append(list[key][allAlpha[i]])
+                    if key['Name'] == allAlpha[i]:
+                        newList.append(key)
             list = newList
 
         elif sort == 'Lowest Price':
             allPrice = {}
             for key in list:
-                allPrice[(list[key]['Price'])] = list[key]['Name']
+                allPrice[key['Name']] = key['Price']
 
-            newList = sorted(allPrice.items(), key=lambda t: t[0])
+            newList = [(k, allPrice[k]) for k in sorted(allPrice, key=allPrice.get)]
             newList2 = []
-            for i in range(len(list)):
-                for key in list:
-                    pass
-
-        elif sort == 'Ratings':
-            pass
+            for key in newList:
+                for key2 in list:
+                    if key[0] == key2['Name']:
+                        newList2.append(key2)
+            list = newList2
         elif sort == 'Ratings (Higest to Lowest)':
-            pass
+            allRat = {}
+            for key in list:
+                allRat[key['Name']] = key['Average Rating']
+
+            newList = [(k, allRat[k]) for k in sorted(allRat, key=allRat.get)]
+            newList2 = []
+            for key in newList:
+                for key2 in list:
+                    if key[0] == key2['Name']:
+                        newList2.append(key2)
+            list = newList2
+
+        return render_template('viewRest.html', Restaurant=list, lengthList=listLen, proPic=proPic, form=form)
     return render_template('viewRest.html', Restaurant=list, lengthList = listLen,proPic=proPic,form=form)
 
 
