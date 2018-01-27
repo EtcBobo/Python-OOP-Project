@@ -33,11 +33,14 @@
          <img id="detailimg" class="img-responsive" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVoweWwEb_UQKtBhQfwA78S2QXub1JHoyCox-rj8B3gnOC9M5_aQ">
     <br>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-8">
        <br>
 
      <h1 id="restnames"><a href="/restDet/{{ i['Name'] }}">{{ i['Name'] }}</a></h1>
         <p id="description"> {{ i['Description'] }} </p>
+         <div class="col-md-4" id="avg">
+        <span>Avg ratings: 3.7/5</span>
+    </div>
     </div>
 </div>
             <hr>
@@ -129,6 +132,10 @@ hr{
     width:1000px;
     margin-bottom: 20px;
     padding-bottom: 3px;
+}
+
+#avg {
+    float:right;
 }
 </style>
 

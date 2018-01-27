@@ -97,7 +97,7 @@ class EventForm(Form):
     eventDescription = TextAreaField('Desciption')
     eventLocation = SelectField(u'Location', choices=[('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),('Central','Central')])
     eventAddress = TextAreaField('Place where your event is held')
-    ticket = IntegerField('Entry Fee', [validators.DataRequired()])
+    ticket = IntegerField('Entry Fee')
     startDate = DateTimeField('Start date (e.g.2018-01-12)*', format='%Y-%m-%d')
     endDate = DateTimeField('End date (e.g.2018-01-12)*', format='%Y-%m-%d')
     startTime = SelectField(u'Start Time(Hr)*',
@@ -634,10 +634,12 @@ def restPage(restName):
                     if key == restName:
                         for co in allRatg[key]:
                             allRatings.insert(0,int(allRatg[key][co]))
+
             except:
                 allComments = []
                 allUsers = []
                 allRatings = []
+
 
 
 
@@ -765,6 +767,11 @@ def events():
 
         event = Events(eventName, eventDescription, eventLocation, eventAddress, startDate,endDate, startTime, endTime, startTimeMin, endTimeMin, ticket, event)
         eventFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
+        allevents = root.reference('events')
+        for key in allevents:
+            if eventName == key:
+                flash('This restaurant already exist')
+                return redirect(url_for('addRest'))
         eventFire.put('events', eventName,{
             'Name': event.get_eventName(),
             'Description': event.get_eventDescription(),
@@ -779,19 +786,19 @@ def events():
             'ticket': event.get_ticket(),
             'people': 0
         })
-        # for key in totalevent:
-        #     if totalevent[key]['']
         flash('You have added a new event!')
         return redirect(url_for('home'))
-    return render_template('events.html', form=form)
 
-@app.route('/events')
-def event():
-    try:
-        proPic = session['proPic']
-    except KeyError:
-        proPic =''
-    return render_template('events.html',proPic=proPic)
+
+    return render_template('events.html', form=form )
+
+# @app.route('/events')
+# def event():
+#     try:
+#         proPic = session['proPic']
+#     except KeyError:
+#         proPic =''
+#     return render_template('events.html',proPic=proPic)
 
 
 if __name__ == '__main__':
