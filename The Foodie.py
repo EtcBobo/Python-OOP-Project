@@ -46,7 +46,7 @@ class RegisterForm(Form):
     user = StringField('Username',[validators.DataRequired()])
     password = PasswordField("Password",[validators.DataRequired()])
     passwordC = PasswordField("Confirm Password",[validators.DataRequired()])
-    price = StringField('Preferred Price Range')
+    price = IntegerField('Preferred Price Range')
     foodType = SelectField(u'Preferred Food Type',
                            choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'), ('Western Food', 'Western Food'),
                                     ('Chinese Food', 'Chinese Food'), ('Healthy Food', 'Healthy Food'),
@@ -63,7 +63,7 @@ class RestForm(Form):
                            choices=[('Any','Any'),('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),
                                     ('Central', 'Central')])
 
-    price = StringField('Average Price',[validators.DataRequired()])
+    price = SelectField(u'Price Range',choices=[(80,80),('1','1'),('2','2'),('3','3'),('4','4'),('5','5'),('6','6'),('7','7'),('8','8'),('9','9'),('10','10'),('11','11'),('12','12'),('13','13'),('14','14'),('15','15'),('16','16')])
     foodType = SelectField(u'Food Types',
                            choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'), ('Western Food', 'Western Food'),
                                     ('Chinese Food', 'Chinese Food'), ('Healthy Food', 'Healthy Food'),
@@ -212,7 +212,11 @@ def home():
 
 @app.route('/chat')
 def hello():
-  return render_template( '/chat.html' )
+    try:
+        proPic = session['proPic']
+    except KeyError:
+        proPic = ''
+    return render_template( '/chat.html' ,proPic=proPic)
 
 
 def messagereceived():
@@ -232,6 +236,10 @@ class theSearch(Form):
 
 @app.route('/filter',methods=['POST','GET'])
 def filter():
+    try:
+        proPic = session['proPic']
+    except KeyError:
+        proPic =''
     filterList = []
     form = RestForm(request.form)
     if request.method == 'POST':
@@ -309,7 +317,7 @@ def filter():
         session['filtered'] = filterList
         print(session['filtered'])
         return redirect(url_for('view'))
-    return render_template('filter.html', form=form)
+    return render_template('filter.html', form=form,proPic=proPic)
 
 
 @app.route('/uploadtest',methods=['POST','GET'])
@@ -319,18 +327,27 @@ def uploadtest():
 
 @app.route('/viewRest',methods=['POST','GET'])
 def view():
-
+    try:
+        proPic = session['proPic']
+    except KeyError:
+        proPic =''
     list = session['filtered']
     listLen = len(list)
     print(list)
 
-    return render_template('viewRest.html', Restaurant=list, lengthList = listLen)
+    return render_template('viewRest.html', Restaurant=list, lengthList = listLen,proPic=proPic)
 
 
 @app.route('/addRest',methods=['POST','GET'])
 def addRest():
+
+    try:
+        proPic = session['proPic']
+    except KeyError:
+        proPic =''
     form = RestForm(request.form)
-    if request.method == 'POST' and form.validate():
+    if request.method == 'POST' :     # need to fix validation
+        print('ok')
         name = form.name.data
         desc = form.desc.data
         location = form.location.data
@@ -339,20 +356,25 @@ def addRest():
         openH = form.openH.data
         closingH = form.closingH.data
         address = form.address.data
-        if price == '':
-            flash('Please enter an average price for the restaurant')
-            return redirect(url_for('addRest'))
 
         res = Restaurant(name,desc,location,price,foodType,openH,closingH,address)
 
-        restFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
+        restFiren = root.child('restaurants')
         try:
-            totalRest = restFire.get('restaurants', None)
-            count = len(totalRest)
-        except TypeError:
-            count = 0
-        restFire.put('restaurants', 'rest' + str(count), {
-            'Name': res.get_name(),
+            for key in restFiren:
+                if name == key:
+                    flash('This restaurant already exist')
+                    return redirect(url_for('addRest'))
+        except:
+            pass
+        try:
+            user = session['username']
+        except:
+            flash('You must be logged in to recommend a Restaurant')
+            return redirect(url_for('addRest'))
+        restFireu = root.child('restaurants/'+name)
+        restFireu.update({
+            'Name':res.get_name(),
             'Description': res.get_description(),
             'Location': res.get_location(),
             'Price': res.get_price(),
@@ -360,16 +382,19 @@ def addRest():
             'Opening Hours': res.get_openH(),
             'Closing Hours': res.get_closingH(),
             'Address': res.get_address(),
-
-
+            'User':session['username']
         })
         flash('You have added a new Restaurant!')
         return redirect(url_for('home'))
-    return render_template('addRest.html', form=form)
+    return render_template('addRest.html', form=form,proPic=proPic)
 
 
 @app.route('/userRegister',methods=['POST','GET'])
 def userRegister():
+    try:
+        proPic = session['proPic']
+    except KeyError:
+        proPic =''
 
     form = RegisterForm(request.form)
     if request.method == 'POST' and form.validate():
@@ -458,11 +483,15 @@ def userRegister():
                     })
                     theBreak = True
         return redirect(url_for('home'))
-    return render_template('userRegister.html', form=form)
+    return render_template('userRegister.html', form=form,proPic=proPic)
 
 
 @app.route('/userLogin',methods=['POST','GET'])
 def userLogin():
+    try:
+        proPic = session['proPic']
+    except KeyError:
+        proPic =''
     logCheck = False
     form = RegisterForm(request.form)
     if request.method == 'POST':
@@ -488,7 +517,7 @@ def userLogin():
             flash('Invalid Username or Password')
             session['logged_in'] = False
 
-    return render_template('userLogin.html', form=form)
+    return render_template('userLogin.html', form=form,proPic=proPic)
 
 @app.route('/heatmap')
 def heatmap():
@@ -518,68 +547,116 @@ def heatmap():
 
 @app.route('/restDet/<restName>',methods=['POST','GET'])
 def restPage(restName):
+    try:
+        proPic = session['proPic']
+    except KeyError:
+        proPic =''
     restName = restName
     form = Feedbacks(request.form)
-    restFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
-    totalRest = restFire.get('restaurants', None)
-    for key in totalRest:
-        if restName == totalRest[key]['Name']:
-            restDetail = totalRest[key]
-    feedback = restFire.get(restName, None)
-    newFeed = []
-    try:
-        for key in range(int(len(feedback) / 3)):
-            newFeed.append({'User': feedback['UserNo' + str(key)]['User'],
-                            'Comment': feedback['CommentNo' + str(key)]['Comment'],
-                             'Rating': int(feedback['RatingNo' + str(key)]['Rating'])})
 
-    except TypeError:
-        pass
+    allRestr = root.child('restaurants/'+restName)
+    print('all',allRestr.get())
+    restDetail = allRestr.get()
+
+
+    """load all comments and ratings, and put all comments into a list"""
+    try:
+        counter = 0
+        allComments = []
+        allUsers = []
+        allCommr = root.child('allComments')
+        allCommg = allCommr.get()
+        for key in allCommg:
+            if key == restName:
+                for i in allCommg[key]:
+                    if counter < int(len(allCommg[key])/2):
+                        allComments.insert(0,allCommg[key][i])
+                    else:
+                        allUsers.insert(0,allCommg[key][i])
+                    counter = counter +1
+
+        allRatings =[]
+        allRatr = root.child('allRatings')
+        allRatg = allRatr.get()
+        for key in allRatg:
+            if key == restName:
+                for co in allRatg[key]:
+                    allRatings.insert(0,int(allRatg[key][co]))
+    except:
+        allComments = []
+        allUsers = []
+        allRatings = []
 
 
     if request.method == 'POST':
-        comments = form.comments.data
-        ratings = form.ratings.data
         try:
+            comments = form.comments.data
+            ratings = form.ratings.data
             try:
-                totalCom = restFire.get(restName,None)
-                count = int(len(totalCom) / 3)
-            except TypeError:
-                count = 0
-            restFire.put(restName,'CommentNo'+str(count),{
-                'Comment': comments
+                pushCommr = root.child('allComments/'+restName)
+                pushCommg = pushCommr.get()
+                theIndex = int(len(pushCommg)/2)
+            except:
+                pushCommr = root.child('allComments/'+restName)
+                theIndex = 0
+            pushCommr.update({
+                'comment'+str(theIndex):comments,
+                'user'+str(theIndex):session['username']
             })
-            restFire.put(restName,'RatingNo'+str(count), {
-                'Rating': ratings
+            pushRatr = root.child('allRatings/'+restName)
+            pushRatr.update({
+                'rating'+str(theIndex):ratings
             })
-            restFire.put(restName,'UserNo'+str(count) ,{
-                'User': session['username']
-            })
-            restFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
-            totalRest = restFire.get('restaurants', None)
-            for key in totalRest:
-                if restName == totalRest[key]['Name']:
-                    restDetail = totalRest[key]
-            feedback = restFire.get(restName, None)
-            newFeed = []
-            try:
-                for key in range(int(len(feedback) / 3)):
-                    newFeed.append({'User': feedback['UserNo' + str(key)]['User'],
-                                    'Comment': feedback['CommentNo' + str(key)]['Comment'],
-                                    'Rating': int(feedback['RatingNo' + str(key)]['Rating'])})
 
-            except TypeError:
-                pass
-            return render_template('restDet.html', restDetail=restDetail, form=form, feedback=newFeed)
-        except KeyError:
+            allRestr = root.child('restaurants/' + restName)
+            print('all', allRestr.get())
+            restDetail = allRestr.get()
+
+            try:
+                counter = 0
+                allComments = []
+                allUsers = []
+                allCommr = root.child('allComments')
+                allCommg = allCommr.get()
+                for key in allCommg:
+                    if key == restName:
+                        for i in allCommg[key]:
+                            if counter < int(len(allCommg[key]) / 2):
+                                allComments.insert(0,allCommg[key][i])
+                            else:
+                                allUsers.insert(0,allCommg[key][i])
+                            counter = counter + 1
+
+                allRatings = []
+                allRatr = root.child('allRatings')
+                allRatg = allRatr.get()
+                for key in allRatg:
+                    if key == restName:
+                        for co in allRatg[key]:
+                            allRatings.insert(0,int(allRatg[key][co]))
+            except:
+                allComments = []
+                allUsers = []
+                allRatings = []
+
+
+
+            return render_template('restDet.html', restDetail=restDetail, form=form, comments=allComments, users=allUsers,
+                                   ratings=allRatings, proPic=proPic)
+        except:
             flash('You must login to be able to comment or rate restaurants')
-            return render_template('restDet.html', restDetail=restDetail, form=form, feedback=newFeed)
-    return render_template('restDet.html',restDetail = restDetail, form=form,feedback=newFeed)
+            return render_template('restDet.html',restDetail = restDetail, form=form,comments=allComments,users=allUsers,ratings=allRatings,proPic=proPic)
+
+    return render_template('restDet.html',restDetail = restDetail, form=form,comments=allComments,users=allUsers,ratings=allRatings,proPic=proPic)
 
 
 
 @app.route('/userEdit',methods=['POST','GET'])
 def userEdit():
+    try:
+        proPic = session['proPic']
+    except KeyError:
+        session['proPic'] =''
     class UserEdit(Form):
         password = PasswordField("Password", [validators.DataRequired()])
         passwordC = PasswordField("Confirm Password", [validators.DataRequired()])
@@ -653,6 +730,10 @@ def logout():
 
 @app.route('/userProfile')
 def userProfile():
+    try:
+        proPic = session['proPic']
+    except KeyError:
+        session['proPic'] =''
     userFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
     totalUsers = userFire.get('allUsers', None)
     for key in totalUsers:
@@ -660,6 +741,7 @@ def userProfile():
             theUser = totalUsers[key]
 
     return render_template('userProfile.html' , user = theUser, proPic = session['proPic'])
+
 
 @app.route('/events', methods=['POST','GET'])
 def events():
@@ -703,19 +785,16 @@ def events():
         return redirect(url_for('home'))
     return render_template('events.html', form=form)
 
+@app.route('/events')
+def event():
+    try:
+        proPic = session['proPic']
+    except KeyError:
+        proPic =''
+    return render_template('events.html',proPic=proPic)
+
+
 if __name__ == '__main__':
     socketio.run(app, debug=True)
 
- # for key in totalRest:
- #            if totalRest[key]['Opening Hours'] == '12 PM':
- #                openH = 12
- #            elif totalRest[key]['Opening Hours'] == '12 AM':
- #                openH = 0
- #            elif totalRest[key]['Opening Hours'][-2:] == 'PM':
- #                openH = int(totalRest[key]['Opening Hours'][0:2]) + 12
- #            else:
- #                openH = int(totalRest[key]['Opening Hours'][0:2])
- #
- #            if totalRest[key]['Closing Hours'] == '12 PM':
- #                closingH = 12
- #            elif totalRest[key]['Closing Hours'] == '12 AM':
+

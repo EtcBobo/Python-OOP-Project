@@ -17,20 +17,48 @@ default_app = firebase_admin.initialize_app(cred, {
 root = db.reference()
 
 
-some = input('start')
+theId = 'Candy Land'
+count = 0
+rest=root.child('allComments/'+theId)
 
-onlineDriver=root.child('forTesting')
-onlineDriver.update({
-'test': '123',
-    'another':'345'
+rest.update({
+    'comment'+str(count):'my first comment',
+    'user'+str(count):3
 })
 
-somef = input('del')
-userFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
-result = userFire.delete('forTesting','test')
+# rest = root.child('allComments')
+# allRest = rest.get()
+# for key in allRest:
+#     if allRest[key]['Name'] == 'Mac':
+#         theId = key
+# print(theId)
 
-while True:
-    count = input('s')
-    if count == 'a':
-        break
-print('ok')
+
+# for key in allRest:
+#     if rest[key]['Name'] == 'Mac':
+#         answ = key
+# onlineDriver.update({
+# 'test': '123',
+#
+# })
+
+
+
+restFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
+test = restFire.get('restaurants', None)
+
+
+# result = userFire.delete('forTesting','test')
+
+# oddNum = 0
+# allComments = []
+# allRestr = root.child('allComments')
+# allRestg = allRestr.get()
+# for key in allRestg:
+#     if key == 'Mac':
+#         for co in allRestg[key]:
+#             oddNum = oddNum + 1
+#             if oddNum % 2 == 1:
+#                 allComments.append(allRestg[key][co])
+#
+# print(allComments)
