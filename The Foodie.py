@@ -105,8 +105,8 @@ class EventForm(Form):
     eventLocation = SelectField(u'Location', choices=[('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),('Central','Central')])
     eventAddress = TextAreaField('Place where your event is held')
     ticket = IntegerField('Entry Fee', [validators.DataRequired()])
-    startDate = DateField('Start date (e.g.2018-01-12)*', format='%Y-%m-%d')
-    endDate = DateField('End date (e.g.2018-01-12)*', format='%Y-%m-%d')
+    startDate = StringField('Start date (e.g.2018-01-12)*')
+    endDate = StringField('End date (e.g.2018-01-12)*')
     startTime = SelectField(u'Start Time(Hr)*',
                            choices=[('12 AM', '12 AM'),('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'), ('4 AM', '4 AM'),
                                     ('5 AM', '5 AM'), ('6 AM', '6 AM'), ('7 AM', '7 AM'), ('8 AM', '8 AM'),
@@ -346,6 +346,64 @@ def data():
     json_string = json.dumps(list)
     return render_template('data.html' , s_data = json_string)
 
+
+@app.route('/viewallRest',methods=['POST','GET'])
+def viewall():
+    try:
+        proPic = session['proPic']
+    except KeyError:
+        proPic =''
+    list= []
+    allRestr = root.child('restaurants')
+    allRestg = allRestr.get()
+    for key in allRestg:
+        list.append(allRestg[key])
+    print(list)
+    listLen = len(list)
+
+
+    form = Sort(request.form)
+    if request.method == 'POST':
+        sort = form.sort.data
+        if sort == 'Alphabetical Order':
+            allAlpha =[]
+            for key in list:
+                allAlpha.append(key['Name'])
+            allAlpha = sorted(allAlpha)
+            newList = []
+            for i in range(len(list)):
+                for key in list:
+                    if key['Name'] == allAlpha[i]:
+                        newList.append(key)
+            list = newList
+
+        elif sort == 'Lowest Price':
+            allPrice = {}
+            for key in list:
+                allPrice[key['Name']] = key['Price']
+
+            newList = [(k, allPrice[k]) for k in sorted(allPrice, key=allPrice.get)]
+            newList2 = []
+            for key in newList:
+                for key2 in list:
+                    if key[0] == key2['Name']:
+                        newList2.append(key2)
+            list = newList2
+        elif sort == 'Ratings (Higest to Lowest)':
+            allRat = {}
+            for key in list:
+                allRat[key['Name']] = key['Average Rating']
+
+            newList = [(k, allRat[k]) for k in sorted(allRat, key=allRat.get)]
+            newList2 = []
+            for key in newList:
+                for key2 in list:
+                    if key[0] == key2['Name']:
+                        newList2.insert(0,key2)
+            list = newList2
+
+        return render_template('viewallRest.html', Restaurant=list, lengthList=listLen, proPic=proPic, form=form)
+    return render_template('viewallRest.html', Restaurant=list, lengthList = listLen,proPic=proPic,form=form)
 
 @app.route('/viewRest',methods=['POST','GET'])
 def view():
@@ -930,6 +988,10 @@ def userProfile():
 
 @app.route('/events', methods=['POST','GET'])
 def events():
+    try:
+        proPic = session['proPic']
+    except KeyError:
+        session['proPic'] =''
     form = EventForm(request.form)
     if request.method =='POST' and form.validate():
         eventName = form.eventName.data
@@ -943,22 +1005,41 @@ def events():
         startTimeMin = form.startTimeMin.data
         endTimeMin = form.endTimeMin.data
         ticket = form.ticket.data
-        event = 0
-        if ticket == '':
-            flash('Please enter an average price for the restaurant')
+
+        try:
+            theCheck = True
+            if int(startDate[0:4]) == int(endDate[0:4]):
+                if int(startDate[5:7]) == int(endDate[5:7]):
+                    if int(startDate[8:]) > int(endDate[8:]):
+                        theCheck = False
+                elif int(startDate[5:7]) > int(endDate[5:7]):
+                    theCheck = False
+            elif int(startDate[0:4]) > int(endDate[0:4]):
+                theCheck = False
+
+            if theCheck == False:
+                flash('The End Date cannot be before the Start Date')
+                return redirect(url_for('events'))
+        except:
+            flash('Please follow the example date format')
             return redirect(url_for('events'))
 
-        event = Events(eventName, eventDescription, eventLocation, eventAddress, startDate,endDate, startTime, endTime, startTimeMin, endTimeMin, ticket, event)
+
+
+
+        event = Events(eventName, eventDescription, eventLocation, eventAddress, startDate,endDate, startTime, endTime, startTimeMin, endTimeMin, ticket)
         allEventr = root.child('events')
         allEventg = allEventr.get()
         try:
             for key in allEventg:
                 if eventName[key]['Name'] == key:
-                    flash('This restaurant already exist')
+                    flash('This event already exist')
                     return redirect(url_for('addRest'))
         except:
             pass
-        allEventr.update({
+
+        currEvent = root.child('events/'+eventName)
+        currEvent.update({
             'Name': event.get_eventName(),
             'Description': event.get_eventDescription(),
             'Location': event.get_eventLocation(),
@@ -970,13 +1051,13 @@ def events():
             'Min Start': event.get_startTimeMin(),
             'Min End': event.get_endTimeMin(),
             'ticket': event.get_ticket(),
-            'people': 0
+            'People': 0
         })
         flash('You have added a new event!')
         return redirect(url_for('home'))
 
 
-    return render_template('events.html', form=form )
+    return render_template('events.html', form=form,proPic = session['proPic'] )
 
 @app.route('/editRest')
 def edit():
