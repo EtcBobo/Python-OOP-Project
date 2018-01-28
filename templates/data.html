@@ -47,6 +47,8 @@ for (var i=0; i<json_string.length; i++) {
 
         var info = json_string[i][name].info
 
+        {#let content = json_string[i][name].Description#}
+
         let content = json_string[i][name].content
 
         var food = {lat: lat, lng: lng};

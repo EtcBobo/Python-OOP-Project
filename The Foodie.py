@@ -341,6 +341,8 @@ def uploadtest():
 def data():
     list =[]
     data = firebase.FirebaseApplication("https://jsmap-a2929.firebaseio.com/")
+    # data = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
+    # firebaseData = data.get('restaurants', None)
     firebaseData = data.get('location', None)
     list.append(firebaseData)
 
