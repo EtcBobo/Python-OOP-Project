@@ -209,7 +209,12 @@ def home():
         firebaseData = data.get('restaurants', None)
 
         for key in firebaseData:
-            if firebaseData[key]['Name'].lower() == name.lower():
+            fireData = firebaseData[key]['Name']
+            fireData_low = fireData.lower()
+            fireData_sep = fireData_low.split()
+            if fireData_low == name.lower():
+                nameList.append(firebaseData[key])
+            if name.lower() in fireData_sep:
                 nameList.append(firebaseData[key])
 
         session['filtered'] = nameList
@@ -236,7 +241,7 @@ def handle_my_custom_event( json ):
 
 
 class theSearch(Form):
-    name = StringField('Enter the Food You Want')   # line you will see above search form
+    name = StringField('Enter the Restaurant Name')   # line you will see above search form
     plswork = StringField('try')
 
 
@@ -336,6 +341,8 @@ def uploadtest():
 def data():
     list =[]
     data = firebase.FirebaseApplication("https://jsmap-a2929.firebaseio.com/")
+    # data = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
+    # firebaseData = data.get('restaurants', None)
     firebaseData = data.get('location', None)
     list.append(firebaseData)
 
