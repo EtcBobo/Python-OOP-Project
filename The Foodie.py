@@ -2,8 +2,8 @@ import firebase_admin
 from Registration import Registration
 from firebase_admin import credentials, db
 from flask import Flask, render_template, request, flash, redirect, url_for, session
-from wtforms import Form, StringField, TextAreaField, RadioField, SelectField, PasswordField, IntegerField, validators, SelectMultipleField, DateTimeField
-from wtforms.fields.html5 import EmailField, DateTimeField
+from wtforms import Form, StringField, TextAreaField, RadioField, SelectField, PasswordField, IntegerField, validators, SelectMultipleField
+from wtforms.fields.html5 import EmailField, DateField
 from firebase import firebase
 from Restaurant import Restaurant
 from Events import Events
@@ -105,15 +105,15 @@ class EventForm(Form):
     eventLocation = SelectField(u'Location', choices=[('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),('Central','Central')])
     eventAddress = TextAreaField('Place where your event is held')
     ticket = IntegerField('Entry Fee', [validators.DataRequired()])
-    startDate = DateTimeField('Start date (e.g.2018-01-12)*', format='%Y-%m-%d')
-    endDate = DateTimeField('End date (e.g.2018-01-12)*', format='%Y-%m-%d')
+    startDate = DateField('Start date (e.g.2018-01-12)*', format='%Y-%m-%d')
+    endDate = DateField('End date (e.g.2018-01-12)*', format='%Y-%m-%d')
     startTime = SelectField(u'Start Time(Hr)*',
                            choices=[('12 AM', '12 AM'),('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'), ('4 AM', '4 AM'),
                                     ('5 AM', '5 AM'), ('6 AM', '6 AM'), ('7 AM', '7 AM'), ('8 AM', '8 AM'),
                                     ('9 AM', '9 AM'), ('10 AM', '10 AM'), ('11 AM', '11 AM'), ('12 PM', '12 PM'),
                                     ('1 PM', '1 PM'),('2 PM', '2 PM'),('3 PM', '3 PM'),('4 PM', '4 PM'),('5 PM', '5 PM'),('6 PM', '6 PM'),('7 PM', '7 PM'),
                                     ('8 PM', '8 PM'),('9 PM', '9 PM'),('10 PM', '10 PM'),('11 PM', '11 PM')])
-    endTime =  SelectField(u'Start Time(Hr)*',
+    endTime =  SelectField(u'End Time(Hr)*',
                            choices=[('12 AM', '12 AM'),('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'), ('4 AM', '4 AM'),
                                     ('5 AM', '5 AM'), ('6 AM', '6 AM'), ('7 AM', '7 AM'), ('8 AM', '8 AM'),
                                     ('9 AM', '9 AM'), ('10 AM', '10 AM'), ('11 AM', '11 AM'), ('12 PM', '12 PM'),
@@ -881,13 +881,16 @@ def events():
             return redirect(url_for('events'))
 
         event = Events(eventName, eventDescription, eventLocation, eventAddress, startDate,endDate, startTime, endTime, startTimeMin, endTimeMin, ticket, event)
-        eventFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
-        allevents = root.reference('events')
-        for key in allevents:
-            if eventName == key:
-                flash('This restaurant already exist')
-                return redirect(url_for('addRest'))
-        eventFire.put('events', eventName,{
+        allEventr = root.child('events')
+        allEventg = allEventr.get()
+        try:
+            for key in allEventg:
+                if eventName[key]['Name'] == key:
+                    flash('This restaurant already exist')
+                    return redirect(url_for('addRest'))
+        except:
+            pass
+        allEventr.update({
             'Name': event.get_eventName(),
             'Description': event.get_eventDescription(),
             'Location': event.get_eventLocation(),
