@@ -7,7 +7,7 @@
     <br>
 <div id="viewdiv">
 
-    <h1 id="view">Details of {{ restDetail['Name'] }}</h1>
+    <h1 id="view">Details of {{ restDetail['Name'] }}    <p id="heart" class="glyphicon glyphicon-heart-empty"><span ></span></p></h1>
     <div class="form-group col-md-12" id="filterdiv" >
       <span class="info2"><p class="glyphicon glyphicon-usd"></p> {{ restDetail['Price'] }}</span>
         <span class="verticalLine"></span>
@@ -17,10 +17,10 @@
          <span class="verticalLine"></span>
           <span class="info2"><p class="glyphicon glyphicon-globe"></p> {{ restDetail['Address'] }}</span>
         <span class="verticalLine"></span>
-         <span class="info2"><p class="glyphicon glyphicon-star"></p> Avg Ratings:{{ restDetail['Average Rating'] }}/5</span>
-
+         <span class="info2"><p class="glyphicon glyphicon-star"></p> {{ restDetail['Average Rating'] }} / 5</span>
     </div>
-<p id="heart" class="glyphicon glyphicon-heart-empty"><span id="fav"> favourite</span></p>
+
+
 </div>
 
 <div class="form-group col-md-8">
@@ -34,12 +34,12 @@
 
     <div class="container" id="filterdiv">
         <div id="viewdiv">
+            <br>
     <img id="detailimg" class="img-responsive" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVoweWwEb_UQKtBhQfwA78S2QXub1JHoyCox-rj8B3gnOC9M5_aQ">
-    </div>
     <div class="form-group col-md-6">
          <div class="form-group col-md-6" class="value">
                  {{ restDetail['Description'] }}</div>
-
+</div>
 
         </div>
     </div>
@@ -141,6 +141,8 @@
     font-size: 15px;
     padding-bottom: 3px;
     font-size:200%;
+        font-family: italic;
+
     }
 
     #pastcomments{
