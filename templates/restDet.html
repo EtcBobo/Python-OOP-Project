@@ -18,7 +18,7 @@
           <span class="info2"><p class="glyphicon glyphicon-globe"></p> {{ restDetail['Address'] }}</span>
         <span class="verticalLine"></span>
          <span class="info2"><p class="glyphicon glyphicon-star"></p> {{ restDetail['Average Rating'] }} / 5</span>
-    </div>
+        </div>
 
 
 </div>
@@ -35,10 +35,33 @@
     <div class="container" id="filterdiv">
         <div id="viewdiv">
             <br>
+
     <img id="detailimg" class="img-responsive" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVoweWwEb_UQKtBhQfwA78S2QXub1JHoyCox-rj8B3gnOC9M5_aQ">
-    <div class="form-group col-md-6">
+                <div class="form-group col-md-6">
          <div class="form-group col-md-6" class="value">
-                 {{ restDetail['Description'] }}</div>
+                 {{ restDetail['Description'] }}
+         </div>
+                    <div class="'form-group col-md-1"></div>
+                    <div class="form-group col-md-5">
+
+                     <ul>Operating Days:
+                         <br>
+                         <br>
+                     Monday
+                     <br>
+                     <br>
+                     Tuesday
+                     <br>
+                     <br>
+                     Wednesday
+                     <br>
+                     <br>
+                     Thursday
+                     <br>
+                     <br>
+                     Friday
+                     </ul>
+                    </div>
 </div>
 
         </div>
@@ -131,6 +154,9 @@
         align:center;
 
     }
+    .days{
+         list-style-type: none;
+    }
 
     #view{
          color: #000;
@@ -156,7 +182,7 @@
 
 
     .value {
-        font-size: 30px;
+        font-size: 150px;
         font-weight: bold;
 
     }
