@@ -3,7 +3,7 @@ from wtforms import Form, StringField, TextAreaField, RadioField, SelectField, v
 from firebase import firebase
 import firebase_admin
 from firebase_admin import credentials, db
-import random
+import datetime
 app = Flask(__name__)
 app.secret_key = 'secret123'
 cred = credentials.Certificate('cred/python-oop-firebase-adminsdk-87ty7-eefcb6bc40.json')
@@ -14,9 +14,9 @@ default_app = firebase_admin.initialize_app(cred, {
 
 
 root = db.reference()
-allday = root.child('restaurants/More sushi/Days')
-alldayg = allday.get()
-print(alldayg)
+now = datetime.datetime.now()
+year = now.day
+print(year+1)
 # rest = root.child('allComments')
 # allRest = rest.get()
 # for key in allRest:

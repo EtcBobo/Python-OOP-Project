@@ -11,34 +11,34 @@
        <div class="col-md-4">
               <br>
                 <br>
-              <h3 class="eventTitle">Food Tasting <button type="button" class="btn btn-success">Ongoing</button></h3>
+              <h3 class="eventTitle">{{ currEventg['Name'] }} <button type="button" class="btn btn-success">Ongoing</button></h3>
        </div>
     <img id='eventimg' class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
     </div>
           <br><br><br><br><br><br>
        <button type="button" class="btn btn-primary" class="int">I'm Interested In Going</button>
               <br>
-               <small> 180 people interested in going</small>
+               <small> {{ currEventg['People'] }} people interested in going</small>
       </div>
 
      <div class="col-md-12">
          <div class="col-md-8">
-         <span>Description Of event</span>
+         <span>{{ currEventg['Description'] }}</span>
               <br>
               <br>
-                <span class="glyphicon glyphicon-map-marker"> North</span>
+                <span class="glyphicon glyphicon-map-marker"> {{ currEventg['Location'] }}</span>
               <br>
               <br>
-                <span class="glyphicon glyphicon-globe"> NYP</span>
+                <span class="glyphicon glyphicon-globe">{{ currEventg['Address'] }}</span>
               <br>
               <br>
-                <span class="glyphicon glyphicon-tag"> Free Entry</span>
+                <span class="glyphicon glyphicon-tag"> {{ currEventg['ticket'] }}</span>
               <br>
               <br>
-              <span class="glyphicon glyphicon-calendar"> 2018-01-12 to 2018-01-15 </span>
+              <span class="glyphicon glyphicon-calendar"> {{ currEventg['start'] }} to {{ currEventg['end'] }} </span>
               <br>
               <br>
-              <span class="glyphicon glyphicon-time"> 10:15 - 18:00</span>
+              <span class="glyphicon glyphicon-time">{{ currEventg['Time Start'] }} - {{ currEventg['Time End'] }}</span>
     </div>
      </div>
 

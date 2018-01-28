@@ -16,7 +16,7 @@
     <ul class="nav nav-tabs nav-justified" role="tablist">
     <li class="active"><a href="#ongoingEvent" data-toggle="tab">Ongoing</a></li>
     <li><a href="#popularEvent" data-toggle="tab">Popular</a></li>
-    <li><a href="#upcoming" data-toggle="tab">Upcoming</a></li>
+    <li><a href="#upcomingEvent" data-toggle="tab">Upcoming</a></li>
     <li><a href="#endedEvent" data-toggle="tab">Ended</a></li>
     <li><a href="#addEvent" data-toggle="tab">Organize Events!</a></li>
   </ul>
@@ -26,60 +26,49 @@
   <div class="tab-content  clearfix">
   <div class="tab-pane active" id="ongoingEvent">
       <br>
-<div class="tab-pane" id="upcomingEvent">
-         <div class="col-md-12">
+    {% for i in ongoing %}
+      <div class="col-md-12">
           <div class="col-md-4">
               <br>
                 <br>
-              <h3 class="eventTitle">Food Tasting <button type="button" class="btn btn-success">Ongoing</button>
+              <br>
+              <h3 class="eventTitle"><a href="/events/{{ i['Name'] }}">{{ i['Name'] }}</a><button type="button" class="btn btn-success"><span class="glyphicon glyphicon-fire"></span> Popular</button>
               </h3>
               <br>
               <img id='eventimg' class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
           </div>
           <div class="col-md-4" id="eventdesc">
-              <br><br><br><br><br><br>
-              <span>Description Of event</span>
+              <br><br><br><br><br><br><br>
+              <span>{{ i['Description'] }}</span>
+              <br>
+              <br>
+                <span class="glyphicon glyphicon-map-marker">{{ i['Location'] }}</span>
+              <br>
+              <br>
+                <span class="glyphicon glyphicon-globe">{{ i['Address'] }}</span>
+              <br>
+              <br>
+                <span class="glyphicon glyphicon-tag">{{ i['ticket'] }}</span>
+              <br>
+              <br>
+              <span class="glyphicon glyphicon-calendar"> {{ i['Start'] }} to {{ i['End'] }} </span>
+              <br>
+              <br>
+              <span class="glyphicon glyphicon-time"> {{ i['Time Start'] }} - {{ i['Time End'] }}</span>
           </div>
           <div class="col-md-4">
+              <br>
               <br>
               <br>
               <br>
                <button type="button" class="btn btn-primary" class="int">I'm Interested In Going</button>
               <br>
-               <small> 180 people interested in going</small>
+               <small> {{ i['People'] }} people interested in going</small>
           </div>
           </div>
 
-{#      second event#}
-         <div class="col-md-12">
-          <div class="col-md-4">
-              <br>
-                <br>
+  {% endfor %}
 
-              <h3 class="eventTitle">Food Tasting <button type="button" class="btn btn-success">Ongoing</button>
-              </h3>
-              <br>
-              <img id='eventimg' class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
-          </div>
-          <div class="col-md-4" id="eventdesc">
-               <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <span>Description Of event</span>
-          </div>
-          <div class="col-md-4">
-              <br>
-              <br>
-              <br>
-               <button type="button" class="btn btn-primary" class="int">I'm Interested In Going</button>
-              <br>
-               <small> 180 people interested in going</small>
-          </div>
-          </div>
-          </div>
 
       </div>
 
@@ -157,19 +146,36 @@
 
 {#        popular events tab#}
   <div class="tab-pane" id="popularEvent">
-        <div class="col-md-12">
+
+    {% for i in popEvent %}
+      <div class="col-md-12">
           <div class="col-md-4">
               <br>
                 <br>
               <br>
-              <h3 class="eventTitle">Food Tasting <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-fire"></span> Popular</button>
+              <h3 class="eventTitle"><a href="/events/{{ i['Name'] }}">{{ i['Name'] }}</a><button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-fire"></span> Popular</button>
               </h3>
               <br>
               <img id='eventimg' class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
           </div>
           <div class="col-md-4" id="eventdesc">
               <br><br><br><br><br><br><br>
-              <span>Description Of event</span>
+              <span>{{ i['Description'] }}</span>
+              <br>
+              <br>
+                <span class="glyphicon glyphicon-map-marker">{{ i['Location'] }}</span>
+              <br>
+              <br>
+                <span class="glyphicon glyphicon-globe">{{ i['Address'] }}</span>
+              <br>
+              <br>
+                <span class="glyphicon glyphicon-tag">{{ i['ticket'] }}</span>
+              <br>
+              <br>
+              <span class="glyphicon glyphicon-calendar"> {{ i['Start'] }} to {{ i['End'] }} </span>
+              <br>
+              <br>
+              <span class="glyphicon glyphicon-time"> {{ i['Time Start'] }} - {{ i['Time End'] }}</span>
           </div>
           <div class="col-md-4">
               <br>
@@ -178,60 +184,45 @@
               <br>
                <button type="button" class="btn btn-primary" class="int">I'm Interested In Going</button>
               <br>
-               <small> 1800 people interested in going</small>
+               <small> {{ i['People'] }} people interested in going</small>
           </div>
           </div>
-{#second event#}
-         <div class="col-md-12">
-          <div class="col-md-4">
-              <br>
-      <br>
-             <h3 class="eventTitle">Food Tasting <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-fire"></span> Popular</button>
-              </h3>
-              <br>
-              <img id='eventimg' class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
-          </div>
-          <div class="col-md-4" id="eventdesc">
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <span>Description Of event</span>
-          </div>
-          <div class="col-md-4">
-              <br>
-              <br>
-              <br>
-               <button type="button" class="btn btn-primary" class="int">I'm Interested In Going</button>
-              <br>
-               <small> 180 people interested in going</small>
-          </div>
-          </div>
+
+  {% endfor %}
+
 </div>
 
-{#    upcoming events tab#}
-       <div class="tab-pane" id="upcoming">
-        <div class="col-md-12">
+{#    upcoming event tab#}
+  <div class="tab-pane" id="upcomingEvent">
+             {% for i in upcoming %}
+      <div class="col-md-12">
           <div class="col-md-4">
               <br>
                 <br>
               <br>
-             <h3 class="eventTitle">Food Tasting <button type="button" class="btn btn-warning">Upcoming</button>
+              <h3 class="eventTitle"><a href="/events/{{ i['Name'] }}">{{ i['Name'] }}</a><button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-fire"></span> Upcoming</button>
               </h3>
               <br>
               <img id='eventimg' class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
           </div>
           <div class="col-md-4" id="eventdesc">
+              <br><br><br><br><br><br><br>
+              <span>{{ i['Description'] }}</span>
               <br>
               <br>
+                <span class="glyphicon glyphicon-map-marker">{{ i['Location'] }}</span>
               <br>
               <br>
+                <span class="glyphicon glyphicon-globe">{{ i['Address'] }}</span>
               <br>
               <br>
+                <span class="glyphicon glyphicon-tag">{{ i['ticket'] }}</span>
               <br>
-              <span>Description Of event</span>
+              <br>
+              <span class="glyphicon glyphicon-calendar"> {{ i['Start'] }} to {{ i['End'] }} </span>
+              <br>
+              <br>
+              <span class="glyphicon glyphicon-time"> {{ i['Time Start'] }} - {{ i['Time End'] }}</span>
           </div>
           <div class="col-md-4">
               <br>
@@ -240,103 +231,58 @@
               <br>
                <button type="button" class="btn btn-primary" class="int">I'm Interested In Going</button>
               <br>
-               <small> 180 people interested in going</small>
+               <small> {{ i['People'] }} people interested in going</small>
           </div>
           </div>
-{#             second event#}
-               <div class="col-md-12">
-          <div class="col-md-4">
-              <br>
-      <br>
-             <h3 class="eventTitle">Food Tasting <button type="button" class="btn btn-warning">Upcoming</button>
-              </h3>
-              <br>
-              <img id='eventimg' class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
-          </div>
-          <div class="col-md-4" id="eventdesc">
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <span>Description Of event</span>
-          </div>
-          <div class="col-md-4">
-              <br>
-              <br>
-              <br>
-               <button type="button" class="btn btn-primary" class="int">I'm Interested In Going</button>
-              <br>
-               <small> 180 people interested in going</small>
-          </div>
-          </div>
-       </div>
+        {% endfor %}
 
-
-
+          </div>
 
 
 {#      ended event tab#}
-      <div class="tab-pane" id="endedEvent">
-        <div class="col-md-12">
+       <div class="tab-pane" id="endedEvent">
+                   {% for i in ended %}
+      <div class="col-md-12">
           <div class="col-md-4">
               <br>
                 <br>
               <br>
-             <h3 class="eventTitle">Food Tasting <button type="button" class="btn btn-basic">Ended</button>
+              <h3 class="eventTitle"><a href="/events/{{ i['Name'] }}">{{ i['Name'] }}</a><button type="button" class="btn btn-basic"><span class="glyphicon glyphicon-fire"></span> Ended</button>
               </h3>
               <br>
               <img id='eventimg' class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
           </div>
           <div class="col-md-4" id="eventdesc">
+              <br><br><br><br><br><br><br>
+              <span>{{ i['Description'] }}</span>
               <br>
               <br>
+                <span class="glyphicon glyphicon-map-marker">{{ i['Location'] }}</span>
               <br>
               <br>
+                <span class="glyphicon glyphicon-globe">{{ i['Address'] }}</span>
               <br>
               <br>
+                <span class="glyphicon glyphicon-tag">{{ i['ticket'] }}</span>
               <br>
-              <span>Description Of event</span>
+              <br>
+              <span class="glyphicon glyphicon-calendar"> {{ i['Start'] }} to {{ i['End'] }} </span>
+              <br>
+              <br>
+              <span class="glyphicon glyphicon-time"> {{ i['Time Start'] }} - {{ i['Time End'] }}</span>
           </div>
-          </div>
-{#             second event#}
-               <div class="col-md-12">
           <div class="col-md-4">
               <br>
-      <br>
-             <h3 class="eventTitle">Food Tasting <button type="button" class="btn btn-basic">Ended</button>
-              </h3>
-              <br>
-              <img id='eventimg' class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
-          </div>
-          <div class="col-md-4" id="eventdesc">
               <br>
               <br>
               <br>
+               <button type="button" class="btn btn-primary" class="int">I'm Interested In Going</button>
               <br>
-              <br>
-              <br>
-              <span>Description Of event</span>
+               <small> {{ i['People'] }} people interested in going</small>
           </div>
           </div>
-
-
-
-
-
-
-
-
-
-
+        {% endfor %}
        </div>
-
-
-
-
-  </div>
-
 
 
 <style>
