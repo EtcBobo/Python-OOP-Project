@@ -104,7 +104,7 @@ class EventForm(Form):
     eventDescription = TextAreaField('Desciption')
     eventLocation = SelectField(u'Location', choices=[('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),('Central','Central')])
     eventAddress = TextAreaField('Place where your event is held')
-    ticket = IntegerField('Entry Fee', [validators.DataRequired()])
+    ticket = IntegerField('Entry Fee')
     startDate = StringField('Start date (e.g.2018-01-12)*')
     endDate = StringField('End date (e.g.2018-01-12)*')
     startTime = SelectField(u'Start Time(Hr)*',
@@ -125,7 +125,6 @@ class EventForm(Form):
     endTimeMin = SelectField(u'End Time(Min)*',
                             choices= [('00', '00'), ('05', '05'), ('10', '10'), ('15', '15'), ('20', '20'), ('25', '25'), ('30', '30'), ('35', '35'),
                                       ('40', '40'), ('45', '45'), ('50', '50'), ('55','55')])
-    people = 0
 
 # @app.route("/location")
 # def mapview():
@@ -1031,7 +1030,8 @@ def events():
             flash('Please follow the example date format')
             return redirect(url_for('events'))
 
-
+        if ticket == '':
+            ticket = 0
 
 
         event = Events(eventName, eventDescription, eventLocation, eventAddress, startDate,endDate, startTime, endTime, startTimeMin, endTimeMin, ticket)

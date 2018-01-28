@@ -1,6 +1,6 @@
 class Events:
 
-    def __init__(self,eventName,eventDescription,eventLocation,eventAddress,startDate,endDate,startTime,endTime, startTimeMin, endTimeMin, ticket, people):
+    def __init__(self,eventName,eventDescription,eventLocation,eventAddress,startDate,endDate,startTime,endTime, startTimeMin, endTimeMin, ticket):
         self.__eventName = eventName
         self.__eventDescription = eventDescription
         self.__eventLocation = eventLocation
@@ -12,7 +12,7 @@ class Events:
         self.__startTimeMin = startTimeMin
         self.__endTimeMin = endTimeMin
         self.__ticket = ticket
-        self.__people = 0
+
 
     def get_eventName(self):
         return self.__eventName
@@ -35,8 +35,6 @@ class Events:
     def get_ticket(self):
         return self.__ticket
 
-    def get_people(self):
-        return self.__people
 
     def get_startTime(self):
         return self.__startTime
