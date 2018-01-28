@@ -1093,7 +1093,9 @@ def edit():
 #     except KeyError:
 #         proPic =''
 #     return render_template('events.html',proPic=proPic)
-
+@app.route('/eventDet')
+def viewevent():
+    return render_template('eventDet.html')
 
 if __name__ == '__main__':
     socketio.run(app, debug=True)
