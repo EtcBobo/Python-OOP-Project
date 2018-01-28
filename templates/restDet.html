@@ -45,21 +45,11 @@
                     <div class="form-group col-md-5">
 
                      <ul>Operating Days:
+                         {% for i in (restDetail['Days']) %}
                          <br>
                          <br>
-                     Monday
-                     <br>
-                     <br>
-                     Tuesday
-                     <br>
-                     <br>
-                     Wednesday
-                     <br>
-                     <br>
-                     Thursday
-                     <br>
-                     <br>
-                     Friday
+                         {{ i  }}
+                        {% endfor %}
                      </ul>
                     </div>
 </div>

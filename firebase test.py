@@ -14,10 +14,9 @@ default_app = firebase_admin.initialize_app(cred, {
 
 
 root = db.reference()
-allAlpha = ['h','r','a','q']
-allAlpha = sorted(allAlpha)
-print(allAlpha)
-
+allday = root.child('restaurants/More sushi/Days')
+alldayg = allday.get()
+print(alldayg)
 # rest = root.child('allComments')
 # allRest = rest.get()
 # for key in allRest:
