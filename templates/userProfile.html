@@ -122,6 +122,8 @@
 </div>
 
    <div class="tab-pane" id="tab4">
+
+       {% for i in allEdit %}
         <div class="col-md-12">
           <div class="col-md-3">
           <br>
@@ -131,32 +133,29 @@
          </div>
      <div class="col-md-7">
          <br>
-     <h1>Restaurant Name</h1>
-        <p> Description of Restaurant</p>
+     <h1>{{ i['Name'] }}</h1>
+        <p> {{ i['Description'] }}</p>
      </div>
     <div class="col-md-2"></div>
-                  <button id="editrest">Edit Restaurant</button>
+            <a href="/restEdit/{{ i['Name'] }}"><button id="editrest" >Edit Restaurant</button></a>
             </div>
        <hr>
+        {% endfor %}
 
 
-       <div class="col-md-12">
-          <div class="col-md-3">
-          <br>
-         <img id="detailimg" class="img-responsive" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVoweWwEb_UQKtBhQfwA78S2QXub1JHoyCox-rj8B3gnOC9M5_aQ">
-         <br>
-         </div>
-     <div class="col-md-7">
-     <h1>Restaurant Name</h1>
-        <p> Description of Restaurant</p>
-     </div>
-    <div class="col-md-2"></div>
-                  <button id="editrest">Edit Restaurant</button>
-            </div>
 
 
   </div>
         </div>
+
+
+    <script>
+    function editRest(){
+
+    }
+
+    </script>
+
 
 
     <style>

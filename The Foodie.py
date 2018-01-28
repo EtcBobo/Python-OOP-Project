@@ -760,6 +760,74 @@ def restPage(restName):
     return render_template('restDet.html',restDetail = restDetail, form=form,comments=allComments,users=allUsers,ratings=allRatings,proPic=proPic, pic=allPic)
 
 
+@app.route('/restEdit/<restName>',methods=['POST','GET'])
+def restEdit(restName):
+    try:
+        proPic = session['proPic']
+    except KeyError:
+        session['proPic'] = ''
+    restName = restName
+    theRestr = root.child('restaurants/'+restName)
+    theRestg = theRestr.get()
+
+    class RestForm(Form):
+        desc = TextAreaField('Desciption', default=theRestg['Description'])
+
+        location = SelectField(u'Location',
+                               choices=[('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),
+                                        ('Central', 'Central')],default=theRestg['Location'])
+
+        price = SelectField(u'Price Range',
+                            choices=[(80, 80), ('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5'), ('6', '6'),
+                                     ('7', '7'), ('8', '8'), ('9', '9'), ('10', '10'), ('11', '11'), ('12', '12'),
+                                     ('13', '13'), ('14', '14'), ('15', '15'), ('16', '16')],default=theRestg['Price'])
+        foodType = SelectField(u'Food Types',
+                               choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'),
+                                        ('Western Food', 'Western Food'),
+                                        ('Chinese Food', 'Chinese Food'), ('Healthy Food', 'Healthy Food'),
+                                        ('None', 'None')],default=theRestg['Food Type'])
+        openH = SelectField(u'Opening Hours',
+                            choices=[('12 AM', '12 AM'), ('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'),
+                                     ('4 AM', '4 AM'),
+                                     ('5 AM', '5 AM'), ('6 AM', '6 AM'), ('7 AM', '7 AM'), ('8 AM', '8 AM'),
+                                     ('9 AM', '9 AM'), ('10 AM', '10 AM'), ('11 AM', '11 AM'), ('12 PM', '12 PM'),
+                                     ('1 PM', '1 PM'), ('2 PM', '2 PM'), ('3 PM', '3 PM'), ('4 PM', '4 PM'),
+                                     ('5 PM', '5 PM'), ('6 PM', '6 PM'), ('7 PM', '7 PM'),
+                                     ('8 PM', '8 PM'), ('9 PM', '9 PM'), ('10 PM', '10 PM'), ('11 PM', '11 PM')],default=theRestg['Opening Hours'])
+        closingH = SelectField(u'Closing Hours',
+                               choices=[('12 AM', '12 AM'), ('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'),
+                                        ('4 AM', '4 AM'),
+                                        ('5 AM', '5 AM'), ('6 AM', '6 AM'), ('7 AM', '7 AM'), ('8 AM', '8 AM'),
+                                        ('9 AM', '9 AM'), ('10 AM', '10 AM'), ('11 AM', '11 AM'), ('12 PM', '12 PM'),
+                                        ('1 PM', '1 PM'), ('2 PM', '2 PM'), ('3 PM', '3 PM'), ('4 PM', '4 PM'),
+                                        ('5 PM', '5 PM'), ('6 PM', '6 PM'), ('7 PM', '7 PM'),
+                                        ('8 PM', '8 PM'), ('9 PM', '9 PM'), ('10 PM', '10 PM'), ('11 PM', '11 PM'), ],default=theRestg['Closing Hours'])
+
+        address = TextAreaField('Address',default=theRestg['Address'])
+
+    form = RestForm(request.form)
+    if request.method == 'POST':
+
+        desc = form.desc.data
+        location = form.location.data
+        price = form.price.data
+        foodType = form.foodType.data
+        openH = form.openH.data
+        closingH = form.closingH.data
+        address = form.address.data
+
+        theRestr.update({
+            'Description': desc,
+            'Location': location,
+            'Price': price,
+            'Food Type': foodType,
+            'Opening Hours': openH,
+            'Closing Hours': closingH,
+            'Address': address
+        })
+        flash('You have successfully edited your restaurant!')
+        return redirect(url_for('home'))
+    return render_template('restEdit.html', form=form, proPic=session['proPic'],rest = theRestg)
 
 @app.route('/userEdit',methods=['POST','GET'])
 def userEdit():
@@ -912,7 +980,7 @@ def events():
 
 @app.route('/editRest')
 def edit():
-    return render_template('editRest.html')
+    return render_template('restEdit.html')
 # @app.route('/events')
 # def event():
 #     try:
