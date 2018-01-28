@@ -339,10 +339,12 @@ def uploadtest():
 @app.route('/data')
 def data():
     list =[]
-    data = firebase.FirebaseApplication("https://jsmap-a2929.firebaseio.com/")
-    # data = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
-    # firebaseData = data.get('restaurants', None)
-    firebaseData = data.get('location', None)
+    # data = firebase.FirebaseApplication("https://jsmap-a2929.firebaseio.com/")
+    # firebaseData = data.get('location', None)
+
+    data = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
+    firebaseData = data.get('locations', None)
+
     list.append(firebaseData)
 
     # for key in firebaseData:
