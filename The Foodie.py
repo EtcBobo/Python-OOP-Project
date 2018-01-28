@@ -2,7 +2,7 @@ import firebase_admin
 from Registration import Registration
 from firebase_admin import credentials, db
 from flask import Flask, render_template, request, flash, redirect, url_for, session
-from wtforms import Form, StringField, TextAreaField, RadioField, SelectField, PasswordField, IntegerField, validators, SelectMultipleField
+from wtforms import Form, StringField, TextAreaField, RadioField, SelectField, PasswordField, IntegerField, validators, SelectMultipleField, widgets
 from wtforms.fields.html5 import EmailField, DateField
 from firebase import firebase
 from Restaurant import Restaurant
@@ -60,34 +60,48 @@ class RestForm(Form):
     desc = TextAreaField('Desciption')
 
     location = SelectField(u'Location', choices=[('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),('Central','Central')])
-    fLocation = SelectField(u'Location',
-                           choices=[('Any','Any'),('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),
-                                    ('Central', 'Central')])
 
-    price = SelectField(u'Price Range',choices=[(80,80),('1','1'),('2','2'),('3','3'),('4','4'),('5','5'),('6','6'),('7','7'),('8','8'),('9','9'),('10','10'),('11','11'),('12','12'),('13','13'),('14','14'),('15','15'),('16','16')])
+
+    price = IntegerField(u'Price Range (in Dollars)',[validators.DataRequired()])
+
     foodType = SelectField(u'Food Types',
                            choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'), ('Western Food', 'Western Food'),
                                     ('Chinese Food', 'Chinese Food'), ('Healthy Food', 'Healthy Food'),
                                     ('None', 'None')])
-    openH = SelectField(u'Opening Hours',
+    openH = SelectField(u'Opening Hours (12am to 12am means 24 hours)',
                            choices=[('12 AM', '12 AM'),('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'), ('4 AM', '4 AM'),
                                     ('5 AM', '5 AM'), ('6 AM', '6 AM'), ('7 AM', '7 AM'), ('8 AM', '8 AM'),
                                     ('9 AM', '9 AM'), ('10 AM', '10 AM'), ('11 AM', '11 AM'), ('12 PM', '12 PM'),
                                     ('1 PM', '1 PM'),('2 PM', '2 PM'),('3 PM', '3 PM'),('4 PM', '4 PM'),('5 PM', '5 PM'),('6 PM', '6 PM'),('7 PM', '7 PM'),
                                     ('8 PM', '8 PM'),('9 PM', '9 PM'),('10 PM', '10 PM'),('11 PM', '11 PM')])
-    closingH = SelectField(u'Closing Hours',
+    closingH = SelectField(u'Closing Hours (12am to 12am means 24 hours)',
                            choices=[('12 AM', '12 AM'),('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'), ('4 AM', '4 AM'),
                                     ('5 AM', '5 AM'), ('6 AM', '6 AM'), ('7 AM', '7 AM'), ('8 AM', '8 AM'),
                                     ('9 AM', '9 AM'), ('10 AM', '10 AM'), ('11 AM', '11 AM'), ('12 PM', '12 PM'),
                                     ('1 PM', '1 PM'),('2 PM', '2 PM'),('3 PM', '3 PM'),('4 PM', '4 PM'),('5 PM', '5 PM'),('6 PM', '6 PM'),('7 PM', '7 PM'),
                                     ('8 PM', '8 PM'),('9 PM', '9 PM'),('10 PM', '10 PM'),('11 PM', '11 PM'),])
+
+    address = TextAreaField('Address')
+
+    days = SelectMultipleField('Opened Days',choices=[('Monday', 'Monday'), ('Tuesday', 'Tuesday'), ('Wednesday', 'Wednesday'),  ('Thursday', 'Thursday'), ('Friday', 'Friday'),
+                                    ('Saturday', 'Saturday'), ('Sunday','Sunday')],option_widget=widgets.CheckboxInput(),
+        widget=widgets.ListWidget(prefix_label=False))
+class FilterForm(Form):
+    fLocation = SelectField(u'Location',
+                           choices=[('Any','Any'),('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),
+                                    ('Central', 'Central')])
+    pricef = SelectField(u'Price Range (Below selected price)',choices=[('05', '05'), ('10', '10'), ('15', '15'), ('20', '20'), ('25', '25'), ('30', '30'), ('35', '35'),
+                                      ('40', '40'), ('45', '45'), ('50', '50'), ('55','55'), ('60', '60'), ('65', '65'), ('70', '70'), ('75', '75'), ('80', '80'), ('85', '85'), ('90', '95'),('100', '100')])
     openT = SelectField(u'Preferred Meal Time',
                            choices=[('12 PM', '12 PM'),('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'), ('4 AM', '4 AM'),
                                     ('5 AM', '5 AM'), ('6 AM', '6 AM'), ('7 AM', '7 AM'), ('8 AM', '8 AM'),
                                     ('9 AM', '9 AM'), ('10 AM', '10 AM'), ('11 AM', '11 AM'), ('12 AM', '12 AM'),
                                     ('1 PM', '1 PM'),('2 PM', '2 PM'),('3 PM', '3 PM'),('4 PM', '4 PM'),('5 PM', '5 PM'),('6 PM', '6 PM'),('7 PM', '7 PM'),
                                     ('8 PM', '8 PM'),('9 PM', '9 PM'),('10 PM', '10 PM'),('11 PM', '11 PM')])
-    address = TextAreaField('Address')
+    foodType = SelectField(u'Food Types',
+                           choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'), ('Western Food', 'Western Food'),
+                                    ('Chinese Food', 'Chinese Food'), ('Healthy Food', 'Healthy Food'),
+                                    ('None', 'None')])
 
 class Feedbacks(Form):
     comments = TextAreaField('Comments')
@@ -252,10 +266,10 @@ def filter():
     except KeyError:
         proPic =''
     filterList = []
-    form = RestForm(request.form)
+    form = FilterForm(request.form)
     if request.method == 'POST':
         location = form.fLocation.data
-        price = form.price.data
+        pricef = form.pricef.data
         foodType = form.foodType.data
         openT = form.openT.data
 
@@ -306,10 +320,10 @@ def filter():
 
 
 
-        if price != '':
+        if pricef != '':
             i = 0
             while i < len(filterList):
-                if int(filterList[i]['Price']) > int(price):
+                if int(filterList[i]['Price']) > int(pricef):
                     del filterList[i]
                     i = i - 1
                 i = i + 1
@@ -475,8 +489,7 @@ def addRest():
         proPic =''
         user = ''
     form = RestForm(request.form)
-    if request.method == 'POST' :     # need to fix validation
-        print('ok')
+    if request.method == 'POST' and form.validate():
         name = form.name.data
         desc = form.desc.data
         location = form.location.data
@@ -485,12 +498,13 @@ def addRest():
         openH = form.openH.data
         closingH = form.closingH.data
         address = form.address.data
+        days = form.days.data
 
         res = Restaurant(name,desc,location,price,foodType,openH,closingH,address)
 
-        restFiren = root.child('restaurants')
+        restFirer = root.child('restaurants')
         try:
-            for key in restFiren:
+            for key in restFirer:
                 if name == key:
                     flash('This restaurant already exist')
                     return redirect(url_for('addRest'))
@@ -511,7 +525,8 @@ def addRest():
             'Address': res.get_address(),
             'User':session['username'],
             'Average Rating':0,
-            'Number of Raters':0
+            'Number of Raters':0,
+            'Days':days
         })
         flash('You have added a new Restaurant!')
         # theBreak = False

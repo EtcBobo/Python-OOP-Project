@@ -9,7 +9,7 @@
     <p id="rest">Do you feel that that restaurants you visited deserve more recognition? Help them by adding the restaurant informations below!</p>
     <br>
     <br>
-    <form method=post >
+    <form method='POST' >
          <div class="form-group col-md-12">
             <div class="row">
             <div  class="col-md-8 col-md-offset-2" class="edit">
@@ -54,14 +54,20 @@
                 <div class="form-group col-md-12">
                     {{ render_field(form.closingH, class_="form-control") }}
                 </div>
-                <br>
-                <br>
+
+
+
+                <div class="form-group col-md-12">
+                    {{ render_field(form.days) }}
+                </div>
+
+
                     <div class="form-group">
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <br>
                     <div class='btn-toolbar'>
-                        <button type="submit" class="btn btn-primary btn-lg upload-group text-center" id="uploadButton" onclick="myFunction()">Register</button>
+                        <button type="submit" class="btn btn-primary btn-lg upload-group text-center" id="uploadButton" onclick="myFunction()">Recommend</button>
                     </div>
                              </div>
                         </div>
