@@ -1,0 +1,104 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+        {% from "includes/_formhelper.html" import render_field %}
+  <div class="container" id="filterdiv">
+         <br>
+        <br>
+<div id="viewdiv">
+    <h1 id="view">View All Restaurants</h1>
+    <br/>
+    </div>
+
+      <form method="post">
+      <div class="form-group col-md-12">
+            <p id="lengthlist">{{ lengthList }} results</p>
+    <div class="form-group col-md-4">
+        {{ render_field(form.sort, class_="form-control") }}
+    </div>
+        <div class="form-group col-md-4">
+            <button type="submit" id="sortbtn">Sort</button>
+        </div>
+           </div>
+</form>
+
+
+    <div class="form-group col-md-4"><img class="homerec" class='img-responsive' src="http://clipartbarn.com/wp-content/uploads/2016/12/Restaurant-clipart-page-1.jpg">
+        <h3><a href="#">Restaurant Name</a></h3>
+        <p>description</p>
+        <p></p>
+    </div>
+    <div class="form-group col-md-4"><img class="homerec" class='img-responsive' src="http://clipartbarn.com/wp-content/uploads/2016/12/Restaurant-clipart-page-1.jpg">
+        <h3><a href="#">Restaurant Name</a></h3>
+        <p>description</p>
+        <p></p>
+    </div>
+    <div class="form-group col-md-4"><img class="homerec" class='img-responsive' src="http://clipartbarn.com/wp-content/uploads/2016/12/Restaurant-clipart-page-1.jpg">
+        <h3><a href="#">Restaurant Name</a></h3>
+        <p>description</p>
+        <p></p>
+    </div>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<style>
+     #viewdiv{
+        max-width: 1480px;
+    padding: 20px 12px 10px 20px;
+    font: 13px Arial, Helvetica, sans-serif;
+        align:center;
+
+    }
+
+    #view{
+        font-weight: bold;
+    font-style: italic;
+    border-bottom: 2px solid darkred;
+    margin-bottom: 20px;
+    font-size: 15px;
+    padding-bottom: 3px;
+    font-size:200%;
+
+    }
+
+     #sortbtn{
+         border-radius: 4px;
+    background-color: darkred;
+    border: 0;
+    color: #fff!important;
+    display: inline-block;
+    font-size: 14px;
+    text-align: center;
+        height: 36px;
+        width:250px;
+        float:left;
+         margin-top:25px;
+    }
+
+.homerec{
+    width:250px;
+    height:200px;
+}
+
+@media(max-width){
+    .homerec{
+        width:60%;
+        height:60%;
+    }
+}
+
+
+</style>
+
+
+{% endblock %}
