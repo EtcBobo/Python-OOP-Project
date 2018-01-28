@@ -14,8 +14,9 @@
     <br>
     <br>
     <ul class="nav nav-tabs nav-justified" role="tablist">
-    <li class="active"><a href="#upcomingEvent" data-toggle="tab">Upcoming</a></li>
+    <li class="active"><a href="#ongoingEvent" data-toggle="tab">Ongoing</a></li>
     <li><a href="#popularEvent" data-toggle="tab">Popular</a></li>
+    <li><a href="#upcoming" data-toggle="tab">Upcoming</a></li>
     <li><a href="#endedEvent" data-toggle="tab">Ended</a></li>
     <li><a href="#addEvent" data-toggle="tab">Organize Events!</a></li>
   </ul>
@@ -23,14 +24,14 @@
 {#    home tab#}
 
   <div class="tab-content  clearfix">
-  <div class="tab-pane active" id="upcomingEvent">
+  <div class="tab-pane active" id="ongoingEvent">
       <br>
 <div class="tab-pane" id="upcomingEvent">
          <div class="col-md-12">
           <div class="col-md-4">
               <br>
                 <br>
-              <h3 class="eventTitle">Food Tasting <button type="button" class="btn btn-warning">Upcoming</button>
+              <h3 class="eventTitle">Food Tasting <button type="button" class="btn btn-success">Ongoing</button>
               </h3>
               <br>
               <img id='eventimg' class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
@@ -55,7 +56,7 @@
               <br>
                 <br>
 
-              <h3 class="eventTitle">Food Tasting <button type="button" class="btn btn-warning">Upcoming</button>
+              <h3 class="eventTitle">Food Tasting <button type="button" class="btn btn-success">Ongoing</button>
               </h3>
               <br>
               <img id='eventimg' class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
@@ -210,20 +211,20 @@
           </div>
 </div>
 
-
-{#      ended event tab#}
-      <div class="tab-pane" id="endedEvent">
+{#    upcoming events tab#}
+       <div class="tab-pane" id="upcoming">
         <div class="col-md-12">
           <div class="col-md-4">
               <br>
                 <br>
               <br>
-             <h3 class="eventTitle">Food Tasting <button type="button" class="btn btn-basic">Ended</button>
+             <h3 class="eventTitle">Food Tasting <button type="button" class="btn btn-warning">Upcoming</button>
               </h3>
               <br>
               <img id='eventimg' class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
           </div>
           <div class="col-md-4" id="eventdesc">
+              <br>
               <br>
               <br>
               <br>
@@ -247,7 +248,7 @@
           <div class="col-md-4">
               <br>
       <br>
-             <h3 class="eventTitle">Food Tasting <button type="button" class="btn btn-basic">Ended</button>
+             <h3 class="eventTitle">Food Tasting <button type="button" class="btn btn-warning">Upcoming</button>
               </h3>
               <br>
               <img id='eventimg' class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
@@ -268,6 +269,55 @@
                <button type="button" class="btn btn-primary" class="int">I'm Interested In Going</button>
               <br>
                <small> 180 people interested in going</small>
+          </div>
+          </div>
+       </div>
+
+
+
+
+
+{#      ended event tab#}
+      <div class="tab-pane" id="endedEvent">
+        <div class="col-md-12">
+          <div class="col-md-4">
+              <br>
+                <br>
+              <br>
+             <h3 class="eventTitle">Food Tasting <button type="button" class="btn btn-basic">Ended</button>
+              </h3>
+              <br>
+              <img id='eventimg' class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
+          </div>
+          <div class="col-md-4" id="eventdesc">
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <span>Description Of event</span>
+          </div>
+          </div>
+{#             second event#}
+               <div class="col-md-12">
+          <div class="col-md-4">
+              <br>
+      <br>
+             <h3 class="eventTitle">Food Tasting <button type="button" class="btn btn-basic">Ended</button>
+              </h3>
+              <br>
+              <img id='eventimg' class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
+          </div>
+          <div class="col-md-4" id="eventdesc">
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <span>Description Of event</span>
           </div>
           </div>
 
