@@ -2,125 +2,161 @@
 
 {% block body %}
     {% from "includes/_formhelper.html" import render_field %}
-    <div class="container" id="profilediv">
+        <div class="container" id="profilediv">
     <br>
     <br>
-    <h1 id="profile">My Profile!</h1>
-    <div class="row">
+    <ul class="nav nav-tabs nav-justified" role="tablist">
+    <li class="active"><a href="#tab1" data-toggle="tab">My Profile!</a></li>
+    <li><a href="#tab2" data-toggle="tab">My Favourites</a></li>
+    <li><a href="#tab3" data-toggle="tab">My Events</a></li>
+    <li><a href="#tab4" data-toggle="tab">My Restaurants</a></li>
+  </ul>
 
-<div class="container" id="profilediv">
-  <div class="tab">
-      <figure class="col-md-12">
-    <br>
+{#    home tab#}
+
+  <div class="tab-content  clearfix">
+  <div class="tab-pane active" id="tab1">
+    <div class="col-md-12">
+      <figure class="col-md-4">
+        <br>
+          <br>
+          <br>
              <img src={{ proPic }} class="img-responsive" id="profilepic">
             <p id="profilename"> {{ user['Username'] }} </p>
         </figure>
-   <button class="tablinks" id="defaultOpen" onclick="openCity(event, 'Profile')">My Profile</button>
-  <button class="tablinks" onclick="openCity(event, 'restaurants')">My Favorites</button>
-  <button class="tablinks" onclick="openCity(event, 'events')">My Events</button>
-</div>
-
-{#    my profile tab content#}
-<div id="Profile" class="tabcontent">
-<br>
-      <p class="userinfo">Preferred price range: <span style="font-weight: bold;"> {{  user['Price'] }} </span></p>
+        <div class="col-md-6">
+            <br>
+            <br>
+            <br>
+             <p class="userinfo">Preferred price range: <span style="font-weight: bold;"> {{  user['Price'] }} </span></p>
             <br>
             <p class="userinfo">Preferred Food Type:<span style="font-weight: bold;"> {{  user['Food Types'] }} </span></p>
             <br>
             <p class="userinfo">Email: <span style="font-weight: bold;">{{ user['Email']  }} </span></p>
             <br>
             <br>
-{#              <a href="/userEdit" >#}
-                  <button id="edit" onclick="clickEdit()">Edit profile</button>
-</div>
+            </div>
+            <div class="col-md-2"></div>
+        <a href="/userEdit">
+                  <button id="edit" onclick="clickEdit()">Edit profile</button></a>
+            </div>
+    </div>
 
-<div id="restaurants" class="tabcontent">
-  <h3>Bookmarked Restaurants</h3>
-<br>
-    <br>
-    <div class="col-md-12">
-     <div class="col-md-3">
-<br>
+     <div class="tab-pane" id="tab2">
+         <div class="col-md-12">
+         <div class="col-md-3">
+            <br>
+             <br>
          <img id="detailimg" class="img-responsive" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVoweWwEb_UQKtBhQfwA78S2QXub1JHoyCox-rj8B3gnOC9M5_aQ">
-     <br>
-     </div>
+            <br>
+         </div>
         <div class="col-md-8">
-     <h1>Restaurant Name Title</h1>
-        <p> Description of Restaurant</p>
-     </div>
-    <div class="col-md-1">
+            <br>
+          <h1>Restaurant Name Title</h1>
+          <p> Description of Restaurant</p>
+        </div>
+        <div class="col-md-1">
         <br>
         <br>
         <span class="glyphicon glyphicon-heart"></span>
-    </div>
-</div>
+         </div>
+         </div>
     <hr>
-     <div class="col-md-12">
-     <div class="col-md-3">
-<br>
+          <div class="col-md-12">
+         <div class="col-md-3">
+            <br>
          <img id="detailimg" class="img-responsive" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVoweWwEb_UQKtBhQfwA78S2QXub1JHoyCox-rj8B3gnOC9M5_aQ">
-     <br>
-     </div>
+            <br>
+         </div>
         <div class="col-md-8">
-     <h1>Restaurant Name</h1>
-        <p> Description of Restaurant</p>
-     </div>
-    <div class="col-md-1">
+          <h1>Restaurant Name Title</h1>
+          <p> Description of Restaurant</p>
+        </div>
+        <div class="col-md-1">
         <br>
         <br>
         <span class="glyphicon glyphicon-heart"></span>
-    </div>
+         </div>
+         </div>
+     </div>
 
-</div>
-</div>
-
-<div id="events" class="tabcontent">
-  <h3>Events Interestd</h3>
-     <div class="col-md-12">
+    <div class="tab-pane" id="tab3">
+          <div class="col-md-12">
      <div class="col-md-3">
 <br>
+ <br>
          <img id="detailimg" class="img-responsive" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVoweWwEb_UQKtBhQfwA78S2QXub1JHoyCox-rj8B3gnOC9M5_aQ">
      <br>
      </div>
-     <div class="col-md-6">
+     <div class="col-md-7">
+         <br>
      <h1>Event Name</h1>
         <p> Description of Event</p>
      </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
         <br>
         <br>
-        <span><small>interested in going</small></span>
+        <span><small>status: interested in going</small></span>
     </div>
+          </div>
+        <hr>
+
+        <div class="col-md-12">
+     <div class="col-md-3">
+<br>
+         <img id="detailimg" class="img-responsive" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVoweWwEb_UQKtBhQfwA78S2QXub1JHoyCox-rj8B3gnOC9M5_aQ">
+     <br>
+     </div>
+     <div class="col-md-7">
+     <h1>Event Name</h1>
+        <p> Description of Event</p>
+     </div>
+    <div class="col-md-2">
+        <br>
+        <br>
+        <span><small>status: interested in going</small></span>
+    </div>
+        </div>
 
 
 </div>
 
+   <div class="tab-pane" id="tab4">
 
-    </div>
-    </div>
-    </div>
+       {% for i in allEdit %}
+        <div class="col-md-12">
+          <div class="col-md-3">
+          <br>
+          <br>
+         <img id="detailimg" class="img-responsive" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVoweWwEb_UQKtBhQfwA78S2QXub1JHoyCox-rj8B3gnOC9M5_aQ">
+         <br>
+         </div>
+     <div class="col-md-7">
+         <br>
+     <h1>{{ i['Name'] }}</h1>
+        <p> {{ i['Description'] }}</p>
+     </div>
+    <div class="col-md-2"></div>
+            <a href="/restEdit/{{ i['Name'] }}"><button id="editrest" >Edit Restaurant</button></a>
+            </div>
+       <hr>
+        {% endfor %}
 
-<script>
 
 
-function openCity(evt, cityName) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
+
+  </div>
+        </div>
+
+
+    <script>
+    function editRest(){
+
     }
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    document.getElementById(cityName).style.display = "block";
-    evt.currentTarget.className += " active";
-}
 
-// Get the element with id="defaultOpen" and click on it
-document.getElementById("defaultOpen").click();
+    </script>
 
-</script>
+
 
     <style>
      #profile{
@@ -136,6 +172,8 @@ document.getElementById("defaultOpen").click();
 
      #profilepic{
          align:center;
+         width:320px;
+         height:320px;
      }
 
      #profilediv {
@@ -145,7 +183,7 @@ document.getElementById("defaultOpen").click();
      }
 
 
-#edit{
+#edit, #editrest{
      background-color: darkred;
     border: 0;
     color: #fff!important;
@@ -156,40 +194,33 @@ document.getElementById("defaultOpen").click();
         width:250px;
     float:right;
     overflow:auto;
-
-
 }
+
+
 
 #profilename{
     font-weight:bold;
     font-size:300%;
 }
 
-@media(max-width:991px){
-    #edit{
-        width:100%;
+@media(max-width:991px) {
+    #edit {
+        width: 60%;
     }
 
-    #profilename{
+    #profilename {
         text-justify: auto;
     }
 
-    .tab{
-        height: 100%;
-        width:100%;
+    #editrest{
+        margin-top:30px;
+        margin-bottom:30px;
+        width:60%;
+        margin-left:80px;
     }
 
-    .tabcontent{
-        height:100%;
-        width:100%;
-    }
-
-}
 
 
-.userinfo{
-    margin-left:30px;
-    font-size:150%;
 }
 
 
@@ -220,26 +251,10 @@ a:hover{
     font-size: 17px;
 }
 
-/* Change background color of buttons on hover */
-.tab button:hover {
-    background-color: #ddd;
-}
-
-/* Create an active/current "tab button" class */
-.tab button.active {
-    background-color: #ccc;
-}
-
-/* Style the tab content */
-.tabcontent {
-    float: left;
-    padding: 0px 12px;
-    border: 1px solid #ccc;
-    width: 70%;
-    border-left: none;
-    height: 100%;
-}
-
+    #detailimg{
+        height:150px;
+        width:250px;
+    }
 
 </style>
 

@@ -2,8 +2,8 @@ import firebase_admin
 from Registration import Registration
 from firebase_admin import credentials, db
 from flask import Flask, render_template, request, flash, redirect, url_for, session
-from wtforms import Form, StringField, TextAreaField, RadioField, SelectField, PasswordField, IntegerField, validators, SelectMultipleField, DateTimeField
-from wtforms.fields.html5 import EmailField, DateTimeField
+from wtforms import Form, StringField, TextAreaField, RadioField, SelectField, PasswordField, IntegerField, validators, SelectMultipleField
+from wtforms.fields.html5 import EmailField, DateField
 from firebase import firebase
 from Restaurant import Restaurant
 from Events import Events
@@ -105,15 +105,15 @@ class EventForm(Form):
     eventLocation = SelectField(u'Location', choices=[('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),('Central','Central')])
     eventAddress = TextAreaField('Place where your event is held')
     ticket = IntegerField('Entry Fee', [validators.DataRequired()])
-    startDate = DateTimeField('Start date (e.g.2018-01-12)*', format='%Y-%m-%d')
-    endDate = DateTimeField('End date (e.g.2018-01-12)*', format='%Y-%m-%d')
+    startDate = DateField('Start date (e.g.2018-01-12)*', format='%Y-%m-%d')
+    endDate = DateField('End date (e.g.2018-01-12)*', format='%Y-%m-%d')
     startTime = SelectField(u'Start Time(Hr)*',
                            choices=[('12 AM', '12 AM'),('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'), ('4 AM', '4 AM'),
                                     ('5 AM', '5 AM'), ('6 AM', '6 AM'), ('7 AM', '7 AM'), ('8 AM', '8 AM'),
                                     ('9 AM', '9 AM'), ('10 AM', '10 AM'), ('11 AM', '11 AM'), ('12 PM', '12 PM'),
                                     ('1 PM', '1 PM'),('2 PM', '2 PM'),('3 PM', '3 PM'),('4 PM', '4 PM'),('5 PM', '5 PM'),('6 PM', '6 PM'),('7 PM', '7 PM'),
                                     ('8 PM', '8 PM'),('9 PM', '9 PM'),('10 PM', '10 PM'),('11 PM', '11 PM')])
-    endTime =  SelectField(u'Start Time(Hr)*',
+    endTime =  SelectField(u'End Time(Hr)*',
                            choices=[('12 AM', '12 AM'),('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'), ('4 AM', '4 AM'),
                                     ('5 AM', '5 AM'), ('6 AM', '6 AM'), ('7 AM', '7 AM'), ('8 AM', '8 AM'),
                                     ('9 AM', '9 AM'), ('10 AM', '10 AM'), ('11 AM', '11 AM'), ('12 PM', '12 PM'),
@@ -358,12 +358,9 @@ def view():
         proPic = session['proPic']
     except KeyError:
         proPic =''
-    allItemr = root.child('allRatings')
-    allItemg = allItemr.get()
     list = session['filtered']
-
     listLen = len(list)
-    print(list)
+
 
     form = Sort(request.form)
     if request.method == 'POST':
@@ -371,30 +368,41 @@ def view():
         if sort == 'Alphabetical Order':
             allAlpha =[]
             for key in list:
-                allAlpha.append(list[key]['Name'])
-            sorted(allAlpha)
+                allAlpha.append(key['Name'])
+            allAlpha = sorted(allAlpha)
             newList = []
             for i in range(len(list)):
                 for key in list:
-                    if list[key]['Name'] == allAlpha[i]:
-                        newList.append(list[key][allAlpha[i]])
+                    if key['Name'] == allAlpha[i]:
+                        newList.append(key)
             list = newList
 
         elif sort == 'Lowest Price':
             allPrice = {}
             for key in list:
-                allPrice[(list[key]['Price'])] = list[key]['Name']
+                allPrice[key['Name']] = key['Price']
 
-            newList = sorted(allPrice.items(), key=lambda t: t[0])
+            newList = [(k, allPrice[k]) for k in sorted(allPrice, key=allPrice.get)]
             newList2 = []
-            for i in range(len(list)):
-                for key in list:
-                    pass
-
-        elif sort == 'Ratings':
-            pass
+            for key in newList:
+                for key2 in list:
+                    if key[0] == key2['Name']:
+                        newList2.append(key2)
+            list = newList2
         elif sort == 'Ratings (Higest to Lowest)':
-            pass
+            allRat = {}
+            for key in list:
+                allRat[key['Name']] = key['Average Rating']
+
+            newList = [(k, allRat[k]) for k in sorted(allRat, key=allRat.get)]
+            newList2 = []
+            for key in newList:
+                for key2 in list:
+                    if key[0] == key2['Name']:
+                        newList2.insert(0,key2)
+            list = newList2
+
+        return render_template('viewRest.html', Restaurant=list, lengthList=listLen, proPic=proPic, form=form)
     return render_template('viewRest.html', Restaurant=list, lengthList = listLen,proPic=proPic,form=form)
 
 
@@ -757,6 +765,74 @@ def restPage(restName):
     return render_template('restDet.html',restDetail = restDetail, form=form,comments=allComments,users=allUsers,ratings=allRatings,proPic=proPic, pic=allPic)
 
 
+@app.route('/restEdit/<restName>',methods=['POST','GET'])
+def restEdit(restName):
+    try:
+        proPic = session['proPic']
+    except KeyError:
+        session['proPic'] = ''
+    restName = restName
+    theRestr = root.child('restaurants/'+restName)
+    theRestg = theRestr.get()
+
+    class RestForm(Form):
+        desc = TextAreaField('Desciption', default=theRestg['Description'])
+
+        location = SelectField(u'Location',
+                               choices=[('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),
+                                        ('Central', 'Central')],default=theRestg['Location'])
+
+        price = SelectField(u'Price Range',
+                            choices=[(80, 80), ('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5'), ('6', '6'),
+                                     ('7', '7'), ('8', '8'), ('9', '9'), ('10', '10'), ('11', '11'), ('12', '12'),
+                                     ('13', '13'), ('14', '14'), ('15', '15'), ('16', '16')],default=theRestg['Price'])
+        foodType = SelectField(u'Food Types',
+                               choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'),
+                                        ('Western Food', 'Western Food'),
+                                        ('Chinese Food', 'Chinese Food'), ('Healthy Food', 'Healthy Food'),
+                                        ('None', 'None')],default=theRestg['Food Type'])
+        openH = SelectField(u'Opening Hours',
+                            choices=[('12 AM', '12 AM'), ('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'),
+                                     ('4 AM', '4 AM'),
+                                     ('5 AM', '5 AM'), ('6 AM', '6 AM'), ('7 AM', '7 AM'), ('8 AM', '8 AM'),
+                                     ('9 AM', '9 AM'), ('10 AM', '10 AM'), ('11 AM', '11 AM'), ('12 PM', '12 PM'),
+                                     ('1 PM', '1 PM'), ('2 PM', '2 PM'), ('3 PM', '3 PM'), ('4 PM', '4 PM'),
+                                     ('5 PM', '5 PM'), ('6 PM', '6 PM'), ('7 PM', '7 PM'),
+                                     ('8 PM', '8 PM'), ('9 PM', '9 PM'), ('10 PM', '10 PM'), ('11 PM', '11 PM')],default=theRestg['Opening Hours'])
+        closingH = SelectField(u'Closing Hours',
+                               choices=[('12 AM', '12 AM'), ('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'),
+                                        ('4 AM', '4 AM'),
+                                        ('5 AM', '5 AM'), ('6 AM', '6 AM'), ('7 AM', '7 AM'), ('8 AM', '8 AM'),
+                                        ('9 AM', '9 AM'), ('10 AM', '10 AM'), ('11 AM', '11 AM'), ('12 PM', '12 PM'),
+                                        ('1 PM', '1 PM'), ('2 PM', '2 PM'), ('3 PM', '3 PM'), ('4 PM', '4 PM'),
+                                        ('5 PM', '5 PM'), ('6 PM', '6 PM'), ('7 PM', '7 PM'),
+                                        ('8 PM', '8 PM'), ('9 PM', '9 PM'), ('10 PM', '10 PM'), ('11 PM', '11 PM'), ],default=theRestg['Closing Hours'])
+
+        address = TextAreaField('Address',default=theRestg['Address'])
+
+    form = RestForm(request.form)
+    if request.method == 'POST':
+
+        desc = form.desc.data
+        location = form.location.data
+        price = form.price.data
+        foodType = form.foodType.data
+        openH = form.openH.data
+        closingH = form.closingH.data
+        address = form.address.data
+
+        theRestr.update({
+            'Description': desc,
+            'Location': location,
+            'Price': price,
+            'Food Type': foodType,
+            'Opening Hours': openH,
+            'Closing Hours': closingH,
+            'Address': address
+        })
+        flash('You have successfully edited your restaurant!')
+        return redirect(url_for('home'))
+    return render_template('restEdit.html', form=form, proPic=session['proPic'],rest = theRestg)
 
 @app.route('/userEdit',methods=['POST','GET'])
 def userEdit():
@@ -846,11 +922,12 @@ def userProfile():
     for key in totalUsers:
         if totalUsers[key]['Username'] == session['username']:
             theUser = totalUsers[key]
+    print(theUser)
     allRestr = root.child('restaurants')
     allRestg = allRestr.get()
     allEdit = []
     for key in allRestg:
-        if allRestg[key]['User'] == theUser:
+        if allRestg[key]['User'] == theUser['Username']:
             allEdit.append(allRestg[key])
 
     return render_template('userProfile.html' , user = theUser, proPic = session['proPic'],allEdit=allEdit)
@@ -877,13 +954,16 @@ def events():
             return redirect(url_for('events'))
 
         event = Events(eventName, eventDescription, eventLocation, eventAddress, startDate,endDate, startTime, endTime, startTimeMin, endTimeMin, ticket, event)
-        eventFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
-        allevents = root.reference('events')
-        for key in allevents:
-            if eventName == key:
-                flash('This restaurant already exist')
-                return redirect(url_for('addRest'))
-        eventFire.put('events', eventName,{
+        allEventr = root.child('events')
+        allEventg = allEventr.get()
+        try:
+            for key in allEventg:
+                if eventName[key]['Name'] == key:
+                    flash('This restaurant already exist')
+                    return redirect(url_for('addRest'))
+        except:
+            pass
+        allEventr.update({
             'Name': event.get_eventName(),
             'Description': event.get_eventDescription(),
             'Location': event.get_eventLocation(),
@@ -903,6 +983,9 @@ def events():
 
     return render_template('events.html', form=form )
 
+@app.route('/editRest')
+def edit():
+    return render_template('restEdit.html')
 # @app.route('/events')
 # def event():
 #     try:

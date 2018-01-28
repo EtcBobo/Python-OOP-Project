@@ -14,10 +14,9 @@ default_app = firebase_admin.initialize_app(cred, {
 
 
 root = db.reference()
-mydict = {2:3, 1:89, 4:5, 3:0}
-
-mydict = sorted(mydict.items(),key = lambda t: t[0])
-print(mydict)
+allAlpha = ['h','r','a','q']
+allAlpha = sorted(allAlpha)
+print(allAlpha)
 
 # rest = root.child('allComments')
 # allRest = rest.get()
