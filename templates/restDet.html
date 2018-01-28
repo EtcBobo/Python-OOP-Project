@@ -44,8 +44,12 @@
                     <div class="'form-group col-md-1"></div>
                     <div class="form-group col-md-5">
 
+
+                     <ul id="opdays">Operating Days:
+
                      <ul>Operating Days:
                          {% for i in (restDetail['Days']) %}
+
                          <br>
                          <br>
                          {{ i  }}
@@ -159,6 +163,11 @@
     font-size:200%;
         font-family: italic;
 
+    }
+
+    #opdays{
+        font-weight:bold;
+        font-size:120%;
     }
 
     #pastcomments{
