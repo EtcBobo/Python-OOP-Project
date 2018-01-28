@@ -18,6 +18,7 @@ from flask_googlemaps import GoogleMaps
 from flask_googlemaps import Map
 from flask_share import Share
 import json
+import datetime
 
 
 #pip install flask-socketio
@@ -1015,6 +1016,82 @@ def events():
         proPic = session['proPic']
     except KeyError:
         session['proPic'] =''
+
+    allEventr = root.child('events')
+    allEventg = allEventr.get()
+
+    now = datetime.datetime.now()
+    currYear = now.year
+    currMonth = now.month
+    currDate = now.day
+
+    status = []
+    count = 0
+    for key in allEventg:
+        if int(allEventg[key]['Start'][0:4]) > currYear:
+            status.append('Upcoming')
+        elif int(allEventg[key]['Start'][0:4]) < currYear:
+            status.append('Ended')
+        elif int(allEventg[key]['Start'][0:4]) == currYear:
+            if int(allEventg[key]['Start'][5:7]) > currMonth:
+                status.append('Upcoming')
+            elif int(allEventg[key]['Start'][5:7]) < currMonth:
+                status.append('Ended')
+            elif int(allEventg[key]['Start'][5:7]) == currMonth:
+                if int(allEventg[key]['Start'][8:]) > currDate:
+                    status.append('Upcoming')
+                elif int(allEventg[key]['Start'][8:]) < currDate:
+                    status.append('Ended')
+                elif int(allEventg[key]['Start'][8:]) == currDate:
+                    status.append('Ongoing')
+
+    for key in allEventg:
+        eventr = root.child('events/'+allEventg[key]['Name'])
+        eventr.update({
+            'Status':status[count]
+        })
+        count = count +1
+
+
+
+    theList = []
+    ongoing = []
+    upcoming = []
+    ended = []
+
+
+    for key in allEventg:
+        theList.append(allEventg[key])
+
+    for key in allEventg:
+        if allEventg[key]['Status'] == 'Ongoing':
+            ongoing.append(allEventg[key])
+
+    for key in allEventg:
+        if allEventg[key]['Status'] == 'Upcoming':
+            upcoming.append(allEventg[key])
+
+    for key in allEventg:
+        if allEventg[key]['Status'] == 'Ended':
+            ended.append(allEventg[key])
+
+
+
+    allPop = {}
+    for key in theList:
+        if key['Status'] == 'Ongoing' or key['Status'] == 'Upcoming':
+            allPop[key['Name']] = key['People']
+
+    newList = [(k, allPop[k]) for k in sorted(allPop, key=allPop.get)]
+    newList2 = []
+    for key in newList:
+        for key2 in theList:
+            if key[0] == key2['Name']:
+                newList2.insert(0, key2)
+    popEvent = newList2
+
+
+
     form = EventForm(request.form)
     if request.method =='POST' and form.validate():
         eventName = form.eventName.data
@@ -1080,8 +1157,21 @@ def events():
         flash('You have added a new event!')
         return redirect(url_for('home'))
 
+    return render_template('events.html', form=form,proPic = session['proPic'],ongoing=ongoing,upcoming=upcoming,ended=ended,popEvent=popEvent )
 
-    return render_template('events.html', form=form,proPic = session['proPic'] )
+@app.route('/events/<eventName>',methods=['POST','GET'])
+def eventDet(eventName):
+    try:
+        proPic = session['proPic']
+    except KeyError:
+        session['proPic'] = ''
+
+    eventName = eventName
+    currEventr = root.child('events/'+eventName)
+    currEventg = currEventr.get()
+
+
+    return render_template('eventDet.html',currEventg=currEventg,proPic=proPic)
 
 @app.route('/editRest')
 def edit():
