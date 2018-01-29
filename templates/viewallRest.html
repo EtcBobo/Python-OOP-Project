@@ -27,8 +27,8 @@
         <h3><a href="/restDet/{{ i['Name'] }}">{{ i['Name'] }}</a></h3>
         <p>{{ i['Description'] }}</p>
         <br>
-        <p class="avg">Avg Ratings:</p>
-        <p>Avg Price:</p>
+        <p class="avg">{{ i['Average Rating'] }}</p>
+        <p>{{ i['Price'] }}</p>
     </div>
 
     {% endfor %}
