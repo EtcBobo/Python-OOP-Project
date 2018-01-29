@@ -82,6 +82,8 @@
      </div>
 
     <div class="tab-pane" id="tab3">
+        {% for i in allEdit %}
+
           <div class="col-md-12">
      <div class="col-md-3">
 <br>
@@ -101,25 +103,7 @@
     </div>
           </div>
         <hr>
-
-        <div class="col-md-12">
-     <div class="col-md-3">
-<br>
-         <img id="detailimg" class="img-responsive" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVoweWwEb_UQKtBhQfwA78S2QXub1JHoyCox-rj8B3gnOC9M5_aQ">
-     <br>
-     </div>
-     <div class="col-md-7">
-     <h1>Event Name</h1>
-        <p> Description of Event</p>
-     </div>
-    <div class="col-md-2">
-        <br>
-        <br>
-        <span><small>status: interested in going</small></span>
-    </div>
-        </div>
-
-
+    {% endfor %}
 </div>
 
    <div class="tab-pane" id="tab4">
