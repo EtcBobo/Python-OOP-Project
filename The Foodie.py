@@ -301,7 +301,7 @@ def handle_my_custom_event( json ):
 
 
 class theSearch(Form):
-    name = StringField('Enter the Restaurant Name')   # line you will see above search form
+    name = StringField('')   # line you will see above search form
     plswork = StringField('try')
 
 
