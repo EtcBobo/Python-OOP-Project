@@ -9,10 +9,13 @@
 
          <h1 id="view">Edit {{ eventName }}</h1>
     <form method="post">
-    <div class="col-md-12">
-    <img id="detailimg" class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
+        <br>
+        <br>
+         <img id="detailimg" class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
+    <div class="form-group col-md-12">
          <div class="row">
-            <div  class="col-md-8 col-md-offset-4" class="edit">
+            <div  class="col-md-8 col-md-offset-2" class="edit">
+                    <br><br>
                 <div class="form-group col-md-12" class="eventDesc">
                     {{ render_field(form.eventDescription, class_="form-control") }}
                 </div>
@@ -67,8 +70,7 @@
               </div>
             </div>
         </div>
-
-</form>
+        </form>
 
 
 
@@ -111,7 +113,7 @@
 
 #detailimg{
     height:300px;
-    width:530px;
+    width:600px;
     margin-left:250px;
 
 }
@@ -134,8 +136,8 @@
     #detailimg{
         margin-left:0px;
     }
-    #file{
-        margin-left:0px;
+    #submitbtn{
+        width:100%;
     }
 }
 </style>
