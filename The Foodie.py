@@ -56,6 +56,7 @@ class RegisterForm(Form):
     email = EmailField("Email")
 
 
+
 class RestForm(Form):
     name = StringField('Restaurant Name',[validators.DataRequired()])
     desc = TextAreaField('Desciption')
@@ -1086,7 +1087,7 @@ def userEdit():
     class UserEdit(Form):
         password = PasswordField("Password", [validators.DataRequired()])
         passwordC = PasswordField("Confirm Password", [validators.DataRequired()])
-        price = StringField('Preferred Price Range',default=session['userDetail']['Price'])
+        price = IntegerField('Preferred Price Range',default=session['userDetail']['Price'])
         foodType = SelectField(u'Preferred Food Type',
                                choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'),
                                         ('Western Food', 'Western Food'),
@@ -1101,7 +1102,6 @@ def userEdit():
     for key in allPic:
         if session['username'] == allPic[key]['user']:
             count = int(allPic[key]['counter']) +1
-
 
     if request.method == 'POST' and form.validate():
         email = form.email.data
@@ -1222,7 +1222,7 @@ def events():
             status.append('Upcoming')
         elif int(allEventg[key]['End'][0:4]) < currYear:
             status.append('Ended')
-        elif int(allEventg[key]['Start'][0:4]) < currYear and int(allEventg[key]['End'][0:4]) > currYear:
+        elif int(allEventg[key]['Start'][0:4]) <= currYear and int(allEventg[key]['End'][0:4]) > currYear:
             status.append('Ongoing')
         elif int(allEventg[key]['Start'][0:4]) == currYear:
 
@@ -1230,7 +1230,7 @@ def events():
                 status.append('Upcoming')
             elif int(allEventg[key]['End'][5:7]) < currMonth:
                 status.append('Ended')
-            elif int(allEventg[key]['Start'][5:7]) < currMonth and int(allEventg[key]['End'][5:7]) > currMonth:
+            elif int(allEventg[key]['Start'][5:7]) <= currMonth and int(allEventg[key]['End'][5:7]) > currMonth:
                 status.append('Ongoing')
             elif int(allEventg[key]['Start'][5:7]) == currMonth:
 
@@ -1238,15 +1238,17 @@ def events():
                     status.append('Upcoming')
                 elif int(allEventg[key]['End'][8:]) < currDate:
                     status.append('Ended')
-                elif int(allEventg[key]['Start'][8:]) < currDate and int(allEventg[key]['End'][8:]) > currDate:
+                elif int(allEventg[key]['Start'][8:]) <= currDate and int(allEventg[key]['End'][8:]) > currDate:
                     status.append('Ongoing')
 
     for key in allEventg:
-        eventr = root.child('events/'+key)
+        eventr = root.child('events/'+allEventg[key]['Name'])
         eventr.update({
             'Status':status[count]
         })
         count = count +1
+
+    print(status)
 
     for key in allEventg:
         count2 = 0
