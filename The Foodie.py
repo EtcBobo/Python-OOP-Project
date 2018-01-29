@@ -1108,6 +1108,13 @@ def userEdit():
             return redirect(url_for('userEdit'))
 
         for key in allUser:
+            if allUser[key]['Username'] != session['username']:
+                if allUser[key]['Email'] == email and email != '':
+                    flash('This Email has already been used')
+                    return redirect(url_for('userEdit'))
+
+
+        for key in allUser:
             if session['username'] == allUser[key]['Username']:
                 thekey = key
 
@@ -1207,19 +1214,25 @@ def events():
     for key in allEventg:
         if int(allEventg[key]['Start'][0:4]) > currYear:
             status.append('Upcoming')
-        elif int(allEventg[key]['Start'][0:4]) < currYear:
+        elif int(allEventg[key]['End'][0:4]) < currYear:
             status.append('Ended')
+        elif int(allEventg[key]['Start'][0:4]) < currYear and int(allEventg[key]['End'][0:4]) > currYear:
+            status.append('Ongoing')
         elif int(allEventg[key]['Start'][0:4]) == currYear:
+
             if int(allEventg[key]['Start'][5:7]) > currMonth:
                 status.append('Upcoming')
-            elif int(allEventg[key]['Start'][5:7]) < currMonth:
+            elif int(allEventg[key]['End'][5:7]) < currMonth:
                 status.append('Ended')
+            elif int(allEventg[key]['Start'][5:7]) < currMonth and int(allEventg[key]['End'][5:7]) > currMonth:
+                status.append('Ongoing')
             elif int(allEventg[key]['Start'][5:7]) == currMonth:
+
                 if int(allEventg[key]['Start'][8:]) > currDate:
                     status.append('Upcoming')
-                elif int(allEventg[key]['Start'][8:]) < currDate:
+                elif int(allEventg[key]['End'][8:]) < currDate:
                     status.append('Ended')
-                elif int(allEventg[key]['Start'][8:]) == currDate:
+                elif int(allEventg[key]['Start'][8:]) < currDate and int(allEventg[key]['End'][8:]) > currDate:
                     status.append('Ongoing')
 
     for key in allEventg:
