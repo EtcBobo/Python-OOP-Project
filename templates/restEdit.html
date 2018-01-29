@@ -9,6 +9,8 @@
 
     <h1 id="view">{{ rest['Name'] }}</h1>
     <div class="col-md-12">
+        <br>
+        <br>
     <img id="detailimg" class="img-responsive" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVoweWwEb_UQKtBhQfwA78S2QXub1JHoyCox-rj8B3gnOC9M5_aQ">
     <br>
         <input type="file" id="file"/>
@@ -17,6 +19,7 @@
         <form method="post">
         <div class="form-group col-md-12">
             <div class="row">
+                <br>
             <div  class="col-md-8 col-md-offset-2" class="edit">
                 <div class="form-group col-md-12">
                     {{ render_field(form.desc, class_="form-control") }}
@@ -106,7 +109,7 @@
 
 #detailimg{
     height:300px;
-    width:500px;
+    width:580px;
     margin-left:250px;
 
 }
@@ -134,7 +137,12 @@
     #file{
         margin-left:0px;
     }
+     #submitbtn{
+        width:100%;
+    }
+
 }
+
 </style>
 
     {% endblock %}
