@@ -392,7 +392,7 @@ def data():
     #     list.append(data)
 
     json_string = json.dumps(list)
-    return render_template('data.html' , s_data = json_string)
+    return render_template('data.html' , s_data = json_string, proPic = session['proPic'])
 
 
 @app.route('/viewallRest',methods=['POST','GET'])
