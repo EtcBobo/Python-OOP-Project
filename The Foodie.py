@@ -1185,7 +1185,7 @@ def userProfile():
     for key in allEventg:
         try:
             for key2 in allEventg[key]['Going']:
-                if allEventg[key]['Going']['Name'] == theUser['Username']:
+                if allEventg[key]['Going'][key2] == theUser['Username']:
                     goingEvent.append(allEventg[key])
         except:
             pass
@@ -1391,7 +1391,7 @@ def eventDet(eventName):
             return render_template('eventDet.html', currEventg=currEventg, proPic=proPic)
         goingEventr = root.child('events/'+eventName+'/Going')
         goingEventr.update({
-            'Name':session['username']
+            session['username']:session['username']
         })
         flash('The event has been added to your profile successfully!')
         return redirect(url_for('userProfile'))
