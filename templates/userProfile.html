@@ -8,8 +8,9 @@
     <ul class="nav nav-tabs nav-justified" role="tablist">
     <li class="active"><a href="#tab1" data-toggle="tab">My Profile!</a></li>
     <li><a href="#tab2" data-toggle="tab">My Favourites</a></li>
-    <li><a href="#tab3" data-toggle="tab">My Events</a></li>
+    <li><a href="#tab3" data-toggle="tab">Events Interested</a></li>
     <li><a href="#tab4" data-toggle="tab">My Restaurants</a></li>
+     <li><a href="#tab5" data-toggle="tab">My Events</a></li>
   </ul>
 
 {#    home tab#}
@@ -124,28 +125,78 @@
    <div class="tab-pane" id="tab4">
 
        {% for i in allEdit %}
-        <div class="col-md-12">
-          <div class="col-md-3">
-          <br>
-          <br>
+           <div class="col-md-12">
+     <div class="col-md-3">
+<br><br>
          <img id="detailimg" class="img-responsive" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVoweWwEb_UQKtBhQfwA78S2QXub1JHoyCox-rj8B3gnOC9M5_aQ">
-         <br>
          </div>
      <div class="col-md-7">
          <br>
      <h1>{{ i['Name'] }}</h1>
         <p> {{ i['Description'] }}</p>
      </div>
-    <div class="col-md-2"></div>
-            <a href="/restEdit/{{ i['Name'] }}"><button id="editrest" >Edit Restaurant</button></a>
-            </div>
-       <hr>
+     <div class="col-md-2">
+        <br>
+        <br>
+         <a href="/restEdit/{{ i['Name'] }}"><button id="editrest" >Edit Restaurant</button></a>
+         </div>
+         </div>
+<hr>
+
         {% endfor %}
+    </div>
+
+  <div class="tab-pane" id="tab5">
+       <div class="col-md-12">
+         <div class="col-md-3">
+            <br>
+             <br>
+         <img id="detailimg" class="img-responsive" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVoweWwEb_UQKtBhQfwA78S2QXub1JHoyCox-rj8B3gnOC9M5_aQ">
+            <br>
+         </div>
+        <div class="col-md-8">
+            <br>
+          <h1>Event Name Title</h1>
+          <p> Description of Event</p>
+        </div>
+        <div class="col-md-1">
+        <br>
+        <br>
+         <a href="/eventEdit"><button id="editrest" >Edit Event</button></a>
+         </div>
+         </div>
+    <hr>
+       <div class="col-md-12">
+     <div class="col-md-3">
+<br>
+         <img id="detailimg" class="img-responsive" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVoweWwEb_UQKtBhQfwA78S2QXub1JHoyCox-rj8B3gnOC9M5_aQ">
+     <br>
+     </div>
+     <div class="col-md-7">
+     <h1>Event Name</h1>
+        <p> Description of Event</p>
+     </div>
+    <div class="col-md-2">
+        <br>
+        <br>
+         <a href="/eventEdit"><button id="editrest" >Edit Event</button></a>
+    </div>
+        </div>
+
+
+
+
+
+
+
 
 
 
 
   </div>
+
+
+
         </div>
 
 

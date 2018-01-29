@@ -1,6 +1,11 @@
 {% extends 'layout.html' %}
 
 {% block body %}
+     <div class="container" id="filterdiv">
+         <br>
+        <br>
+     <h1 id="findme">Find Me</h1>
+    <br>
     <div id="map"></div>
 <script>
 
@@ -74,18 +79,33 @@ for (var i=0; i<json_string.length; i++) {
     <style>
     #map {
         height: 470px;
-        width: 1170px;
+        width: 100%;
         margin:auto;
         border-style: solid;
         border-color: white;
     }
     body{
-        background:url("http://hotmillion.ca/wp-content/uploads/2015/03/Best-Indian-Food-Wallpaper.jpg");
         background-color: rgba(255,255,255,0.2);
         background-blend-mode: lighten;
         background-repeat: no-repeat;
         opacity:0.9;
 }
+
+    #findme{
+        font-weight: bold;
+    font-style: italic;
+    border-bottom: 2px solid darkred;
+    margin-bottom: 20px;
+    font-size: 15px;
+    padding-bottom: 3px;
+    font-size:200%;
+    }
+
+    #filterdiv{
+         align: center;
+         background-color: white;
+         display:block;
+    }
 </style>
 
 {% endblock %}

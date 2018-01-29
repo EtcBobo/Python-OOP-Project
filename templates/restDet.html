@@ -7,7 +7,7 @@
     <br>
 <div id="viewdiv">
 
-    <h1 id="view">Details of {{ restDetail['Name'] }}    <p id="heart" class="glyphicon glyphicon-heart-empty"><span ></span></p></h1>
+    <h1 id="view">Details of {{ restDetail['Name'] }}    <button type="submit" class="box-btn"><span id="heart" class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span></h1>
     <div class="form-group col-md-12" id="filterdiv" >
       <span class="info2"><p class="glyphicon glyphicon-usd"></p> {{ restDetail['Price'] }}</span>
         <span class="verticalLine"></span>
@@ -46,8 +46,6 @@
 
 
                      <ul id="opdays">Operating Days:
-
-                     <ul>Operating Days:
                          {% for i in (restDetail['Days']) %}
 
                          <br>
@@ -144,6 +142,12 @@ function showcomments(recentcomments) {
        else
           e.style.display = 'block';
     }
+
+$(function($) {
+  $(document).on('click', '.box-btn', function(event) {
+    $(this).find('.glyphicon').toggleClass('red').toggleClass('glyphicon-heart-empty glyphicon-heart');
+  });
+});
 
 </script>
 
@@ -270,9 +274,25 @@ function showcomments(recentcomments) {
 
    }
 
-   #heart{
+   .box-btn {
+  float: left;
+  background: transparent;
+  font-size: 30px;
+  color: #4D4E56;
+  font-weight: 300;
+  cursor: pointer;
+  border-radius: 2px;
+  line-height: 0.5;
+  border: none;
+  outline: none;
        float:right;
-   }
+}
+#heart {
+  transition:transparent .3s linear;
+}
+.box-btn .red {
+  color: red;
+}
 
 
    #userpic{

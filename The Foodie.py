@@ -1187,6 +1187,10 @@ def edit():
 def viewevent():
     return render_template('eventDet.html')
 
+@app.route('/eventEdit')
+def editevent():
+    return render_template('eventEdit.html')
+
 if __name__ == '__main__':
     socketio.run(app, debug=True)
 
