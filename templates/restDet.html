@@ -84,8 +84,11 @@
 <div class="form-group col-md-12">
     {{ share.create(title='Share with: ') }}
 {#-----------------------------------------------------------------------------#}
-        <div class="form-group col-md-12">
-           <h2 id="pastcomments">Past Comments</h2>
+<br>
+<a class='recentc' onclick="showcomments(recentcomments)">view recent comments >> </a>
+
+        <div class="form-group col-md-12" id="recentcomments">
+           <h2 id="pastcomments">Recent Comments</h2>
        {% for i in range(comments | length) %}
            <div class="form-group col-md-12">
                <br>
@@ -99,7 +102,7 @@
                    {% endfor %}
            {{ avgratg }}
            </div>
-           </div>
+        </div>
        {% endfor %}
 {#        <table class="table table-bordered">#}
 {#        <thead>#}
@@ -133,7 +136,16 @@
     </div>
 </div>
 </div>
+<script>
+function showcomments(recentcomments) {
+   var e = document.getElementById('recentcomments');
+       if(e.style.display == 'block')
+          e.style.display = 'none';
+       else
+          e.style.display = 'block';
+    }
 
+</script>
 
 
    <style>
@@ -150,6 +162,10 @@
     }
     .days{
          list-style-type: none;
+    }
+
+    #recentcomments{
+        display:none;
     }
 
     #view{
@@ -275,13 +291,9 @@
         display: inline-block;
        text-align:center;
    }
-@media (max-width: 991px) {
-
-
-
-
+.recentc{
+   float:right;
 }
-
 
 
 
