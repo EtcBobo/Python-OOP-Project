@@ -1174,6 +1174,7 @@ def events():
 
     status = []
     count = 0
+
     for key in allEventg:
         if int(allEventg[key]['Start'][0:4]) > currYear:
             status.append('Upcoming')
@@ -1193,11 +1194,23 @@ def events():
                     status.append('Ongoing')
 
     for key in allEventg:
-        eventr = root.child('events/'+allEventg[key]['Name'])
+        eventr = root.child('events/'+key)
         eventr.update({
             'Status':status[count]
         })
         count = count +1
+
+    for key in allEventg:
+        count2 = 0
+        try:
+            for key2 in allEventg[key]['Going']:
+                count2 = count2 + 1
+        except:
+            count2 = 0
+        peopler = root.child('events/'+key)
+        peopler.update({
+            'People':count2
+        })
 
 
 
@@ -1205,7 +1218,8 @@ def events():
     ongoing = []
     upcoming = []
     ended = []
-
+    allEventr = root.child('events')
+    allEventg = allEventr.get()
 
     for key in allEventg:
         theList.append(allEventg[key])
@@ -1327,15 +1341,16 @@ def eventDet(eventName):
     form = EventForm(request.form)
     if request.method == 'POST':
         try:
-            user = session['Username']
+            user = session['username']
         except:
             flash('You must be logged in to sign up for the event')
             return render_template('eventDet.html', currEventg=currEventg, proPic=proPic)
         goingEventr = root.child('events/'+eventName+'/Going')
         goingEventr.update({
-            'Name':session['Username']
+            'Name':session['username']
         })
-
+        flash('The event has been added to your profile successfully!')
+        return redirect(url_for('userProfile'))
     return render_template('eventDet.html',currEventg=currEventg,proPic=proPic)
 
 
