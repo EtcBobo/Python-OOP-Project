@@ -528,7 +528,9 @@ def addRest():
         address = form.address.data
         days = form.days.data
 
-        print(days)
+        if days == []:
+            days = {'0':'Everyday'}
+            print('this')
 
         res = Restaurant(name,desc,location,price,foodType,openH,closingH,address)
 
