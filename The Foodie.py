@@ -252,35 +252,29 @@ def home():
 
             fireData_low = fireData.lower()                     #lowercase
 
-            fireData_sep = fireData_low.split()                 #split lowercase (for name that got space)
-
-            fireData_sep_first = fireData_low.split()[0]        #get first split value
-
-            fireData_2words = fireData_sep_first[0:2]           #get frist 2 words
-
-            fireData_3words = fireData_sep_first[0:3]           #get first 3 words
-
-            fireData_4words = fireData_sep_first[0:4]           #get first 4 words
-
-            fireData_5words = fireData_sep_first[0:5]           # get first 4 words
-
-            if fireData_low == name.lower():                    #exact match
+            if name.lower() in fireData_low:                    #if user input is same with words in firebase, the result will come out
                 nameList.append(firebaseData[key])
 
-            if name.lower() in fireData_sep:                    #split value
-                nameList.append(firebaseData[key])
 
-            if name.lower() in fireData_2words:                 #first 2 words
-                nameList.append(firebaseData[key])
-
-            elif name.lower() in fireData_3words:               #first 3 words if use if got two same results
-                nameList.append(firebaseData[key])
-
-            elif name.lower() in fireData_4words:               #first 4 words
-                nameList.append(firebaseData[key])
-
-            elif name.lower() in fireData_5words:               #first 4 words
-                nameList.append(firebaseData[key])
+            #---------------------------------Old Codes---------------------------------------------------------#
+            # fireData_sep = fireData_low.split()                 #split lowercase (for name that got space)
+            # fireData_sep_first = fireData_low.split()[0]        #get first split value
+            # fireData_2words = fireData_sep_first[0:2]           #get frist 2 words
+            # fireData_3words = fireData_sep_first[0:3]           #get first 3 words
+            # fireData_4words = fireData_sep_first[0:4]           #get first 4 words
+            # fireData_5words = fireData_sep_first[0:5]           # get first 4 words
+            # if fireData_low == name.lower():                    #exact match
+            #     nameList.append(firebaseData[key])
+            # if name.lower() in fireData_sep:                    #split value
+            #     nameList.append(firebaseData[key])
+            # if name.lower() in fireData_2words:                 #first 2 words
+            #     nameList.append(firebaseData[key])
+            # elif name.lower() in fireData_3words:               #first 3 words if use if got two same results
+            #     nameList.append(firebaseData[key])
+            # elif name.lower() in fireData_4words:               #first 4 words
+            #     nameList.append(firebaseData[key])
+            # elif name.lower() in fireData_5words:               #first 4 words
+            #     nameList.append(firebaseData[key])
 
         session['filtered'] = nameList
         return redirect(url_for('view'))
