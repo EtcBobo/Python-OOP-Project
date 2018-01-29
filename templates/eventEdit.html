@@ -7,65 +7,50 @@
     <br>
     <div id="viewdiv">
 
-         <h1 id="view">Edit Event</h1>
+         <h1 id="view">Edit {{ eventName }}</h1>
+    <form method="post">
     <div class="col-md-12">
     <img id="detailimg" class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
          <div class="row">
             <div  class="col-md-8 col-md-offset-4" class="edit">
-                <div class="form-group col-md-12">
-                    <br>
-                     Event Name:<br>
-                    <input type="text" name="" value="tako">
+                <div class="form-group col-md-12" class="eventDesc">
+                    {{ render_field(form.eventDescription, class_="form-control") }}
                 </div>
 
-                <div class="form-group col-md-12" class="desc">
-                    Description:<br>
-                    <input type="text" name="" value="Description">
+                <div class="form-group col-md-12" class="'eventLocation">
+                    {{ render_field(form.eventLocation, class_="form-control") }}
                 </div>
 
-                <div class="form-group col-md-12">
-                    Place where your event is held:<br>
-                     <input type="text" name="" value="NYP">
+                <div class="form-group col-md-12" class="eventAddress">
+                    {{ render_field(form.eventAddress, class_="form-control") }}
                 </div>
 
-                <div class="form-group col-md-12" class="location">
-                    Location:<br>
-                    <input type="text" name="" value="North">
+                <div class="form-group col-md-6" class="startDate">
+                    {{ render_field(form.startDate, class_="form-control") }}
                 </div>
 
-                <div class="form-group col-md-12" class="type">
-                    Entry Fee:<br>
-                    <input type="text" name="" value="None">
+                <div class="form-group col-md-6" class="endDate">
+                    {{ render_field(form.endDate, class_="form-control") }}
                 </div>
 
-                <div class="form-group col-md-6" class="price">
-                     Start Date(e.g.2018-01-12)*:<br>
-                    <input type="text" name="" value="4">
+                 <div class="form-group col-md-6" class="startTime">
+                    {{ render_field(form.startTime, class_="form-control") }}
                 </div>
 
-                <div class="form-group col-md-6" class="openhr">
-                     End Date(e.g.2018-01-12)*:<br>
-                    <input type="text" name="" value="10AM">
+                 <div class="form-group col-md-6" class="startTimeMin">
+                    {{ render_field(form.startTimeMin, class_="form-control") }}
                 </div>
 
-                <div class="form-group col-md-6">
-                     Start Time:<br>
-                    <input type="text" name="" value="10AM">
+                 <div class="form-group col-md-6" class="endTime">
+                    {{ render_field(form.endTime, class_="form-control") }}
                 </div>
 
-                <div class="form-group col-md-6">
-                     Start Time(Min):<br>
-                    <input type="text" name="" value="10">
+                 <div class="form-group col-md-6" class="endTimeMin">
+                    {{ render_field(form.endTimeMin, class_="form-control") }}
                 </div>
 
-                <div class="form-group col-md-6">
-                     End Time:<br>
-                    <input type="text" name="" value="8PM">
-                </div>
-
-                <div class="form-group col-md-6">
-                     End Time(Min):<br>
-                    <input type="text" name="" value="30">
+                <div class="form-group col-md-12" class="ticket">
+                    {{ render_field(form.ticket, class_="form-control") }}
                 </div>
 
                 <br>
@@ -83,7 +68,7 @@
             </div>
         </div>
 
-
+</form>
 
 
 

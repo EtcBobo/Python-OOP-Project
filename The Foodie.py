@@ -528,6 +528,8 @@ def addRest():
         address = form.address.data
         days = form.days.data
 
+        print(days)
+
         res = Restaurant(name,desc,location,price,foodType,openH,closingH,address)
 
         restFirer = root.child('restaurants')
@@ -867,6 +869,110 @@ def restPage(restName):
     return render_template('restDet.html',restDetail = restDetail, form=form,comments=allComments,users=allUsers,ratings=allRatings,proPic=proPic, pic=allPic)
 
 
+
+@app.route('/eventEdit/<eventName>',methods=['POST','GET'])
+def eventEdit(eventName):
+    try:
+        proPic = session['proPic']
+    except KeyError:
+        session['proPic'] = ''
+
+    eventName = eventName
+    theEventr = root.child('events/'+eventName)
+    theEventg = theEventr.get()
+
+    class EventForm2(Form):
+        eventDescription = TextAreaField('Desciption',default=theEventg['Description'])
+        eventLocation = SelectField(u'Location',
+                                    choices=[('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),
+                                             ('Central', 'Central')],default=theEventg['Location'])
+        eventAddress = TextAreaField('Place where your event is held',default=theEventg['Address'])
+        ticket = IntegerField('Entry Fee',default=theEventg['ticket'])
+        startDate = StringField('Start date (e.g.2018-01-12)*',default=theEventg['Start'])
+        endDate = StringField('End date (e.g.2018-01-12)*',default=theEventg['End'])
+        startTime = SelectField(u'Start Time(Hr)*',
+                                choices=[('12 AM', '12 AM'), ('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'),
+                                         ('4 AM', '4 AM'),
+                                         ('5 AM', '5 AM'), ('6 AM', '6 AM'), ('7 AM', '7 AM'), ('8 AM', '8 AM'),
+                                         ('9 AM', '9 AM'), ('10 AM', '10 AM'), ('11 AM', '11 AM'), ('12 PM', '12 PM'),
+                                         ('1 PM', '1 PM'), ('2 PM', '2 PM'), ('3 PM', '3 PM'), ('4 PM', '4 PM'),
+                                         ('5 PM', '5 PM'), ('6 PM', '6 PM'), ('7 PM', '7 PM'),
+                                         ('8 PM', '8 PM'), ('9 PM', '9 PM'), ('10 PM', '10 PM'), ('11 PM', '11 PM')],default=theEventg['Time Start'])
+        endTime = SelectField(u'End Time(Hr)*',
+                              choices=[('12 AM', '12 AM'), ('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'),
+                                       ('4 AM', '4 AM'),
+                                       ('5 AM', '5 AM'), ('6 AM', '6 AM'), ('7 AM', '7 AM'), ('8 AM', '8 AM'),
+                                       ('9 AM', '9 AM'), ('10 AM', '10 AM'), ('11 AM', '11 AM'), ('12 PM', '12 PM'),
+                                       ('1 PM', '1 PM'), ('2 PM', '2 PM'), ('3 PM', '3 PM'), ('4 PM', '4 PM'),
+                                       ('5 PM', '5 PM'), ('6 PM', '6 PM'), ('7 PM', '7 PM'),
+                                       ('8 PM', '8 PM'), ('9 PM', '9 PM'), ('10 PM', '10 PM'), ('11 PM', '11 PM')],default=theEventg['Time End'])
+        startTimeMin = SelectField(u'Start Time(Min)*',
+                                   choices=[('00', '00'), ('05', '05'), ('10', '10'), ('15', '15'), ('20', '20'),
+                                            ('25', '25'), ('30', '30'), ('35', '35'),
+                                            ('40', '40'), ('45', '45'), ('50', '50'), ('55', '55')],default=theEventg['Min Start'])
+        endTimeMin = SelectField(u'End Time(Min)*',
+                                 choices=[('00', '00'), ('05', '05'), ('10', '10'), ('15', '15'), ('20', '20'),
+                                          ('25', '25'), ('30', '30'), ('35', '35'),
+                                          ('40', '40'), ('45', '45'), ('50', '50'), ('55', '55')],default=theEventg['Min End'])
+
+    form = EventForm2(request.form)
+    if request.method == 'POST':
+        eventDescription = form.eventDescription.data
+        eventLocation = form.eventLocation.data
+        eventAddress = form.eventAddress.data
+        startDate = form.startDate.data
+        endDate = form.endDate.data
+        startTime = form.startTime.data
+        endTime = form.endTime.data
+        startTimeMin = form.startTimeMin.data
+        endTimeMin = form.endTimeMin.data
+        ticket = form.ticket.data
+
+        try:
+            user = session['username']
+        except:
+            flash('You must be logged in to add an Event')
+            return render_template('eventEdit.html', form=form, proPic=session['proPic'])
+
+        try:
+            theCheck = True
+            if int(startDate[0:4]) == int(endDate[0:4]):
+                if int(startDate[5:7]) == int(endDate[5:7]):
+                    if int(startDate[8:]) > int(endDate[8:]):
+                        theCheck = False
+                elif int(startDate[5:7]) > int(endDate[5:7]):
+                    theCheck = False
+            elif int(startDate[0:4]) > int(endDate[0:4]):
+                theCheck = False
+
+            if theCheck == False:
+                flash('The End Date cannot be before the Start Date')
+                return render_template('eventEdit.html', form=form, proPic=session['proPic'], eventName=eventName)
+        except:
+            flash('Please follow the example date format')
+            return render_template('eventEdit.html', form=form, proPic=session['proPic'], eventName=eventName)
+
+        if ticket == '':
+            ticket = 0
+
+        theEventr.update({
+            'Description': eventDescription,
+            'Location': eventLocation,
+            'Address': eventAddress,
+            'Start': startDate,
+            'End': endDate,
+            'Time Start': startTime,
+            'Time End': endTime,
+            'Min Start': startTimeMin,
+            'Min End': endTimeMin,
+            'ticket': ticket
+        })
+        flash('You have successfully edited your Event!')
+        return redirect(url_for('home'))
+
+    return render_template('eventEdit.html', form=form, proPic=session['proPic'],eventName=eventName)
+
+
 @app.route('/restEdit/<restName>',methods=['POST','GET'])
 def restEdit(restName):
     try:
@@ -877,7 +983,7 @@ def restEdit(restName):
     theRestr = root.child('restaurants/'+restName)
     theRestg = theRestr.get()
 
-    class RestForm(Form):
+    class RestForm2(Form):
         desc = TextAreaField('Desciption', default=theRestg['Description'])
 
         location = SelectField(u'Location',
@@ -912,7 +1018,7 @@ def restEdit(restName):
 
         address = TextAreaField('Address',default=theRestg['Address'])
 
-    form = RestForm(request.form)
+    form = RestForm2(request.form)
     if request.method == 'POST':
 
         desc = form.desc.data
@@ -1232,23 +1338,9 @@ def eventDet(eventName):
 
     return render_template('eventDet.html',currEventg=currEventg,proPic=proPic)
 
-@app.route('/editRest')
-def edit():
-    return render_template('restEdit.html')
-# @app.route('/events')
-# def event():
-#     try:
-#         proPic = session['proPic']
-#     except KeyError:
-#         proPic =''
-#     return render_template('events.html',proPic=proPic)
-@app.route('/eventDet')
-def viewevent():
-    return render_template('eventDet.html')
 
-@app.route('/eventEdit')
-def editevent():
-    return render_template('eventEdit.html')
+
+
 
 if __name__ == '__main__':
     socketio.run(app, debug=True)
