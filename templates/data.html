@@ -4,7 +4,7 @@
      <div class="container" id="filterdiv">
          <br>
         <br>
-     <h1 id="findme">Find Me</h1>
+     <h1 id="findme">Restaurants Near You</h1>
     <br>
     <div id="map"></div>
 </div>
@@ -28,6 +28,7 @@
                   infoWindow.setContent('Your Location');
                   infoWindow.open(map);
                   map.setCenter(pos);
+
               }, function () {
                   handleLocationError(true, infoWindow, map.getCenter());
               });
