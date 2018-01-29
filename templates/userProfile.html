@@ -39,7 +39,7 @@
             </div>
             <div class="col-md-2"></div>
         <a href="/userEdit">
-                  <button id="edit" onclick="clickEdit()">Edit profile</button></a>
+                  <button id="edit" >Edit profile</button></a>
             </div>
     </div>
 
@@ -82,7 +82,7 @@
      </div>
 
     <div class="tab-pane" id="tab3">
-        {% for i in allEdit %}
+        {% for i in goingEvent %}
 
           <div class="col-md-12">
      <div class="col-md-3">
@@ -93,8 +93,8 @@
      </div>
      <div class="col-md-7">
          <br>
-     <h1>Event Name</h1>
-        <p> Description of Event</p>
+     <h1><a href="/events/{{ i['Name'] }}">{{ i['Name'] }}</a></h1>
+        <p> {{ i['Description'] }}</p>
      </div>
     <div class="col-md-2">
         <br>
@@ -116,7 +116,7 @@
          </div>
      <div class="col-md-7">
          <br>
-     <h1>{{ i['Name'] }}</h1>
+     <h1><a href="/restDet/{{ i['Name'] }}">{{ i['Name'] }}</a> </h1>
         <p> {{ i['Description'] }}</p>
      </div>
      <div class="col-md-2">
@@ -131,6 +131,8 @@
     </div>
 
   <div class="tab-pane" id="tab5">
+      {% for i in allEvent %}
+
        <div class="col-md-12">
          <div class="col-md-3">
             <br>
@@ -140,43 +142,17 @@
          </div>
         <div class="col-md-8">
             <br>
-          <h1>Event Name Title</h1>
-          <p> Description of Event</p>
+          <h1><a href="/events/{{ i['Name'] }}">{{ i['Name'] }}</a> </h1>
+          <p> {{ i['Description'] }}</p>
         </div>
         <div class="col-md-1">
         <br>
         <br>
-         <a href="/eventEdit"><button id="editrest" >Edit Event</button></a>
+         <a href="/eventEdit/{{ i['Name'] }}"><button id="editrest" >Edit Event</button></a>
          </div>
          </div>
     <hr>
-       <div class="col-md-12">
-     <div class="col-md-3">
-<br>
-         <img id="detailimg" class="img-responsive" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVoweWwEb_UQKtBhQfwA78S2QXub1JHoyCox-rj8B3gnOC9M5_aQ">
-     <br>
-     </div>
-     <div class="col-md-7">
-     <h1>Event Name</h1>
-        <p> Description of Event</p>
-     </div>
-    <div class="col-md-2">
-        <br>
-        <br>
-         <a href="/eventEdit"><button id="editrest" >Edit Event</button></a>
-    </div>
-        </div>
-
-
-
-
-
-
-
-
-
-
-
+{% endfor %}
   </div>
 
 
@@ -184,12 +160,7 @@
         </div>
 
 
-    <script>
-    function editRest(){
 
-    }
-
-    </script>
 
 
 

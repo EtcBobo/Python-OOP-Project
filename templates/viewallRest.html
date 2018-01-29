@@ -26,7 +26,9 @@
     <div class="form-group col-md-4"><img class="homerec" class='img-responsive' src="http://clipartbarn.com/wp-content/uploads/2016/12/Restaurant-clipart-page-1.jpg">
         <h3><a href="/restDet/{{ i['Name'] }}">{{ i['Name'] }}</a></h3>
         <p>{{ i['Description'] }}</p>
-        <p></p>
+        <br>
+        <p class="avg">Avg Ratings:</p>
+        <p>Avg Price:</p>
     </div>
 
     {% endfor %}
@@ -62,6 +64,7 @@
     font-size:200%;
 
     }
+
 
      #sortbtn{
          border-radius: 4px;
