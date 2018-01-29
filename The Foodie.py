@@ -404,6 +404,10 @@ def uploadtest():
 
 @app.route('/data')
 def data():
+    try:
+        proPic = session['proPic']
+    except KeyError:
+        proPic =''
     list =[]
     # data = firebase.FirebaseApplication("https://jsmap-a2929.firebaseio.com/")
     # firebaseData = data.get('location', None)
@@ -418,7 +422,10 @@ def data():
     #     list.append(data)
 
     json_string = json.dumps(list)
-    return render_template('data.html' , s_data = json_string, proPic = session['proPic'])
+
+
+
+    return render_template('data.html' , s_data = json_string, proPic = 'proPic')
 
 
 @app.route('/viewallRest',methods=['POST','GET'])
