@@ -120,8 +120,8 @@ class EventForm(Form):
     eventLocation = SelectField(u'Location', choices=[('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),('Central','Central')])
     eventAddress = TextAreaField('Place where your event is held')
     ticket = IntegerField('Entry Fee')
-    startDate = StringField('Start date (e.g.2018-01-12)*')
-    endDate = StringField('End date (e.g.2018-01-12)*')
+    startDate = StringField('Start date (e.g.2018-01-12,2018.01.12,2018/01/12)*')
+    endDate = StringField('End date (e.g.2018-01-12,2018.01.12,2018/01/12)*')
     startTime = SelectField(u'Start Time(Hr)*',
                            choices=[('12 AM', '12 AM'),('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'), ('4 AM', '4 AM'),
                                     ('5 AM', '5 AM'), ('6 AM', '6 AM'), ('7 AM', '7 AM'), ('8 AM', '8 AM'),
