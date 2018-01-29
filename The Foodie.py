@@ -208,6 +208,31 @@ def home():
     randRec.append(recommend[option3])
 
 
+    list= []
+    allRestr = root.child('restaurants')
+    allRestg = allRestr.get()
+    for key in allRestg:
+        list.append(allRestg[key])
+
+    allRat = {}
+    for key in list:
+        allRat[key['Name']] = float(key['Average Rating'])
+
+    newList = [(k, allRat[k]) for k in sorted(allRat, key=allRat.get)]
+    newList2 = []
+    for key in newList:
+        for key2 in list:
+            if key[0] == key2['Name']:
+                newList2.insert(0, key2)
+
+
+    newList3 = []
+    newList3.append(newList2[0])
+    newList3.append(newList2[1])
+    newList3.append(newList2[2])
+    list = newList3
+
+
     nameList = []
     form = theSearch(request.form)
     if request.method == 'POST':
@@ -233,7 +258,7 @@ def home():
 
         session['filtered'] = nameList
         return redirect(url_for('view'))
-    return render_template('home.html', recommend=randRec , form=form, proPic = proPic)
+    return render_template('home.html', recommend=randRec , form=form, proPic = proPic, hnp=list)
 
 
 @app.route('/chat')
@@ -403,7 +428,7 @@ def viewall():
         elif sort == 'Lowest Price':
             allPrice = {}
             for key in list:
-                allPrice[key['Name']] = key['Price']
+                allPrice[key['Name']] = int(key['Price'])
 
             newList = [(k, allPrice[k]) for k in sorted(allPrice, key=allPrice.get)]
             newList2 = []
@@ -415,7 +440,7 @@ def viewall():
         elif sort == 'Ratings (Higest to Lowest)':
             allRat = {}
             for key in list:
-                allRat[key['Name']] = key['Average Rating']
+                allRat[key['Name']] = int(key['Average Rating'])
 
             newList = [(k, allRat[k]) for k in sorted(allRat, key=allRat.get)]
             newList2 = []
@@ -456,7 +481,7 @@ def view():
         elif sort == 'Lowest Price':
             allPrice = {}
             for key in list:
-                allPrice[key['Name']] = key['Price']
+                allPrice[key['Name']] = int(key['Price'])
 
             newList = [(k, allPrice[k]) for k in sorted(allPrice, key=allPrice.get)]
             newList2 = []
@@ -468,7 +493,7 @@ def view():
         elif sort == 'Ratings (Higest to Lowest)':
             allRat = {}
             for key in list:
-                allRat[key['Name']] = key['Average Rating']
+                allRat[key['Name']] = float(key['Average Rating'])
 
             newList = [(k, allRat[k]) for k in sorted(allRat, key=allRat.get)]
             newList2 = []
@@ -1007,7 +1032,23 @@ def userProfile():
         if allRestg[key]['User'] == theUser['Username']:
             allEdit.append(allRestg[key])
 
-    return render_template('userProfile.html' , user = theUser, proPic = session['proPic'],allEdit=allEdit)
+    allEventr = root.child('events')
+    allEventg =allEventr.get()
+    allEvent = []
+    for key in allEventg:
+        if allEventg[key]['User'] == theUser['Username']:
+            allEvent.append(allEventg[key])
+
+    goingEvent = []
+    for key in allEventg:
+        try:
+            for key2 in allEventg[key]['Going']:
+                if allEventg[key]['Going']['Name'] == theUser['Username']:
+                    goingEvent.append(allEventg[key])
+        except:
+            pass
+
+    return render_template('userProfile.html' , user = theUser, proPic = session['proPic'],allEdit=allEdit,allEvent=allEvent,goingEvent=goingEvent)
 
 
 @app.route('/events', methods=['POST','GET'])
@@ -1107,6 +1148,12 @@ def events():
         ticket = form.ticket.data
 
         try:
+            user = session['username']
+        except:
+            flash('You must be logged in to add an Event')
+            return redirect(url_for('events'))
+
+        try:
             theCheck = True
             if int(startDate[0:4]) == int(endDate[0:4]):
                 if int(startDate[5:7]) == int(endDate[5:7]):
@@ -1152,7 +1199,8 @@ def events():
             'Min Start': event.get_startTimeMin(),
             'Min End': event.get_endTimeMin(),
             'ticket': event.get_ticket(),
-            'People': 0
+            'People': 0,
+            'User':user
         })
         flash('You have added a new event!')
         return redirect(url_for('home'))
@@ -1170,6 +1218,17 @@ def eventDet(eventName):
     currEventr = root.child('events/'+eventName)
     currEventg = currEventr.get()
 
+    form = EventForm(request.form)
+    if request.method == 'POST':
+        try:
+            user = session['Username']
+        except:
+            flash('You must be logged in to sign up for the event')
+            return render_template('eventDet.html', currEventg=currEventg, proPic=proPic)
+        goingEventr = root.child('events/'+eventName+'/Going')
+        goingEventr.update({
+            'Name':session['Username']
+        })
 
     return render_template('eventDet.html',currEventg=currEventg,proPic=proPic)
 
