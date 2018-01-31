@@ -19,6 +19,7 @@ from flask_googlemaps import Map
 from flask_share import Share
 import json
 import datetime
+import feedparser
 
 
 #pip install flask-socketio
@@ -280,6 +281,48 @@ def home():
         session['filtered'] = nameList
         return redirect(url_for('view'))
     return render_template('home.html', recommend=randRec , form=form, proPic = proPic, hnp=list)
+
+
+
+@app.route('/newsFeed')
+def newsFeed():
+
+    try:
+        proPic = session['proPic']
+    except KeyError:
+        proPic =''
+
+
+    def parseRSS(rss_url):
+        return feedparser.parse(rss_url)
+
+    def getHeadlines(rss_url):
+        headlines = []
+
+        feed = parseRSS(rss_url)
+        for newsitem in feed['items']:
+            headlines.append(newsitem)
+        return headlines
+
+
+    allheadlines = []
+
+    newsurls = {'ladyiron':'http://www.ladyironchef.com/rss'}
+
+    for key, url in newsurls.items():
+        allheadlines.extend(getHeadlines(url))
+
+
+    list=[]
+    for hl in allheadlines:
+        a = hl['link']
+        list.append(a)
+    print(list)
+
+    return render_template('newsFeed.html', list=list)
+
+
+
 
 
 @app.route('/chat')
