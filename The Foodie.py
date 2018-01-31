@@ -243,10 +243,6 @@ def home():
 
         data = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
 
-
-        counter = 9999
-
-
         firebaseData = data.get('restaurants', None)
 
         for key in firebaseData:
@@ -346,7 +342,6 @@ def handle_my_custom_event( json ):
 class theSearch(Form):
     name = StringField('')   # line you will see above search form
     plswork = StringField('try')
-
 
 
 @app.route('/filter',methods=['POST','GET'])
@@ -802,6 +797,9 @@ def heatmap():
 
 
     return render_template('heatmap.html', Centralmap1= centralmap1)
+
+
+
 
 @app.route('/restDet/<restName>',methods=['POST','GET'])
 def restPage(restName):
