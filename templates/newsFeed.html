@@ -1,0 +1,10 @@
+{% block body %}
+
+<ul>
+     {% for item in list %}
+        <li>{{ item }}</li>
+       <li><a href= {{ item}}>{{ item }}</a></li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
