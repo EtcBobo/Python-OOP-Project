@@ -5,22 +5,32 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
     integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
+
+</head>
+{% block body %}
     <style>
-      div.msg_bbl {
+    div.msg_bbl {
         background-color: #ddd;
         padding: 5px 10px;
         border-radius: 10px;
         color: #555;
         margin-bottom: 5px;
-      }
-        #profilediv {
-         align: center;
-         background-color: white;
-         display:block;
-     }
-        @media (max-width: 991px) {
-    .edit{
-        float:left;
+        }
+    body{
+        background:url("http://hotmillion.ca/wp-content/uploads/2015/03/Best-Indian-Food-Wallpaper.jpg");
+        background-color: rgba(255,255,255,0.2);
+        background-blend-mode: lighten;
+        background-repeat: no-repeat;
+        opacity:0.9;
+    }
+    #profilediv {
+        align: center;
+        background-color: white;
+        display:block;
+    }
+    @media (max-width: 991px) {
+        .edit{
+            float:left;
     }
 
     #profilediv{
@@ -28,8 +38,6 @@
     }}
 
     </style>
-</head>
-{% block body %}
     <div class="container" id="profilediv">
     <br>
     <br>
@@ -65,33 +73,40 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
-    <script>
-      var socket = io.connect( 'http://' + document.domain + ':' + location.port )
+    <script> //emit data means send data according to its events
+
+      var socket = io.connect( 'http://' + document.domain + ':' + location.port ) //The socket variable is initialized with a SocketIO connection to the server
       // broadcast a message
-      socket.on( 'connect', function() {
-        socket.emit( 'my event', {
-          data: 'User Connected'
+      socket.on( 'connect', function() {  //The socket.on() syntax is used in the client side to define an event handler. connect is a socket event that occurs when a user connects to the network, then this event is raised and we can capture this event
+
+        socket.emit( 'my event', { //add a custom event. socket.emit(my event) then on the second parameter we are gonna pass the data that we are trying to send to the server.
+          data: 'User Connected' // emit allows us to emit any event to both the client and the server
         } )
         var form = $( 'form' ).on( 'submit', function( e ) {
           e.preventDefault()
-            {{ currentUser }}
+{#            {{ currentUser }}#}
           let user_name = $( 'input.username' ).val() + ':'
+            //means that calling the input feild that we created wit a class username and then selecting that input feild using its class username, and then its value.
+          {#  let user_name = {{ currentUser }}.val() + ':'#}
           let user_input = $( 'input.message' ).val()
           socket.emit( 'my event', {
             user_name : user_name,
             message : user_input
           } )
           // empty the input field
-          $( 'input.message' ).val( '' ).focus()
+          $( 'input.message' ).val( '' ).focus() //we want to empty the message feild when we submit the form///
+
         } )
       } )
       // capture message
       socket.on( 'my response', function( msg ) {
-        console.log( msg )
-        if( typeof msg.user_name !== 'undefined' ) {
+        console.log( msg ) //console.log sends the data to the console log.
+
+        if( typeof msg.user_name !== 'undefined' ) { //if we have a msg and it is not undefiend..we are going to remove the h1 and we will append all the new data to our msg wrapper
           $( 'h1' ).remove()
           $( 'div.message_holder' ).append( '<div class="msg_bbl"><b style="color: #000">'+msg.user_name+'</b> '+msg.message+'</div>' )
         }
       } )
     </script>
 {% endblock %}
+</div>
