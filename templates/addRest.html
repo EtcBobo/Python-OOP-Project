@@ -2,11 +2,8 @@
 
 {% block body %}
     {% from "includes/_formhelper.html" import render_field %}
-<div class="container" id="profilediv">
-    <br>
-    <br>
-    <h1 id="addrest">Recommend a New restaurant!</h1>
-    <p id="rest">Do you feel that that restaurants you visited deserve more recognition? Help them by adding the restaurant informations below!</p>
+<div class="container">
+     <div class="form-group col-md-12" id="add">Recommend A Restaurant!</div>
     <br>
     <br>
     <form method='POST' >
@@ -14,8 +11,8 @@
             <div class="row">
             <div  class="col-md-8 col-md-offset-2" class="edit">
                 <div class="form-group col-md-12">
+                    <br>
                 <img id="img" src="http://clipartbarn.com/wp-content/uploads/2016/12/Restaurant-clipart-page-1.jpg" width="304" height="304">
-                <br>
                 <br>
                 <input type="file" id="file"/>
                 <br>
@@ -196,20 +193,29 @@
 <style>
 
 
-      #addrest{
-         font-weight: bold;
-    font-style: italic;
-    border-bottom: 2px solid darkred;
-    margin-bottom:20px;
-    font-size: 15px;
-    padding-bottom: 3px;
-    font-size:200%;
-    }
-#profilediv {
-         align: center;
-         background-color: white;
-         display:block;
+      #add{
+          display: block;
+    font-size: 150%;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+ text-align: center;
      }
+
+{#    #add::before{#}
+{#          content: '';#}
+{#    height: 3px;#}
+{#    width: 250px;#}
+{#    background-color: darkred;#}
+{#    position: absolute;#}
+{#    bottom:0;#}
+{#    margin-top:20px;#}
+{#    left: 50%;#}
+{#    -webkit-transform: translateX(-50%);#}
+{#    -ms-transform: translateX(-50%);#}
+{#    transform: translateX(-50%);#}
+{#    }#}
 
     form{
         display: inline-block;
@@ -224,8 +230,28 @@
     font-size: 14px;
     text-align: center;
         height: 42px;
-        width:300px;
+        width:50%;
     }
+
+    #file{
+         margin-left:250px;
+
+    }
+
+    #img{
+    margin-left:200px;
+}
+
+    @media(max-width:991px){
+    #img{
+        margin-left:0px;
+    }
+    #file{
+        margin-left:0px;
+    }
+}
+
+
 #rest{
    font-style: italic;
 }
@@ -235,20 +261,20 @@
         float:left;
     }
 
-    #profilediv{
-        float:left;
-    }
+   #uploadButton{
+   width:100%;}
+}
 
 }
 
-body{
- background:url("http://www.arteasan.com/mag/wp-content/uploads/2016/02/fresh-vegetables-on-the-wooden-table-wallpaper-5000x3745-690x455.jpg");
-    background-color: rgba(255,255,255,0.2);
-     background-blend-mode: lighten;
-    background-repeat: no-repeat;
-     background-size: cover;
-    opacity:0.9;
-}
+{#body{#}
+{# background:url("http://www.arteasan.com/mag/wp-content/uploads/2016/02/fresh-vegetables-on-the-wooden-table-wallpaper-5000x3745-690x455.jpg");#}
+{#    background-color: rgba(255,255,255,0.2);#}
+{#     background-blend-mode: lighten;#}
+{#    background-repeat: no-repeat;#}
+{#     background-size: cover;#}
+{#    opacity:0.9;#}
+{#}#}
 
 
 </style>
