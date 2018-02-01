@@ -1,64 +1,65 @@
-{#<meta name="viewport" content="width=device-width, initial-scale=1">#}
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+{% extends 'layout.html' %}
 {% block body %}
-{#    <table style="width:100%">#}
-{#    {% for key, val  in list.items()%}#}
-{##}
+<div class="container">
+<div id='news' class="form-group col-md-12">Latest News</div>
+    <hr/>
+    {% for news in container %}
+    <div class="form-group col-md-4"><img id='NewsImage' class="img-responsive" src="https://image.freepik.com/foto-gratis/diferentes-especias-ingredientes-de-alimentos-cuchara-de-madera-sobre-fondo-blancotable_1220-1704.jpg" alt="NewsImage">
+                    <h3 id="title"><a href= {{ news['link']}}>{{ news['title'] }}</a></h3>
+                    <p id="date">{{ news['date'] }}</p>
+                    <p></p>
+                </div>
+    {% endfor %}
+
+</div>
+
+{#<table style="width:80%; background-color: yellow; ">#}
+{#{% for news in container %}#}
+{#    #}
 {#  <tr>#}
-{#    <td><a href= {{ key}}>{{ key }}</a>{{ title }}</td>#}
-{#    <td>{{ val }}</td>#}
-{##}
+{#    <th rowspan="2"><img id='NewsImage' class="img-responsive" src="http://www.freeiconspng.com/uploads/food-icon-7.png" alt="NewsImage"></th>#}
+{#    <td><a href= {{ news['link']}}>{{ news['title'] }}</a></td>#}
 {#  </tr>#}
-{#    {% endfor %}#}
+{#  <tr>#}
+{#    <td>{{ news['date'] }}</td>#}
+{#  </tr>#}
+{##}
+{#{% endfor %}#}
 {#</table>#}
 
 
 
-<div  id="container">
-   <div class="row">
+{#<div  id="newsfeed">#}
+{#   <div class="row">#}
+{##}
+{#        <div class="col-sm-12 " style="background-color: yellow">#}
+{#   {% for news in container %}#}
+{#        <li style="list-style-type: none;"><a href= {{ news['link']}}>{{ news['title'] }}</a></li>#}
+{#       <li style="list-style-type: none;">{{ news['date'] }}</li>#}
+{#   {% endfor %}#}
+{#        </div>#}
 
-        <div class="col-sm-12 " style="background-color: yellow">
-   {% for news in container %}
-        <li><a href= {{ news['link']}}>{{ news['title'] }}</a></li>
-       <li>{{ news['date'] }}</li>
-   {% endfor %}
-        </div>
-
-
-
-   </div>
-    </div>
-
+{#   </div>#}
+{#    </div>#}
+<style>
+    #NewsImage{
+        padding: 5px 5px 5px 5px;
+    }
+    #date{
+        text-align: right;
+    }
+    #news{
+        color: #000;
+        font-family: "hgw-HelveticaNeueBold",Arial,sans-serif;
+        font-weight: bold;
+        border-bottom: 2px solid darkred;
+        margin-bottom: 20px;
+        font-size: 15px;
+        padding-bottom: 3px;
+        font-size:200%;
+        font-style: italic;
+    }
+</style>
 
 {% endblock %}
 
-<style>
-    #container{
-        width:150px;
-        height: 50px;
-    }
-
-    li{
-        list-style-type: none;
-    }
-
-{#    /* width */#}
-{#    ::-webkit-scrollbar {#}
-{#        width: 10px;#}
-{#    }#}
-{##}
-{#    /* Track */#}
-{#    ::-webkit-scrollbar-track {#}
-{#        background: #f1f1f1;#}
-{#    }#}
-{##}
-{#    /* Handle */#}
-{#    ::-webkit-scrollbar-thumb {#}
-{#        background: #888;#}
-{#    }#}
-{##}
-{#    /* Handle on hover */#}
-{#    ::-webkit-scrollbar-thumb:hover {#}
-{#        background: #555;#}
-{#}#}
-</style>
