@@ -16,9 +16,11 @@
     <img id='eventimg' class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
     </div>
           <br><br><br><br><br><br>
+          {% if currEventg['Status'] !='Ended' %}
           <form method="post">
        <button type="submit" class="btn btn-primary" class="int">I'm Interested In Going</button>
           </form>
+          {% endif %}
               <br>
                <small> {{ currEventg['People'] }} people interested in going</small>
       </div>

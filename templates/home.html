@@ -47,7 +47,7 @@
 <br><br><br>
         <div class="form-group col-md-12">
         <div class="form-group col-md-4">
-		<img class="img responsive" src="https://creatily.net/wp-content/uploads/2016/08/Discount-BBQ-Restaurant-Voucher.jpg" style="width:100%;height:300px;">
+		<img class="img responsive" src={{ hnp[2]['urlRest'] }} style="width:100%;height:300px;">
 		<div class="w3-container" style="width:100%;height:300px;background-color:#aad4b3;">
           <img class="icon-img" src="http://www.free-css.com/assets/files/free-css-templates/preview/page185/bliss/images/icon1.png" style="margin-left:130px;">
          <p class="popline">{{ hnp[2]['Name'] }}</p>
@@ -58,6 +58,7 @@
            <a class="popline" href="/restDet/{{ hnp[2]['Name'] }}">know More</a>
         </div>
         </div>
+
 
 
 
@@ -72,12 +73,13 @@
           <p class="more"></p>
            <a class="popline" href="/restDet/{{ hnp[1]['Name'] }}">know More</a>
       </div>
-       <img class='img-responsive' src="https://creatily.net/wp-content/uploads/2016/08/Discount-BBQ-Restaurant-Voucher.jpg" style="width:100%;height:300px;">
+          <img class="img responsive" src={{ hnp[1]['urlRest'] }}  style="width:100%;height:300px;">
         </div>
 
 
+
       <div class="form-group col-md-4">
-                 <img class='img-responsive' src="https://creatily.net/wp-content/uploads/2016/08/Discount-BBQ-Restaurant-Voucher.jpg" style="width:100%;height:300px;">
+                 <img class="img responsive" src={{ hnp[0]['urlRest'] }} style="width:100%;height:300px;">
       <div class="w3-container" style="width:100%;height:300px;background-color:#ffe5b9">
           <img class="icon-img" src="http://www.free-css.com/assets/files/free-css-templates/preview/page185/bliss/images/icon1.png"  style="margin-left:130px;">
          <p class="popline">{{ hnp[0]['Name'] }}</p>
@@ -88,6 +90,8 @@
            <a class="popline" href="/restDet/{{ hnp[0]['Name'] }}">know More</a>
       </div>
         </div>
+
+
 
         </div>
     </div>
@@ -146,10 +150,11 @@
  <div class="form-group col-md-12" id="recommend">Our Recommendations</div>
 
 
+
   <div class="form-group col-md-12">
 <br><br>
    <div class="form-group col-md-4">
-       <img class="img-responsive" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
+       <img class="img-responsive" style="height:350px;width:500px;" src={{ recommend[0]['urlRest'] }}>
        <h1 class="recname">{{ recommend[0]['Name'] }}</h1>
                     <h6 class="recdesc">{{ recommend[0]['Description'] }}</h6>
        <br>
@@ -157,7 +162,7 @@
                 </div>
 
           <div class="form-group col-md-4">
-              <img class="img-responsive" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
+              <img class="img-responsive" style="height:350px;width:500px;" src={{ recommend[1]['urlRest'] }}>
               <h1 class="recname">{{ recommend[1]['Name'] }}</h1>
               <h5 class="recdesc">{{ recommend[1]['Description'] }}</h5>
               <br>
@@ -166,12 +171,31 @@
 
 
           <div class="form-group col-md-4">
-              <img class="img-responsive" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
+              <img class="img-responsive" style="height:350px;width:500px;" src={{ recommend[2]['urlRest'] }}>
               <h1 class="recname">{{ recommend[2]['Name'] }}</h1>
               <h6 class="recdesc">{{ recommend[2]['Description'] }}</h6>
                <br>
-               <a class='recbtn' href="/restDet/{{ recommend[1]['Name'] }}">know more</a>
-          </div>
+               <a class='recbtn' href="/restDet/{{ recommend[2]['Name'] }}">know more</a>
+
+{#                <div class="form-group col-md-4"><img class="homerec" class="img responsive" src={{ recommend[0]['urlRest'] }}>#}
+{#                    <h1><a href="/restDet/{{ recommend[0]['Name'] }}">{{ recommend[0]['Name'] }}</a></h1>#}
+{#                    <p>{{ recommend[0]['Description'] }}</p>#}
+{#                    <p></p>#}
+{#                </div>#}
+{##}
+{#          <div class="form-group col-md-4"><img class="homerec" class="img responsive" src={{ recommend[1]['urlRest'] }}>#}
+{#              <h1><a href="/restDet/{{ recommend[1]['Name'] }}">{{ recommend[1]['Name'] }}</a></h1>#}
+{#              <p>{{ recommend[1]['Description'] }}</p>#}
+{##}
+{#          </div>#}
+{##}
+{##}
+{#          <div class="form-group col-md-4"><img class="homerec" class="img responsive" src={{ recommend[2]['urlRest'] }}>#}
+{#              <h1><a href="/restDet/{{ recommend[2]['Name'] }}">{{ recommend[2]['Name'] }}</a></h1>#}
+{#              <p>{{ recommend[2]['Description'] }}</p>#}
+{#              <p></p>#}
+{##}
+{#          </div>#}
   </div>
 </div>
 </div>
