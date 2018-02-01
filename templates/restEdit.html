@@ -139,9 +139,21 @@
         var elem2 = document.getElementById("myBar2");
 
 
+        if(document.getElementById( 'img' ).src != "{{ restPic }}"){
+            var filename = selectedFile.name;
+        }
+        else{
+                var updates = {};
+                var postData = {
+                    urlRest:"{{ restPic }}",
+                    Name:'placeholder'
+                };
+                updates['/restaurants/{{ restid }}'] = postData;
 
+                firebase.database().ref().update(updates);
 
-        var filename = selectedFile.name;
+        }
+
         var storageRef = firebase.storage().ref('/images/restPic/' + filename);
         var fileRef = storageRef.child(filename);
         var uploadTask = storageRef.put(selectedFile);

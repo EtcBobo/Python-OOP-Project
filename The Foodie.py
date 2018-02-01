@@ -1069,10 +1069,10 @@ def restEdit(restName):
     for key in allRestg:
         if allRestg[key]['Name'] == restName:
             restid = key
+            restPic = allRestg[key]['urlRest']
 
-    print(restid)
 
-    restPic = ''
+
 
     theRestr = root.child('restaurants/'+restid)
     theRestg = theRestr.get()
@@ -1213,11 +1213,14 @@ def userEdit():
             'Password': password
         })
         flash('You have succesfully edited your profile!')
+        allUserr = root.child('allUsers')
+        allUserg = allUserr.get()
         for key in allUserg:
             if session['username'] == allUserg[key]['Username']:
                 session['userDetail'] = allUserg[key]
+                session['proPic'] = allUserg[key]['urlProfile']
 
-        print(session['userDetail'])
+
         return redirect(url_for('home'))
     return render_template('userEdit.html', form=form, user=session['userDetail'], proPic=session['proPic'], theKey=theKey)
 

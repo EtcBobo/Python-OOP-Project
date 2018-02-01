@@ -14,7 +14,7 @@
             <div class="row">
             <div  class="col-md-8 col-md-offset-2" class="edit">
                 <div class="form-group col-md-12">
-                <img id="img" src="https://www.revenueriver.co/hs-fs/hub/177047/file-2110622193-png/user_profile_img.png" width="304" height="304">
+                <img id="img" src="http://clipartbarn.com/wp-content/uploads/2016/12/Restaurant-clipart-page-1.jpg" width="304" height="304">
                 <br>
                 <br>
                 <input type="file" id="file"/>
@@ -144,9 +144,22 @@
         var elem2 = document.getElementById("myBar2");
 
 
-
-
+        if(document.getElementById( 'img' ).src != "http://clipartbarn.com/wp-content/uploads/2016/12/Restaurant-clipart-page-1.jpg"){
         var filename = selectedFile.name;
+
+        }
+        else{
+
+                var updates = {};
+                var postData = {
+                    urlRest:"http://clipartbarn.com/wp-content/uploads/2016/12/Restaurant-clipart-page-1.jpg"
+                };
+                updates['/restaurants/rest{{ count }}'] = postData;
+
+                firebase.database().ref().update(updates);
+
+        }
+
         var storageRef = firebase.storage().ref('/images/restPic/' + filename);
         var fileRef = storageRef.child(filename);
         var uploadTask = storageRef.put(selectedFile);

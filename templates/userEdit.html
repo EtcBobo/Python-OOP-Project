@@ -108,9 +108,21 @@
         var elem2 = document.getElementById("myBar2");
 
 
+        if(document.getElementById( 'img' ).src != "{{ proPic }}"){
+            var filename = selectedFile.name;
+        }
+        else{
+                var updates = {};
+                var postData = {
+                    urlProfile:"{{ proPic }}",
+                    Username:'placeholder'
+                };
+                updates['/allUsers/{{ theKey }}'] = postData;
 
+                firebase.database().ref().update(updates);
 
-        var filename = selectedFile.name;
+        }
+
         var storageRef = firebase.storage().ref('/images/profilePic/' + filename);
         var fileRef = storageRef.child(filename);
         var uploadTask = storageRef.put(selectedFile);

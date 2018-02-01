@@ -23,7 +23,7 @@
 </form>
       {% for i in Restaurant %}
 
-    <div class="form-group col-md-4"><img class="homerec" class='img-responsive' src="http://clipartbarn.com/wp-content/uploads/2016/12/Restaurant-clipart-page-1.jpg">
+    <div class="form-group col-md-4"><img class="homerec" class='img-responsive' src={{ i['urlRest'] }}>
         <h3><a href="/restDet/{{ i['Name'] }}">{{ i['Name'] }}</a></h3>
         <p>{{ i['Description'] }}</p>
         <br>

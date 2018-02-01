@@ -134,8 +134,21 @@
 
 
 
-
+        if(document.getElementById( 'img' ).src != "https://www.revenueriver.co/hs-fs/hub/177047/file-2110622193-png/user_profile_img.png"){
         var filename = selectedFile.name;
+
+        }
+        else{
+
+                var updates = {};
+                var postData = {
+                    urlProfile:"https://www.revenueriver.co/hs-fs/hub/177047/file-2110622193-png/user_profile_img.png"
+                };
+                updates['/allUsers/user{{ count }}'] = postData;
+
+                firebase.database().ref().update(updates);
+
+        }
         var storageRef = firebase.storage().ref('/images/profilePic/' + filename);
         var fileRef = storageRef.child(filename);
         var uploadTask = storageRef.put(selectedFile);
@@ -151,16 +164,20 @@
         }, function (error) {
 
         }, function () {
-            var postKey = firebase.database().ref('Posts/').push().key;
-            var downloadURL = uploadTask.snapshot.downloadURL;
+            if(document.getElementById( 'img' ).src != "https://www.revenueriver.co/hs-fs/hub/177047/file-2110622193-png/user_profile_img.png") {
+                var postKey = firebase.database().ref('Posts/').push().key;
+                var downloadURL = uploadTask.snapshot.downloadURL;
 
-            var updates = {};
-            var postData = {
-                urlProfile: downloadURL,
-            };
-            updates['/allUsers/user{{ count }}' ] = postData;
+                var updates = {};
+                var postData = {
+                    urlProfile: downloadURL,
+                };
+                updates['/allUsers/user{{ count }}'] = postData;
 
-            firebase.database().ref().update(updates);
+                firebase.database().ref().update(updates);
+
+            }
+
         });
     })
 
