@@ -1,10 +1,64 @@
+{#<meta name="viewport" content="width=device-width, initial-scale=1">#}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 {% block body %}
+{#    <table style="width:100%">#}
+{#    {% for key, val  in list.items()%}#}
+{##}
+{#  <tr>#}
+{#    <td><a href= {{ key}}>{{ key }}</a>{{ title }}</td>#}
+{#    <td>{{ val }}</td>#}
+{##}
+{#  </tr>#}
+{#    {% endfor %}#}
+{#</table>#}
 
-<ul>
-     {% for item in list %}
-        <li>{{ item }}</li>
-       <li><a href= {{ item}}>{{ item }}</a></li>
-    {% endfor %}
-</ul>
+
+
+<div  id="container">
+   <div class="row">
+
+        <div class="col-sm-12 " style="background-color: yellow">
+   {% for news in container %}
+        <li><a href= {{ news['link']}}>{{ news['title'] }}</a></li>
+       <li>{{ news['date'] }}</li>
+   {% endfor %}
+        </div>
+
+
+
+   </div>
+    </div>
+
 
 {% endblock %}
+
+<style>
+    #container{
+        width:150px;
+        height: 50px;
+    }
+
+    li{
+        list-style-type: none;
+    }
+
+{#    /* width */#}
+{#    ::-webkit-scrollbar {#}
+{#        width: 10px;#}
+{#    }#}
+{##}
+{#    /* Track */#}
+{#    ::-webkit-scrollbar-track {#}
+{#        background: #f1f1f1;#}
+{#    }#}
+{##}
+{#    /* Handle */#}
+{#    ::-webkit-scrollbar-thumb {#}
+{#        background: #888;#}
+{#    }#}
+{##}
+{#    /* Handle on hover */#}
+{#    ::-webkit-scrollbar-thumb:hover {#}
+{#        background: #555;#}
+{#}#}
+</style>

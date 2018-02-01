@@ -43,7 +43,7 @@
 
 
   var data_xyz = {{s_data|tojson}};
-  var json_string = JSON.parse(data_xyz);
+  var json_string = JSON.parse(data_xyz);     //convert text into a JavaScript object
 
 for (var i=0; i<json_string.length; i++) {
     for (var name in json_string[i]) {
@@ -97,12 +97,12 @@ for (var i=0; i<json_string.length; i++) {
 
     #findme{
         font-weight: bold;
-    font-style: italic;
-    border-bottom: 2px solid darkred;
-    margin-bottom: 20px;
-    font-size: 15px;
-    padding-bottom: 3px;
-    font-size:200%;
+        font-style: italic;
+        border-bottom: 2px solid darkred;
+        margin-bottom: 20px;
+        font-size: 15px;
+        padding-bottom: 3px;
+        font-size:200%;
     }
 
     #filterdiv{

@@ -243,10 +243,6 @@ def home():
 
         data = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
 
-
-        counter = 9999
-
-
         firebaseData = data.get('restaurants', None)
 
         for key in firebaseData:
@@ -287,12 +283,6 @@ def home():
 @app.route('/newsFeed')
 def newsFeed():
 
-    try:
-        proPic = session['proPic']
-    except KeyError:
-        proPic =''
-
-
     def parseRSS(rss_url):
         return feedparser.parse(rss_url)
 
@@ -312,14 +302,17 @@ def newsFeed():
     for key, url in newsurls.items():
         allheadlines.extend(getHeadlines(url))
 
+    container = []
 
-    list=[]
-    for hl in allheadlines:
-        a = hl['link']
-        list.append(a)
-    print(list)
+    for hl in allheadlines[0:7]:
+        link = hl['link']
+        date = hl['published']
+        title = hl['title']
 
-    return render_template('newsFeed.html', list=list)
+        news = {'title': title, 'link': link, 'date': date}
+        container.append(news)
+
+    return render_template('newsFeed.html', container=container )
 
 
 
@@ -346,7 +339,6 @@ def handle_my_custom_event( json ):
 class theSearch(Form):
     name = StringField('')   # line you will see above search form
     plswork = StringField('try')
-
 
 
 @app.route('/filter',methods=['POST','GET'])
@@ -810,6 +802,9 @@ def heatmap():
 
 
     return render_template('heatmap.html', Centralmap1= centralmap1)
+
+
+
 
 @app.route('/restDet/<restName>',methods=['POST','GET'])
 def restPage(restName):
