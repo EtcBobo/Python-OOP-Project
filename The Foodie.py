@@ -304,7 +304,7 @@ def newsFeed():
 
     container = []
 
-    for hl in allheadlines[0:7]:
+    for hl in allheadlines[0:3]:
         link = hl['link']
         date = hl['published']
         title = hl['title']
