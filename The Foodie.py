@@ -602,8 +602,8 @@ def addRest():
 
 
         try:
-            for key in restFirer:
-                if name == key:
+            for key in restFireg:
+                if name.lower == restFireg[key]['Name'].lower:
                     flash('This restaurant already exist')
                     return redirect(url_for('addRest'))
         except:
@@ -1312,7 +1312,7 @@ def events():
                     status.append('Ongoing')
 
     for key in allEventg:
-        eventr = root.child('events/'+allEventg[key]['Name'])
+        eventr = root.child('events/'+key)
         eventr.update({
             'Status':status[count]
         })
@@ -1340,6 +1340,7 @@ def events():
     ended = []
     allEventr = root.child('events')
     allEventg = allEventr.get()
+    numEvent = len(allEventg)
 
     for key in allEventg:
         theList.append(allEventg[key])
@@ -1370,6 +1371,8 @@ def events():
             if key[0] == key2['Name']:
                 newList2.insert(0, key2)
     popEvent = newList2
+
+
 
 
 
@@ -1420,13 +1423,14 @@ def events():
         allEventg = allEventr.get()
         try:
             for key in allEventg:
-                if eventName[key]['Name'] == key:
+                if eventName.lower == allEventg[key]['Name'].lower:
                     flash('This event already exist')
                     return redirect(url_for('addRest'))
         except:
             pass
 
-        currEvent = root.child('events/'+eventName)
+
+        currEvent = root.child('events/event'+str(numEvent))
         currEvent.update({
             'Name': event.get_eventName(),
             'Description': event.get_eventDescription(),
@@ -1445,7 +1449,7 @@ def events():
         flash('You have added a new event!')
         return redirect(url_for('home'))
 
-    return render_template('events.html', form=form,proPic = session['proPic'],ongoing=ongoing,upcoming=upcoming,ended=ended,popEvent=popEvent )
+    return render_template('events.html', form=form,proPic = session['proPic'],ongoing=ongoing,upcoming=upcoming,ended=ended,popEvent=popEvent,numEvent=numEvent )
 
 @app.route('/events/<eventName>',methods=['POST','GET'])
 def eventDet(eventName):
@@ -1455,8 +1459,11 @@ def eventDet(eventName):
         session['proPic'] = ''
 
     eventName = eventName
-    currEventr = root.child('events/'+eventName)
+    currEventr = root.child('events')
     currEventg = currEventr.get()
+    for key in currEventg:
+        if currEventg[key]['Name'] == eventName:
+            currEvent = currEventg[key]
 
     form = EventForm(request.form)
     if request.method == 'POST':
@@ -1471,7 +1478,7 @@ def eventDet(eventName):
         })
         flash('The event has been added to your profile successfully!')
         return redirect(url_for('userProfile'))
-    return render_template('eventDet.html',currEventg=currEventg,proPic=proPic)
+    return render_template('eventDet.html',currEventg=currEvent,proPic=proPic)
 
 
 
