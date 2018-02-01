@@ -1,42 +1,40 @@
 <!--<link rel=stylesheet type=text/css href="\static\css\navbar.css">-->
   <!--<nav class="navbar navbar-default">-->
     {% from "includes/_formhelper.html" import render_field %}
+
 <div class="container">
-<nav class=".navbar.navbar-default.navbar-static-top">
-     <div class="container-fluid" id="container">
+<nav class="navbar navbar-default navbar-static-top">
+{#     <div class="container-fluid" id="container">#}
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false"
-                    aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <ul class="navbar-brand">
-                <img src="http://www.freeiconspng.com/uploads/food-icon-7.png" style="width:40px;height:40px;display:inline-block;">The Foodie
+             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+            <ul class="navbar-brand" id="navbrand">
+                <img src="http://www.freeiconspng.com/uploads/food-icon-7.png" style="width:20px;height:20px;display:inline-block;">The Foodie
             </ul>
         </div>
-        <!--<div id="navbar" class="collapse navbar-collapse">-->
-            <ul class="nav navbar-nav" class="stroke" style="margin-top:10px;">
-                <li class=""><a href="/">Home</a></li>
-                <li class=""><a href="/filter">Find Food</a></li>
-                <li class=""><a href="/data">Find Me</a></li>
-                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Restaurant<span
-                        class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/addRest">Recommend a Restaurant</a></li>
-                        <li><a href="/viewallRest">View all Restaurant</a></li>
-                    </ul>
-                    <li class=""><a href="/chat">ChatRoom</a></li>
-                    <li class=""><a href="/events">Events</a></li>
-                </li>
 
-            </ul>
-
-             <ul class="nav navbar-nav navbar-right" style="margin-top:10px;">
-
-                {% if session['logged_in'] %}
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="/">Home</a></li>
+        <li><a href="/filter">Find Food</a></li>
+          <li><a href="/data">Find Me</a></li>
+           <li><a href="/findevent">Find Event</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Restaurants<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/addRest">Recommend Restaurant</a></li>
+            <li><a href="/viewallRest">View All Restaurants</a></li>
+          </ul>
+        </li>
+           <li><a href="/events">Events</a></li>
+           <li><a href="/chat">ChatRoom</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        {% if session['logged_in'] %}
                     <li>
                    <img id ='profileimg' class="img-circle" style="width:40px;height:40px;display:inline-block;margin-top:5px;" src={{ proPic }}>
                         </li>
@@ -48,158 +46,69 @@
                 {% endif %}
 
             </ul>
-            </div>
-
-
+      </ul>
+        </div>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
 </nav>
-</div>
-
-{##}
-{#this is login box#}
-{#<div id="login" class="modal fade" role="dialog">#}
-{#  <div class="modal-dialog" id="loginmodal">#}
-{##}
-{#    <!-- Modal content-->#}
-{#    <div class="modal-content">#}
-{#      <div class="modal-header">#}
-{#        <button type="button" class="close" data-dismiss="modal">&times;</button>#}
-{#		<div class="modal-title" style="font-weight:bold;text-align:center;font-size:150%;font-color:black;">#}
-{#		<img src="http://www.freeiconspng.com/uploads/food-icon-7.png" style="width:40px;height:40px;display:inline-block;">The Foodie#}
-{#		</div>#}
-{#      </div>#}
-{#	  <div class="col-sm-12">#}
-{#      <div class="modal-body">#}
-{#	  <div class="col-sm-12">#}
-{#	   <form action="/action_page.php">#}
-{#    <label for="fname" style="size:50px;"><span class="glyphicon glyphicon-user"></span>  Username</label>#}
-{#    <input class="logininfo" type="text" id="fname" name="firstname"  style="height:50%;">#}
-{##}
-{#    <label for="lname" style="size:50px;"><span class="glyphicon glyphicon-lock"></span>  Password</label>#}
-{#    <input class='logininfo' type="text" id="lname" name="lastname" style="height:50%;">#}
-{##}
-{#<br>#}
-{#           <br>#}
-{#    <button type="button" class="btn btn-success" style="height: 42px;" id="loginbtn">Login</button>#}
-{#  </form>#}
-{#		</div>#}
-{#   </div>#}
-{#    </div>#}
-{##}
-{#</form>#}
-{#        <div class="modal-footer">#}
-{##}
-{#      </div>#}
-{#    </div>#}
-{##}
-{#  </div>#}
-{#</div>#}
-{#end of login box#}
-{##}
-{#this is register box#}
-{#<div id="register" class="modal fade" role="dialog"  id="signupmodal">#}
-{#  <div class="modal-dialog">#}
-{##}
-{##}
-{#    <!-- Modal content-->#}
-{#    <div class="modal-content">#}
-{#      <div class="modal-header">#}
-{#        <button type="button" class="close" data-dismiss="modal">&times;</button>#}
-{#		<div class="modal-title" style="font-weight:bold;text-align:center;font-size:150%;font-color:black;">#}
-{#		<img src="http://www.freeiconspng.com/uploads/food-icon-7.png" style="width:40px;height:40px;">The Foodie#}
-{#		</div>#}
-{#		</div>#}
-{##}
-{##}
-{#	  <div class="col-sm-12">#}
-{#      <div class="modal-body">#}
-{#	  <div class="col-sm-12">#}
-{#	   <form method="POST">#}
-{#	   <div class="container-fluid" class="col-md-8 col-md-offset-2" id="signup">#}
-{#	   <img src="https://www.revenueriver.co/hs-fs/hub/177047/file-2110622193-png/user_profile_img.png" class="img-responsive" class="img-circle" width="200" height="300" id="img">#}
-{#	   <br>#}
-{#	   <br>#}
-{#		 <button class="btn btn-default" id="choose" type="submit">Choose Image</button>#}
-{# </div>#}
-{##}
-{#        <br>#}
-{#<br>#}
-{##}
-{#    <label for="fname" style="size:50%;">Username</label>#}
-{#           <br>#}
-{#    <input type="text" id="fname" name="firstname"  class="info">#}
-{#<br>#}
-{#    <label for="lname" style="size:50%;">Password</label>#}
-{#           <br>#}
-{#    <input type="text" id="lname" name="lastname" class="info">#}
-{#    <label for="fname" style="size:50%;">Confirm Password</label>#}
-{#           <br>#}
-{#    <input type="text" id="fname" name="firstname" class="info">#}
-{##}
-{#	 <label for="fname" style="size:50%;">Preferred price Range</label>#}
-{#           <br>#}
-{#    <input type="text" id="fname" name="firstname" class="info">#}
-{##}
-{#	 <label for="fname" style="size:50%;">Preferred Food Type</label>#}
-{#           <br>#}
-{#    <input type="text" id="fname" name="firstname" class="info">#}
-{#<br>#}
-{#	 <label for="fname" style="size:50%;">Email</label>#}
-{#           <br>#}
-{#    <input type="text" id="fname" name="firstname" class="info">#}
-{#	<p id="email">(Optional) Sign up with your email to recieve monthly subscription letter of The Foodie and exclusive discount codes!</p>#}
-{##}
-{#    <button type="button" class="btn btn-danger" id="signbtn" style=" height: 42px;">Sign Up</button>#}
-{#           <input type="submit" value="Register" class="btn btn-info" id="registerbtn"/>#}
-{#  </form>#}
-{#		</div>#}
-{# </div>#}
-{#   </div>#}
-{##}
-{#</form>#}
-{#      <div class="modal-footer">#}
-{##}
-{#      </div>#}
-{#    </div>#}
-{##}
-{#  </div>#}
-{#</div>#}
 
 
 
 <style>
 
 .container{
-background-color: white;
+    background-color:white;
+
+}
+
+.navbar
+{
+    background-color: transparent;
+}
+
+.navbar-brand{
+    display:inline-block;
+    color:black !important;
+
 }
 
 
-    a { color:black !important; }
+    a, .navbar-brand { color:black !important;display: block;
+    font-size: 13px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: .1em; }
 nav a:hover { color:red !important;}
 
-/* Full-width input fields */
-.info {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
+.nav navbar-nav{
+font-size:10px;
 }
 
-.logininfo{
-     width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-}
-
-/* Set a style for all buttons */
-#signbtn {
-     background-color:darkred;
-    width:100%;
-}
+{#/* Full-width input fields */#}
+{#.info {#}
+{#    width: 100%;#}
+{#    padding: 12px 20px;#}
+{#    margin: 8px 0;#}
+{#    display: inline-block;#}
+{#    border: 1px solid #ccc;#}
+{#    box-sizing: border-box;#}
+{#}#}
+{##}
+{#.logininfo{#}
+{#     width: 100%;#}
+{#    padding: 12px 20px;#}
+{#    margin: 8px 0;#}
+{#    display: inline-block;#}
+{#    border: 1px solid #ccc;#}
+{#    box-sizing: border-box;#}
+{#}#}
+{##}
+{#/* Set a style for all buttons */#}
+{##signbtn {#}
+{#     background-color:darkred;#}
+{#    width:100%;#}
+{#}#}
 
 @media (max-width:991px){
 #profileimg{

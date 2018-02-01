@@ -2,17 +2,18 @@
 
 {% block body %}
         {% from "includes/_formhelper.html" import render_field %}
-  <div class="container" id="filterdiv">
+  <div class="container">
          <br>
         <br>
-<div id="viewdiv">
     <h1 id="view">View All Restaurants</h1>
-    <br/>
-    </div>
 
       <form method="post">
       <div class="form-group col-md-12">
-            <p id="lengthlist">{{ lengthList }} results</p>
+          <div class="form-group col-md-4">
+          <p id="lengthlist">{{ lengthList }} results</p></div>
+      </div>
+
+          <div class="form-group col-md-12">
     <div class="form-group col-md-4">
         {{ render_field(form.sort, class_="form-control") }}
     </div>
@@ -21,49 +22,123 @@
         </div>
            </div>
 </form>
-      {% for i in Restaurant %}
+  </div>
 
-    <div class="form-group col-md-4"><img class="homerec" class='img-responsive' src={{ i['urlRest'] }}>
-        <h3><a href="/restDet/{{ i['Name'] }}">{{ i['Name'] }}</a></h3>
-        <p>{{ i['Description'] }}</p>
-        <br>
-        <p class="avg">{{ i['Average Rating'] }}</p>
-        <p>{{ i['Price'] }}</p>
+    <div class="container">
+
+          <div class="form-group col-md-12">
+
+    <br><br><br>
+{% for i in Restaurant %}
+
+   <div class="form-group col-md-4">
+
+       <img id='restimg' class='img-responsive' src={{ i['urlRest'] }}>
+       <h1 class="restname">{{i['Name'] }}</h1>
+       <h5 id="restdesc" style="text-align:justify;word-wrap: break-word;"> {{ i['Description'] }}
+       Aguaviva specializes in the freshest fish and seafood prepared with
+Latino – Caribbean flair, and features a wonderful oyster and
+ceviche bar in front of the open kitchen. In 2003, Aguaviva was
+named one of the 75 best new restaurants in the world by Conde
+Nast Traveler magazine. A variety of ceviches are offered, served
+with tostones of course, as well as several types of oysters, which
+are flown in daily, as are the fresh Maine lobsters.</h5>
+           <br>
+       <h6>Average Rating: {{ i['Average Rating'] }} out of 5 </h6>
+       <h6>Price Range: ${{ i['Price'] }}</h6>
+       <a class='recbtn' href="/restDet/{{ i['Name'] }}">know more</a>
+<br><br><br>
+
     </div>
-
-    {% endfor %}
-
-
+ {% endfor %}
+ </div>
 
 
 </div>
 
 
-
-
+{#      {% for i in Restaurant %}#}
+{##}
+{#    <div class="form-group col-md-4"><img class="homerec" class='img-responsive' src={{ i['urlRest'] }}>#}
+{#        <h3><a href="/restDet/{{ i['Name'] }}">{{ i['Name'] }}</a></h3>#}
+{#        <p>{{ i['Description'] }}</p>#}
+{#        <br>#}
+{#        <p class="avg">{{ i['Average Rating'] }}</p>#}
+{#        <p>{{ i['Price'] }}</p>#}
+{#    </div>#}
+{##}
+{#    {% endfor %}#}
+{##}
+{##}
+{##}
+{##}
+{#</div>#}
 
 
 
 
 <style>
-     #viewdiv{
-        max-width: 1480px;
-    padding: 20px 12px 10px 20px;
-    font: 13px Arial, Helvetica, sans-serif;
-        align:center;
+     #view{
+       display: block;
+    font-size: 150%;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+         text-align:center;
 
     }
 
-    #view{
-        font-weight: bold;
-    font-style: italic;
-    border-bottom: 2px solid darkred;
-    margin-bottom: 20px;
-    font-size: 15px;
-    padding-bottom: 3px;
-    font-size:200%;
+    .restname{
+    display: block;
+    font-size: 130%;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+ text-align: center;
+}
 
+    .recbtn{
+         text-align:center;
+    border: 1px solid #969696;
+    color: #969696;
+    margin-top: 24px;
+    padding: 5px 32px 11px;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-size:80%;
     }
+
+    .recbtn:hover{
+   text-decoration:none;
+    background-color:#aad4b3;
+    color:white!important;
+    font-weight:bold;
+}
+
+    #restimg{
+        height:250px;
+        width:330px;
+    }
+
+    #restdesc {
+         font-family: 'Montserrat', sans-serif;
+    }
+
+{#    #view::before{#}
+{#         content: '';#}
+{#    height: 3px;#}
+{#    width: 250px;#}
+{#    background-color: darkred;#}
+{#    position: absolute;#}
+{#    bottom:0;#}
+{#    margin-top:20px;#}
+{#    left: 50%;#}
+{#    -webkit-transform: translateX(-50%);#}
+{#    -ms-transform: translateX(-50%);#}
+{#    transform: translateX(-50%);#}
+{#    }#}
 
 
      #sortbtn{
@@ -80,17 +155,7 @@
          margin-top:25px;
     }
 
-.homerec{
-    width:250px;
-    height:200px;
-}
 
-@media(max-width){
-    .homerec{
-        width:60%;
-        height:60%;
-    }
-}
 
 
 </style>
