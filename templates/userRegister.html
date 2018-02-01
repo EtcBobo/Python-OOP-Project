@@ -3,19 +3,19 @@
 {% block body %}
     {% from "includes/_formhelper.html" import render_field %}
 
- <div class="container" id="profilediv">
+ <div class="container">
     <br>
-        <br>
 
-    <h1 id="register">Sign Up Now!</h1>
-    <p>Register for the Foodie Account now and start sharing your dining experience!</p>
+    <div class="form-group col-md-12" id="signup">Register Now!</div>
     <br>
     <form method=post >
          <div class="form-group col-md-12">
             <div class="row">
             <div  class="col-md-8 col-md-offset-2" class="edit">
                 <div class="form-group col-md-12">
-                <img id="img" src="https://www.revenueriver.co/hs-fs/hub/177047/file-2110622193-png/user_profile_img.png" class="img-circle" width="304" height="304">
+                    <br>
+                    <br>
+                <img id="img" src="https://www.revenueriver.co/hs-fs/hub/177047/file-2110622193-png/user_profile_img.png" class="img-responsive" width="304" height="304">
                 <br>
                 <br>
                 <input type="file" id="file"/>
@@ -187,29 +187,17 @@
 </div>
 
 <style>
-    #register{
-         font-weight: bold;
-    font-style: italic;
-    border-bottom: 2px solid darkred;
-    margin-bottom:20px;
-    font-size: 15px;
-    padding-bottom: 3px;
-    font-size:200%;
+{#    body{#}
+{#    background-image: url("https://wallpapertag.com/wallpaper/full/7/1/0/60015-cool-food-background-3800x2500-iphone.jpg") ;#}
+{#    background-color: rgba(255,255,255,0.2);#}
+{#     background-blend-mode: lighten;#}
+{#    background-repeat: no-repeat;#}
+{#     background-size: cover;#}
+{#    opacity:0.9;#}
+{#}#}
 
-    }
-
-    body{
-    background-image: url("https://wallpapertag.com/wallpaper/full/7/1/0/60015-cool-food-background-3800x2500-iphone.jpg") ;
-    background-color: rgba(255,255,255,0.2);
-     background-blend-mode: lighten;
-    background-repeat: no-repeat;
-     background-size: cover;
-    opacity:0.9;
-}
-
-
-     #file{
-    margin-top:300px;
+      #file{
+  margin-left:250px;
 
 }
 
@@ -221,7 +209,7 @@
     font-size: 14px;
     text-align: center;
         height: 42px;
-        width:250px;
+        width:50%;
         margin-left:20px;
     }
 
@@ -232,6 +220,41 @@
         color: black;
 
     }
+
+#signup{
+     display: block;
+    font-size: 150%;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+         text-align:center;
+}
+
+
+
+#img{
+    margin-left:200px;
+}
+
+@media(max-width:991px){
+    #img{
+        margin-left:0px;
+    }
+    #file{
+        margin-left:0px;
+    }
+    #uploadButton{
+    width:90%;
+    }
+}
+
+@media(max-width: 1024px){
+    #img{
+       text-align:center;
+         margin-left:0px;
+}
+}
 
 </style>
 

@@ -5,16 +5,14 @@
 <br>
     {% from "includes/_formhelper.html" import render_field %}
     <form method=post>
-     <br>
+    <br>
         <br>
     <div class="jumbotron text-center" id="banner">
         <h1>Welcome To The Foodie</h1>
-        <br>
     </div>
 
 
-
-<div class="container" id="profilediv">
+<div class="container">
         <h3 id="tag">Search Here To See Amazing Restaurants</h3>
         <br>
 {#        <div id='searchthing' class="form-group col-md-6">#}
@@ -26,6 +24,7 @@
 {#        <input type="submit" value="Search" class="btn btn-info" id="searchbtn"/>#}
 {##}
 {#    </div>#}
+
 
         <div id='searchF' class="form-group col-md-6">
             {{ render_field(form.name,  id='search_box', class_="form-control") }}</div>
@@ -42,76 +41,145 @@
     </form>
 
 
-<div class="container" id="profilediv">
-      <div class="form-group col-md-12" id="popular">Hot & Popular restaurants!!</div>
-				<hr/>
-
-
-<div class="form-group col-md-12">
-</div>
-<div class="form-group col-md-12">
-
-
-    <div class="form-group col-md-5">
-		<img class="homepop" class="img responsive" src="https://creatily.net/wp-content/uploads/2016/08/Discount-BBQ-Restaurant-Voucher.jpg">
-			 <h3><a href="/restDet/{{ hnp[2]['Name'] }}">{{ hnp[2]['Name'] }}</a></h3>
-        <p>{{ hnp[2]['Description'] }}</p>
-
-
-    <div class="form-group col-md-6">
-        </div>
-		<img class="homepop" class="img responsive" src="https://creatily.net/wp-content/uploads/2016/08/Discount-BBQ-Restaurant-Voucher.jpg">
-			 <h3><a href="/restDet/{{ hnp[1]['Name'] }}">{{ hnp[1]['Name'] }}</a></h3>
-        <p>{{ hnp[1]['Description'] }}</p>
-		</div>
-
+ <div class="container">
+<br><br><br>
+      <div class="form-group col-md-12" id="popular">Hot & Popular restaurants</div>
+<br><br><br>
+        <div class="form-group col-md-12">
         <div class="form-group col-md-4">
-		<img id="featuredimg" class="img responsive" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
-			 <h3><a href="/restDet/{{ hnp[0]['Name'] }}">{{ hnp[0]['Name'] }}</a></h3>
-        <p> {{ hnp[0]['Description'] }}</p>
+		<img class="img responsive" src="https://creatily.net/wp-content/uploads/2016/08/Discount-BBQ-Restaurant-Voucher.jpg" style="width:100%;height:300px;">
+		<div class="w3-container" style="width:100%;height:300px;background-color:#aad4b3;">
+          <img class="icon-img" src="http://www.free-css.com/assets/files/free-css-templates/preview/page185/bliss/images/icon1.png" style="margin-left:130px;">
+         <p class="popline">{{ hnp[2]['Name'] }}</p>
+          <br>
+        <p class="homedesc">Description: {{ hnp[2]['Description'] }}</p>
+          <br><br>
+          <p class="more"></p>
+           <a class="popline" href="/restDet/{{ hnp[2]['Name'] }}">know More</a>
+        </div>
         </div>
 
 
 
+      <div class="form-group col-md-4">
+      <div class="w3-container" style="width:100%;height:300px;background-color:#86cdd7">
+          <br>
+          <img class="icon-img" src="http://www.jakesfinerfoods.com/wp-content/uploads/2012/07/cloche-icon-white.png" style="height:80px;width:100px;margin-left:100px;">
+         <p class="popline">{{ hnp[1]['Name'] }}</p>
+          <br>
+        <p class="homedesc">Description: {{ hnp[1]['Description'] }}</p>
+          <br><br>
+          <p class="more"></p>
+           <a class="popline" href="/restDet/{{ hnp[1]['Name'] }}">know More</a>
+      </div>
+       <img class='img-responsive' src="https://creatily.net/wp-content/uploads/2016/08/Discount-BBQ-Restaurant-Voucher.jpg" style="width:100%;height:300px;">
+        </div>
 
-         </div>
-</div>
 
-    <div class="container" id="profilediv">
+      <div class="form-group col-md-4">
+                 <img class='img-responsive' src="https://creatily.net/wp-content/uploads/2016/08/Discount-BBQ-Restaurant-Voucher.jpg" style="width:100%;height:300px;">
+      <div class="w3-container" style="width:100%;height:300px;background-color:#ffe5b9">
+          <img class="icon-img" src="http://www.free-css.com/assets/files/free-css-templates/preview/page185/bliss/images/icon1.png"  style="margin-left:130px;">
+         <p class="popline">{{ hnp[0]['Name'] }}</p>
+          <br>
+        <p class="homedesc">Description: {{ hnp[0]['Description'] }}</p>
+          <br><br>
+          <p class="more"></p>
+           <a class="popline" href="/restDet/{{ hnp[0]['Name'] }}">know More</a>
+      </div>
+        </div>
 
- <div class="form-group col-md-12" id="recommend">Our Recommendations!!</div>
-				<hr/>
+        </div>
+    </div>
+
+    {#<section style="background-color:#F5F3EE;">#}
+{#<div class="container" style="background-color:#F5F3EE;">#}
+{#<br><br><br>#}
+{#      <div class="form-group col-md-12" id="popular">Hot & Popular restaurants</div>#}
+{##}
+{#<div class="w3-row-padding w3-margin-top">#}
+{#  <div class="w3-full">#}
+{#         <br>#}
+{#    <br>#}
+{#    <div class="w3-card">#}
+{#      <img class='img-responsive' src="https://creatily.net/wp-content/uploads/2016/08/Discount-BBQ-Restaurant-Voucher.jpg" style="width:100%;height:400px;">#}
+{#      <div class="w3-container" style="background-color: white;">#}
+{#        <h3 class="popline"><a href="/restDet/{{ hnp[2]['Name'] }}">{{ hnp[2]['Name'] }}</a></h3>#}
+{#        <p>Description Of Restaurant: {{ hnp[2]['Description'] }}</p>#}
+{#      </div>#}
+{#    </div>#}
+
+{#  <div class="w3-half">#}
+{#         <br>#}
+{#    <br>#}
+{#    <div class="w3-card">#}
+{#      <img class='img-responsive' src="http://images.dailyhive.com/20160804161755/TaKo_Vancouver_Tacos_Korean.jpg" style="width:100%;height:400px;">#}
+{#      <div class="w3-container" style="background-color: white;">#}
+{#        <h3 class="popline"><a href="/restDet/{{ hnp[1]['Name'] }}">{{ hnp[1]['Name'] }}</a></h3>#}
+{#        <p>Description Of Restaurant:  {{ hnp[1]['Description'] }}</p>#}
+{#      </div>#}
+{#    </div>#}
+{#  </div>#}
+{##}
+{#  <div class="w3-half">#}
+{#         <br>#}
+{#    <br>#}
+{#    <div class="w3-card">#}
+{#      <img class='img-responsive' src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=67fb2e7b1fbe39b18b51146234ef38aa&dpr=1&auto=format&fit=crop&w=376&h=251&q=60&cs=tinysrgb" style="width:100%;height:400px;">#}
+{#      <div class="w3-container" style="background-color: white;">#}
+{#        <p class="popline"><a href="/restDet/{{ hnp[0]['Name'] }}">{{ hnp[0]['Name'] }}</a></p>#}
+{#        <p>Description Of Restaurant:  {{ hnp[0]['Description'] }}</p>#}
+{#      </div>#}
+{#    </div>#}
+{##}
+{##}
+{##}
+{#  </div>#}
+{#        </div>#}
+{#</section>#}
 
 
-                <div class="form-group col-md-4"><img class="homerec" class="img responsive" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
-                    <h1><a href="/restDet/{{ recommend[0]['Name'] }}">{{ recommend[0]['Name'] }}</a></h1>
-                    <p>{{ recommend[0]['Description'] }}</p>
-                    <p></p>
+  <br><br><br><br>
+
+
+   <div class="container">
+ <div class="form-group col-md-12" id="recommend">Our Recommendations</div>
+
+
+  <div class="form-group col-md-12">
+<br><br>
+   <div class="form-group col-md-4">
+       <img class="img-responsive" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
+       <h1 class="recname">{{ recommend[0]['Name'] }}</h1>
+                    <h6 class="recdesc">{{ recommend[0]['Description'] }}</h6>
+       <br>
+       <a class="recbtn" href="/restDet/{{ recommend[0]['Name'] }}">know more</a>
                 </div>
 
-          <div class="form-group col-md-4"><img class="homerec" class="img responsive" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
-              <h1><a href="/restDet/{{ recommend[1]['Name'] }}">{{ recommend[1]['Name'] }}</a></h1>
-              <p>{{ recommend[1]['Description'] }}</p>
-
+          <div class="form-group col-md-4">
+              <img class="img-responsive" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
+              <h1 class="recname">{{ recommend[1]['Name'] }}</h1>
+              <h5 class="recdesc">{{ recommend[1]['Description'] }}</h5>
+              <br>
+               <a class='recbtn' href="/restDet/{{ recommend[1]['Name'] }}">know more</a>
           </div>
 
 
-          <div class="form-group col-md-4"><img class="homerec" class="img responsive" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
-              <h1><a href="/restDet/{{ recommend[2]['Name'] }}">{{ recommend[2]['Name'] }}</a></h1>
-              <p>{{ recommend[2]['Description'] }}</p>
-              <p></p>
+          <div class="form-group col-md-4">
+              <img class="img-responsive" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
+              <h1 class="recname">{{ recommend[2]['Name'] }}</h1>
+              <h6 class="recdesc">{{ recommend[2]['Description'] }}</h6>
+               <br>
+               <a class='recbtn' href="/restDet/{{ recommend[1]['Name'] }}">know more</a>
           </div>
-
-     </div>
+  </div>
 </div>
+</div>
+
 
 
 
 <style>
-.homerec{
-    height:300px;
-    width:350px;
-}
 
 #features{
     margin-top: 5px;
@@ -128,24 +196,121 @@
     text-align: center;
 }
 
-#popular, #recommend{
-    color: #000;
-    font-family: "hgw-HelveticaNeueBold",Arial,sans-serif;
-    font-weight: bold;
-    border-bottom: 2px solid darkred;
-    margin-bottom: 20px;
-    font-size: 15px;
-    padding-bottom: 3px;
-    font-size:200%;
-     font-style: italic;
-}
-#searchbtn{
-    margin-top: 20px;
-    margin-left: 170px;}
 
-#search_box{
-    width:400px;
-    margin-left: 310px;}
+
+.icon-img{
+    margin-left:130px;
+
+}
+
+@media(max-width:1366px){
+    .icon-img{
+
+        justify-content: center;
+    }
+}
+
+.recdesc{
+     display: block;
+    font-size: 80%;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: .1em;
+     float:left;
+}
+
+ #popular, #recommend{
+      display: block;
+    font-size: 150%;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+ text-align: center;
+ }
+
+ #banner{
+     text-align:center;
+    font-size:63px;
+    padding:128px;
+ }
+
+
+
+ .popline, .popline a{
+      display: block;
+     color:white!important;
+    font-size: 130%;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+ text-align: center;
+ }
+
+ .homedesc{
+     display: block;
+    color:white;
+    font-size: 90%;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    letter-spacing: .1em;
+     float:left;
+ }
+
+ .more {border-top-style: dashed;
+        border-top-color:white;
+        text-align:center;
+     margin-bottom:20px;
+                 }
+
+{# #popular::before, #recommend::before{#}
+{#      content: '';#}
+{#    height: 3px;#}
+{#    width: 250px;#}
+{#    background-color: darkred;#}
+{#    position: absolute;#}
+{#    bottom:0;#}
+{#    margin-top:20px;#}
+{#    left: 50%;#}
+{#    -webkit-transform: translateX(-50%);#}
+{#    -ms-transform: translateX(-50%);#}
+{#    transform: translateX(-50%);#}
+{##}
+{##}
+{# }#}
+{##searchbtn{#}
+{#    margin-top: 20px;#}
+{#    margin-left: 170px;}#}
+
+.recname{
+      display: block;
+    font-size: 150%;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+         text-align:center;
+}
+
+.recbtn{
+     text-align:center;
+    border: 1px solid #969696;
+    color: #969696;
+    margin-top: 24px;
+    padding: 5px 32px 11px;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-size:80%;
+}
+
+.recbtn:hover{
+   text-decoration:none;
+    background-color:#aad4b3;
+    color:white!important;
+    font-weight:bold;
+}
+
+
 
 h3{
     text-align: center;
@@ -227,22 +392,17 @@ h3{
 
 #banner{
      background-image: url("http://lindyslanding.com/wp-content/uploads/2017/03/dining-food-Banner-1920-x-750.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
     color:white;
       height:550px;
     width:100%;
+    opacity: 0.9;
 }
 
 
 
-.homepop{
-    width:400px;
-    height:300px;
-}
 
-#featuredimg{
-    height:550px;
-    width:580px;
-}
 
 @media(max-width:991px){
     #featuredimg{
