@@ -588,6 +588,9 @@ def addRest():
         proPic =''
         user = ''
     form = RestForm(request.form)
+    restFirer = root.child('restaurants')
+    restFireg = restFirer.get()
+    count = len(restFireg)
     if request.method == 'POST' and form.validate():
         name = form.name.data
         desc = form.desc.data
@@ -605,7 +608,7 @@ def addRest():
 
         res = Restaurant(name,desc,location,price,foodType,openH,closingH,address)
 
-        restFirer = root.child('restaurants')
+
         try:
             for key in restFirer:
                 if name == key:
@@ -616,7 +619,19 @@ def addRest():
         if user == '':
             flash('You must be logged in to recommend a Restaurant')
             return redirect(url_for('addRest'))
-        restFireu = root.child('restaurants/'+name)
+
+
+
+        theBreak = False
+        while theBreak != True:
+            allRestr = root.child('restaurants')
+            allRestg = allRestr.get()
+            for key in allRestg:
+                if key == 'rest'+str(count):
+                    theBreak = True
+
+
+        restFireu = root.child('restaurants/rest'+str(count))
         restFireu.update({
             'Name':res.get_name(),
             'Description': res.get_description(),
@@ -632,19 +647,9 @@ def addRest():
             'Days':days
         })
         flash('You have added a new Restaurant!')
-        # theBreak = False
-        # while theBreak != True:
-        #     allPicr = root.child('restPic')
-        #     allPicg = allPicr.get()
-        #     for key in allPicg:
-        #         if allPicg[key]['rest'] == 'placeholder':
-        #             rightUser = root.child('restPic/' + key)
-        #             rightUser.update({
-        #                 'rest': res.get_name()
-        #             })
-        #             theBreak = True
+
         return redirect(url_for('home'))
-    return render_template('addRest.html', form=form,proPic=proPic,user=user)
+    return render_template('addRest.html', form=form,proPic=proPic,user=user,count=str(count))
 
 
 @app.route('/userRegister',methods=['POST','GET'])
@@ -653,6 +658,13 @@ def userRegister():
         proPic = session['proPic']
     except KeyError:
         proPic =''
+    allUser = root.child('allUsers')
+    allUserg = allUser.get()
+    try:
+        count = len(allUserg)
+    except:
+        count = 0
+
 
     form = RegisterForm(request.form)
     if request.method == 'POST' and form.validate():
@@ -668,15 +680,16 @@ def userRegister():
             return redirect(url_for('userRegister'))
 
 
+
+
         reg = Registration(user,password,price,foodType,email)
 
-        userFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
-        allUser = userFire.get('allUsers',None)
-        for key in allUser:
-            if allUser[key]['Username'] == user:
+
+        for key in allUserg:
+            if allUserg[key]['Username'] == user:
                 flash('This username has already been used')
                 return redirect(url_for('userRegister'))
-            if allUser[key]['Email'] == email and email != '':
+            if allUserg[key]['Email'] == email and email != '':
                 flash('This email has already been used')
                 return redirect(url_for('userRegister'))
 
@@ -717,31 +730,28 @@ def userRegister():
             server.sendmail(email_user, email_send, text)
             server.quit()
 
-        try:
-            totalUsers = userFire.get('allUsers',None)
-            count = len(totalUsers)
-        except TypeError:
-            count = 0
-        userFire.put('allUsers','user'+str(count),{
+
+        theBreak = False
+        while theBreak == False:
+            allUser = root.child('allUsers')
+            allUserg = allUser.get()
+            for key in allUserg:
+                if key == 'user'+str(count):
+                    theBreak = True
+
+        theUser = root.child('allUsers/user'+str(count))
+        theUser.update({
             'Username': reg.get_user(),
             'Password': reg.get_password(),
             'Price': reg.get_price(),
             'Food Types': reg.get_foodType(),
             'Email':reg.get_email()
         })
+
         flash('You have succesfully registered!')
-        theBreak = False
-        while theBreak != True:
-            allPic = userFire.get('userPic', None)
-            for key in allPic:
-                if allPic[key]['user'] == 'placeholder':
-                    rightUser = root.child('userPic/'+key)
-                    rightUser.update({
-                        'user': reg.get_user()
-                    })
-                    theBreak = True
+
         return redirect(url_for('home'))
-    return render_template('userRegister.html', form=form,proPic=proPic)
+    return render_template('userRegister.html', form=form,proPic=proPic,count=str(count))
 
 
 @app.route('/userLogin',methods=['POST','GET'])
@@ -765,9 +775,7 @@ def userLogin():
                 flash('You are successfully logged in')
                 session['userPref'] = totalUsers[key]
                 session['userDetail'] = totalUsers[key]
-                for key2 in allPic:
-                    if user == allPic[key2]['user']:
-                        session['proPic'] = allPic[key2]['urlProfile']
+                session['proPic'] = totalUsers[key]['urlProfile']
                 print(totalUsers[key])
                 logCheck = True
                 return redirect(url_for('home'))
@@ -812,9 +820,16 @@ def restPage(restName):
     restName = restName
     form = Feedbacks(request.form)
 
-    allRestr = root.child('restaurants/'+restName)
-    print('all',allRestr.get())
-    restDetail = allRestr.get()
+    allRestr = root.child('restaurants')
+    allRestg = allRestr.get()
+    for key in allRestg:
+        if allRestg[key]['Name'] == restName:
+            restDetail =allRestg[key]
+            restid = key
+
+    allUserr =root.child('allUsers')
+    allUserg = allUserr.get()
+
 
 
     """load all comments and ratings, and put all comments into a list"""
@@ -823,8 +838,7 @@ def restPage(restName):
         allComments = []
         allUsers = []
         allCommr = root.child('allComments')
-        allPicr = root.child('userPic')
-        allPicg = allPicr.get()
+
         allCommg = allCommr.get()
         for key in allCommg:
             if key == restName:
@@ -837,9 +851,9 @@ def restPage(restName):
 
         allPic = []
         for i in range(len(allUsers)):
-            for key in allPicg:
-                if allUsers[i] == allPicg[key]['user']:
-                   allPic.append(allPicg[key]['urlProfile'])
+            for key in allUserg:
+                if allUsers[i] == allUserg[key]['Username']:
+                   allPic.append(allUserg[key]['urlProfile'])
 
 
         allRatings =[]
@@ -855,7 +869,7 @@ def restPage(restName):
         allRatings = []
         allPic = []
 
-
+    print(allComments)
 
     if request.method == 'POST':
         try:
@@ -888,12 +902,13 @@ def restPage(restName):
                 totalRating = totalRating + int(currRatg[key])
             numRaters = len(currRatg)
             avgRatings = round(totalRating/numRaters,1)
-            allRestr.update({
+            theRestr = root.child('restaurants/'+restid)
+            theRestr.update({
                 'Average Rating':avgRatings,
                 'Number of Raters':numRaters
             })
             print(avgRatings,numRaters)
-            restDetail = allRestr.get()
+            restDetail = theRestr.get()
 
 
 
@@ -1053,8 +1068,21 @@ def restEdit(restName):
     except KeyError:
         session['proPic'] = ''
     restName = restName
-    theRestr = root.child('restaurants/'+restName)
+
+    allRestr = root.child('restaurants')
+    allRestg = allRestr.get()
+    for key in allRestg:
+        if allRestg[key]['Name'] == restName:
+            restid = key
+
+    print(restid)
+
+    restPic = ''
+
+    theRestr = root.child('restaurants/'+restid)
     theRestg = theRestr.get()
+
+
 
     class RestForm2(Form):
         desc = TextAreaField('Desciption', default=theRestg['Description'])
@@ -1102,18 +1130,33 @@ def restEdit(restName):
         closingH = form.closingH.data
         address = form.address.data
 
+        theBreak = False
+        while theBreak == False:
+            daRestr = root.child('restaurants/'+restid)
+            daRestg = daRestr.get()
+            for key in daRestg:
+                if daRestg['Name'] == 'placeholder':
+                    theBreak = True
+
         theRestr.update({
+            'Name':restName,
             'Description': desc,
             'Location': location,
             'Price': price,
             'Food Type': foodType,
             'Opening Hours': openH,
             'Closing Hours': closingH,
-            'Address': address
+            'Address': address,
+            'User': theRestg['User'],
+            'Average Rating': theRestg['Average Rating'],
+            'Number of Raters': theRestg['Number of Raters'],
+            'Days': theRestg['Days']
         })
         flash('You have successfully edited your restaurant!')
+
+
         return redirect(url_for('home'))
-    return render_template('restEdit.html', form=form, proPic=session['proPic'],rest = theRestg)
+    return render_template('restEdit.html', form=form, proPic=session['proPic'],rest = theRestg,restPic=restPic,restid=restid)
 
 @app.route('/userEdit',methods=['POST','GET'])
 def userEdit():
@@ -1132,13 +1175,12 @@ def userEdit():
                                         ('None', 'None')], default=session['userDetail']['Food Types'])
         email = EmailField("Email", [validators.optional()], default=session['userDetail']['Email'])
     form = UserEdit(request.form)
-    userFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
-    allUser = userFire.get('allUsers', None)
-    allPic = userFire.get('userPic', None)
-    count = 0
-    for key in allPic:
-        if session['username'] == allPic[key]['user']:
-            count = int(allPic[key]['counter']) +1
+    allUserr = root.child('allUsers')
+    allUserg= allUserr.get()
+    for key in allUserg:
+        if allUserg[key]['Username'] == session['username']:
+            theKey=key
+
 
     if request.method == 'POST' and form.validate():
         email = form.email.data
@@ -1150,19 +1192,25 @@ def userEdit():
             flash('The passwords does not match')
             return redirect(url_for('userEdit'))
 
-        for key in allUser:
-            if allUser[key]['Username'] != session['username']:
-                if allUser[key]['Email'] == email and email != '':
+        for key in allUserg:
+            if allUserg[key]['Username'] != session['username']:
+                if allUserg[key]['Email'] == email and email != '':
                     flash('This Email has already been used')
                     return redirect(url_for('userEdit'))
 
 
-        for key in allUser:
-            if session['username'] == allUser[key]['Username']:
-                thekey = key
 
 
-        userFire.put('allUsers', thekey, {
+        theBreak = False
+        while theBreak == False:
+            userr = root.child('allUsers/' + theKey)
+            userg = userr.get()
+            for key in userg:
+                if userg['Username'] == 'placeholder':
+                    theBreak = True
+
+
+        userr.update({
             'Username': session['username'],
             'Price': price,
             'Food Types': foodType,
@@ -1170,26 +1218,13 @@ def userEdit():
             'Password': password
         })
         flash('You have succesfully edited your profile!')
-        for key in allUser:
-            if session['username'] == allUser[key]['Username']:
-                session['userDetail'] = allUser[key]
+        for key in allUserg:
+            if session['username'] == allUserg[key]['Username']:
+                session['userDetail'] = allUserg[key]
 
-        theBreak = False
-        while theBreak == False:
-            userFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
-            allPic = userFire.get('userPic', None)
-            for key in allPic:
-                if session['username'] == allPic[key]['user'] and int(allPic[key]['counter']) == count-1:
-                    toDelete = key
-                    theBreak = True
-        result = userFire.delete('userPic', toDelete)
-
-        for key in allPic:
-            if session['username'] == allPic[key]['user']:
-                session['proPic'] = allPic[key]['urlProfile']
         print(session['userDetail'])
         return redirect(url_for('home'))
-    return render_template('userEdit.html', form=form, user=session['userDetail'], proPic=session['proPic'], count=str(count))
+    return render_template('userEdit.html', form=form, user=session['userDetail'], proPic=session['proPic'], theKey=theKey)
 
 
 @app.route('/logout')
@@ -1209,7 +1244,7 @@ def userProfile():
     for key in totalUsers:
         if totalUsers[key]['Username'] == session['username']:
             theUser = totalUsers[key]
-    print(theUser)
+
     allRestr = root.child('restaurants')
     allRestg = allRestr.get()
     allEdit = []

@@ -157,10 +157,8 @@
             var updates = {};
             var postData = {
                 urlProfile: downloadURL,
-                counter: 0 ,
-                user: 'placeholder'
             };
-            updates['/userPic/' + postKey] = postData;
+            updates['/allUsers/user{{ count }}' ] = postData;
 
             firebase.database().ref().update(updates);
         });

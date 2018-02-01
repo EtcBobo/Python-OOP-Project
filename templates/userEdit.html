@@ -65,7 +65,7 @@
       readURL2(this);
     });
     function readURL(input) {
-
+    alert('ok')
       if (input.files && input.files[0]) {
         var reader = new FileReader();
 
@@ -132,11 +132,9 @@
             var updates = {};
             var postData = {
                 urlProfile: downloadURL,
-                counter: {{ count }} ,
-
-                user: '{{ user['Username'] }}'
+                Username:'placeholder'
             };
-            updates['/userPic/' + postKey] = postData;
+            updates['/allUsers/{{ theKey }}'] = postData;
 
             firebase.database().ref().update(updates);
         });

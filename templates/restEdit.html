@@ -8,19 +8,21 @@
     <div id="viewdiv">
 
     <h1 id="view">{{ rest['Name'] }}</h1>
-    <div class="col-md-12">
-        <br>
-        <br>
-    <img id="detailimg" class="img-responsive" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVoweWwEb_UQKtBhQfwA78S2QXub1JHoyCox-rj8B3gnOC9M5_aQ">
-    <br>
-        <input type="file" id="file"/>
-    </div>
+
 
         <form method="post">
         <div class="form-group col-md-12">
+
             <div class="row">
-                <br>
             <div  class="col-md-8 col-md-offset-2" class="edit">
+                <img id = 'img' class="img-circle" style="width: 275px; height: 275px;" src={{ restPic }}>
+                <br>
+                <br>
+                <input type="file" id="file"/>
+                <br>
+                <br>
+                <br>
+
                 <div class="form-group col-md-12">
                     {{ render_field(form.desc, class_="form-control") }}
                 </div>
@@ -57,7 +59,9 @@
                             <div class="form-group col-md-12">
                                 <br>
                                 <br>
-                                <input type="submit" value="Save Changes" id="submitbtn"/>
+                    <div class='btn-toolbar'>
+                        <button type="submit" class="btn btn-primary btn-lg upload-group text-center" id="uploadButton" onclick="myFunction()">Save Changes</button>
+                    </div>
                              </div>
                         </div>
                     </div>
@@ -67,18 +71,108 @@
         </form>
 
 
-
-
-
-
     </div>
 
-
-
-
-
-
 </div>
+
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+<script>
+   function myFunction() {
+
+}
+    function readURL2(input) {
+
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+          $('#img2').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+     $("#file2").change(function() {
+      readURL2(this);
+    });
+    function readURL(input) {
+    alert('ok')
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+          $('#img').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    $("#file").change(function() {
+      readURL(this);
+    });
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyAbX0KjCpu-WKGrnj9snTRolEqomOXy0oA",
+        authDomain: "python-oop.firebaseapp.com",
+        databaseURL: "https://python-oop.firebaseio.com/",
+        projectId: "python-oop",
+        storageBucket: "python-oop.appspot.com",
+        messagingSenderId: "397421551766"
+      };
+      firebase.initializeApp(config);
+    var fileButton = document.getElementById('uploadButton');
+    $("#file").on("change",function (event) {
+        selectedFile=event.target.files[0];
+
+
+    });
+    $("#file2").on("change",function (event) {
+        selectedFile2=event.target.files[0];
+
+
+    });
+
+    fileButton.addEventListener('click',function(e) {
+
+        var elem = document.getElementById("myBar");
+        var elem2 = document.getElementById("myBar2");
+
+
+
+
+        var filename = selectedFile.name;
+        var storageRef = firebase.storage().ref('/images/restPic/' + filename);
+        var fileRef = storageRef.child(filename);
+        var uploadTask = storageRef.put(selectedFile);
+
+
+        uploadTask.on('state_changed', function (snapshot) {
+        var percentage = snapshot.bytesTransferred / snapshot.totalBytes * 100;
+            //uploader.value = percentage;
+             elem.style.width = parseInt(percentage) + '%';
+             elem.innerHTML=parseInt(percentage)+'%';
+             elem2.style.width = parseInt(percentage) + '%';
+             elem2.innerHTML=parseInt(percentage)+'%';
+        }, function (error) {
+
+        }, function () {
+            var postKey = firebase.database().ref('Posts/').push().key;
+            var downloadURL = uploadTask.snapshot.downloadURL;
+
+            var updates = {};
+            var postData = {
+                urlRest: downloadURL,
+                Name: 'placeholder'
+            };
+            updates['/restaurants/{{ restid }}'] = postData;
+
+            firebase.database().ref().update(updates);
+        });
+    })
+
+
+        </script>
 
 <style>
 #profilediv {
