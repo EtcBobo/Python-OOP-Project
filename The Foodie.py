@@ -904,6 +904,8 @@ def restPage(restName):
             })
             print(avgRatings,numRaters)
             restDetail = theRestr.get()
+            allUserr = root.child('allUsers')
+            allUserg = allUserr.get()
 
 
 
@@ -924,9 +926,9 @@ def restPage(restName):
 
                 allPic = []
                 for i in range(len(allUsers)):
-                    for key in allPicg:
-                        if allUsers[i] == allPicg[key]['user']:
-                            allPic.append(allPicg[key]['urlProfile'])
+                    for key in allUserg:
+                        if allUsers[i] == allUserg[key]['Username']:
+                            allPic.append(allUserg[key]['urlProfile'])
 
                 allRatings = []
                 allRatr = root.child('allRatings')
@@ -961,18 +963,24 @@ def eventEdit(eventName):
         session['proPic'] = ''
 
     eventName = eventName
-    theEventr = root.child('events/'+eventName)
+    theEventr = root.child('events')
     theEventg = theEventr.get()
+    for key in theEventg:
+        if eventName == theEventg[key]['Name']:
+            theEvent = theEventg[key]
+            eventid = key
+
+    theEventr = root.child('events/'+eventid)
 
     class EventForm2(Form):
-        eventDescription = TextAreaField('Desciption',default=theEventg['Description'])
+        eventDescription = TextAreaField('Desciption',default=theEvent['Description'])
         eventLocation = SelectField(u'Location',
                                     choices=[('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),
-                                             ('Central', 'Central')],default=theEventg['Location'])
-        eventAddress = TextAreaField('Place where your event is held',default=theEventg['Address'])
-        ticket = IntegerField('Entry Fee',default=theEventg['ticket'])
-        startDate = StringField('Start date (e.g.2018-01-12)*',default=theEventg['Start'])
-        endDate = StringField('End date (e.g.2018-01-12)*',default=theEventg['End'])
+                                             ('Central', 'Central')],default=theEvent['Location'])
+        eventAddress = TextAreaField('Place where your event is held',default=theEvent['Address'])
+        ticket = IntegerField('Entry Fee',default=theEvent['ticket'])
+        startDate = StringField('Start date (e.g.2018-01-12)*',default=theEvent['Start'])
+        endDate = StringField('End date (e.g.2018-01-12)*',default=theEvent['End'])
         startTime = SelectField(u'Start Time(Hr)*',
                                 choices=[('12 AM', '12 AM'), ('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'),
                                          ('4 AM', '4 AM'),
@@ -980,7 +988,7 @@ def eventEdit(eventName):
                                          ('9 AM', '9 AM'), ('10 AM', '10 AM'), ('11 AM', '11 AM'), ('12 PM', '12 PM'),
                                          ('1 PM', '1 PM'), ('2 PM', '2 PM'), ('3 PM', '3 PM'), ('4 PM', '4 PM'),
                                          ('5 PM', '5 PM'), ('6 PM', '6 PM'), ('7 PM', '7 PM'),
-                                         ('8 PM', '8 PM'), ('9 PM', '9 PM'), ('10 PM', '10 PM'), ('11 PM', '11 PM')],default=theEventg['Time Start'])
+                                         ('8 PM', '8 PM'), ('9 PM', '9 PM'), ('10 PM', '10 PM'), ('11 PM', '11 PM')],default=theEvent['Time Start'])
         endTime = SelectField(u'End Time(Hr)*',
                               choices=[('12 AM', '12 AM'), ('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'),
                                        ('4 AM', '4 AM'),
@@ -988,15 +996,15 @@ def eventEdit(eventName):
                                        ('9 AM', '9 AM'), ('10 AM', '10 AM'), ('11 AM', '11 AM'), ('12 PM', '12 PM'),
                                        ('1 PM', '1 PM'), ('2 PM', '2 PM'), ('3 PM', '3 PM'), ('4 PM', '4 PM'),
                                        ('5 PM', '5 PM'), ('6 PM', '6 PM'), ('7 PM', '7 PM'),
-                                       ('8 PM', '8 PM'), ('9 PM', '9 PM'), ('10 PM', '10 PM'), ('11 PM', '11 PM')],default=theEventg['Time End'])
+                                       ('8 PM', '8 PM'), ('9 PM', '9 PM'), ('10 PM', '10 PM'), ('11 PM', '11 PM')],default=theEvent['Time End'])
         startTimeMin = SelectField(u'Start Time(Min)*',
                                    choices=[('00', '00'), ('05', '05'), ('10', '10'), ('15', '15'), ('20', '20'),
                                             ('25', '25'), ('30', '30'), ('35', '35'),
-                                            ('40', '40'), ('45', '45'), ('50', '50'), ('55', '55')],default=theEventg['Min Start'])
+                                            ('40', '40'), ('45', '45'), ('50', '50'), ('55', '55')],default=theEvent['Min Start'])
         endTimeMin = SelectField(u'End Time(Min)*',
                                  choices=[('00', '00'), ('05', '05'), ('10', '10'), ('15', '15'), ('20', '20'),
                                           ('25', '25'), ('30', '30'), ('35', '35'),
-                                          ('40', '40'), ('45', '45'), ('50', '50'), ('55', '55')],default=theEventg['Min End'])
+                                          ('40', '40'), ('45', '45'), ('50', '50'), ('55', '55')],default=theEvent['Min End'])
 
     form = EventForm2(request.form)
     if request.method == 'POST':
@@ -1015,7 +1023,8 @@ def eventEdit(eventName):
             user = session['username']
         except:
             flash('You must be logged in to add an Event')
-            return render_template('eventEdit.html', form=form, proPic=session['proPic'])
+            return render_template('eventEdit.html', form=form, proPic=session['proPic'], eventName=eventName,eventid =eventid,
+                                   theEvent=theEvent)
 
         try:
             theCheck = True
@@ -1030,15 +1039,25 @@ def eventEdit(eventName):
 
             if theCheck == False:
                 flash('The End Date cannot be before the Start Date')
-                return render_template('eventEdit.html', form=form, proPic=session['proPic'], eventName=eventName)
+                return render_template('eventEdit.html', form=form, proPic=session['proPic'], eventName=eventName,eventid =eventid,
+                                       theEvent=theEvent)
         except:
             flash('Please follow the example date format')
-            return render_template('eventEdit.html', form=form, proPic=session['proPic'], eventName=eventName)
+            return render_template('eventEdit.html', form=form, proPic=session['proPic'], eventName=eventName,theEvent=theEvent,eventid =eventid,)
 
         if ticket == '':
             ticket = 0
 
+        theBreak = False
+        while theBreak == False:
+            theEventr = root.child('events/'+eventid)
+            theEventg = theEventr.get()
+            for key in theEventg:
+                if theEventg['Name'] == 'placeholder':
+                    theBreak = True
+
         theEventr.update({
+            'Name':eventName,
             'Description': eventDescription,
             'Location': eventLocation,
             'Address': eventAddress,
@@ -1048,12 +1067,14 @@ def eventEdit(eventName):
             'Time End': endTime,
             'Min Start': startTimeMin,
             'Min End': endTimeMin,
-            'ticket': ticket
+            'ticket': ticket,
+            'People': theEvent['People'],
+            'User': theEvent['User']
         })
         flash('You have successfully edited your Event!')
         return redirect(url_for('home'))
 
-    return render_template('eventEdit.html', form=form, proPic=session['proPic'],eventName=eventName)
+    return render_template('eventEdit.html', form=form, proPic=session['proPic'], eventName=eventName,theEvent=theEvent, eventid=eventid)
 
 
 @app.route('/restEdit/<restName>',methods=['POST','GET'])
@@ -1246,6 +1267,7 @@ def userProfile():
     allRestr = root.child('restaurants')
     allRestg = allRestr.get()
     allEdit = []
+
     for key in allRestg:
         if allRestg[key]['User'] == theUser['Username']:
             allEdit.append(allRestg[key])
@@ -1286,92 +1308,97 @@ def events():
 
     status = []
     count = 0
-
-    for key in allEventg:
-        if int(allEventg[key]['Start'][0:4]) > currYear:
-            status.append('Upcoming')
-        elif int(allEventg[key]['End'][0:4]) < currYear:
-            status.append('Ended')
-        elif int(allEventg[key]['Start'][0:4]) <= currYear and int(allEventg[key]['End'][0:4]) > currYear:
-            status.append('Ongoing')
-        elif int(allEventg[key]['Start'][0:4]) == currYear:
-
-            if int(allEventg[key]['Start'][5:7]) > currMonth:
+    try:
+        for key in allEventg:
+            if int(allEventg[key]['Start'][0:4]) > currYear:
                 status.append('Upcoming')
-            elif int(allEventg[key]['End'][5:7]) < currMonth:
+            elif int(allEventg[key]['End'][0:4]) < currYear:
                 status.append('Ended')
-            elif int(allEventg[key]['Start'][5:7]) <= currMonth and int(allEventg[key]['End'][5:7]) > currMonth:
+            elif int(allEventg[key]['Start'][0:4]) <= currYear and int(allEventg[key]['End'][0:4]) > currYear:
                 status.append('Ongoing')
-            elif int(allEventg[key]['Start'][5:7]) == currMonth:
+            elif int(allEventg[key]['Start'][0:4]) == currYear:
 
-                if int(allEventg[key]['Start'][8:]) > currDate:
+                if int(allEventg[key]['Start'][5:7]) > currMonth:
                     status.append('Upcoming')
-                elif int(allEventg[key]['End'][8:]) < currDate:
+                elif int(allEventg[key]['End'][5:7]) < currMonth:
                     status.append('Ended')
-                elif int(allEventg[key]['Start'][8:]) <= currDate and int(allEventg[key]['End'][8:]) > currDate:
+                elif int(allEventg[key]['Start'][5:7]) <= currMonth and int(allEventg[key]['End'][5:7]) > currMonth:
                     status.append('Ongoing')
+                elif int(allEventg[key]['Start'][5:7]) == currMonth:
 
-    for key in allEventg:
-        eventr = root.child('events/'+key)
-        eventr.update({
-            'Status':status[count]
-        })
-        count = count +1
+                    if int(allEventg[key]['Start'][8:]) > currDate:
+                        status.append('Upcoming')
+                    elif int(allEventg[key]['End'][8:]) < currDate:
+                        status.append('Ended')
+                    elif int(allEventg[key]['Start'][8:]) <= currDate and int(allEventg[key]['End'][8:]) > currDate:
+                        status.append('Ongoing')
 
-    print(status)
+        for key in allEventg:
+            eventr = root.child('events/'+key)
+            eventr.update({
+                'Status':status[count]
+            })
+            count = count +1
 
-    for key in allEventg:
-        count2 = 0
-        try:
-            for key2 in allEventg[key]['Going']:
-                count2 = count2 + 1
-        except:
+        print(status)
+
+        for key in allEventg:
             count2 = 0
-        peopler = root.child('events/'+key)
-        peopler.update({
-            'People':count2
-        })
-
+            try:
+                for key2 in allEventg[key]['Going']:
+                    count2 = count2 + 1
+            except:
+                count2 = 0
+            peopler = root.child('events/'+key)
+            peopler.update({
+                'People':count2
+            })
+    except:
+        pass
 
 
     theList = []
     ongoing = []
     upcoming = []
     ended = []
+    popEvent = []
+
     allEventr = root.child('events')
     allEventg = allEventr.get()
     numEvent = len(allEventg)
+    print('len of even',numEvent)
+    try:
+        for key in allEventg:
+            theList.append(allEventg[key])
 
-    for key in allEventg:
-        theList.append(allEventg[key])
+        for key in allEventg:
+            if allEventg[key]['Status'] == 'Ongoing':
+                ongoing.append(allEventg[key])
 
-    for key in allEventg:
-        if allEventg[key]['Status'] == 'Ongoing':
-            ongoing.append(allEventg[key])
+        for key in allEventg:
+            if allEventg[key]['Status'] == 'Upcoming':
+                upcoming.append(allEventg[key])
 
-    for key in allEventg:
-        if allEventg[key]['Status'] == 'Upcoming':
-            upcoming.append(allEventg[key])
-
-    for key in allEventg:
-        if allEventg[key]['Status'] == 'Ended':
-            ended.append(allEventg[key])
+        for key in allEventg:
+            if allEventg[key]['Status'] == 'Ended':
+                ended.append(allEventg[key])
 
 
 
-    allPop = {}
-    for key in theList:
-        if key['Status'] == 'Ongoing' or key['Status'] == 'Upcoming':
-            allPop[key['Name']] = key['People']
+        allPop = {}
+        for key in theList:
+            if key['Status'] == 'Ongoing' or key['Status'] == 'Upcoming':
+                allPop[key['Name']] = key['People']
 
-    newList = [(k, allPop[k]) for k in sorted(allPop, key=allPop.get)]
-    newList2 = []
-    for key in newList:
-        for key2 in theList:
-            if key[0] == key2['Name']:
-                newList2.insert(0, key2)
-    popEvent = newList2
-
+        newList = [(k, allPop[k]) for k in sorted(allPop, key=allPop.get)]
+        newList2 = []
+        for key in newList:
+            for key2 in theList:
+                if key[0] == key2['Name']:
+                    newList2.insert(0, key2)
+        popEvent = newList2
+    except:
+        pass
 
 
 
@@ -1430,6 +1457,7 @@ def events():
             pass
 
 
+
         currEvent = root.child('events/event'+str(numEvent))
         currEvent.update({
             'Name': event.get_eventName(),
@@ -1449,7 +1477,7 @@ def events():
         flash('You have added a new event!')
         return redirect(url_for('home'))
 
-    return render_template('events.html', form=form,proPic = session['proPic'],ongoing=ongoing,upcoming=upcoming,ended=ended,popEvent=popEvent,numEvent=numEvent )
+    return render_template('events.html', form=form,proPic = session['proPic'],ongoing=ongoing,upcoming=upcoming,ended=ended,popEvent=popEvent,numEvent=str(numEvent),)
 
 @app.route('/events/<eventName>',methods=['POST','GET'])
 def eventDet(eventName):

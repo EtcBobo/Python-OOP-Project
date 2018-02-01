@@ -78,8 +78,16 @@
           <form method="POST">
         <div class="form-group col-md-12">
             <div class="row">
+            <div  class="col-md-8 col-md-offset-2" class="edit">
+                <div class="form-group col-md-12">
+                    <br>
+                <img id="img" src="https://thedanamariner.com/wp-content/uploads/2017/12/Events.jpg" width="304" height="304">
+                <br>
+                <input type="file" id="file"/>
                 <br>
                 <br>
+                <br>
+                </div>
             <div  class="col-md-8 col-md-offset-2" class="eventName">
                 <div class="form-group col-md-12">
                     {{ render_field(form.eventName, class_="form-control") }}
@@ -131,13 +139,17 @@
                             <div class="form-group col-md-12">
                                 <br>
                                 <br>
-                                <input type="submit" value="Submit" id="submitbtn"/>
+                                <div class='btn-toolbar'>
+                        <button type="submit" class="btn btn-primary btn-lg upload-group text-center" id="uploadButton" onclick="myFunction()">Organize</button>
+                    </div>
                              </div>
                         </div>
                     </div>
               </div>
             </div>
         </div>
+            </div>
+
               </form>
   </div>
 
@@ -275,7 +287,122 @@
           </div>
         {% endfor %}
        </div>
+  </div>
+     </div>
 
+      <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+<script>
+   function myFunction() {
+
+}
+    function readURL2(input) {
+
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+          $('#img2').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+     $("#file2").change(function() {
+      readURL2(this);
+    });
+    function readURL(input) {
+
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+          $('#img').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    $("#file").change(function() {
+      readURL(this);
+    });
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyAbX0KjCpu-WKGrnj9snTRolEqomOXy0oA",
+        authDomain: "python-oop.firebaseapp.com",
+        databaseURL: "https://python-oop.firebaseio.com/",
+        projectId: "python-oop",
+        storageBucket: "python-oop.appspot.com",
+        messagingSenderId: "397421551766"
+      };
+      firebase.initializeApp(config);
+    var fileButton = document.getElementById('uploadButton');
+    $("#file").on("change",function (event) {
+        selectedFile=event.target.files[0];
+
+
+    });
+    $("#file2").on("change",function (event) {
+        selectedFile2=event.target.files[0];
+
+
+    });
+
+    fileButton.addEventListener('click',function(e) {
+
+        var elem = document.getElementById("myBar");
+        var elem2 = document.getElementById("myBar2");
+
+
+        if(document.getElementById( 'img' ).src != "https://thedanamariner.com/wp-content/uploads/2017/12/Events.jpg"){
+            alert('if is running')
+            var filename = selectedFile.name;
+
+        }
+        else{
+                alert('else')
+                var updates = {};
+                var postData = {
+                    urlEvent:"https://thedanamariner.com/wp-content/uploads/2017/12/Events.jpg"
+
+                };
+                updates['/events/event{{ numEvent }}'] = postData;
+
+                firebase.database().ref().update(updates);
+
+        }
+
+        var storageRef = firebase.storage().ref('/images/restPic/' + filename);
+        var fileRef = storageRef.child(filename);
+        var uploadTask = storageRef.put(selectedFile);
+
+
+        uploadTask.on('state_changed', function (snapshot) {
+        var percentage = snapshot.bytesTransferred / snapshot.totalBytes * 100;
+            //uploader.value = percentage;
+             elem.style.width = parseInt(percentage) + '%';
+             elem.innerHTML=parseInt(percentage)+'%';
+             elem2.style.width = parseInt(percentage) + '%';
+             elem2.innerHTML=parseInt(percentage)+'%';
+        }, function (error) {
+
+        }, function () {
+            alert('function')
+            var postKey = firebase.database().ref('Posts/').push().key;
+            var downloadURL = uploadTask.snapshot.downloadURL;
+
+            var updates = {};
+            var postData = {
+                urlEvent: downloadURL,
+            };
+            updates['/events/event{{ numEvent }}'] = postData;
+
+            firebase.database().ref().update(updates);
+        });
+    })
+
+
+        </script>
 
 <style>
 #photo{
