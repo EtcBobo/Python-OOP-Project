@@ -47,7 +47,7 @@ GoogleMaps(app, key="AIzaSyCrGeXVb96USi1ujzqQ7wlCwc_8LzUB-yY")
 
 class RegisterForm(Form):
     user = StringField('Username',[validators.DataRequired()])
-    password = PasswordField('New Password', [
+    password = PasswordField('Password', [
         validators.Length(min=8),
         validators.DataRequired(),
         validators.EqualTo('confirm', message='Passwords must match')
@@ -752,10 +752,13 @@ def addRest():
 
     try:
         proPic = session['proPic']
-        user = session['username']
     except KeyError:
         proPic =''
-        user = ''
+
+    try:
+        testUser = session['username']
+    except:
+        return redirect(url_for('denied'))
     form = RestForm(request.form)
     restFirer = root.child('restaurants')
     restFireg = restFirer.get()
@@ -960,6 +963,17 @@ def userLogin():
             session['logged_in'] = False
 
     return render_template('userLogin.html', form=form,proPic=proPic)
+
+@app.route('/denied',methods=['POST','GET'])
+def denied():
+    try:
+        proPic = session['proPic']
+    except KeyError:
+        proPic =''
+
+
+
+    return render_template('denied.html',proPic=proPic)
 
 @app.route('/heatmap')
 def heatmap():
@@ -1211,13 +1225,6 @@ def eventEdit(eventName):
         startTimeMin = form.startTimeMin.data
         endTimeMin = form.endTimeMin.data
         ticket = form.ticket.data
-
-        try:
-            user = session['username']
-        except:
-            flash('You must be logged in to add an Event')
-            return render_template('eventEdit.html', form=form, proPic=session['proPic'], eventName=eventName,eventid =eventid,
-                                   theEvent=theEvent)
 
         try:
             theCheck = True
@@ -1593,6 +1600,13 @@ def addEvent():
         proPic = session['proPic']
     except KeyError:
         session['proPic'] =''
+
+    try:
+        testUser = session['username']
+    except:
+        return redirect(url_for('denied'))
+
+
     allEventr = root.child('events')
     allEventg = allEventr.get()
     try:
@@ -1619,12 +1633,6 @@ def addEvent():
         startTimeMin = form.startTimeMin.data
         endTimeMin = form.endTimeMin.data
         ticket = form.ticket.data
-
-        try:
-            user = session['username']
-        except:
-            flash('You must be logged in to add an Event')
-            return redirect(url_for('addEvent'))
 
         try:
             theCheck = True
