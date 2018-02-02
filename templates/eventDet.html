@@ -7,43 +7,79 @@
 
  <div class="container" id="profilediv">
       <div class="col-md-12">
-    <div class="col-md-10">
-       <div class="col-md-4">
+                    {% if currEventg['Status'] !='Ended' %}
+          <div method="post">
+          <div>
+       <button type="submit" class="btn btn-primary" style="float:right;">I'm Interested In Going</button>
+           <br><br>
+      <small style="float:right"> {{ currEventg['People'] }} people interested in going</small>
+          </div>
               <br>
-                <br>
-              <h3 class="eventTitle"> {{ currEventg['Name'] }} <span class="label label-success">{{ currEventg['Status'] }}</span></h3>
-       </div>
-    <img id='eventimg' class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
-    </div>
-          <br><br><br><br><br><br>
-          {% if currEventg['Status'] !='Ended' %}
-          <form method="post">
-       <button type="submit" class="btn btn-primary" class="int">I'm Interested In Going</button>
           </form>
           {% endif %}
               <br>
-               <small> {{ currEventg['People'] }} people interested in going</small>
-      </div>
 
-     <div class="col-md-12">
-         <div class="col-md-8">
-         <span> {{ currEventg['Description'] }}</span>
-              <br>
-              <br>
+    <div class="col-md-7">
+       <div class="col-md-12">
+           <br>
+           <h3 class="eventTitle"> {{ currEventg['Name'] }} <span class="label label-success">{{ currEventg['Status'] }}</span></h3>
+       </div>
+        <br>
+    <img id='eventimg' class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
+        <span> {{ currEventg['Description'] }}</span>
+    </div>
+          <div class="col-md-4" id="eventdesc">
+             <div id="br"> <br><br><br> </div>
+              <div id="height">
+                  <br>
+{#            <span> {{ currEventg['Description'] }} fihcbnehyikvfc beifbweikfqjn biewkf qewfbqewifnqewifbew qwe bweikfqjn biewkf qewfbqewifnqewifbew  fihcbnehyikvfc beifbweikfqjn biewkf  qwe fihcbnehyikvfc beifbweikfqjn biewkf qewfbqewifnqewifbew fewnhfqwuoefnbewf wef  qwe fihcbnehyikvfc beifbweikfqjn biewkf qewfbqewifnqewifbew fewnhfqwuoefnbewf wef  qwe fihcbnehyikvfc beifbweikfqjn biewkf qewfbqewifnqewifbew fewnhfqwuoefnbewf wef  qewfbqewifnqewifbew fewnhfqwuoefnbewf wef  fewnhfqwuoefnbewf wef</span>#}
                 <span class="glyphicon glyphicon-map-marker"> {{ currEventg['Location'] }}</span>
               <br>
               <br>
                 <span class="glyphicon glyphicon-globe"> {{ currEventg['Address'] }}</span>
               <br>
               <br>
-                <span class="glyphicon glyphicon-tag"> {{ currEventg['ticket'] }}</span>
+                <span class="glyphicon glyphicon-tag"> ${{ currEventg['ticket'] }}</span>
               <br>
               <br>
               <span class="glyphicon glyphicon-calendar"> {{ currEventg['Start'] }} to {{ currEventg['End'] }} </span>
               <br>
               <br>
               <span class="glyphicon glyphicon-time"> {{ currEventg['Time Start'] }} - {{ currEventg['Time End'] }}</span>
-    </div>
+                  </div>
+              </div>
+
+
+{#          {% if currEventg['Status'] !='Ended' %}#}
+{#          <form method="post">#}
+{#       <button type="submit" class="btn btn-primary" class="int">I'm Interested In Going</button>#}
+{#          </form>#}
+{#          {% endif %}#}
+{#              <br>#}
+{#               <small> {{ currEventg['People'] }} people interested in going</small>#}
+
+      </div>
+
+{#     <div class="col-md-12">#}
+{#         <div class="col-md-8">#}
+{#         <span> {{ currEventg['Description'] }}</span>#}
+{#              <br>#}
+{#              <br>#}
+{#                <span class="glyphicon glyphicon-map-marker"> {{ currEventg['Location'] }}</span>#}
+{#              <br>#}
+{#              <br>#}
+{#                <span class="glyphicon glyphicon-globe"> {{ currEventg['Address'] }}</span>#}
+{#              <br>#}
+{#              <br>#}
+{#                <span class="glyphicon glyphicon-tag"> {{ currEventg['ticket'] }}</span>#}
+{#              <br>#}
+{#              <br>#}
+{#              <span class="glyphicon glyphicon-calendar"> {{ currEventg['Start'] }} to {{ currEventg['End'] }} </span>#}
+{#              <br>#}
+{#              <br>#}
+{#              <span class="glyphicon glyphicon-time"> {{ currEventg['Time Start'] }} - {{ currEventg['Time End'] }}</span>#}
+{#    </div>#}
+
      </div>
 
 
@@ -57,43 +93,36 @@
 </div>
 <style>
 
-
-
+ #height   {
+        height: 200px !important;
+        word-wrap: break-word ;
+        text-justify: auto;
+    }
 
 @media (max-width: 991px) {
-    #eventnav {
-        max-width: 100%;
+    #br br{
+        display:none
     }
 }
 
 #eventimg{
-    width:90%;
+    width:100%;
     height:400px;
 }
 
-div {
-    display: block;
+
+
+
+#eventdesc{
+    display:block;
 }
 
-.upcoming{
-    float:right;
-     cursor: default;
 
-}
 
-.int{
-    float:right;
-}
 
-#eventsheader{
-    text-align:center;
-    font-size:63px;
-    padding:128px;
-}
 
-.btn btn-success, .btn btn-warning, .btn btn-danger{
-      cursor: default;
-}
+
+
 </style>
 
 {% endblock %}

@@ -29,14 +29,13 @@
     <br><br><br>
 {% for i in Restaurant %}
 
-   <div class="form-group col-md-4">
+   <div class="form-group col-md-4" id="viewdiv">
 
        <img id='restimg' class='img-responsive' src={{ i['urlRest'] }}>
        <h1 class="restname">{{i['Name'] }}</h1>
        <h5 id="restdesc" style="text-align:justify;word-wrap: break-word;"> {{ i['Description'] }}
        Aguaviva specializes in the freshest fish and seafood prepared with
-Latino – Caribbean flair, and features a wonderful oyster and
-ceviche bar in front of the open kitchen.</h5>
+Latino – Caribbean flair, and features a wonderful oyster</h5>
            <br>
        <h6>Average Rating: {{ i['Average Rating'] }} out of 5 </h6>
        <h6>Price Range: ${{ i['Price'] }}</h6>
@@ -69,8 +68,6 @@ ceviche bar in front of the open kitchen.</h5>
 {#</div>#}
 
 
-
-
 <style>
      #view{
        display: block;
@@ -83,6 +80,10 @@ ceviche bar in front of the open kitchen.</h5>
 
     }
 
+{#     #viewdiv{#}
+{#         height:600px;#}
+{#          overflow: scroll;#}
+{#     }#}
     .restname{
     display: block;
     font-size: 130%;
@@ -90,8 +91,11 @@ ceviche bar in front of the open kitchen.</h5>
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: .1em;
- text-align: center;
+    text-align: center;
+        height:50px;
 }
+
+
 
     .recbtn{
          text-align:center;
@@ -119,6 +123,13 @@ ceviche bar in front of the open kitchen.</h5>
 
     #restdesc {
          font-family: 'Montserrat', sans-serif;
+   word-wrap: break-word;
+        height:200px;
+
+    }
+
+    .form-group col-md-4{
+        height:auto!important;
     }
 
 {#    #view::before{#}
