@@ -147,13 +147,12 @@
         }
         else{
 
-                var updates = {};
                 var postData = {
                     urlRest:"http://clipartbarn.com/wp-content/uploads/2016/12/Restaurant-clipart-page-1.jpg"
                 };
-                updates['/restaurants/rest{{ count }}'] = postData;
 
-                firebase.database().ref().update(updates);
+
+                firebase.database().ref().child('/restaurants/rest{{ count }}').update(postData)
 
         }
 
@@ -172,16 +171,12 @@
         }, function (error) {
 
         }, function () {
-            var postKey = firebase.database().ref('Posts/').push().key;
             var downloadURL = uploadTask.snapshot.downloadURL;
-
-            var updates = {};
             var postData = {
                 urlRest: downloadURL,
             };
-            updates['/restaurants/rest{{ count }}'] = postData;
 
-            firebase.database().ref().update(updates);
+            firebase.database().ref().child('/restaurants/rest{{ count }}').update(postData)
         });
     })
 

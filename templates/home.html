@@ -144,6 +144,19 @@
 
 
   <br><br><br><br>
+    <div class="container">
+<div id='news' class="form-group col-md-12">Latest News</div>
+    {% for news in container %}
+{#    <div class="form-group col-md-4"><img id='NewsImage' class="img-responsive" src="https://image.freepik.com/foto-gratis/diferentes-especias-ingredientes-de-alimentos-cuchara-de-madera-sobre-fondo-blancotable_1220-1704.jpg" alt="NewsImage">#}
+                       <div class="form-group col-md-4"><img id='NewsImage' class="img-responsive" src={{ news['image'] }} alt="NewsImage">
+                    <h3 id="title"><a href= {{ news['link']}}>{{ news['title'] }}</a></h3>
+                    <p id="date">{{ news['date'] }}</p>
+                    <p></p>
+                </div>
+    {% endfor %}
+
+</div>
+    <br><br><br><br>
 
 
    <div class="container">
@@ -204,22 +217,26 @@
 
 
 <style>
-
-#features{
-    margin-top: 5px;
-    margin-left: -5px;
-    transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-    display: block;
-    width: 55px;
-    height: 55px;
-    font-weight: 300;
-    font-size: 12px;
-    color: #fff;
-    text-align: center;
-}
-
+    #features{
+        margin-top: 5px;
+        margin-left: -5px;
+        transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+        display: block;
+        width: 55px;
+        height: 55px;
+        font-weight: 300;
+        font-size: 12px;
+        color: #fff;
+        text-align: center;
+    }
+    #NewsImage{
+        padding: 5px 5px 5px 5px;
+    }
+    #date{
+        text-align: right;
+    }
 
 
 .icon-img{
@@ -242,7 +259,7 @@
      float:left;
 }
 
- #popular, #recommend{
+ #popular, #recommend, #news{
       display: block;
     font-size: 150%;
     font-family: 'Montserrat', sans-serif;
@@ -302,9 +319,15 @@
 {##}
 {##}
 {# }#}
-{##searchbtn{#}
-{#    margin-top: 20px;#}
-{#    margin-left: 170px;}#}
+
+#searchbtn{
+    margin-top: 21px;
+    margin-left: 180px;}
+
+#search_box{
+    margin-left:200px;
+
+}
 
 .recname{
       display: block;

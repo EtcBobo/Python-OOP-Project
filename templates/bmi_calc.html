@@ -1,0 +1,92 @@
+{% extends 'layout.html' %}
+
+
+
+
+<head>
+
+
+    <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bmicalc.css') }}">
+
+</head>
+{% block body %}
+    <div class="container" id="profilediv">
+    <br>
+    <br>
+
+    <br>
+<section id="photo" src="https://prods3.imgix.net/images/articles/2016_01/Hero-Dinner-Party-Papdi-Chaat-Babu-Ji-NYC-East-Village-Melbourne-Indian-Recipes-Tamarind-Nachos-Yogurt-Mint.jpg?auto=format,compress">
+<div class="text-container" id="eventheader">
+<h2 id="eventsheader">Healthy eating</h2>
+</div>
+</section>
+     <div class="container" id="profilediv">
+    <br>
+    <br>
+<h1 id="cal">BMI Calculator</h1>
+
+<div class="main">
+	<form class="pure-form" method="POST" action="{{ url_for('bmi') }}">
+	Weight in kg:<br>
+	<input type="text" name="weight"><br>
+	Height in cm:<br>
+	<input type="text" name="height"><br>
+	<button type="submit" class="pure-button pure-button-primary" value="Submit">Submit</button>
+	</form>
+</div>
+
+<br>
+
+<div class="main">
+	{% if bmi %}
+	    <p>
+        {% print("Your BMI is {}. That means {}".format(bmi, result)) %}
+        </p>
+	{% endif %}
+
+</div>
+     </div>
+
+     <style>
+#profilediv {
+         align: center;
+         background-color: white;
+         display:block;
+     }
+    @media (max-width: 991px) {
+    .edit{
+        float:left;
+    }
+
+    #profilediv{
+        float:left;
+    }
+
+}
+    #photo{
+background-image: url("https://prods3.imgix.net/images/articles/2016_01/Hero-Dinner-Party-Papdi-Chaat-Babu-Ji-NYC-East-Village-Melbourne-Indian-Recipes-Tamarind-Nachos-Yogurt-Mint.jpg?auto=format,compress");
+background-repeat: no-repeat;
+background-size: cover;
+background-position:center;
+width:100%;
+height:550px;
+}
+#eventheader{
+align:center;
+color:white;    }
+
+    #cal{
+        display: block;
+    font-size: 150%;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+         text-align:center;}
+
+
+</style>
+
+{% endblock %}

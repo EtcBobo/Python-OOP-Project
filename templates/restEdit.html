@@ -15,7 +15,7 @@
 
             <div class="row">
             <div  class="col-md-8 col-md-offset-2" class="edit">
-                <img id = 'img' class="img-circle" style="width: 275px; height: 275px;" src={{ restPic }}>
+                <img id = 'img' style="width: 275px; height: 275px;" src={{ restPic }}>
                 <br>
                 <br>
                 <input type="file" id="file"/>
@@ -96,7 +96,6 @@
       readURL2(this);
     });
     function readURL(input) {
-    alert('ok')
       if (input.files && input.files[0]) {
         var reader = new FileReader();
 
@@ -143,14 +142,11 @@
             var filename = selectedFile.name;
         }
         else{
-                var updates = {};
                 var postData = {
                     urlRest:"{{ restPic }}",
-                    Name:'placeholder'
                 };
-                updates['/restaurants/{{ restid }}'] = postData;
 
-                firebase.database().ref().update(updates);
+                firebase.database().ref().child('/restaurants/{{ restid }}').update(postData)
 
         }
 
@@ -169,17 +165,12 @@
         }, function (error) {
 
         }, function () {
-            var postKey = firebase.database().ref('Posts/').push().key;
             var downloadURL = uploadTask.snapshot.downloadURL;
-
-            var updates = {};
             var postData = {
                 urlRest: downloadURL,
-                Name: 'placeholder'
             };
-            updates['/restaurants/{{ restid }}'] = postData;
 
-            firebase.database().ref().update(updates);
+            firebase.database().ref().child('/restaurants/{{ restid }}').update(postData)
         });
     })
 

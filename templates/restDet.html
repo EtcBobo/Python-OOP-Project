@@ -2,12 +2,13 @@
 
 {% block body %}
         {% from "includes/_formhelper.html" import render_field %}
-<div class="container">
+<div class="container" id="filterdiv">
+    <br>
+    <br>
 <div id="viewdiv">
 
-    <h1 id="view">Details of {{ restDetail['Name'] }}    <button type="submit" class="box-btn"><span id="heart" class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span></button></h1>
-    <div class="form-group col-md-12">
-        <br><br>
+    <h1 id="view">Details of {{ restDetail['Name'] }}    <button type="submit" class="box-btn" onclick="send()"><span id="heart" class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span></button></h1>
+    <div class="form-group col-md-12" id="filterdiv" >
       <span class="info2"><p class="glyphicon glyphicon-usd"></p> {{ restDetail['Price'] }}</span>
         <span class="verticalLine"></span>
         <span class="info2"><p class="glyphicon glyphicon-bell"></p> {{ restDetail['Opening Hours'] }} to {{ restDetail['Closing Hours'] }}</span>
@@ -38,7 +39,7 @@
     <img id="detailimg" class="img-responsive" src={{ restDetail['urlRest'] }}>
                 <div class="form-group col-md-6">
          <div class="form-group col-md-6" class="value">
-                Description: <br> {{ restDetail['Description'] }}
+                 {{ restDetail['Description'] }}
          </div>
                     <div class="'form-group col-md-1"></div>
                     <div class="form-group col-md-5">
@@ -133,6 +134,7 @@
     </div>
 </div>
 </div>
+    <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
 <script>
 function showcomments(recentcomments) {
    var e = document.getElementById('recentcomments');
@@ -147,6 +149,28 @@ $(function($) {
     $(this).find('.glyphicon').toggleClass('red').toggleClass('glyphicon-heart-empty glyphicon-heart');
   });
 });
+
+function send() {
+
+  var config = {
+        apiKey: "AIzaSyAbX0KjCpu-WKGrnj9snTRolEqomOXy0oA",
+        authDomain: "python-oop.firebaseapp.com",
+        databaseURL: "https://python-oop.firebaseio.com/",
+        projectId: "python-oop",
+        storageBucket: "python-oop.appspot.com",
+        messagingSenderId: "397421551766"
+  };
+  firebase.initializeApp(config);
+  database = firebase.database();
+    var postData = {
+        {{ restDetail['Name'] }}:"{{ restDetail['Name'] }}"
+    };
+    firebase.database().ref().child('/fav/{{ session['username'] }}').update(postData)
+
+
+
+}
+
 
 </script>
 
@@ -172,13 +196,15 @@ $(function($) {
     }
 
     #view{
-         display: block;
-    font-size: 150%;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: .1em;
- text-align: center;
+         color: #000;
+    font-family: "hgw-HelveticaNeueBold",Arial,sans-serif;
+	 font-weight: bold;
+    border-bottom: 2px solid darkred;
+    margin-bottom: 20px;
+    font-size: 15px;
+    padding-bottom: 3px;
+    font-size:200%;
+        font-family: italic;
 
     }
 
@@ -218,7 +244,6 @@ $(function($) {
     text-align: center;
         height: 42px;
         width:250px;
-       float:right;
 
    }
 
