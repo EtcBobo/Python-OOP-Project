@@ -29,7 +29,7 @@
             <br>
             <br>
             <br>
-             <p class="userinfo">Preferred price range: <span style="font-weight: bold;"> {{  user['Price'] }} </span></p>
+             <p class="userinfo">Preferred price range: <span style="font-weight: bold;"> ${{  user['minPrice'] }} - ${{ user['maxPrice'] }}</span></p>
             <br>
             <p class="userinfo">Preferred Food Type:<span style="font-weight: bold;"> {{  user['Food Types'] }} </span></p>
             <br>
@@ -44,17 +44,18 @@
     </div>
 
      <div class="tab-pane" id="tab2">
+         {% for i in favRest %}
          <div class="col-md-12">
          <div class="col-md-3">
             <br>
              <br>
-         <img id="detailimg" class="img-responsive" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVoweWwEb_UQKtBhQfwA78S2QXub1JHoyCox-rj8B3gnOC9M5_aQ">
+         <img id="detailimg" class="img-responsive" src={{ i['urlRest'] }}>
             <br>
          </div>
         <div class="col-md-8">
             <br>
-          <h1>Restaurant Name Title</h1>
-          <p> Description of Restaurant</p>
+          <h1><a href="/restDet/{{ i['Name'] }}">{{ i['Name'] }}</a></h1>
+          <p> {{ i['Description'] }}</p>
         </div>
         <div class="col-md-1">
         <br>
@@ -63,22 +64,8 @@
          </div>
          </div>
     <hr>
-          <div class="col-md-12">
-         <div class="col-md-3">
-            <br>
-         <img id="detailimg" class="img-responsive" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVoweWwEb_UQKtBhQfwA78S2QXub1JHoyCox-rj8B3gnOC9M5_aQ">
-            <br>
-         </div>
-        <div class="col-md-8">
-          <h1>Restaurant Name Title</h1>
-          <p> Description of Restaurant</p>
-        </div>
-        <div class="col-md-1">
-        <br>
-        <br>
-        <span class="glyphicon glyphicon-heart"></span>
-         </div>
-         </div>
+         {% endfor %}
+
      </div>
 
     <div class="tab-pane" id="tab3">

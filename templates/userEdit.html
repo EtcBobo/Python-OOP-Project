@@ -21,7 +21,9 @@
                 <br>
                    {{ render_field(form.passwordC, class_="form-control") }}
                 <br>
-                 {{ render_field(form.price, class_="form-control") }}
+                 {{ render_field(form.minPrice, class_="form-control") }}
+                <br>
+                {{ render_field(form.maxPrice, class_="form-control") }}
                 <br>
                 {{ render_field(form.foodType, class_="form-control") }}
                 <br>
@@ -112,14 +114,11 @@
             var filename = selectedFile.name;
         }
         else{
-                var updates = {};
                 var postData = {
                     urlProfile:"{{ proPic }}",
-                    Username:'placeholder'
                 };
-                updates['/allUsers/{{ theKey }}'] = postData;
 
-                firebase.database().ref().update(updates);
+                firebase.database().ref().child('/allUsers/{{ theKey }}').update(postData)
 
         }
 
@@ -138,17 +137,12 @@
         }, function (error) {
 
         }, function () {
-            var postKey = firebase.database().ref('Posts/').push().key;
             var downloadURL = uploadTask.snapshot.downloadURL;
-
-            var updates = {};
             var postData = {
                 urlProfile: downloadURL,
-                Username:'placeholder'
-            };
-            updates['/allUsers/{{ theKey }}'] = postData;
 
-            firebase.database().ref().update(updates);
+            };
+            firebase.database().ref().child('/allUsers/{{ theKey }}').update(postData)
         });
     })
 
