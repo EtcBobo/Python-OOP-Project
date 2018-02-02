@@ -2,9 +2,7 @@
 
 {% block body %}
     {% from "includes/_formhelper.html" import render_field %}
-     <div class="container" id="filterdiv">
-         <br>
-        <br>
+     <div class="container">
     <h1 id="find">Find Food</h1>
     <form method="POST" >
         <br>
@@ -45,20 +43,20 @@
         </div>
 
 <style>
-    #filterdiv{
-         align: center;
-         background-color: white;
-         display:block;
-    }
+{#    #filterdiv{#}
+{#         align: center;#}
+{#         background-color: white;#}
+{#         display:block;#}
+{#    }#}
 
     #find{
-        font-weight: bold;
-    font-style: italic;
-    border-bottom: 2px solid darkred;
-    margin-bottom: 20px;
-    font-size: 15px;
-    padding-bottom: 3px;
-    font-size:200%;
+         display: block;
+    font-size: 150%;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+ text-align: center;
 
     }
 
@@ -78,15 +76,15 @@
         float:right;
 
     }
-body{
-    background:url("http://hotmillion.ca/wp-content/uploads/2015/03/Best-Indian-Food-Wallpaper.jpg");
-    background-color: rgba(255,255,255,0.2);
-     background-blend-mode: lighten;
-    background-repeat: no-repeat;
-
-    opacity:0.9;
-
-}
+{#body{#}
+{#    background:url("http://hotmillion.ca/wp-content/uploads/2015/03/Best-Indian-Food-Wallpaper.jpg");#}
+{#    background-color: rgba(255,255,255,0.2);#}
+{#     background-blend-mode: lighten;#}
+{#    background-repeat: no-repeat;#}
+{##}
+{#    opacity:0.9;#}
+{##}
+{#}#}
 
 
 

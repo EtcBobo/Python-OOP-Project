@@ -1,0 +1,96 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    {% from "includes/_formhelper.html" import render_field %}
+     <div class="container">
+         <br>
+        <br>
+    <h1 id="find">Find Food</h1>
+    <form method="POST" >
+        <br>
+        <br>
+        <div class="form-group">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    {{ render_field(form.fLocation, class_="form-control") }}
+                </div>
+                <div class="form-group col-md-6">
+                    {{ render_field(form.foodType, class_="form-control") }}
+                </div>
+                <div class="form-group col-md-6">
+                    {{ render_field(form.pricef, class_="form-control") }}
+                </div>
+                <div class="form-group col-md-6">
+                    {{ render_field(form.openT, class_="form-control") }}
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="form-row">
+                <br>
+                <br>
+                <div class="form-group col-md-12">
+                        <br>
+                        <br>
+                    <input type="submit" value="Find Food" class="btn btn-info" id="filterbtn"/>
+                </div>
+            </div>
+        </div>
+
+    </form>
+        </div>
+
+<style>
+{#    #filterdiv{#}
+{#         align: center;#}
+{#         background-color: white;#}
+{#         display:block;#}
+{#    }#}
+
+    #find{
+         display: block;
+    font-size: 150%;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+ text-align: center;
+
+    }
+
+    #filterbtn{
+          border-radius: 4px;
+    background-color: darkred;
+    border: 0;
+    color: #fff!important;
+    display: inline-block;
+    font-size: 14px;
+    /*line-height: 40px;*/
+    /*min-width: 150px;*/
+    /*height: 42px;*/
+    text-align: center;
+        height: 42px;
+        width:250px;
+        float:right;
+
+    }
+{#body{#}
+{#    background:url("http://hotmillion.ca/wp-content/uploads/2015/03/Best-Indian-Food-Wallpaper.jpg");#}
+{#    background-color: rgba(255,255,255,0.2);#}
+{#     background-blend-mode: lighten;#}
+{#    background-repeat: no-repeat;#}
+{##}
+{#    opacity:0.9;#}
+{##}
+{#}#}
+
+
+
+</style>
+
+
+{% endblock %}

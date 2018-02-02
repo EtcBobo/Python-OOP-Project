@@ -3,8 +3,6 @@
 {% block body %}
         {% from "includes/_formhelper.html" import render_field %}
   <div class="container">
-         <br>
-        <br>
     <h1 id="view">View All Restaurants</h1>
 
       <form method="post">
@@ -104,13 +102,14 @@ ceviche bar in front of the open kitchen.</h5>
     text-transform: uppercase;
     font-family: 'Montserrat', sans-serif;
     font-size:80%;
+        display:block;
     }
 
     .recbtn:hover{
    text-decoration:none;
-    background-color:#aad4b3;
-    color:white!important;
-    font-weight:bold;
+    background-color:white;
+    color:darkred!important;
+    font-weight:800;
 }
 
     #restimg{
