@@ -47,8 +47,12 @@ GoogleMaps(app, key="AIzaSyCrGeXVb96USi1ujzqQ7wlCwc_8LzUB-yY")
 
 class RegisterForm(Form):
     user = StringField('Username',[validators.DataRequired()])
-    password = PasswordField("Password",[validators.DataRequired()])
-    passwordC = PasswordField("Confirm Password",[validators.DataRequired()])
+    password = PasswordField('New Password', [
+        validators.Length(min=8),
+        validators.DataRequired(),
+        validators.EqualTo('confirm', message='Passwords must match')
+    ])
+    confirm = PasswordField('Repeat Password')
     minPrice = IntegerField('Minimum Meal Budget')
     maxPrice = IntegerField('Maximum Meal Budget')
     foodType = SelectField(u'Preferred Food Type',
@@ -777,12 +781,12 @@ def addRest():
         try:
             for key in restFireg:
                 if name.lower == restFireg[key]['Name'].lower:
-                    flash('This restaurant already exist')
+                    flash(u'This restaurant already exist','error')
                     return redirect(url_for('addRest'))
         except:
             pass
         if user == '':
-            flash('You must be logged in to recommend a Restaurant')
+            flash(u'You must be logged in to recommend a Restaurant','error')
             return redirect(url_for('addRest'))
 
 
@@ -831,10 +835,6 @@ def userRegister():
         email = form.email.data
 
 
-        passwordC = form.passwordC.data
-        if password != passwordC:
-            flash('The passwords does not match')
-            return redirect(url_for('userRegister'))
 
         if minPrice > maxPrice:
             flash('The Minumum budget cannot exceed the Maximum budget')
@@ -956,7 +956,7 @@ def userLogin():
                 logCheck = True
                 return redirect(url_for('home'))
         if logCheck == False:
-            flash('Invalid Username or Password')
+            flash(u'Invalid Username or Password','error')
             session['logged_in'] = False
 
     return render_template('userLogin.html', form=form,proPic=proPic)
@@ -1049,6 +1049,10 @@ def restPage(restName):
         allPic = []
 
     print(allComments)
+    try:
+        commentLen = len(allComments)
+    except:
+        commentLen = 0
 
     if request.method == 'POST':
         try:
@@ -1127,15 +1131,20 @@ def restPage(restName):
                 allRatings = []
                 allPic = []
 
+            try:
+                commentLen = len(allComments)
+            except:
+                commentLen = 0
+
 
 
             return render_template('restDet.html', restDetail=restDetail, form=form, comments=allComments, users=allUsers,
-                                   ratings=allRatings, proPic=proPic, pic=allPic)
+                                   ratings=allRatings, proPic=proPic, pic=allPic,commentLen=commentLen)
         except:
             flash('You must login to be able to comment or rate restaurants')
-            return render_template('restDet.html',restDetail = restDetail, form=form,comments=allComments,users=allUsers,ratings=allRatings,proPic=proPic, pic=allPic)
+            return render_template('restDet.html',restDetail = restDetail, form=form,comments=allComments,users=allUsers,ratings=allRatings,proPic=proPic, pic=allPic,commentLen=commentLen)
 
-    return render_template('restDet.html',restDetail = restDetail, form=form,comments=allComments,users=allUsers,ratings=allRatings,proPic=proPic, pic=allPic)
+    return render_template('restDet.html',restDetail = restDetail, form=form,comments=allComments,users=allUsers,ratings=allRatings,proPic=proPic, pic=allPic,commentLen=commentLen)
 
 
 
@@ -1350,8 +1359,12 @@ def userEdit():
     except KeyError:
         session['proPic'] =''
     class UserEdit(Form):
-        password = PasswordField("Password", [validators.DataRequired()])
-        passwordC = PasswordField("Confirm Password", [validators.DataRequired()])
+        password = PasswordField('New Password', [
+            validators.Length(min=8),
+            validators.DataRequired(),
+            validators.EqualTo('confirm', message='Passwords must match')
+        ])
+        confirm = PasswordField('Repeat Password')
         minPrice = IntegerField('Minimum Meal Budget',default=session['userDetail']['minPrice'])
         maxPrice = IntegerField('Maximum Meal Budget', default=session['userDetail']['maxPrice'])
         foodType = SelectField(u'Preferred Food Type',
@@ -1374,10 +1387,6 @@ def userEdit():
         maxPrice = form.maxPrice.data
         foodType = form.foodType.data
         password = form.password.data
-        passwordC = form.passwordC.data
-        if password != passwordC:
-            flash('The passwords does not match')
-            return redirect(url_for('userEdit'))
 
         if minPrice > maxPrice:
             flash('The Minumum budget cannot exceed the Maximum budget')
@@ -1405,7 +1414,6 @@ def userEdit():
             if session['username'] == allUserg[key]['Username']:
                 session['userDetail'] = allUserg[key]
                 session['proPic'] = allUserg[key]['urlProfile']
-
 
         return redirect(url_for('home'))
     return render_template('userEdit.html', form=form, user=session['userDetail'], proPic=session['proPic'], theKey=theKey)
@@ -1458,7 +1466,7 @@ def userProfile():
         allFavg = allFavr.get()
         for key in allFavg:
             for key2 in allRestg:
-                if allRestg[key2]['Name'] == key:
+                if allRestg[key2]['Name'] == allFavg[key]:
                     favRest.append(allRestg[key2])
         print(favRest)
     except:
