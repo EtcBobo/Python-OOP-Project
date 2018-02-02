@@ -727,6 +727,21 @@ def userRegister():
     return render_template('userRegister.html', form=form,proPic=proPic,count=str(count))
 
 
+@app.route('/bmi_calc', methods=['GET', 'POST'])
+def bmi():
+    def calc_bmi(weight, height):
+        return round((weight / ((height / 100) ** 2)), 2)
+
+    bmi = ''
+    if request.method == 'POST' and 'weight' in request.form:
+        weight = float(request.form.get('weight'))
+        height = float(request.form.get('height'))
+        bmi = calc_bmi(weight, height)
+    return render_template("bmi_calc.html",
+	                        bmi=bmi)
+
+
+
 @app.route('/userLogin',methods=['POST','GET'])
 def userLogin():
     try:
