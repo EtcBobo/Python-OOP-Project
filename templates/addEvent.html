@@ -1,25 +1,28 @@
 {% extends 'layout.html' %}
 {% block body %}
-<br>
-<br>
+
     {% from "includes/_formhelper.html" import render_field %}
 
-
-
+<div class="'container">
+ <div class="form-group col-md-12" id="add">Organize A Event!</div>
+<br>
+    <br>
           <form method="POST">
         <div class="form-group col-md-12">
             <div class="row">
             <div  class="col-md-8 col-md-offset-2" class="edit">
                 <div class="form-group col-md-12">
                     <br>
+                    <div class="form-group col-md-12">
                 <img id="img" src="https://thedanamariner.com/wp-content/uploads/2017/12/Events.jpg" width="304" height="304">
-                <br>
+                </div>
                 <input type="file" id="file"/>
                 <br>
                 <br>
                 <br>
                 </div>
-            <div  class="col-md-8 col-md-offset-2" class="eventName">
+
+            <div class="col-md-8 col-md-offset-2" class="eventName">
                 <div class="form-group col-md-12">
                     {{ render_field(form.eventName, class_="form-control") }}
                 </div>
@@ -68,9 +71,8 @@
                     <div class="form-group">
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                                <br>
-                                <br>
                                 <div class='btn-toolbar'>
+
                         <button type="submit" class="btn btn-primary btn-lg upload-group text-center" id="uploadButton" onclick="myFunction()">Organize</button>
                     </div>
                              </div>
@@ -82,7 +84,7 @@
             </div>
 
               </form>
-
+</div>
 
 
           <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
@@ -191,5 +193,53 @@
 
         </script>
 
+<style>
+ #file{
+         margin-left:350px;
 
+    }
+
+    #img{
+    margin-left:300px;
+}
+
+#add{
+     display: block;
+    font-size: 150%;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+ text-align: center;
+}
+
+#uploadButton{
+         border-radius: 4px;
+    background-color: darkred;
+    border: 0;
+    color: #fff!important;
+    display: inline-block;
+    font-size: 14px;
+    text-align: center;
+        height: 42px;
+        width:50%;
+    }
+
+ @media(max-width:991px){
+    #img{
+        margin-left:0px;
+    }
+    #file{
+        margin-left:0px;
+    }
+    .edit{
+        float:left;
+    }
+
+   #uploadButton{
+   width:100%;}
+}
+
+
+</style>
 {% endblock %}
