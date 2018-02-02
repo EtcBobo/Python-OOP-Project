@@ -16,18 +16,18 @@
         color: #555;
         margin-bottom: 5px;
         }
-    body{
-        background:url("http://hotmillion.ca/wp-content/uploads/2015/03/Best-Indian-Food-Wallpaper.jpg");
-        background-color: rgba(255,255,255,0.2);
-        background-blend-mode: lighten;
-        background-repeat: no-repeat;
-        opacity:0.9;
-    }
-    #profilediv {
-        align: center;
-        background-color: white;
-        display:block;
-    }
+{#    body{#}
+{#        background:url("http://hotmillion.ca/wp-content/uploads/2015/03/Best-Indian-Food-Wallpaper.jpg");#}
+{#        background-color: rgba(255,255,255,0.2);#}
+{#        background-blend-mode: lighten;#}
+{#        background-repeat: no-repeat;#}
+{#        opacity:0.9;#}
+{#    }#}
+{#    #profilediv {#}
+{#        align: center;#}
+{#        background-color: white;#}
+{#        display:block;#}
+{#    }#}
     @media (max-width: 991px) {
         .edit{
             float:left;
@@ -44,7 +44,7 @@
 
     <div class="text-center well"><b>The foodie Chatroom</b></div>
 
-    <div class="container">
+
       <div class="col-sm-8">
         <div class="no_message">
           <h1 style='color: #ccc'>No message yet..</h1>
@@ -60,14 +60,18 @@
           <br>
           <b>Type your message below <span class="glyphicon glyphicon-arrow-down"></span></b>
           <div class="clearfix" style="margin-top: 10px;"></div>
-          <input type="text" class="username form-control" placeholder="User Name">
+            {% if session['username'] != '' %}
+                <input type="text" class="username form-control" placeholder="User Name" value="{{ session['username'] }}">
+            {% else %}
+                <input type="text" class="username form-control" placeholder="User Name" >
+            {% endif %}
           <div style="padding-top: 5px;"></div>
           <input type="text" class="message form-control" placeholder="Messages">
           <div style="padding-top: 10px;"></div>
           <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-send"></span> Send</button>
         </form>
       </div>
-    </div>
+
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -86,6 +90,7 @@
           e.preventDefault()
 {#            {{ currentUser }}#}
           let user_name = $( 'input.username' ).val() + ':'
+
             //means that calling the input feild that we created wit a class username and then selecting that input feild using its class username, and then its value.
           {#  let user_name = {{ currentUser }}.val() + ':'#}
           let user_input = $( 'input.message' ).val()

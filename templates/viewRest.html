@@ -3,53 +3,60 @@
 {% block body %}
         {% from "includes/_formhelper.html" import render_field %}
   <div class="container" id="filterdiv">
-         <br>
-        <br>
-<div id="viewdiv">
     <h1 id="view">Results</h1>
-    <br/>
 
 <form method="post">
+    <br><br>
       <div class="form-group col-md-12">
             <p id="lengthlist">{{ lengthList }} results</p>
-    <div class="form-group col-md-4">
+          <br>
+      </div>
+    <div class="form-group col-md-12">
+    <div class="form-group col-md-4" id="sortdiv">
         {{ render_field(form.sort, class_="form-control") }}
-    </div>
+        </div>
         <div class="form-group col-md-4">
             <button type="submit" id="sortbtn">Sort</button>
         </div>
            </div>
 </form>
+<br><br>
 
         {% for i in Restaurant %}
 
 <div class="col-md-12">
-    <div class="col-md-4">
-        <h1 id="restnames"><a href="/restDet/{{ i['Name'] }}">{{ i['Name'] }}</a></h1>
-        <br>
+ <br>
+    <div class="col-md-12">
+        <div class="col-md-5">
+        <h1 id="restnames">{{ i['Name'] }}</h1>
          <img id="detailimg" class="img-responsive" src={{ i['urlRest'] }}>
-    <br>
-    </div>
-    <div class="col-md-6">
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <p id="description"> {{ i['Description'] }} </p>
-        <br>
-        <br>
-         <div class="col-md-4" id="avg">
-        <span>Avg ratings: {{ i['Average Rating'] }}/5</span>
-             <br>
-             <br>
-         <span>Average Price: 4</span>
-    </div>
+            <br>
+            <br>
+             </div>
+
+        <a class="viewbtn"  href="/restDet/{{ i['Name'] }}">know More</a>
+        <div class="col-md-5">
+            <br><br>
+        <p id="description"> {{ i['Description'] }} regvtrebvarebvaewbvawebrbrbrertybntyerbn etrbn teyregvtrebvaewbvawebrbrbrertybntyerbn etrbn teyregvtrebvaewbvawebrbrbrertybntyerbn etrbn tey</p>
+         <br>
+            <span id="avgra">Average ratings: {{ i['Average Rating'] }}/5</span>
+           <br>
+             <span>Average Price: $4</span>
     </div>
 
+        <br><br>
+
+        </div>
+
+
+         <div class="col-md-4" id="avg">
+             <br><br>
+
+        </div>
+        <br><br>
 
 </div>
-            <hr>
+
 
 
         {% endfor %}
@@ -92,22 +99,19 @@
 </div>
     </div>
 <style>
-     #viewdiv{
-        max-width: 1480px;
-    padding: 20px 12px 10px 20px;
-    font: 13px Arial, Helvetica, sans-serif;
-        align:center;
-
-    }
+   #detailimg{
+       width:500px;
+       height:300px;
+   }
 
     #view{
-        font-weight: bold;
-    font-style: italic;
-    border-bottom: 2px solid darkred;
-    margin-bottom: 20px;
-    font-size: 15px;
-    padding-bottom: 3px;
-    font-size:200%;
+        display: block;
+    font-size: 150%;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+         text-align:center;
 
     }
 
@@ -128,45 +132,93 @@
         height: 36px;
         width:150px;
         float:left;
-        margin-top:20px;
+        margin-top:25px;
     }
 
 
 
  #restnames{
-     font-size:230%;
-     font-family: Playfair Display, serif;
-     font-weight:bold;
-
+      display: block;
+    font-size: 120%;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+         text-align:center;
  }
+
+
+
 
 #description{
     font-weight:normal;
     font-size:120%;
+    word-wrap: break-word;
+
 }
 
-hr{
-     font-weight: bold;
-    font-style: italic;
-    border-bottom: 1px darkgrey;
-    width:1000px;
-    margin-bottom: 20px;
-    padding-bottom: 3px;
+.viewbtn{
+     text-align:center;
+    border: 1px solid #969696;
+   color: #969696;
+    margin-top: 24px;
+    padding: 5px 32px 11px;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-size:80%;
 }
+
+.viewbtn:hover{
+   text-decoration:none;
+    color:darkred!important;
+    font-weight:800;
+}
+
+
+
+
+
+
+
 
 #avg {
     float:right;
 }
 
+
+
 #lengthlist{
     float:right;
+    margin-right:220px;
 }
 
 @media(max-width:991px){
     #sortbtn{
         width:100%;
-        margin-bottom:50px;
+        margin-bottom:100px;
     }
+
+    #lengthlist{
+       margin-right:0px;
+
+    }
+
+    .col-md-3 br, #avg br{
+        display:none;
+    }
+
+     .col-md-3 span{
+        display:block!important;
+         float:left;
+    }
+
+     .viewbtn{
+         text-align:center;
+         display:block;
+       margin-left:30px;
+         margin-right:30px;
+     }
+
+
 }
 
 

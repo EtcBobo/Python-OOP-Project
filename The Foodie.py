@@ -235,7 +235,50 @@ def home():
     newList3.append(newList2[2])
     list = newList3
 
+    # ------------------------------ NewsFeed ------------------------------
+    def parseRSS(rss_url):
+        return feedparser.parse(rss_url)
 
+    def getHeadlines(rss_url):
+        headlines = []
+
+        feed = parseRSS(rss_url)
+        for newsitem in feed['items']:
+            headlines.append(newsitem)
+        return headlines
+
+
+
+
+    allheadlines = []
+
+    newsurls = {'ladyiron':'http://www.ladyironchef.com/rss'}
+
+    for key, url in newsurls.items():
+        allheadlines.extend(getHeadlines(url))
+
+    container = []
+
+    for hl in allheadlines[0:3]:
+        link = hl['link']
+
+        date = hl['published']
+
+        title = hl['title']
+
+        content = hl['content']
+        index = content[0]['value'].find('http')
+        # finding the index for end of the url for the pic
+        second_index = content[0]['value'].find('"', index)
+        # print(content[0]['value'][index:second_index])
+        image =content[0]['value'][index:second_index]
+
+
+        news = {'title': title, 'link': link, 'date': date, 'image':image}
+        container.append(news)
+
+
+    # ------------------------------ Search ------------------------------
     nameList = []
     form = theSearch(request.form)
     if request.method == 'POST':
@@ -277,7 +320,7 @@ def home():
 
         session['filtered'] = nameList
         return redirect(url_for('view'))
-    return render_template('home.html', recommend=randRec , form=form, proPic = proPic, hnp=list)
+    return render_template('home.html', recommend=randRec , form=form, proPic = proPic, hnp=list, container=container)
 
 
 
@@ -732,6 +775,30 @@ def userRegister():
 
         return redirect(url_for('home'))
     return render_template('userRegister.html', form=form,proPic=proPic,count=str(count))
+
+
+@app.route('/bmi_calc', methods=['GET', 'POST'])
+def bmi():
+    def calc_bmi(weight, height):
+        return round((weight / ((height / 100) ** 2)), 2)
+
+    bmi = ''
+    result = ''
+    if request.method == 'POST' and 'weight' in request.form:
+        weight = float(request.form.get('weight'))
+        height = float(request.form.get('height'))
+        bmi = calc_bmi(weight, height)
+        if bmi < 18.5:
+            result = "yOU ARE underweight!!"
+        elif bmi > 25 and bmi < 30:
+            result= "YoU are OverWeight!"
+        elif bmi > 30:
+            result = "You are obese!"
+        else:
+            result = "You are healthy!"
+    return render_template("bmi_calc.html",
+	                        bmi=bmi, result=result)
+
 
 
 @app.route('/userLogin',methods=['POST','GET'])
