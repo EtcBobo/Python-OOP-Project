@@ -32,7 +32,7 @@
               <br>
                 <br>
               <br>
-             <h3 class="eventTitle"><a href="/events/{{ i['Name'] }}">{{ i['Name'] }}</a> <span class="label label-success">Ongoing</span></h3>
+             <h3 class="eventTitle"><a href="/eventDet/{{ i['Name'] }}">{{ i['Name'] }}</a> <span class="label label-success">Ongoing</span></h3>
               <br>
               <img id='eventimg' class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
           </div>
@@ -67,90 +67,7 @@
 
 
       </div>
-
-
-
-
-{#        organize events tab#}
-{#  <div class="tab-pane" id="addEvent">#}
-{#          <form method="POST">#}
-{#        <div class="form-group col-md-12">#}
-{#            <div class="row">#}
-{#            <div  class="col-md-8 col-md-offset-2" class="edit">#}
-{#                <div class="form-group col-md-12">#}
-{#                    <br>#}
-{#                <img id="img" src="https://thedanamariner.com/wp-content/uploads/2017/12/Events.jpg" width="304" height="304">#}
-{#                <br>#}
-{#                <input type="file" id="file"/>#}
-{#                <br>#}
-{#                <br>#}
-{#                <br>#}
-{#                </div>#}
-{#            <div  class="col-md-8 col-md-offset-2" class="eventName">#}
-{#                <div class="form-group col-md-12">#}
-{#                    {{ render_field(form.eventName, class_="form-control") }}#}
-{#                </div>#}
-{##}
-{#                <div class="form-group col-md-12" class="eventDesc">#}
-{#                    {{ render_field(form.eventDescription, class_="form-control") }}#}
-{#                </div>#}
-{##}
-{#                <div class="form-group col-md-12" class="'eventLocation">#}
-{#                    {{ render_field(form.eventLocation, class_="form-control") }}#}
-{#                </div>#}
-{##}
-{#                <div class="form-group col-md-12" class="eventAddress">#}
-{#                    {{ render_field(form.eventAddress, class_="form-control") }}#}
-{#                </div>#}
-{##}
-{#                <div class="form-group col-md-6" class="startDate">#}
-{#                    {{ render_field(form.startDate, class_="form-control") }}#}
-{#                </div>#}
-{##}
-{#                <div class="form-group col-md-6" class="endDate">#}
-{#                    {{ render_field(form.endDate, class_="form-control") }}#}
-{#                </div>#}
-{##}
-{#                 <div class="form-group col-md-6" class="startTime">#}
-{#                    {{ render_field(form.startTime, class_="form-control") }}#}
-{#                </div>#}
-{##}
-{#                 <div class="form-group col-md-6" class="startTimeMin">#}
-{#                    {{ render_field(form.startTimeMin, class_="form-control") }}#}
-{#                </div>#}
-{##}
-{#                 <div class="form-group col-md-6" class="endTime">#}
-{#                    {{ render_field(form.endTime, class_="form-control") }}#}
-{#                </div>#}
-{##}
-{#                 <div class="form-group col-md-6" class="endTimeMin">#}
-{#                    {{ render_field(form.endTimeMin, class_="form-control") }}#}
-{#                </div>#}
-{##}
-{#                <div class="form-group col-md-12" class="ticket">#}
-{#                    {{ render_field(form.ticket, class_="form-control") }}#}
-{#                </div>#}
-{#                <br>#}
-{#                <br>#}
-{#                    <div class="form-group">#}
-{#                        <div class="form-row">#}
-{#                            <div class="form-group col-md-12">#}
-{#                                <br>#}
-{#                                <br>#}
-{#                                <div class='btn-toolbar'>#}
-{#                        <button type="submit" class="btn btn-primary btn-lg upload-group text-center" id="uploadButton" onclick="myFunction()">Organize</button>#}
-{#                    </div>#}
-{#                             </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#              </div>#}
-{#            </div>#}
-{#        </div>#}
-{#            </div>#}
-{##}
-{#              </form>#}
-{#  </div>#}
-
+  
 
 {#        popular events tab#}
   <div class="tab-pane" id="popularEvent">
@@ -162,6 +79,9 @@
                 <br>
               <br>
               <h3 class="eventTitle"><a href="/events/{{ i['Name'] }}">{{ i['Name'] }}</a> <span class="label label-danger"><span class="glyphicon glyphicon-fire"></span> Popular</span></h3>
+
+               <h3 class="eventTitle"><a href="/eventDet/{{ i['Name'] }}">{{ i['Name'] }}</a> <span class="label label-danger"><span class="glyphicon glyphicon-fire"></span> Popular</span></h3>
+
               <br>
               <img id='eventimg' class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
           </div>
@@ -204,7 +124,7 @@
               <br>
                 <br>
               <br>
-             <h3 class="eventTitle"><a href="/events/{{ i['Name'] }}">{{ i['Name'] }}</a> <span class="label label-warning">Upcoming</span></h3>
+             <h3 class="eventTitle"><a href="/eventDet/{{ i['Name'] }}">{{ i['Name'] }}</a> <span class="label label-warning">Upcoming</span></h3>
               <br>
               <img id='eventimg' class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
           </div>
@@ -245,7 +165,7 @@
               <br>
                 <br>
               <br>
-             <h3 class="eventTitle"><a href="/events/{{ i['Name'] }}">{{ i['Name'] }}</a> <span class="label label-default">Ended</span></h3>
+             <h3 class="eventTitle"><a href="/eventDet/{{ i['Name'] }}">{{ i['Name'] }}</a> <span class="label label-default">Ended</span></h3>
               <br>
               <img id='eventimg' class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
           </div>
@@ -280,111 +200,6 @@
   </div>
      </div>
 
-      <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
-<script>
-   function myFunction() {
-
-}
-    function readURL2(input) {
-
-      if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function(e) {
-          $('#img2').attr('src', e.target.result);
-        }
-
-        reader.readAsDataURL(input.files[0]);
-      }
-    }
-     $("#file2").change(function() {
-      readURL2(this);
-    });
-    function readURL(input) {
-
-      if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function(e) {
-          $('#img').attr('src', e.target.result);
-        }
-
-        reader.readAsDataURL(input.files[0]);
-      }
-    }
-
-    $("#file").change(function() {
-      readURL(this);
-    });
-      // Initialize Firebase
-      var config = {
-        apiKey: "AIzaSyAbX0KjCpu-WKGrnj9snTRolEqomOXy0oA",
-        authDomain: "python-oop.firebaseapp.com",
-        databaseURL: "https://python-oop.firebaseio.com/",
-        projectId: "python-oop",
-        storageBucket: "python-oop.appspot.com",
-        messagingSenderId: "397421551766"
-      };
-      firebase.initializeApp(config);
-    var fileButton = document.getElementById('uploadButton');
-    $("#file").on("change",function (event) {
-        selectedFile=event.target.files[0];
-
-
-    });
-    $("#file2").on("change",function (event) {
-        selectedFile2=event.target.files[0];
-
-
-    });
-
-    fileButton.addEventListener('click',function(e) {
-
-        var elem = document.getElementById("myBar");
-        var elem2 = document.getElementById("myBar2");
-
-
-        if(document.getElementById( 'img' ).src != "https://thedanamariner.com/wp-content/uploads/2017/12/Events.jpg"){
-            var filename = selectedFile.name;
-
-        }
-        else{
-                var postData = {
-                    urlEvent:"https://thedanamariner.com/wp-content/uploads/2017/12/Events.jpg",
-                    Name:'placeholder'
-
-                };
-
-                firebase.database().ref().child('/events/event{{ numEvent }}').update(postData)
-
-        }
-
-        var storageRef = firebase.storage().ref('/images/restPic/' + filename);
-        var fileRef = storageRef.child(filename);
-        var uploadTask = storageRef.put(selectedFile);
-
-
-        uploadTask.on('state_changed', function (snapshot) {
-        var percentage = snapshot.bytesTransferred / snapshot.totalBytes * 100;
-            //uploader.value = percentage;
-             elem.style.width = parseInt(percentage) + '%';
-             elem.innerHTML=parseInt(percentage)+'%';
-             elem2.style.width = parseInt(percentage) + '%';
-             elem2.innerHTML=parseInt(percentage)+'%';
-        }, function (error) {
-
-        }, function () {
-            var downloadURL = uploadTask.snapshot.downloadURL;
-            var postData = {
-                urlEvent: downloadURL,
-                Name:'placeholder'
-            };
-            firebase.database().ref().child('/events/event{{ numEvent }}').update(postData)
-        });
-    })
-
-
-        </script>
 
 <style>
 #photo{

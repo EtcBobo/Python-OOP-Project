@@ -62,9 +62,7 @@ class RegisterForm(Form):
 class RestForm(Form):
     name = StringField('Restaurant Name',[validators.DataRequired()])
     desc = TextAreaField('Desciption')
-
     location = SelectField(u'Location', choices=[('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),('Central','Central')])
-
 
     price = IntegerField(u'Price Range (in Dollars)',[validators.DataRequired()])
 
@@ -94,18 +92,37 @@ class FilterForm(Form):
     fLocation = SelectField(u'Location',
                            choices=[('Any','Any'),('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),
                                     ('Central', 'Central')])
-    pricef = SelectField(u'Price Range (Below selected price)',choices=[('05', '05'), ('10', '10'), ('15', '15'), ('20', '20'), ('25', '25'), ('30', '30'), ('35', '35'),
-                                      ('40', '40'), ('45', '45'), ('50', '50'), ('55','55'), ('60', '60'), ('65', '65'), ('70', '70'), ('75', '75'), ('80', '80'), ('85', '85'), ('90', '95'),('100', '100')])
+    pricef = SelectField(u'Price Range (Below selected price)',
+                         choices=[('05', '05'), ('10', '10'), ('15', '15'), ('20', '20'), ('25', '25'),
+                                  ('30', '30'), ('35', '35'),
+                                  ('40', '40'), ('45', '45'), ('50', '50'), ('55', '55'), ('60', '60'),
+                                  ('65', '65'), ('70', '70'), ('75', '75'), ('80', '80'), ('85', '85'),
+                                  ('90', '95'), ('100', '100')])
     openT = SelectField(u'Preferred Meal Time',
-                           choices=[('12 PM', '12 PM'),('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'), ('4 AM', '4 AM'),
-                                    ('5 AM', '5 AM'), ('6 AM', '6 AM'), ('7 AM', '7 AM'), ('8 AM', '8 AM'),
-                                    ('9 AM', '9 AM'), ('10 AM', '10 AM'), ('11 AM', '11 AM'), ('12 AM', '12 AM'),
-                                    ('1 PM', '1 PM'),('2 PM', '2 PM'),('3 PM', '3 PM'),('4 PM', '4 PM'),('5 PM', '5 PM'),('6 PM', '6 PM'),('7 PM', '7 PM'),
-                                    ('8 PM', '8 PM'),('9 PM', '9 PM'),('10 PM', '10 PM'),('11 PM', '11 PM')])
+                        choices=[('12 PM', '12 PM'), ('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'),
+                                 ('4 AM', '4 AM'),
+                                 ('5 AM', '5 AM'), ('6 AM', '6 AM'), ('7 AM', '7 AM'), ('8 AM', '8 AM'),
+                                 ('9 AM', '9 AM'), ('10 AM', '10 AM'), ('11 AM', '11 AM'), ('12 AM', '12 AM'),
+                                 ('1 PM', '1 PM'), ('2 PM', '2 PM'), ('3 PM', '3 PM'), ('4 PM', '4 PM'),
+                                 ('5 PM', '5 PM'), ('6 PM', '6 PM'), ('7 PM', '7 PM'),
+                                 ('8 PM', '8 PM'), ('9 PM', '9 PM'), ('10 PM', '10 PM'), ('11 PM', '11 PM')])
     foodType = SelectField(u'Food Types',
-                           choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'), ('Western Food', 'Western Food'),
+                           choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'),
+                                    ('Western Food', 'Western Food'),
                                     ('Chinese Food', 'Chinese Food'), ('Healthy Food', 'Healthy Food'),
                                     ('None', 'None')])
+
+
+class EventFilter(Form):
+    fLocation = SelectField(u'Location',
+                            choices=[('Any', 'Any'), ('North', 'North'), ('West', 'West'), ('East', 'East'),
+                                     ('South', 'South'),
+                                     ('Central', 'Central')])
+
+    status = SelectField(u'Status',
+                            choices=[('Any', 'Any'), ('Upcoming', 'Upcoming'), ('Ongoing', 'Ongoing'), ('Ended', 'Ended')])
+
+    maxPrice = IntegerField(u'Maximum Budget (in Dollars)',[validators.DataRequired()])
 
 class Feedbacks(Form):
     comments = TextAreaField('Comments')
@@ -115,7 +132,9 @@ class Sort(Form):
     sort = SelectField(u'Sort By:',
                           choices=[('Alphabetical Order', 'Alphabetical Order'), ('Lowest Price', 'Lowest Price'), ('Ratings (Higest to Lowest)', 'Ratings (Higest to Lowest)')])
 
-
+class eSort(Form):
+    sort = SelectField(u'Sort By:',
+                          choices=[('Alphabetical Order', 'Alphabetical Order'), ('Lowest Price', 'Lowest Price'), ('Most Popular', 'Most Popular')])
 
 class EventForm(Form):
     eventName = StringField('Event Name',[validators.DataRequired()])
@@ -476,9 +495,114 @@ def filter():
     return render_template('filter.html', form=form,proPic=proPic)
 
 
-@app.route('/uploadtest',methods=['POST','GET'])
-def uploadtest():
-    return render_template('uploadtest.html')
+@app.route('/findEvent',methods=['POST','GET'])
+def findEvent():
+    try:
+        proPic = session['proPic']
+    except KeyError:
+        proPic =''
+    filterList = []
+    form = EventFilter(request.form)
+    if request.method == 'POST' and form.validate():
+        location = form.fLocation.data
+        status = form.status.data
+        maxPrice = form.maxPrice.data
+
+        allEventr = root.child('events')
+        allEventg = allEventr.get()
+
+
+        for key in allEventg:
+            if status == 'Any':
+                filterList.append(allEventg[key])
+            else:
+                if allEventg[key]['Status'] == status:
+                    filterList.append(allEventg[key])
+
+        if location !='Any':
+            i = 0
+            while i < len(filterList):
+                if filterList[i]['Location'] != location:
+                    del filterList[i]
+                    i = i - 1
+                i = i + 1
+
+
+        i = 0
+        while i < len(filterList):
+            if int(filterList[i]['ticket']) > int(maxPrice):
+                del filterList[i]
+                i = i - 1
+            i = i + 1
+
+
+
+
+        session['efiltered'] = filterList
+        print(session['efiltered'])
+        return redirect(url_for('viewEvent'))
+    return render_template('findEvent.html', form=form,proPic=proPic)
+
+
+
+
+
+@app.route('/viewEvent',methods=['POST','GET'])
+def viewEvent():
+    try:
+        proPic = session['proPic']
+    except KeyError:
+        proPic =''
+    list = session['efiltered']
+    listLen = len(list)
+
+
+    form = eSort(request.form)
+    if request.method == 'POST':
+        sort = form.sort.data
+        if sort == 'Alphabetical Order':
+            allAlpha =[]
+            for key in list:
+                allAlpha.append(key['Name'])
+            allAlpha = sorted(allAlpha)
+            newList = []
+            for i in range(len(list)):
+                for key in list:
+                    if key['Name'] == allAlpha[i]:
+                        newList.append(key)
+            list = newList
+
+        elif sort == 'Lowest Price':
+            allPrice = {}
+            for key in list:
+                allPrice[key['Name']] = int(key['Price'])
+
+            newList = [(k, allPrice[k]) for k in sorted(allPrice, key=allPrice.get)]
+            newList2 = []
+            for key in newList:
+                for key2 in list:
+                    if key[0] == key2['Name']:
+                        newList2.append(key2)
+            list = newList2
+        elif sort == 'Most Popular':
+            allRat = {}
+            for key in list:
+                allRat[key['Name']] = int(key['People'])
+
+            newList = [(k, allRat[k]) for k in sorted(allRat, key=allRat.get)]
+            newList2 = []
+            for key in newList:
+                for key2 in list:
+                    if key[0] == key2['Name']:
+                        newList2.insert(0,key2)
+            list = newList2
+
+        return render_template('viewEvent.html', events=list, lengthList=listLen, proPic=proPic, form=form)
+    return render_template('viewEvent.html', events=list, lengthList = listLen,proPic=proPic,form=form)
+
+
+
+
 
 
 @app.route('/data')
@@ -1350,6 +1474,7 @@ def events():
     except KeyError:
         session['proPic'] =''
 
+
     allEventr = root.child('events')
     allEventg = allEventr.get()
 
@@ -1417,8 +1542,6 @@ def events():
 
     allEventr = root.child('events')
     allEventg = allEventr.get()
-    numEvent = len(allEventg)
-    print('len of even',numEvent)
     try:
         for key in allEventg:
             theList.append(allEventg[key])
@@ -1453,10 +1576,30 @@ def events():
         pass
 
 
+    return render_template('events.html',proPic = session['proPic'],ongoing=ongoing,upcoming=upcoming,ended=ended,popEvent=popEvent)
+
+
+@app.route('/addEvent',methods=['POST','GET'])
+def addEvent():
+    try:
+        proPic = session['proPic']
+    except KeyError:
+        session['proPic'] =''
+    allEventr = root.child('events')
+    allEventg = allEventr.get()
+    try:
+        numEvent = len(allEventg)
+    except:
+        numEvent = 0
+
+    for key in allEventg:
+        if allEventg[key]['Name'] == 'placeholder':
+            numEvent = len(allEventg) - 1
+
 
 
     form = EventForm(request.form)
-    if request.method =='POST' and form.validate():
+    if request.method == 'POST' and form.validate():
         eventName = form.eventName.data
         eventDescription = form.eventDescription.data
         eventLocation = form.eventLocation.data
@@ -1473,7 +1616,7 @@ def events():
             user = session['username']
         except:
             flash('You must be logged in to add an Event')
-            return redirect(url_for('events'))
+            return redirect(url_for('addEvent'))
 
         try:
             theCheck = True
@@ -1488,16 +1631,43 @@ def events():
 
             if theCheck == False:
                 flash('The End Date cannot be before the Start Date')
-                return redirect(url_for('events'))
+                return redirect(url_for('addEvent'))
         except:
             flash('Please follow the example date format')
-            return redirect(url_for('events'))
+            return redirect(url_for('addEvent'))
+
+        if startTime == '12 AM':
+            startHour = 0
+        elif startTime == '12 PM':
+            startHour = 12
+        elif startTime[-2:] == 'AM':
+            startHour = int(startTime[0:2])
+        elif startTime[-2:] == 'PM':
+            startHour = int(startTime[0:2]) + 12
+
+        if endTime == '12 AM':
+            endHour = 0
+        elif endTime == '12 PM':
+            endHour = 12
+        elif endTime[-2:] == 'AM':
+            endHour = int(startTime[0:2])
+        elif endTime[-2:] == 'PM':
+            endHour = int(startTime[0:2]) + 12
+
+        if startDate == endDate:
+            if startHour > endHour:
+                flash('The Start Time cannot be later than the End Time!')
+                return redirect(url_for('addEvent'))
+            elif startHour == endHour:
+                if int(startTimeMin) > int(endTimeMin):
+                    flash('The Start Time cannot be later than the End Time!')
+                    return redirect(url_for('addEvent'))
 
         if ticket == '':
             ticket = 0
 
-
-        event = Events(eventName, eventDescription, eventLocation, eventAddress, startDate,endDate, startTime, endTime, startTimeMin, endTimeMin, ticket)
+        event = Events(eventName, eventDescription, eventLocation, eventAddress, startDate, endDate, startTime, endTime,
+                       startTimeMin, endTimeMin, ticket)
         allEventr = root.child('events')
         allEventg = allEventr.get()
         try:
@@ -1510,14 +1680,18 @@ def events():
 
         theBreak = False
         while theBreak == False:
-            allEventr = root.child('events')
-            allEventg = allEventr.get()
-            for key in allEventg:
-                if allEventg[key]['Name'] == 'placeholder':
-                    eventKey = key
-                    theBreak = True
+            try:
+                allEventr = root.child('events')
+                allEventg = allEventr.get()
+                for key in allEventg:
+                    if allEventg[key]['Name'] == 'placeholder':
+                        eventKey = key
+                        theBreak = True
+            except:
+                pass
 
-        currEvent = root.child('events/'+eventKey)
+
+        currEvent = root.child('events/' + eventKey)
         currEvent.update({
             'Name': event.get_eventName(),
             'Description': event.get_eventDescription(),
@@ -1531,14 +1705,13 @@ def events():
             'Min End': event.get_endTimeMin(),
             'ticket': event.get_ticket(),
             'People': 0,
-            'User':user
+            'User': user
         })
         flash('You have added a new event!')
         return redirect(url_for('home'))
+    return render_template('addEvent.html', form=form,proPic=session['proPic'], numEvent=str(numEvent))
 
-    return render_template('events.html', form=form,proPic = session['proPic'],ongoing=ongoing,upcoming=upcoming,ended=ended,popEvent=popEvent,numEvent=str(numEvent),)
-
-@app.route('/events/<eventName>',methods=['POST','GET'])
+@app.route('/eventDet/<eventName>',methods=['POST','GET'])
 def eventDet(eventName):
     try:
         proPic = session['proPic']
@@ -1566,14 +1739,6 @@ def eventDet(eventName):
         flash('The event has been added to your profile successfully!')
         return redirect(url_for('userProfile'))
     return render_template('eventDet.html',currEventg=currEvent,proPic=proPic)
-
-@app.route('/findevent')
-def finde():
-    return render_template('findevent.html')
-
-@app.route('/addevent')
-def adde():
-    return render_template('addevent.html')
 
 
 if __name__ == '__main__':

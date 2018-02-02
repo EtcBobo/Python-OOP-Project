@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="31b0ad24-9715-4fb3-ac4e-f17ab7a95e70" name="Default" comment="">
+    <list default="true" id="31b0ad24-9715-4fb3-ac4e-f17ab7a95e70" name="Default" comment="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;templates/events.html">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/addEvent.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/viewEvent.html" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/addevent.html" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/templates/findevent.html" afterPath="$PROJECT_DIR$/templates/findEvent.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/chat.html" afterPath="$PROJECT_DIR$/templates/chat.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/eventDet.html" afterPath="$PROJECT_DIR$/templates/eventDet.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/The Foodie.py" afterPath="$PROJECT_DIR$/The Foodie.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/firebase test.py" afterPath="$PROJECT_DIR$/firebase test.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/events.html" afterPath="$PROJECT_DIR$/templates/events.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/home.html" afterPath="$PROJECT_DIR$/templates/home.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/includes/_navbar.html" afterPath="$PROJECT_DIR$/templates/includes/_navbar.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/restDet.html" afterPath="$PROJECT_DIR$/templates/restDet.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/viewRest.html" afterPath="$PROJECT_DIR$/templates/viewRest.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/viewallRest.html" afterPath="$PROJECT_DIR$/templates/viewallRest.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,13 +24,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="The Foodie.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="The Foodie.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/The Foodie.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="91">
-              <caret line="1554" column="34" lean-forward="true" selection-start-line="1554" selection-start-column="34" selection-end-line="1554" selection-end-column="34" />
+            <state relative-caret-position="3724">
+              <caret line="1727" column="34" lean-forward="true" selection-start-line="1727" selection-start-column="34" selection-end-line="1727" selection-end-column="34" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
+                <marker date="1517595331395" expanded="true" signature="2137:2247" ph="..." />
               </folding>
             </state>
           </provider>
@@ -66,11 +67,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="addevent.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/addevent.html">
+      <file leaf-file-name="addEvent.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/addEvent.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1701">
-              <caret line="81" column="14" lean-forward="false" selection-start-line="81" selection-start-column="14" selection-end-line="81" selection-end-column="21" />
+            <state relative-caret-position="1743">
+              <caret line="83" column="14" lean-forward="false" selection-start-line="191" selection-start-column="16" selection-end-line="191" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -108,11 +109,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="events.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="events.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/events.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="406">
-              <caret line="40" column="35" lean-forward="false" selection-start-line="40" selection-start-column="35" selection-end-line="40" selection-end-column="35" />
+            <state relative-caret-position="281">
+              <caret line="69" column="2" lean-forward="false" selection-start-line="69" selection-start-column="2" selection-end-line="69" selection-end-column="2" />
               <folding />
             </state>
           </provider>
@@ -193,7 +194,6 @@
         <option value="$PROJECT_DIR$/templates/filter.html" />
         <option value="$PROJECT_DIR$/templates/userRegister.html" />
         <option value="$PROJECT_DIR$/templates/findevent.html" />
-        <option value="$PROJECT_DIR$/The Foodie.py" />
         <option value="$PROJECT_DIR$/templates/addevent.html" />
         <option value="$PROJECT_DIR$/templates/includes/_navbar.html" />
         <option value="$PROJECT_DIR$/templates/chat.html" />
@@ -201,8 +201,9 @@
         <option value="$PROJECT_DIR$/templates/home.html" />
         <option value="$PROJECT_DIR$/templates/viewRest.html" />
         <option value="$PROJECT_DIR$/templates/restDet.html" />
-        <option value="$PROJECT_DIR$/templates/events.html" />
         <option value="$PROJECT_DIR$/templates/eventDet.html" />
+        <option value="$PROJECT_DIR$/The Foodie.py" />
+        <option value="$PROJECT_DIR$/templates/events.html" />
       </list>
     </option>
   </component>
@@ -469,7 +470,14 @@
       <option name="project" value="LOCAL" />
       <updated>1517582350471</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="update">
+      <created>1517595308669</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1517595308669</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -531,16 +539,11 @@
     <MESSAGE value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;templates/userProfile.html" />
     <MESSAGE value="Merge branch 'master' of https://github.com/EtcBobo/Python-OOP-Project&#10;&#10;# Conflicts:&#10;#&#9;templates/restDet.html" />
     <MESSAGE value="update" />
-    <option name="LAST_COMMIT_MESSAGE" value="update" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;templates/events.html" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;templates/events.html" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="jinja2-line">
-          <url>file://$PROJECT_DIR$/templates/events.html</url>
-          <line>28</line>
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="1" />
     </breakpoint-manager>
     <watches-manager />
@@ -568,6 +571,7 @@
           <caret line="148" column="0" lean-forward="false" selection-start-line="148" selection-start-column="0" selection-end-line="148" selection-end-column="0" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
+            <marker date="1517595331395" expanded="true" signature="2137:2247" ph="..." />
           </folding>
         </state>
       </provider>
@@ -678,6 +682,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
+            <marker date="1517595331395" expanded="true" signature="2137:2247" ph="..." />
           </folding>
         </state>
       </provider>
@@ -904,7 +909,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/findevent.html">
+    <entry file="file://$PROJECT_DIR$/templates/findEvent.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="38" column="58" lean-forward="false" selection-start-line="38" selection-start-column="58" selection-end-line="38" selection-end-column="58" />
@@ -912,10 +917,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/addevent.html">
+    <entry file="file://$PROJECT_DIR$/templates/addEvent.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1701">
-          <caret line="81" column="14" lean-forward="false" selection-start-line="81" selection-start-column="14" selection-end-line="81" selection-end-column="21" />
+        <state relative-caret-position="1743">
+          <caret line="83" column="14" lean-forward="false" selection-start-line="191" selection-start-column="16" selection-end-line="191" selection-end-column="17" />
           <folding />
         </state>
       </provider>
@@ -970,14 +975,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/events.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="40" column="35" lean-forward="false" selection-start-line="40" selection-start-column="35" selection-end-line="40" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/eventDet.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="336">
@@ -991,11 +988,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/The Foodie.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="91">
-          <caret line="1554" column="34" lean-forward="true" selection-start-line="1554" selection-start-column="34" selection-end-line="1554" selection-end-column="34" />
+        <state relative-caret-position="3724">
+          <caret line="1727" column="34" lean-forward="true" selection-start-line="1727" selection-start-column="34" selection-end-line="1727" selection-end-column="34" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
+            <marker date="1517595331395" expanded="true" signature="2137:2247" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/events.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="69" column="2" lean-forward="false" selection-start-line="69" selection-start-column="2" selection-end-line="69" selection-end-column="2" />
+          <folding />
         </state>
       </provider>
     </entry>
