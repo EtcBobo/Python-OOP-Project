@@ -337,7 +337,6 @@ def newsFeed():
             headlines.append(newsitem)
         return headlines
 
-
     allheadlines = []
 
     newsurls = {'ladyiron':'http://www.ladyironchef.com/rss'}
@@ -347,18 +346,24 @@ def newsFeed():
 
     container = []
 
-    for hl in allheadlines[0:3]:
+    for hl in allheadlines[0:15]:
         link = hl['link']
+
         date = hl['published']
+
         title = hl['title']
 
-        news = {'title': title, 'link': link, 'date': date}
+        content = hl['content']
+        index = content[0]['value'].find('http')
+        # finding the index for end of the url for the pic
+        second_index = content[0]['value'].find('"', index)
+        # print(content[0]['value'][index:second_index])
+        image =content[0]['value'][index:second_index]
+
+        news = {'title': title, 'link': link, 'date': date, 'image':image}
         container.append(news)
 
     return render_template('newsFeed.html', container=container )
-
-
-
 
 
 @app.route('/chat')
