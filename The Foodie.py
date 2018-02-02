@@ -234,7 +234,37 @@ def home():
     newList3.append(newList2[2])
     list = newList3
 
+    # ------------------------------ NewsFeed ------------------------------
+    def parseRSS(rss_url):
+        return feedparser.parse(rss_url)
 
+    def getHeadlines(rss_url):
+        headlines = []
+
+        feed = parseRSS(rss_url)
+        for newsitem in feed['items']:
+            headlines.append(newsitem)
+        return headlines
+
+
+    allheadlines = []
+
+    newsurls = {'ladyiron':'http://www.ladyironchef.com/rss'}
+
+    for key, url in newsurls.items():
+        allheadlines.extend(getHeadlines(url))
+
+    container = []
+
+    for hl in allheadlines[0:3]:
+        link = hl['link']
+        date = hl['published']
+        title = hl['title']
+
+        news = {'title': title, 'link': link, 'date': date}
+        container.append(news)
+
+    # ------------------------------ Search ------------------------------
     nameList = []
     form = theSearch(request.form)
     if request.method == 'POST':
@@ -276,7 +306,7 @@ def home():
 
         session['filtered'] = nameList
         return redirect(url_for('view'))
-    return render_template('home.html', recommend=randRec , form=form, proPic = proPic, hnp=list)
+    return render_template('home.html', recommend=randRec , form=form, proPic = proPic, hnp=list, container=container)
 
 
 
