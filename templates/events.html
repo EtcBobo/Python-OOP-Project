@@ -360,7 +360,8 @@
         }
         else{
                 var postData = {
-                    urlEvent:"https://thedanamariner.com/wp-content/uploads/2017/12/Events.jpg"
+                    urlEvent:"https://thedanamariner.com/wp-content/uploads/2017/12/Events.jpg",
+                    Name:'placeholder'
 
                 };
 
@@ -386,6 +387,7 @@
             var downloadURL = uploadTask.snapshot.downloadURL;
             var postData = {
                 urlEvent: downloadURL,
+                Name:'placeholder'
             };
             firebase.database().ref().child('/events/event{{ numEvent }}').update(postData)
         });
