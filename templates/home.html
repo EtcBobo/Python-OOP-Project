@@ -13,7 +13,7 @@
 
 
 <div class="container">
-        <h3 id="tag">Search Here To See Amazing Restaurants</h3>
+        <h3 id="tag">Search For Restaurants</h3>
         <br>
 {#        <div id='searchthing' class="form-group col-md-6">#}
 {#            <div class="form-group col-md-8">#}
@@ -143,14 +143,16 @@
 {#</section>#}
 
 
-  <br><br><br><br>
+  <br><br><br>
     <div class="container">
 <div id='news' class="form-group col-md-12">Latest News</div>
     {% for news in container %}
 {#    <div class="form-group col-md-4"><img id='NewsImage' class="img-responsive" src="https://image.freepik.com/foto-gratis/diferentes-especias-ingredientes-de-alimentos-cuchara-de-madera-sobre-fondo-blancotable_1220-1704.jpg" alt="NewsImage">#}
-                       <div class="form-group col-md-4"><img id='NewsImage' class="img-responsive" src={{ news['image'] }} alt="NewsImage">
+                       <div class="form-group col-md-4">
+                        <br><br>
+                           <img id='NewsImage' class="img-responsive" src={{ news['image'] }} alt="NewsImage">
                     <h3 id="title"><a href= {{ news['link']}}>{{ news['title'] }}</a></h3>
-                    <p id="date">{{ news['date'] }}</p>
+                    <footer id="date">{{ news['date'] }}</footer>
                     <p></p>
                 </div>
     {% endfor %}
@@ -215,7 +217,6 @@
 
 
 
-
 <style>
     #features{
         margin-top: 5px;
@@ -235,7 +236,7 @@
         padding: 5px 5px 5px 5px;
     }
     #date{
-        text-align: right;
+        text-align: center;
     }
 
 
@@ -257,9 +258,10 @@
     font-family: 'Montserrat', sans-serif;
     letter-spacing: .1em;
      float:left;
+    height:50px;
 }
 
- #popular, #recommend, #news{
+ #popular, #recommend, #news, #tag{
       display: block;
     font-size: 150%;
     font-family: 'Montserrat', sans-serif;
@@ -296,6 +298,7 @@
     font-weight: bold;
     letter-spacing: .1em;
      float:left;
+     height:5px;
  }
 
  .more {border-top-style: dashed;
@@ -337,15 +340,17 @@
     text-transform: uppercase;
     letter-spacing: .1em;
          text-align:center;
+    height:50px;
 }
 
 .recbtn{
      text-align:center;
     border: 1px solid #969696;
     color: #969696;
-    margin-top: 24px;
+    margin-top: 80px;
     display:block;
     padding: 5px 32px 11px;
+    height:50px;
     text-transform: uppercase;
     font-family: 'Montserrat', sans-serif;
 
@@ -356,7 +361,9 @@
     font-weight:bold;
 }
 
-
+a:hover{
+    color:black;
+}
 
 h3{
     text-align: center;
