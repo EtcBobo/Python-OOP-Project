@@ -49,7 +49,8 @@ class RegisterForm(Form):
     user = StringField('Username',[validators.DataRequired()])
     password = PasswordField("Password",[validators.DataRequired()])
     passwordC = PasswordField("Confirm Password",[validators.DataRequired()])
-    price = IntegerField('Preferred Price Range')
+    minPrice = IntegerField('Minimum Meal Budget')
+    maxPrice = IntegerField('Maximum Meal Budget')
     foodType = SelectField(u'Preferred Food Type',
                            choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'), ('Western Food', 'Western Food'),
                                     ('Chinese Food', 'Chinese Food'), ('Healthy Food', 'Healthy Food'),
@@ -700,19 +701,24 @@ def userRegister():
     if request.method == 'POST' and form.validate():
         user = form.user.data
         password = form.password.data
-        price = form.price.data
+        minPrice = form.minPrice.data
+        maxPrice = form.maxPrice.data
         foodType = form.foodType.data
         email = form.email.data
+
 
         passwordC = form.passwordC.data
         if password != passwordC:
             flash('The passwords does not match')
             return redirect(url_for('userRegister'))
 
+        if minPrice > maxPrice:
+            flash('The Minumum budget cannot exceed the Maximum budget')
+            return redirect(url_for('userRegister'))
 
 
 
-        reg = Registration(user,password,price,foodType,email)
+        reg = Registration(user,password,minPrice,maxPrice,foodType,email)
 
 
         for key in allUserg:
@@ -764,7 +770,8 @@ def userRegister():
         theUser.update({
             'Username': reg.get_user(),
             'Password': reg.get_password(),
-            'Price': reg.get_price(),
+            'minPrice': reg.get_minPrice(),
+            'maxPrice':reg.get_maxPrice(),
             'Food Types': reg.get_foodType(),
             'Email':reg.get_email()
         })
@@ -1221,7 +1228,8 @@ def userEdit():
     class UserEdit(Form):
         password = PasswordField("Password", [validators.DataRequired()])
         passwordC = PasswordField("Confirm Password", [validators.DataRequired()])
-        price = IntegerField('Preferred Price Range',default=session['userDetail']['Price'])
+        minPrice = IntegerField('Minimum Meal Budget',default=session['userDetail']['minPrice'])
+        maxPrice = IntegerField('Maximum Meal Budget', default=session['userDetail']['maxPrice'])
         foodType = SelectField(u'Preferred Food Type',
                                choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'),
                                         ('Western Food', 'Western Food'),
@@ -1238,12 +1246,17 @@ def userEdit():
 
     if request.method == 'POST' and form.validate():
         email = form.email.data
-        price = form.price.data
+        minPrice = form.minPrice.data
+        maxPrice = form.maxPrice.data
         foodType = form.foodType.data
         password = form.password.data
         passwordC = form.passwordC.data
         if password != passwordC:
             flash('The passwords does not match')
+            return redirect(url_for('userEdit'))
+
+        if minPrice > maxPrice:
+            flash('The Minumum budget cannot exceed the Maximum budget')
             return redirect(url_for('userEdit'))
 
         for key in allUserg:
@@ -1252,14 +1265,11 @@ def userEdit():
                     flash('This Email has already been used')
                     return redirect(url_for('userEdit'))
 
-
-
-
-
-
+        userr = root.child('allUsers/'+theKey)
         userr.update({
             'Username': session['username'],
-            'Price': price,
+            'minPrice': minPrice,
+            'maxPrice':maxPrice,
             'Food Types': foodType,
             'Email': email,
             'Password': password
