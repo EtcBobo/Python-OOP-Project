@@ -1350,6 +1350,7 @@ def events():
     except KeyError:
         session['proPic'] =''
 
+
     allEventr = root.child('events')
     allEventg = allEventr.get()
 
@@ -1492,6 +1493,36 @@ def events():
         except:
             flash('Please follow the example date format')
             return redirect(url_for('events'))
+
+        if startTime == '12 AM':
+            startHour = 0
+        elif startTime == '12 PM':
+            startHour = 12
+        elif startTime[-2:] == 'AM':
+            startHour = int(startTime[0:2])
+        elif startTime[-2:] == 'PM':
+            startHour = int(startTime[0:2]) + 12
+
+        if endTime == '12 AM':
+            endHour = 0
+        elif endTime == '12 PM':
+            endHour = 12
+        elif endTime[-2:] == 'AM':
+            endHour = int(startTime[0:2])
+        elif endTime[-2:] == 'PM':
+            endHour = int(startTime[0:2]) + 12
+
+
+        if startDate == endDate:
+            if startHour > endHour:
+                flash('The Start Time cannot be later than the End Time!')
+                return redirect(url_for('events'))
+            elif startHour == endHour:
+                if int(startTimeMin) > int(endTimeMin):
+                    flash('The Start Time cannot be later than the End Time!')
+                    return redirect(url_for('events'))
+
+
 
         if ticket == '':
             ticket = 0
