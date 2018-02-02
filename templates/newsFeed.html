@@ -1,31 +1,29 @@
 {% extends 'layout.html' %}
 {% block body %}
-<div class="container">
-<div id='news' class="form-group col-md-12">Latest News</div>
-    <hr/>
-    {% for news in container %}
-    <div class="form-group col-md-4"><img id='NewsImage' class="img-responsive" src="https://image.freepik.com/foto-gratis/diferentes-especias-ingredientes-de-alimentos-cuchara-de-madera-sobre-fondo-blancotable_1220-1704.jpg" alt="NewsImage">
-                    <h3 id="title"><a href= {{ news['link']}}>{{ news['title'] }}</a></h3>
-                    <p id="date">{{ news['date'] }}</p>
-                    <p></p>
-                </div>
-    {% endfor %}
-
-</div>
-
-{#<table style="width:80%; background-color: yellow; ">#}
-{#{% for news in container %}#}
-{#    #}
-{#  <tr>#}
-{#    <th rowspan="2"><img id='NewsImage' class="img-responsive" src="http://www.freeiconspng.com/uploads/food-icon-7.png" alt="NewsImage"></th>#}
-{#    <td><a href= {{ news['link']}}>{{ news['title'] }}</a></td>#}
-{#  </tr>#}
-{#  <tr>#}
-{#    <td>{{ news['date'] }}</td>#}
-{#  </tr>#}
+{#<div class="container">#}
+{#<div id='news' class="form-group col-md-12">Latest News</div>#}
+{#    {% for news in container %}#}
+{#    <div class="form-group col-md-12"><img id='NewsImage' class="img-responsive" src="https://image.freepik.com/foto-gratis/diferentes-especias-ingredientes-de-alimentos-cuchara-de-madera-sobre-fondo-blancotable_1220-1704.jpg" alt="NewsImage">#}
+{#                    <h3 id="title"><a href= {{ news['link']}}>{{ news['title'] }}</a></h3>#}
+{#                    <p id="date">{{ news['date'] }}</p>#}
+{#                    <p></p>#}
+{#                </div>#}
+{#    {% endfor %}#}
 {##}
-{#{% endfor %}#}
-{#</table>#}
+{#</div>#}
+<div id='news' class="form-group col-md-12">News</div>
+    <div class="container">
+<table >
+{% for news in container %}
+
+  <tr>
+    <th><img id='NewsImage' class="img-responsive" src={{ news['image'] }} alt="NewsImage"></th>
+    <td><a href= {{ news['link']}}>{{ news['title'] }}</a></td>
+  </tr>
+
+{% endfor %}
+</table>
+    </div>
 
 
 
@@ -43,21 +41,21 @@
 {#    </div>#}
 <style>
     #NewsImage{
+        width: 300px;
+        height: 200px;
         padding: 5px 5px 5px 5px;
     }
     #date{
         text-align: right;
     }
     #news{
-        color: #000;
-        font-family: "hgw-HelveticaNeueBold",Arial,sans-serif;
+        display: block;
+        font-size: 150%;
+        font-family: 'Montserrat', sans-serif;
         font-weight: bold;
-        border-bottom: 2px solid darkred;
-        margin-bottom: 20px;
-        font-size: 15px;
-        padding-bottom: 3px;
-        font-size:200%;
-        font-style: italic;
+        text-transform: uppercase;
+        letter-spacing: .1em;
+        text-align: center;
     }
 </style>
 
