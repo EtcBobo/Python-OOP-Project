@@ -763,12 +763,21 @@ def bmi():
         return round((weight / ((height / 100) ** 2)), 2)
 
     bmi = ''
+    result = ''
     if request.method == 'POST' and 'weight' in request.form:
         weight = float(request.form.get('weight'))
         height = float(request.form.get('height'))
         bmi = calc_bmi(weight, height)
+        if bmi < 18.5:
+            result = "yOU ARE underweight!!"
+        elif bmi > 25 and bmi < 30:
+            result= "YoU are OverWeight!"
+        elif bmi > 30:
+            result = "You are obese!"
+        else:
+            result = "You are healthy!"
     return render_template("bmi_calc.html",
-	                        bmi=bmi)
+	                        bmi=bmi, result=result)
 
 
 
