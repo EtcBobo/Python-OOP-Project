@@ -1503,9 +1503,16 @@ def events():
         except:
             pass
 
+        theBreak = False
+        while theBreak == False:
+            allEventr = root.child('events')
+            allEventg = allEventr.get()
+            for key in allEventg:
+                if allEventg[key]['Name'] == 'placeholder':
+                    eventKey = key
+                    theBreak = True
 
-
-        currEvent = root.child('events/event'+str(numEvent))
+        currEvent = root.child('events/'+eventKey)
         currEvent.update({
             'Name': event.get_eventName(),
             'Description': event.get_eventDescription(),
