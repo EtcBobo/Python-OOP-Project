@@ -1598,8 +1598,13 @@ def eventDet(eventName):
         return redirect(url_for('userProfile'))
     return render_template('eventDet.html',currEventg=currEvent,proPic=proPic)
 
+@app.route('/findevent')
+def finde():
+    return render_template('findevent.html')
 
-
+@app.route('/addevent')
+def adde():
+    return render_template('addevent.html')
 
 
 if __name__ == '__main__':
