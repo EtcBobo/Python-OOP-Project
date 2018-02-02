@@ -35,10 +35,10 @@
                     {{ render_field(form.passwordC, class_="form-control") }}
                 </div>
 
-                <div class="form-group col-md-12">
-                    {{ render_field(form.minPrice, class_="form-control") }}
+                <div class="form-group col-md-6">
+                    {{ render_field(form.minPrice, class_="form-control") }} 
                 </div>
-                <div class="form-group col-md-12">
+                <div class="form-group col-md-6">
                     {{ render_field(form.maxPrice, class_="form-control") }}
                 </div>
                 <div class="form-group col-md-12">
@@ -218,6 +218,16 @@
 
     }
 
+{#    .line{#}
+{#    border-style: solid;#}
+{#         border-top-color:grey!important;#}
+{#        border-bottom-color:white;#}
+{#          border-left-color:white;#}
+{#          border-right-color:white;#}
+{#        text-align:center;#}
+{#        width:30px;#}
+{#        margin-left:20px;#}
+{#}#}
 #signup{
      display: block;
     font-size: 150%;
@@ -234,23 +244,32 @@
     margin-left:200px;
 }
 
-@media(max-width:991px){
-    #img{
-        margin-left:0px;
+@media(max-width:991px) {
+    #img {
+        margin-left: 0px;
     }
-    #file{
-        margin-left:0px;
+
+    #file {
+        margin-left: 0px;
     }
-    #uploadButton{
-    width:90%;
+
+    #uploadButton {
+        width: 90%;
     }
+{#    .line{#}
+{#    display:none#}
+{#}#}
+
 }
+
+
+
 
 @media(max-width: 1024px){
     #img{
        text-align:center;
          margin-left:0px;
-}
+        }
 }
 
 </style>

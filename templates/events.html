@@ -18,7 +18,7 @@
     <li><a href="#popularEvent" data-toggle="tab">Popular</a></li>
     <li><a href="#upcomingEvent" data-toggle="tab">Upcoming</a></li>
     <li><a href="#endedEvent" data-toggle="tab">Ended</a></li>
-    <li><a href="#addEvent" data-toggle="tab">Organize Events!</a></li>
+{#    <li><a href="#addEvent" data-toggle="tab">Organize Events!</a></li>#}
   </ul>
 
 {#    home tab#}
@@ -74,84 +74,84 @@
 
 
 {#        organize events tab#}
-  <div class="tab-pane" id="addEvent">
-          <form method="POST">
-        <div class="form-group col-md-12">
-            <div class="row">
-            <div  class="col-md-8 col-md-offset-2" class="edit">
-                <div class="form-group col-md-12">
-                    <br>
-                <img id="img" src="https://thedanamariner.com/wp-content/uploads/2017/12/Events.jpg" width="304" height="304">
-                <br>
-                <input type="file" id="file"/>
-                <br>
-                <br>
-                <br>
-                </div>
-            <div  class="col-md-8 col-md-offset-2" class="eventName">
-                <div class="form-group col-md-12">
-                    {{ render_field(form.eventName, class_="form-control") }}
-                </div>
-
-                <div class="form-group col-md-12" class="eventDesc">
-                    {{ render_field(form.eventDescription, class_="form-control") }}
-                </div>
-
-                <div class="form-group col-md-12" class="'eventLocation">
-                    {{ render_field(form.eventLocation, class_="form-control") }}
-                </div>
-
-                <div class="form-group col-md-12" class="eventAddress">
-                    {{ render_field(form.eventAddress, class_="form-control") }}
-                </div>
-
-                <div class="form-group col-md-6" class="startDate">
-                    {{ render_field(form.startDate, class_="form-control") }}
-                </div>
-
-                <div class="form-group col-md-6" class="endDate">
-                    {{ render_field(form.endDate, class_="form-control") }}
-                </div>
-
-                 <div class="form-group col-md-6" class="startTime">
-                    {{ render_field(form.startTime, class_="form-control") }}
-                </div>
-
-                 <div class="form-group col-md-6" class="startTimeMin">
-                    {{ render_field(form.startTimeMin, class_="form-control") }}
-                </div>
-
-                 <div class="form-group col-md-6" class="endTime">
-                    {{ render_field(form.endTime, class_="form-control") }}
-                </div>
-
-                 <div class="form-group col-md-6" class="endTimeMin">
-                    {{ render_field(form.endTimeMin, class_="form-control") }}
-                </div>
-
-                <div class="form-group col-md-12" class="ticket">
-                    {{ render_field(form.ticket, class_="form-control") }}
-                </div>
-                <br>
-                <br>
-                    <div class="form-group">
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <br>
-                                <br>
-                                <div class='btn-toolbar'>
-                        <button type="submit" class="btn btn-primary btn-lg upload-group text-center" id="uploadButton" onclick="myFunction()">Organize</button>
-                    </div>
-                             </div>
-                        </div>
-                    </div>
-              </div>
-            </div>
-        </div>
-            </div>
-
-              </form>
-  </div>
+{#  <div class="tab-pane" id="addEvent">#}
+{#          <form method="POST">#}
+{#        <div class="form-group col-md-12">#}
+{#            <div class="row">#}
+{#            <div  class="col-md-8 col-md-offset-2" class="edit">#}
+{#                <div class="form-group col-md-12">#}
+{#                    <br>#}
+{#                <img id="img" src="https://thedanamariner.com/wp-content/uploads/2017/12/Events.jpg" width="304" height="304">#}
+{#                <br>#}
+{#                <input type="file" id="file"/>#}
+{#                <br>#}
+{#                <br>#}
+{#                <br>#}
+{#                </div>#}
+{#            <div  class="col-md-8 col-md-offset-2" class="eventName">#}
+{#                <div class="form-group col-md-12">#}
+{#                    {{ render_field(form.eventName, class_="form-control") }}#}
+{#                </div>#}
+{##}
+{#                <div class="form-group col-md-12" class="eventDesc">#}
+{#                    {{ render_field(form.eventDescription, class_="form-control") }}#}
+{#                </div>#}
+{##}
+{#                <div class="form-group col-md-12" class="'eventLocation">#}
+{#                    {{ render_field(form.eventLocation, class_="form-control") }}#}
+{#                </div>#}
+{##}
+{#                <div class="form-group col-md-12" class="eventAddress">#}
+{#                    {{ render_field(form.eventAddress, class_="form-control") }}#}
+{#                </div>#}
+{##}
+{#                <div class="form-group col-md-6" class="startDate">#}
+{#                    {{ render_field(form.startDate, class_="form-control") }}#}
+{#                </div>#}
+{##}
+{#                <div class="form-group col-md-6" class="endDate">#}
+{#                    {{ render_field(form.endDate, class_="form-control") }}#}
+{#                </div>#}
+{##}
+{#                 <div class="form-group col-md-6" class="startTime">#}
+{#                    {{ render_field(form.startTime, class_="form-control") }}#}
+{#                </div>#}
+{##}
+{#                 <div class="form-group col-md-6" class="startTimeMin">#}
+{#                    {{ render_field(form.startTimeMin, class_="form-control") }}#}
+{#                </div>#}
+{##}
+{#                 <div class="form-group col-md-6" class="endTime">#}
+{#                    {{ render_field(form.endTime, class_="form-control") }}#}
+{#                </div>#}
+{##}
+{#                 <div class="form-group col-md-6" class="endTimeMin">#}
+{#                    {{ render_field(form.endTimeMin, class_="form-control") }}#}
+{#                </div>#}
+{##}
+{#                <div class="form-group col-md-12" class="ticket">#}
+{#                    {{ render_field(form.ticket, class_="form-control") }}#}
+{#                </div>#}
+{#                <br>#}
+{#                <br>#}
+{#                    <div class="form-group">#}
+{#                        <div class="form-row">#}
+{#                            <div class="form-group col-md-12">#}
+{#                                <br>#}
+{#                                <br>#}
+{#                                <div class='btn-toolbar'>#}
+{#                        <button type="submit" class="btn btn-primary btn-lg upload-group text-center" id="uploadButton" onclick="myFunction()">Organize</button>#}
+{#                    </div>#}
+{#                             </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#              </div>#}
+{#            </div>#}
+{#        </div>#}
+{#            </div>#}
+{##}
+{#              </form>#}
+{#  </div>#}
 
 
 {#        popular events tab#}
