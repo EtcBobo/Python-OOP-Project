@@ -147,7 +147,8 @@
     <div class="container">
 <div id='news' class="form-group col-md-12">Latest News</div>
     {% for news in container %}
-    <div class="form-group col-md-4"><img id='NewsImage' class="img-responsive" src="https://image.freepik.com/foto-gratis/diferentes-especias-ingredientes-de-alimentos-cuchara-de-madera-sobre-fondo-blancotable_1220-1704.jpg" alt="NewsImage">
+{#    <div class="form-group col-md-4"><img id='NewsImage' class="img-responsive" src="https://image.freepik.com/foto-gratis/diferentes-especias-ingredientes-de-alimentos-cuchara-de-madera-sobre-fondo-blancotable_1220-1704.jpg" alt="NewsImage">#}
+                       <div class="form-group col-md-4"><img id='NewsImage' class="img-responsive" src={{ news['image'] }} alt="NewsImage">
                     <h3 id="title"><a href= {{ news['link']}}>{{ news['title'] }}</a></h3>
                     <p id="date">{{ news['date'] }}</p>
                     <p></p>
