@@ -7,7 +7,7 @@
     <br>
 <div id="viewdiv">
 
-    <h1 id="view">Details of {{ restDetail['Name'] }}    <button type="submit" class="box-btn"><span id="heart" class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span></button></h1>
+    <h1 id="view">Details of {{ restDetail['Name'] }}    <button type="submit" class="box-btn" onclick="send()"><span id="heart" class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span></button></h1>
     <div class="form-group col-md-12" id="filterdiv" >
       <span class="info2"><p class="glyphicon glyphicon-usd"></p> {{ restDetail['Price'] }}</span>
         <span class="verticalLine"></span>
@@ -134,6 +134,7 @@
     </div>
 </div>
 </div>
+    <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
 <script>
 function showcomments(recentcomments) {
    var e = document.getElementById('recentcomments');
@@ -148,6 +149,28 @@ $(function($) {
     $(this).find('.glyphicon').toggleClass('red').toggleClass('glyphicon-heart-empty glyphicon-heart');
   });
 });
+
+function send() {
+
+  var config = {
+        apiKey: "AIzaSyAbX0KjCpu-WKGrnj9snTRolEqomOXy0oA",
+        authDomain: "python-oop.firebaseapp.com",
+        databaseURL: "https://python-oop.firebaseio.com/",
+        projectId: "python-oop",
+        storageBucket: "python-oop.appspot.com",
+        messagingSenderId: "397421551766"
+  };
+  firebase.initializeApp(config);
+  database = firebase.database();
+    var postData = {
+        {{ restDetail['Name'] }}:"{{ restDetail['Name'] }}"
+    };
+    firebase.database().ref().child('/fav/{{ session['username'] }}').update(postData)
+
+
+
+}
+
 
 </script>
 

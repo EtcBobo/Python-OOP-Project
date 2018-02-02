@@ -355,20 +355,16 @@
 
 
         if(document.getElementById( 'img' ).src != "https://thedanamariner.com/wp-content/uploads/2017/12/Events.jpg"){
-            alert('if is running')
             var filename = selectedFile.name;
 
         }
         else{
-                alert('else')
-                var updates = {};
                 var postData = {
                     urlEvent:"https://thedanamariner.com/wp-content/uploads/2017/12/Events.jpg"
 
                 };
-                updates['/events/event{{ numEvent }}'] = postData;
 
-                firebase.database().ref().update(updates);
+                firebase.database().ref().child('/events/event{{ numEvent }}').update(postData)
 
         }
 
@@ -387,17 +383,11 @@
         }, function (error) {
 
         }, function () {
-            alert('function')
-            var postKey = firebase.database().ref('Posts/').push().key;
             var downloadURL = uploadTask.snapshot.downloadURL;
-
-            var updates = {};
             var postData = {
                 urlEvent: downloadURL,
             };
-            updates['/events/event{{ numEvent }}'] = postData;
-
-            firebase.database().ref().update(updates);
+            firebase.database().ref().child('/events/event{{ numEvent }}').update(postData)
         });
     })
 

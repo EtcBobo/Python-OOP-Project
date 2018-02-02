@@ -153,14 +153,11 @@
             var filename = selectedFile.name;
         }
         else{
-                var updates = {};
                 var postData = {
                     urlEvent:"{{ theEvent['urlEvent'] }}",
-                    Name:'placeholder'
-                };
-                updates['/events/{{ eventid }}'] = postData;
 
-                firebase.database().ref().update(updates);
+                };
+                firebase.database().ref().child('/events/{{ eventid }}').update(postData)
 
         }
 
@@ -179,17 +176,11 @@
         }, function (error) {
 
         }, function () {
-            var postKey = firebase.database().ref('Posts/').push().key;
             var downloadURL = uploadTask.snapshot.downloadURL;
-
-            var updates = {};
             var postData = {
                 urlEvent: downloadURL,
-                Name: 'placeholder'
             };
-            updates['/events/{{ eventid }}'] = postData;
-
-            firebase.database().ref().update(updates);
+            firebase.database().ref().child('/events/{{ eventid }}').update(postData)
         });
     })
 

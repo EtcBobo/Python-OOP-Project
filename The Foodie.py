@@ -613,16 +613,6 @@ def addRest():
             return redirect(url_for('addRest'))
 
 
-
-        theBreak = False
-        while theBreak != True:
-            allRestr = root.child('restaurants')
-            allRestg = allRestr.get()
-            for key in allRestg:
-                if key == 'rest'+str(count):
-                    theBreak = True
-
-
         restFireu = root.child('restaurants/rest'+str(count))
         restFireu.update({
             'Name':res.get_name(),
@@ -721,15 +711,6 @@ def userRegister():
 
             server.sendmail(email_user, email_send, text)
             server.quit()
-
-
-        theBreak = False
-        while theBreak == False:
-            allUser = root.child('allUsers')
-            allUserg = allUser.get()
-            for key in allUserg:
-                if key == 'user'+str(count):
-                    theBreak = True
 
         theUser = root.child('allUsers/user'+str(count))
         theUser.update({
@@ -1048,13 +1029,6 @@ def eventEdit(eventName):
         if ticket == '':
             ticket = 0
 
-        theBreak = False
-        while theBreak == False:
-            theEventr = root.child('events/'+eventid)
-            theEventg = theEventr.get()
-            for key in theEventg:
-                if theEventg['Name'] == 'placeholder':
-                    theBreak = True
 
         theEventr.update({
             'Name':eventName,
@@ -1146,14 +1120,6 @@ def restEdit(restName):
         closingH = form.closingH.data
         address = form.address.data
 
-        theBreak = False
-        while theBreak == False:
-            daRestr = root.child('restaurants/'+restid)
-            daRestg = daRestr.get()
-            for key in daRestg:
-                if daRestg['Name'] == 'placeholder':
-                    theBreak = True
-
         theRestr.update({
             'Name':restName,
             'Description': desc,
@@ -1217,13 +1183,6 @@ def userEdit():
 
 
 
-        theBreak = False
-        while theBreak == False:
-            userr = root.child('allUsers/' + theKey)
-            userg = userr.get()
-            for key in userg:
-                if userg['Username'] == 'placeholder':
-                    theBreak = True
 
 
         userr.update({
@@ -1287,8 +1246,19 @@ def userProfile():
                     goingEvent.append(allEventg[key])
         except:
             pass
+    favRest = []
+    try:
+        allFavr= root.child('fav/'+theUser['Username'])
+        allFavg = allFavr.get()
+        for key in allFavg:
+            for key2 in allRestg:
+                if allRestg[key2]['Name'] == key:
+                    favRest.append(allRestg[key2])
+        print(favRest)
+    except:
+        pass
 
-    return render_template('userProfile.html' , user = theUser, proPic = session['proPic'],allEdit=allEdit,allEvent=allEvent,goingEvent=goingEvent)
+    return render_template('userProfile.html' , user = theUser, proPic = session['proPic'],allEdit=allEdit,allEvent=allEvent,goingEvent=goingEvent,favRest=favRest)
 
 
 @app.route('/events', methods=['POST','GET'])
