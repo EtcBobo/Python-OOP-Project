@@ -2,69 +2,78 @@
 
 {% block body %}
         {% from "includes/_formhelper.html" import render_field %}
-<div class="container" id="filterdiv">
-    <br>
-    <br>
-<div id="viewdiv">
-
-    <h1 id="view">Details of {{ restDetail['Name'] }}    <button type="submit" class="box-btn" onclick="send()"><span id="heart" class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span></button></h1>
-    <div class="form-group col-md-12" id="filterdiv" >
-      <span class="info2"><p class="glyphicon glyphicon-usd"></p> {{ restDetail['Price'] }}</span>
-        <span class="verticalLine"></span>
-        <span class="info2"><p class="glyphicon glyphicon-bell"></p> {{ restDetail['Opening Hours'] }} to {{ restDetail['Closing Hours'] }}</span>
-         <span class="verticalLine"></span>
-        <span class="info2"><p class="glyphicon glyphicon-map-marker"></p> {{ restDetail['Location'] }}</span>
-         <span class="verticalLine"></span>
-          <span class="info2"><p class="glyphicon glyphicon-globe"></p> {{ restDetail['Address'] }}</span>
-        <span class="verticalLine"></span>
-         <span class="info2"><p class="glyphicon glyphicon-star"></p> {{ restDetail['Average Rating'] }} / 5</span>
-        </div>
+<div class="container">
 
 
-</div>
-
-<div class="form-group col-md-8">
-</div>
-
-
-
-<div id="sort">
-
-
-
-    <div class="container" id="filterdiv">
-        <div id="viewdiv">
-            <br>
-
-    <img id="detailimg" class="img-responsive" src={{ restDetail['urlRest'] }}>
-                <div class="form-group col-md-6">
-         <div class="form-group col-md-6" class="value">
-                 {{ restDetail['Description'] }}
-         </div>
-                    <div class="'form-group col-md-1"></div>
-                    <div class="form-group col-md-5">
-
-
-                     <ul id="opdays">Operating Days:
-                         {% for i in (restDetail['Days']) %}
-
-                         <br>
-                         <br>
-                         {{ i  }}
-                        {% endfor %}
-                     </ul>
-                    </div>
-</div>
-
-        </div>
+    <h1 id="view">Details of {{ restDetail['Name'] }}
+    <button type="submit" class="box-btn" onclick="send()"><span id="heart" class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span></h1></button>
+ <div class="container">
+    <div class="form-group col-md-12">
+        <br><br>
+        <h5>Description Of Restaurant: {{ restDetail['Description'] }} brvrb egvheirhnbveiarv fbvrsbvsrtbrstbrtbrtbrtbrtbrtg53 thgh4herhgrehhhehgnbqerqumjikvg nbqehumjr vnqehrmjumgv nerhujg
+        </h5>
     </div>
+ </div>
+
+</div>
+
+
+    <div class="container">
+    <div class="form-group col-md-12">
+
+
+        <div class="form-group col-md-5">
+    <img id="detailimg" class="img-responsive" src={{ restDetail['urlRest'] }}>
+            </div>
+        <div class="form-group col-md-6">
+            <span class="info2"><p class="glyphicon glyphicon-bell"></p> {{ restDetail['Opening Hours'] }} to {{ restDetail['Closing Hours'] }}</span>
+            <br>
+            <span class="info2"><p class="glyphicon glyphicon-usd"></p> {{ restDetail['Price'] }} ~</span>
+             <br>
+            <span class="info2"><p class="glyphicon glyphicon-grain"></p> Food Type: {{ restDetail['Food Type'] }}</span>
+            <br>
+             <span class="info2"><p class="glyphicon glyphicon-star"></p> {{ restDetail['Average Rating'] }} / 5</span>
+            <br>
+          <span class="info2"><p class="glyphicon glyphicon-map-marker"></p> {{ restDetail['Location'] }}</span>
+{#         <span class="verticalLine"></span>#}<br>
+          <span class="info2"><p class="glyphicon glyphicon-globe"></p> {{ restDetail['Address'] }}</span>
+            <br>
+             {% for i in (restDetail['Days']) %}
+            <span class="info2"><p class="glyphicon glyphicon-time"></p> Operating Days: {{ i  }} </span>
+              {% endfor %}
+            </div>
+    </div>
+    </div>
+
+{#                <div class="form-group col-md-4">#}
+{#         <div class="form-group col-md-4" class="value">#}
+{##}
+{#         </div>#}
+{##}
+{#                    <div class="form-group col-md-5">#}
+{##}
+{##}
+{#                     <ul id="opdays">Operating Days:#}
+{#                         {% for i in (restDetail['Days']) %}#}
+{##}
+{#                         <br>#}
+{#                         <br>#}
+{#                         {{ i  }}#}
+{#                        {% endfor %}#}
+{#                     </ul>#}
+{#                    </div>#}
+{#                 </div>#}
+{#</div>#}
+{##}
+{#        </div>#}
+{#    </div>#}
 
 
 <form method=post>
 
+<div class="container">
       <div class="form-group col-md-12">
           <div class="form-group col-md-6" id="ratings">
-              <br>
               <br>
               {{ render_field(form.ratings, class_="form-control") }}
           </div>
@@ -76,6 +85,7 @@
                     <input type="submit" value="Submit" class="btn btn-info" id="submitbtn"/>
                 </div>
       </div>
+</div>
 </form>
 {#Social Media#}
 <div class="container" id="filterdiv">
@@ -85,23 +95,40 @@
 <br>
 <a class='recentc' onclick="showcomments(recentcomments)">view recent comments >> </a>
 
+<div class="container">
+
         <div class="form-group col-md-12" id="recentcomments">
            <h2 id="pastcomments">Recent Comments</h2>
        {% for i in range(comments | length) %}
            <div class="form-group col-md-12">
                <br>
                <br>
+
+           <div class="form-group col-md-2">
            <img src={{ pic[i] }} class="img-responsive" class="img-circle" id="userpic">
-           <div class="form-group col-md-12">
-           <div class="form-group col-md-4" id="usernames">{{ users[i] }}</div>
-           <h2>{{ comments[i] }}</h2>
+           </div>
+
+            <div class="form-group col-md-6" id="usernames">{{ users[i] }}
+            <br>
+                <h6>{{ comments[i] }}</h6>
+            </div>
+
+           <div class="form-group col-md-3">
+               <h6>
                {% for i in range(ratings[i]) %}
                    <img id="ratingstar" src="https://t3.ftcdn.net/jpg/01/09/84/42/160_F_109844239_A7MdQSDf4y1H80cfvHZuSa0zKBkZ68S7.jpg">
                    {% endfor %}
            {{ avgratg }}
+           </h6>
            </div>
-        </div>
+
+
+           </div>
+
+
        {% endfor %}
+        </div>
+    </div>
 {#        <table class="table table-bordered">#}
 {#        <thead>#}
 {#        <br>#}
@@ -131,9 +158,8 @@
 {#        {% endfor %}#}
 {#        </tbody>#}
 {#    </table>#}
-    </div>
-</div>
-</div>
+
+
     <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
 <script>
 function showcomments(recentcomments) {
@@ -196,16 +222,13 @@ function send() {
     }
 
     #view{
-         color: #000;
-    font-family: "hgw-HelveticaNeueBold",Arial,sans-serif;
-	 font-weight: bold;
-    border-bottom: 2px solid darkred;
-    margin-bottom: 20px;
-    font-size: 15px;
-    padding-bottom: 3px;
-    font-size:200%;
-        font-family: italic;
-
+        display: block;
+    font-size: 150%;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+ text-align: center;
     }
 
     #opdays{
@@ -247,6 +270,10 @@ function send() {
 
    }
 
+   #detdesc{
+       word-wrap:break-word;
+   }
+
    th{
        font-family: "hgw-HelveticaNeueBold",Arial,sans-serif;
 	 font-weight: bold;
@@ -275,19 +302,20 @@ function send() {
      right:249px;
      top:10px;
      margin-right: 17px;
+       font-weight:bold;
    }
 
 
    .info2{
-       font-size:150%;
+       font-size:110%;
          margin-right: 17px;
    }
 
    #detailimg{
         display: inline-block;
         float: left;
-        height:250px;
-        width:450px;
+        height:300px;
+        width:550px;
 
    }
 
@@ -298,7 +326,6 @@ function send() {
    }
 
    .box-btn {
-  float: left;
   background: transparent;
   font-size: 30px;
   color: #4D4E56;
@@ -309,6 +336,7 @@ function send() {
   border: none;
   outline: none;
        float:right;
+
 }
 #heart {
   transition:transparent .3s linear;
