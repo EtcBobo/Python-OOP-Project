@@ -2,10 +2,29 @@
 
 {% block body %}
     <div class="container">
-    <img src="http://poutstation.com/wp-content/uploads/2017/08/user_forbidden_man_male_profile_account_person-512.png" style="text-align: center;height:500px;width:500px;">
+    <div class="col-md-12">
+    <img id="deniedimg" class="img-responsive" align="middle" src="https://scontent-sit4-1.xx.fbcdn.net/v/t34.0-12/27591516_1832348633451451_1240145447_n.png?oh=54ae488be61c7240732ec11a380e0cbf&oe=5A78C02B">
+        <h3 style="text-align:center;font-size:200%;">Oops, Page Unavailable</h3>
+        <br><br><br>
+    <h3 style="text-align:center;">You must be logged in to be able to add Restaurant/Event
         <br>
-    <h3>You must be logged in to be able to add Restaurant/Event. Click <a href="/">here</a> to go to the home page</h3>
+        Click <a href="/userRegister" style="font-weight:bold;">here</a> to register now :p</h3>
 
     </div>
 
+
+    </div>
+
+
+
+    <style>
+    #deniedimg{
+         display: block;
+    margin-left: auto;
+    margin-right: auto;
+        width:250px;
+
+    }
+
+    </style>
 {% endblock %}

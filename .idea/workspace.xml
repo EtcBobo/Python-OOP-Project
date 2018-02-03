@@ -3,13 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="31b0ad24-9715-4fb3-ac4e-f17ab7a95e70" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/eventDet.html" afterPath="$PROJECT_DIR$/templates/eventDet.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/eventEdit.html" afterPath="$PROJECT_DIR$/templates/eventEdit.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/events.html" afterPath="$PROJECT_DIR$/templates/events.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/restEdit.html" afterPath="$PROJECT_DIR$/templates/restEdit.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/userEdit.html" afterPath="$PROJECT_DIR$/templates/userEdit.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/userProfile.html" afterPath="$PROJECT_DIR$/templates/userProfile.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/viewEvent.html" afterPath="$PROJECT_DIR$/templates/viewEvent.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/denied.html" afterPath="$PROJECT_DIR$/templates/denied.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,28 +13,18 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Python_OOP_Project$The_Foodie.coverage" NAME="The Foodie Coverage Results" MODIFIED="1517670677593" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Python_OOP_Project$The_Foodie.coverage" NAME="The Foodie Coverage Results" MODIFIED="1517677762775" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="The Foodie.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="The Foodie.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/The Foodie.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="1593" column="46" lean-forward="true" selection-start-line="1593" selection-start-column="46" selection-end-line="1593" selection-end-column="46" />
+            <state relative-caret-position="420">
+              <caret line="1623" column="29" lean-forward="true" selection-start-line="1623" selection-start-column="29" selection-end-line="1623" selection-end-column="29" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="viewEvent.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/viewEvent.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="179" column="6" lean-forward="false" selection-start-line="179" selection-start-column="6" selection-end-line="179" selection-end-column="6" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -50,7 +34,15 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="424">
               <caret line="115" column="20" lean-forward="false" selection-start-line="115" selection-start-column="20" selection-end-line="115" selection-end-column="20" />
-              <folding />
+              <folding>
+                <marker date="1517677619503" expanded="true" signature="3591:3909" ph="..." />
+                <marker date="1517677619503" expanded="true" signature="3605:3706" ph="{...}" />
+                <marker date="1517677619503" expanded="true" signature="3714:3739" ph="{...}" />
+                <marker date="1517677619503" expanded="true" signature="3767:3809" ph="{...}" />
+                <marker date="1517677619503" expanded="true" signature="3779:3807" ph="{...}" />
+                <marker date="1517677619503" expanded="true" signature="3820:3857" ph="{...}" />
+                <marker date="1517677619503" expanded="true" signature="3872:3894" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -59,8 +51,28 @@
         <entry file="file://$PROJECT_DIR$/templates/home.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="294">
-              <caret line="260" column="9" lean-forward="false" selection-start-line="259" selection-start-column="5" selection-end-line="265" selection-end-column="20" />
-              <folding />
+              <caret line="258" column="19" lean-forward="false" selection-start-line="254" selection-start-column="5" selection-end-line="260" selection-end-column="20" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#1;n#div#1;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#1;n#div#0;n#div#2;n#div#1;n#div#1;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="denied.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/denied.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="70">
+              <caret line="8" column="91" lean-forward="true" selection-start-line="8" selection-start-column="91" selection-end-line="8" selection-end-column="91" />
+              <folding>
+                <element signature="n#style#0;n#h3#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#h3#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#0;n#h3#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -68,8 +80,8 @@
       <file leaf-file-name="restEdit.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/restEdit.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="200" column="5" lean-forward="true" selection-start-line="200" selection-start-column="1" selection-end-line="202" selection-end-column="5" />
+            <state relative-caret-position="294">
+              <caret line="194" column="0" lean-forward="true" selection-start-line="188" selection-start-column="0" selection-end-line="202" selection-end-column="5" />
               <folding>
                 <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
                 <marker date="1517670357447" expanded="true" signature="3684:5334" ph="..." />
@@ -79,45 +91,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="restDet.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/restDet.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4053">
-              <caret line="193" column="44" lean-forward="false" selection-start-line="193" selection-start-column="44" selection-end-line="193" selection-end-column="44" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="userProfile.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/userProfile.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1640">
-              <caret line="237" column="0" lean-forward="true" selection-start-line="237" selection-start-column="0" selection-end-line="237" selection-end-column="0" />
-              <folding>
-                <marker date="1517667756095" expanded="true" signature="2296:2307" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="userEdit.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/userEdit.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="191" column="16" lean-forward="false" selection-start-line="191" selection-start-column="16" selection-end-line="191" selection-end-column="16" />
-              <folding>
-                <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="events.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/events.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1326">
-              <caret line="87" column="93" lean-forward="false" selection-start-line="87" selection-start-column="93" selection-end-line="87" selection-end-column="93" />
+            <state relative-caret-position="238">
+              <caret line="173" column="9" lean-forward="false" selection-start-line="173" selection-start-column="9" selection-end-line="173" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -126,12 +104,43 @@
       <file leaf-file-name="eventEdit.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/eventEdit.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="339">
-              <caret line="204" column="4" lean-forward="true" selection-start-line="203" selection-start-column="0" selection-end-line="206" selection-end-column="1" />
+            <state relative-caret-position="-2865">
+              <caret line="66" column="27" lean-forward="false" selection-start-line="66" selection-start-column="27" selection-end-line="66" selection-end-column="27" />
+              <folding>
+                <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="userEdit.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/userEdit.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2814">
+              <caret line="45" column="0" lean-forward="true" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
               <folding>
                 <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#button#0;n#div#0;n#div#0;n#div#0;n#div#11;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="findEvent.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/findEvent.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="147">
+              <caret line="7" column="8" lean-forward="false" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="filter.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/filter.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="21">
+              <caret line="5" column="34" lean-forward="false" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -147,13 +156,9 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>heart</find>
-      <find>eventTitle</find>
-      <find>date</find>
       <find>recname</find>
       <find>name</find>
       <find>home</find>
-      <find>popline</find>
       <find>btn</find>
       <find>desc</find>
       <find>a{</find>
@@ -173,10 +178,14 @@
       <find>more</find>
       <find>recbtn</find>
       <find>rec</find>
-      <find>.eve</find>
       <find>file</find>
+      <find>.eve</find>
       <find>editbutton</find>
       <find>edit</find>
+      <find>bannerword</find>
+      <find>eventhead</find>
+      <find>popline</find>
+      <find>search</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -195,23 +204,24 @@
         <option value="$PROJECT_DIR$/templates/includes/_navbar.html" />
         <option value="$PROJECT_DIR$/templates/chat.html" />
         <option value="$PROJECT_DIR$/templates/viewRest.html" />
-        <option value="$PROJECT_DIR$/templates/findEvent.html" />
         <option value="$PROJECT_DIR$/templates/addRest.html" />
         <option value="$PROJECT_DIR$/templates/addEvent.html" />
         <option value="$PROJECT_DIR$/templates/includes/_message.html" />
-        <option value="$PROJECT_DIR$/templates/home.html" />
         <option value="$PROJECT_DIR$/templates/viewallRest.html" />
         <option value="$PROJECT_DIR$/templates/userLogin.html" />
         <option value="$PROJECT_DIR$/templates/layout.html" />
-        <option value="$PROJECT_DIR$/The Foodie.py" />
         <option value="$PROJECT_DIR$/templates/viewEvent.html" />
         <option value="$PROJECT_DIR$/templates/eventDet.html" />
-        <option value="$PROJECT_DIR$/templates/events.html" />
         <option value="$PROJECT_DIR$/templates/restDet.html" />
         <option value="$PROJECT_DIR$/templates/userProfile.html" />
-        <option value="$PROJECT_DIR$/templates/eventEdit.html" />
         <option value="$PROJECT_DIR$/templates/restEdit.html" />
         <option value="$PROJECT_DIR$/templates/userEdit.html" />
+        <option value="$PROJECT_DIR$/templates/eventEdit.html" />
+        <option value="$PROJECT_DIR$/templates/findEvent.html" />
+        <option value="$PROJECT_DIR$/templates/events.html" />
+        <option value="$PROJECT_DIR$/templates/home.html" />
+        <option value="$PROJECT_DIR$/The Foodie.py" />
+        <option value="$PROJECT_DIR$/templates/denied.html" />
       </list>
     </option>
   </component>
@@ -519,7 +529,35 @@
       <option name="project" value="LOCAL" />
       <updated>1517654406641</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;templates/events.html">
+      <created>1517670813444</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1517670813444</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;templates/events.html">
+      <created>1517677410792</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1517677410792</updated>
+    </task>
+    <task id="LOCAL-00026" summary="update">
+      <created>1517677598993</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1517677598993</updated>
+    </task>
+    <task id="LOCAL-00027" summary="update">
+      <created>1517677679336</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1517677679336</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -580,9 +618,9 @@
     <MESSAGE value="ratings" />
     <MESSAGE value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;templates/userProfile.html" />
     <MESSAGE value="Merge branch 'master' of https://github.com/EtcBobo/Python-OOP-Project&#10;&#10;# Conflicts:&#10;#&#9;templates/restDet.html" />
-    <MESSAGE value="update" />
     <MESSAGE value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;templates/events.html" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;templates/events.html" />
+    <MESSAGE value="update" />
+    <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -591,16 +629,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/The Foodie.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2730">
-          <caret line="148" column="0" lean-forward="false" selection-start-line="148" selection-start-column="0" selection-end-line="148" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/userProfile.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="651">
@@ -661,7 +689,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2667">
           <caret line="127" column="23" lean-forward="false" selection-start-line="127" selection-start-column="23" selection-end-line="127" selection-end-column="23" />
-          <folding />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#1;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#1;n#div#0;n#div#2;n#div#1;n#div#1;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -715,7 +749,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2961">
           <caret line="141" column="26" lean-forward="true" selection-start-line="141" selection-start-column="26" selection-end-line="141" selection-end-column="26" />
-          <folding />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#1;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#1;n#div#0;n#div#2;n#div#1;n#div#1;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -801,14 +841,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/filter.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="5" column="34" lean-forward="false" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/userRegister.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="142">
@@ -828,14 +860,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="441">
           <caret line="57" column="0" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/findEvent.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -868,6 +892,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -907,31 +932,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="424">
           <caret line="115" column="20" lean-forward="false" selection-start-line="115" selection-start-column="20" selection-end-line="115" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/restDet.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4053">
-          <caret line="193" column="44" lean-forward="false" selection-start-line="193" selection-start-column="44" selection-end-line="193" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="260" column="9" lean-forward="false" selection-start-line="259" selection-start-column="5" selection-end-line="265" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/events.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1326">
-          <caret line="87" column="93" lean-forward="false" selection-start-line="87" selection-start-column="93" selection-end-line="87" selection-end-column="93" />
-          <folding />
+          <folding>
+            <marker date="1517677619503" expanded="true" signature="3591:3909" ph="..." />
+            <marker date="1517677619503" expanded="true" signature="3605:3706" ph="{...}" />
+            <marker date="1517677619503" expanded="true" signature="3714:3739" ph="{...}" />
+            <marker date="1517677619503" expanded="true" signature="3767:3809" ph="{...}" />
+            <marker date="1517677619503" expanded="true" signature="3779:3807" ph="{...}" />
+            <marker date="1517677619503" expanded="true" signature="3820:3857" ph="{...}" />
+            <marker date="1517677619503" expanded="true" signature="3872:3894" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -945,10 +954,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/restDet.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4053">
+          <caret line="193" column="44" lean-forward="false" selection-start-line="193" selection-start-column="44" selection-end-line="193" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/restEdit.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="200" column="5" lean-forward="true" selection-start-line="200" selection-start-column="1" selection-end-line="202" selection-end-column="5" />
+        <state relative-caret-position="294">
+          <caret line="194" column="0" lean-forward="true" selection-start-line="188" selection-start-column="0" selection-end-line="202" selection-end-column="5" />
           <folding>
             <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
             <marker date="1517670357447" expanded="true" signature="3684:5334" ph="..." />
@@ -957,33 +974,82 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/eventEdit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2865">
+          <caret line="66" column="27" lean-forward="false" selection-start-line="66" selection-start-column="27" selection-end-line="66" selection-end-column="27" />
+          <folding>
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/userEdit.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="191" column="16" lean-forward="false" selection-start-line="191" selection-start-column="16" selection-end-line="191" selection-end-column="16" />
+        <state relative-caret-position="-2814">
+          <caret line="45" column="0" lean-forward="true" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
           <folding>
             <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/eventEdit.html">
+    <entry file="file://$PROJECT_DIR$/templates/filter.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="204" column="4" lean-forward="true" selection-start-line="203" selection-start-column="0" selection-end-line="206" selection-end-column="1" />
+        <state relative-caret-position="21">
+          <caret line="5" column="34" lean-forward="false" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/findEvent.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="7" column="8" lean-forward="false" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/events.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="173" column="9" lean-forward="false" selection-start-line="173" selection-start-column="9" selection-end-line="173" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="258" column="19" lean-forward="false" selection-start-line="254" selection-start-column="5" selection-end-line="260" selection-end-column="20" />
           <folding>
-            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#0;n#div#0;n#div#0;n#div#0;n#div#11;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#1;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#1;n#div#0;n#div#2;n#div#1;n#div#1;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/The Foodie.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="1593" column="46" lean-forward="true" selection-start-line="1593" selection-start-column="46" selection-end-line="1593" selection-end-column="46" />
+        <state relative-caret-position="420">
+          <caret line="1623" column="29" lean-forward="true" selection-start-line="1623" selection-start-column="29" selection-end-line="1623" selection-end-column="29" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/denied.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="70">
+          <caret line="8" column="91" lean-forward="true" selection-start-line="8" selection-start-column="91" selection-end-line="8" selection-end-column="91" />
+          <folding>
+            <element signature="n#style#0;n#h3#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h3#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#h3#1;n#div#0;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>

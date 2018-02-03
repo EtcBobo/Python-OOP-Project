@@ -4,7 +4,7 @@
         {% from "includes/_formhelper.html" import render_field %}
 
 
-<br><br><br>
+{#<br><br><br>#}
 <section id="photo" src="https://prods3.imgix.net/images/articles/2016_01/Hero-Dinner-Party-Papdi-Chaat-Babu-Ji-NYC-East-Village-Melbourne-Indian-Recipes-Tamarind-Nachos-Yogurt-Mint.jpg?auto=format,compress">
 <div class="text-container" id="eventheader">
 <h2 id="eventsheader">Events</h2>
@@ -171,11 +171,15 @@ background-repeat: no-repeat;
 background-size: cover;
 background-position:center;
 width:100%;
-height:550px;
+height:620px;
 }
+
 #eventheader{
 align:center;
 color:white;
+z-index: 10;
+bottom: 3rem;
+text-shadow: 2px 2px 0px #000;
 }
 
 .desctext{
