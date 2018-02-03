@@ -18,7 +18,7 @@
     <li><a href="#popularEvent" data-toggle="tab">Popular</a></li>
     <li><a href="#upcomingEvent" data-toggle="tab">Upcoming</a></li>
     <li><a href="#endedEvent" data-toggle="tab">Ended</a></li>
-    <li><a href="#addEvent" data-toggle="tab">Organize Events!</a></li>
+{#    <li><a href="#addEvent" data-toggle="tab">Organize Events!</a></li>#}
   </ul>
 
 {#    home tab#}
@@ -32,32 +32,30 @@
               <br>
                 <br>
               <br>
-             <h3 class="eventTitle"><a href="/events/{{ i['Name'] }}">{{ i['Name'] }}</a> <span class="label label-success">Ongoing</span></h3>
+             <h3 class="eventTitle"><a href="/eventDet/{{ i['Name'] }}">{{ i['Name'] }}</a> <span class="label label-success">Ongoing</span></h3>
               <br>
               <img id='eventimg' class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
           </div>
           <div class="col-md-4" id="eventdesc">
-              <br><br><br><br><br><br><br>
-              <span>{{ i['Description'] }}</span>
-              <br>
-              <br>
-                <span class="glyphicon glyphicon-map-marker"> {{ i['Location'] }}</span>
-              <br>
-              <br>
-                <span class="glyphicon glyphicon-globe"> {{ i['Address'] }}</span>
-              <br>
-              <br>
-                <span class="glyphicon glyphicon-tag"> {{ i['ticket'] }}</span>
-              <br>
-              <br>
-              <span class="glyphicon glyphicon-calendar"> {{ i['Start'] }} to {{ i['End'] }} </span>
-              <br>
-              <br>
-              <span class="glyphicon glyphicon-time"> {{ i['Time Start'] }} - {{ i['Time End'] }}</span>
+              <br><br><br><br><br><br>
+              <span class="desctext">{{ i['Description'] }}</span>
+{#              <br>#}
+{#              <br>#}
+{#                <span class="glyphicon glyphicon-map-marker"> {{ i['Location'] }}</span>#}
+{#              <br>#}
+{#              <br>#}
+{#                <span class="glyphicon glyphicon-globe"> {{ i['Address'] }}</span>#}
+{#              <br>#}
+{#              <br>#}
+{#                <span class="glyphicon glyphicon-tag"> ${{ i['ticket'] }}</span>#}
+{#              <br>#}
+{#              <br>#}
+{#              <span class="glyphicon glyphicon-calendar"> {{ i['Start'] }} to {{ i['End'] }} </span>#}
+{#              <br>#}
+{#              <br>#}
+{#              <span class="glyphicon glyphicon-time"> {{ i['Time Start'] }} - {{ i['Time End'] }}</span>#}
           </div>
           <div class="col-md-4">
-              <br>
-              <br>
               <br>
               <br>
               <br>
@@ -71,89 +69,6 @@
       </div>
 
 
-
-
-{#        organize events tab#}
-  <div class="tab-pane" id="addEvent">
-          <form method="POST">
-        <div class="form-group col-md-12">
-            <div class="row">
-            <div  class="col-md-8 col-md-offset-2" class="edit">
-                <div class="form-group col-md-12">
-                    <br>
-                <img id="img" src="https://thedanamariner.com/wp-content/uploads/2017/12/Events.jpg" width="304" height="304">
-                <br>
-                <input type="file" id="file"/>
-                <br>
-                <br>
-                <br>
-                </div>
-            <div  class="col-md-8 col-md-offset-2" class="eventName">
-                <div class="form-group col-md-12">
-                    {{ render_field(form.eventName, class_="form-control") }}
-                </div>
-
-                <div class="form-group col-md-12" class="eventDesc">
-                    {{ render_field(form.eventDescription, class_="form-control") }}
-                </div>
-
-                <div class="form-group col-md-12" class="'eventLocation">
-                    {{ render_field(form.eventLocation, class_="form-control") }}
-                </div>
-
-                <div class="form-group col-md-12" class="eventAddress">
-                    {{ render_field(form.eventAddress, class_="form-control") }}
-                </div>
-
-                <div class="form-group col-md-6" class="startDate">
-                    {{ render_field(form.startDate, class_="form-control") }}
-                </div>
-
-                <div class="form-group col-md-6" class="endDate">
-                    {{ render_field(form.endDate, class_="form-control") }}
-                </div>
-
-                 <div class="form-group col-md-6" class="startTime">
-                    {{ render_field(form.startTime, class_="form-control") }}
-                </div>
-
-                 <div class="form-group col-md-6" class="startTimeMin">
-                    {{ render_field(form.startTimeMin, class_="form-control") }}
-                </div>
-
-                 <div class="form-group col-md-6" class="endTime">
-                    {{ render_field(form.endTime, class_="form-control") }}
-                </div>
-
-                 <div class="form-group col-md-6" class="endTimeMin">
-                    {{ render_field(form.endTimeMin, class_="form-control") }}
-                </div>
-
-                <div class="form-group col-md-12" class="ticket">
-                    {{ render_field(form.ticket, class_="form-control") }}
-                </div>
-                <br>
-                <br>
-                    <div class="form-group">
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <br>
-                                <br>
-                                <div class='btn-toolbar'>
-                        <button type="submit" class="btn btn-primary btn-lg upload-group text-center" id="uploadButton" onclick="myFunction()">Organize</button>
-                    </div>
-                             </div>
-                        </div>
-                    </div>
-              </div>
-            </div>
-        </div>
-            </div>
-
-              </form>
-  </div>
-
-
 {#        popular events tab#}
   <div class="tab-pane" id="popularEvent">
 
@@ -163,39 +78,37 @@
               <br>
                 <br>
               <br>
-               <h3 class="eventTitle"><a href="/events/{{ i['Name'] }}">{{ i['Name'] }}</a> <span class="label label-danger"><span class="glyphicon glyphicon-fire"></span> Popular</span></h3>
+              <h3 class="eventTitle"><a href="/events/{{ i['Name'] }}">{{ i['Name'] }}</a> <span class="label label-danger"><span class="glyphicon glyphicon-fire"></span> Popular</span></h3>
               <br>
               <img id='eventimg' class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
           </div>
-          <div class="col-md-4" id="eventdesc">
-              <br><br><br><br><br><br><br>
-              <span>{{ i['Description'] }}</span>
-              <br>
-              <br>
-                <span class="glyphicon glyphicon-map-marker"> {{ i['Location'] }}</span>
-              <br>
-              <br>
-                <span class="glyphicon glyphicon-globe"> {{ i['Address'] }}</span>
-              <br>
-              <br>
-                <span class="glyphicon glyphicon-tag"> {{ i['ticket'] }}</span>
-              <br>
-              <br>
-              <span class="glyphicon glyphicon-calendar"> {{ i['Start'] }} to {{ i['End'] }} </span>
-              <br>
-              <br>
-              <span class="glyphicon glyphicon-time"> {{ i['Time Start'] }} - {{ i['Time End'] }}</span>
+          <div class="col-md-5" id="eventdesc">
+              <br><br><br><br><br><br>
+              <span class="desctext">{{ i['Description'] }} this is a pen. jehnvcui rijhnie fnewvj nervkev
+              iehynbacvfienviaernviakjerwnviaej rbvbebf nvijrufnhre vrrgiaernfhaueriv bnrejver vujer bnvaeurifnaerufnerjfe rgerfuernfguiernfgerf ergf beruferuger bgfer gerbferygfer
+              qwe this is a pen. jehnvcui rijhnie fnewvj nervkev rvbtrbrtb iehynbacvfienviaernviakjerwnviaej rbvbebf nvijrufnhre viaernfhaueriv bnrejver vujer bnvaeurifnaerufnerjfe rgerfuernfguiernfgerf ergf beruferuger bgfer gerbferygferqwe this is a pen. jehnvcui rijhnie fnewvj nervkev iehynbacvfienviaernviakjerwnviaej rbvbebf nvijrufnhre viaernfhaueriv bnrejver vujer bnvaeurifnaerufnerjfe rgerfuernfguiernfgerf ergf beruferuger bgfer gerbferygfer</span>
+{#              <br>#}
+{#              <br>#}
+{#                <span class="glyphicon glyphicon-map-marker"> {{ i['Location'] }}</span>#}
+{#              <br>#}
+{#              <br>#}
+{#                <span class="glyphicon glyphicon-globe"> {{ i['Address'] }}</span>#}
+{#              <br>#}
+{#              <br>#}
+{#                <span class="glyphicon glyphicon-tag"> ${{ i['ticket'] }}</span>#}
+{#              <br>#}
+{#              <br>#}
+{#              <span class="glyphicon glyphicon-calendar"> {{ i['Start'] }} to {{ i['End'] }} </span>#}
+{#              <br>#}
+{#              <br>#}
+{#              <span class="glyphicon glyphicon-time"> {{ i['Time Start'] }} - {{ i['Time End'] }}</span>#}
+
           </div>
-          <div class="col-md-4">
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
+          <div class="col-md-3">
+              <br><br><br>
                <small> {{ i['People'] }} people interested in going</small>
           </div>
           </div>
-
   {% endfor %}
 
 </div>
@@ -208,35 +121,31 @@
               <br>
                 <br>
               <br>
-             <h3 class="eventTitle"><a href="/events/{{ i['Name'] }}">{{ i['Name'] }}</a> <span class="label label-warning">Upcoming</span></h3>
+             <h3 class="eventTitle"><a href="/eventDet/{{ i['Name'] }}">{{ i['Name'] }}</a> <span class="label label-warning">Upcoming</span></h3>
               <br>
               <img id='eventimg' class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
           </div>
-          <div class="col-md-4" id="eventdesc">
-              <br><br><br><br><br><br><br>
-              <span>{{ i['Description'] }}</span>
-              <br>
-              <br>
-                <span class="glyphicon glyphicon-map-marker"> {{ i['Location'] }}</span>
-              <br>
-              <br>
-                <span class="glyphicon glyphicon-globe"> {{ i['Address'] }}</span>
-              <br>
-              <br>
-                <span class="glyphicon glyphicon-tag"> {{ i['ticket'] }}</span>
-              <br>
-              <br>
-              <span class="glyphicon glyphicon-calendar"> {{ i['Start'] }} to {{ i['End'] }} </span>
-              <br>
-              <br>
-              <span class="glyphicon glyphicon-time"> {{ i['Time Start'] }} - {{ i['Time End'] }}</span>
+          <div class="col-md-5" id="eventdesc">
+              <br><br><br><br><br><br>
+              <span class="desctext">{{ i['Description'] }} qwe this is a pen. jehnvcui rijhnie fnewvj nervkev iehynbacvfienviaernviakjerwnviaej rbvbebf nvijrufnhre vrrgiaernfhaueriv bnrejver vujer bnvaeurifnaerufnerjfe rgerfuernfguiernfgerf ergf beruferuger bgfer gerbferygfer qwe this is a pen. jehnvcui rijhnie fnewvj nervkev rvbtrbrtb iehynbacvfienviaernviakjerwnviaej rbvbebf nvijrufnhre viaernfhaueriv bnrejver vujer bnvaeurifnaerufnerjfe rgerfuernfguiernfgerf ergf beruferuger bgfer gerbferygferqwe this is a pen. jehnvcui rijhnie fnewvj nervkev iehynbacvfienviaernviakjerwnviaej rbvbebf nvijrufnhre viaernfhaueriv bnrejver vujer fbveagvbreg bnvaeurifnaerufnerjfe rgerfuernfguiernfgerf ergf beruferuger bgfer gerbferygfer</span>
+{#              <br>#}
+{#              <br>#}
+{#                <span class="glyphicon glyphicon-map-marker"> {{ i['Location'] }}</span>#}
+{#              <br>#}
+{#              <br>#}
+{#                <span class="glyphicon glyphicon-globe"> {{ i['Address'] }}</span>#}
+{#              <br>#}
+{#              <br>#}
+{#                <span class="glyphicon glyphicon-tag"> ${{ i['ticket'] }}</span>#}
+{#              <br>#}
+{#              <br>#}
+{#              <span class="glyphicon glyphicon-calendar"> {{ i['Start'] }} to {{ i['End'] }} </span>#}
+{#              <br>#}
+{#              <br>#}
+{#              <span class="glyphicon glyphicon-time"> {{ i['Time Start'] }} - {{ i['Time End'] }}</span>#}
           </div>
-          <div class="col-md-4">
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
+          <div class="col-md-3">
+              <br><br><br>
                <small> {{ i['People'] }} people interested in going</small>
           </div>
           </div>
@@ -253,32 +162,30 @@
               <br>
                 <br>
               <br>
-             <h3 class="eventTitle"><a href="/events/{{ i['Name'] }}">{{ i['Name'] }}</a> <span class="label label-default">Ended</span></h3>
+             <h3 class="eventTitle"><a href="/eventDet/{{ i['Name'] }}">{{ i['Name'] }}</a> <span class="label label-default">Ended</span></h3>
               <br>
               <img id='eventimg' class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
           </div>
-          <div class="col-md-4" id="eventdesc">
-              <br><br><br><br><br><br><br>
-              <span>{{ i['Description'] }}</span>
-              <br>
-              <br>
-                <span class="glyphicon glyphicon-map-marker"> {{ i['Location'] }}</span>
-              <br>
-              <br>
-                <span class="glyphicon glyphicon-globe"> {{ i['Address'] }}</span>
-              <br>
-              <br>
-                <span class="glyphicon glyphicon-tag"> {{ i['ticket'] }}</span>
-              <br>
-              <br>
-              <span class="glyphicon glyphicon-calendar"> {{ i['Start'] }} to {{ i['End'] }} </span>
-              <br>
-              <br>
-              <span class="glyphicon glyphicon-time"> {{ i['Time Start'] }} - {{ i['Time End'] }}</span>
+          <div class="col-md-6" id="eventdesc">
+              <br><br><br><br><br><br>
+              <span class="desctext">{{ i['Description'] }}</span>
+{#              <br>#}
+{#              <br>#}
+{#                <span class="glyphicon glyphicon-map-marker"> {{ i['Location'] }}</span>#}
+{#              <br>#}
+{#              <br>#}
+{#                <span class="glyphicon glyphicon-globe"> {{ i['Address'] }}</span>#}
+{#              <br>#}
+{#              <br>#}
+{#                <span class="glyphicon glyphicon-tag"> ${{ i['ticket'] }}</span>#}
+{#              <br>#}
+{#              <br>#}
+{#              <span class="glyphicon glyphicon-calendar"> {{ i['Start'] }} to {{ i['End'] }} </span>#}
+{#              <br>#}
+{#              <br>#}
+{#              <span class="glyphicon glyphicon-time"> {{ i['Time Start'] }} - {{ i['Time End'] }}</span>#}
           </div>
-          <div class="col-md-4">
-              <br>
-              <br>
+          <div class="col-md-3">
               <br>
               <br>
               <br>
@@ -290,109 +197,6 @@
   </div>
      </div>
 
-      <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
-<script>
-   function myFunction() {
-
-}
-    function readURL2(input) {
-
-      if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function(e) {
-          $('#img2').attr('src', e.target.result);
-        }
-
-        reader.readAsDataURL(input.files[0]);
-      }
-    }
-     $("#file2").change(function() {
-      readURL2(this);
-    });
-    function readURL(input) {
-
-      if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function(e) {
-          $('#img').attr('src', e.target.result);
-        }
-
-        reader.readAsDataURL(input.files[0]);
-      }
-    }
-
-    $("#file").change(function() {
-      readURL(this);
-    });
-      // Initialize Firebase
-      var config = {
-        apiKey: "AIzaSyAbX0KjCpu-WKGrnj9snTRolEqomOXy0oA",
-        authDomain: "python-oop.firebaseapp.com",
-        databaseURL: "https://python-oop.firebaseio.com/",
-        projectId: "python-oop",
-        storageBucket: "python-oop.appspot.com",
-        messagingSenderId: "397421551766"
-      };
-      firebase.initializeApp(config);
-    var fileButton = document.getElementById('uploadButton');
-    $("#file").on("change",function (event) {
-        selectedFile=event.target.files[0];
-
-
-    });
-    $("#file2").on("change",function (event) {
-        selectedFile2=event.target.files[0];
-
-
-    });
-
-    fileButton.addEventListener('click',function(e) {
-
-        var elem = document.getElementById("myBar");
-        var elem2 = document.getElementById("myBar2");
-
-
-        if(document.getElementById( 'img' ).src != "https://thedanamariner.com/wp-content/uploads/2017/12/Events.jpg"){
-            var filename = selectedFile.name;
-
-        }
-        else{
-                var postData = {
-                    urlEvent:"https://thedanamariner.com/wp-content/uploads/2017/12/Events.jpg"
-
-                };
-
-                firebase.database().ref().child('/events/event{{ numEvent }}').update(postData)
-
-        }
-
-        var storageRef = firebase.storage().ref('/images/restPic/' + filename);
-        var fileRef = storageRef.child(filename);
-        var uploadTask = storageRef.put(selectedFile);
-
-
-        uploadTask.on('state_changed', function (snapshot) {
-        var percentage = snapshot.bytesTransferred / snapshot.totalBytes * 100;
-            //uploader.value = percentage;
-             elem.style.width = parseInt(percentage) + '%';
-             elem.innerHTML=parseInt(percentage)+'%';
-             elem2.style.width = parseInt(percentage) + '%';
-             elem2.innerHTML=parseInt(percentage)+'%';
-        }, function (error) {
-
-        }, function () {
-            var downloadURL = uploadTask.snapshot.downloadURL;
-            var postData = {
-                urlEvent: downloadURL,
-            };
-            firebase.database().ref().child('/events/event{{ numEvent }}').update(postData)
-        });
-    })
-
-
-        </script>
 
 <style>
 #photo{
@@ -408,21 +212,15 @@ align:center;
 color:white;
 }
 
-  #submitbtn{
-         border-radius: 4px;
-    background-color: darkred;
-    border: 0;
-    color: #fff!important;
-    display: inline-block;
-    font-size: 14px;
-    text-align: center;
-        height: 42px;
-        width:300px;
-    }
+.desctext{
+    height: 200px !important;
+    text-justify: auto;
+}
+
 
 @media (max-width: 991px) {
-    #eventnav {
-        max-width: 100%;
+    #eventdesc br{
+        display:none;
     }
 }
 
@@ -431,19 +229,12 @@ color:white;
     height:300px;
 }
 
-div {
-    display: block;
+.eventTitle a:hover{
+    color:black!important;
 }
 
-.upcoming{
-    float:right;
-     cursor: default;
 
-}
 
-.int{
-    float:right;
-}
 
 #eventsheader{
     text-align:center;
@@ -451,9 +242,7 @@ div {
     padding:128px;
 }
 
-.btn btn-success, .btn btn-warning, .btn btn-danger{
-      cursor: default;
-}
+
 </style>
 
 {% endblock %}

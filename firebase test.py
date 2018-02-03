@@ -34,9 +34,6 @@ print(year+1)
 # })
 
 mydict = {'carl':40,'danny':3,'alan':2,'bob':1}
-some = 'someThing'
-some = some.lower()
-print(some)
 
 
 restFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")

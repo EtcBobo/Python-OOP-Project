@@ -37,11 +37,13 @@
         <a class="viewbtn"  href="/restDet/{{ i['Name'] }}">know More</a>
         <div class="col-md-5">
             <br><br>
-        <p id="description"> {{ i['Description'] }} regvtrebvarebvaewbvawebrbrbrertybntyerbn etrbn teyregvtrebvaewbvawebrbrbrertybntyerbn etrbn teyregvtrebvaewbvawebrbrbrertybntyerbn etrbn tey</p>
+        <p id="description"> {{ i['Description'] }}</p>
          <br>
+            <div class="r">
             <span id="avgra">Average ratings: {{ i['Average Rating'] }}/5</span>
            <br>
              <span>Average Price: $4</span>
+            </div>
     </div>
 
         <br><br>
@@ -121,6 +123,10 @@
 
     }
 
+    .r{
+       height:20px;
+    }
+
     #sortbtn{
          border-radius: 4px;
     background-color: darkred;
@@ -151,9 +157,9 @@
 
 #description{
     font-weight:normal;
-    font-size:120%;
+    font-size:110%;
     word-wrap: break-word;
-
+    height:200px;
 }
 
 .viewbtn{
@@ -172,11 +178,6 @@
     color:darkred!important;
     font-weight:800;
 }
-
-
-
-
-
 
 
 
@@ -218,8 +219,13 @@
          margin-right:30px;
      }
 
+     #description{
+         height:100%;
+     }
+
 
 }
+
 
 
 </style>

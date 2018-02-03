@@ -1,64 +1,79 @@
 {% extends 'layout.html' %}
-
 {% block body %}
-        {% from "includes/_formhelper.html" import render_field %}
-<div class="container">
-<br><br>
-    <h1 id="view">Edit {{ rest['Name'] }}</h1>
 
+    {% from "includes/_formhelper.html" import render_field %}
 
-        <form method="post">
+<div class="'container">
+ <div class="form-group col-md-12" id="add">Organize A Event!</div>
+<br>
+    <br>
+          <form method="POST">
         <div class="form-group col-md-12">
-
             <div class="row">
-            <div class="col-md-8 col-md-offset-2" class="edit">
-                <br><br>
-                <div class="col-md-12">
-                <img id="img" style="width: 275px; height: 275px;" src={{ restPic }}>
-                <br>
+            <div  class="col-md-8 col-md-offset-2" class="edit">
+                <div class="form-group col-md-12">
+                    <br>
+                    <div class="form-group col-md-12">
+                <img id="img" src="https://thedanamariner.com/wp-content/uploads/2017/12/Events.jpg" width="304" height="304">
+                </div>
                 <input type="file" id="file"/>
                 <br>
                 <br>
                 <br>
                 </div>
 
+            <div class="col-md-8 col-md-offset-2" class="eventName">
                 <div class="form-group col-md-12">
-                    {{ render_field(form.desc, class_="form-control") }}
+                    {{ render_field(form.eventName, class_="form-control") }}
                 </div>
 
-                <div class="form-group col-md-12" class="desc">
-                    {{ render_field(form.address, class_="form-control") }}
+                <div class="form-group col-md-12" class="eventDesc">
+                    {{ render_field(form.eventDescription, class_="form-control") }}
                 </div>
 
-                <div class="form-group col-md-12">
-                    {{ render_field(form.location, class_="form-control") }}
+                <div class="form-group col-md-12" class="'eventLocation">
+                    {{ render_field(form.eventLocation, class_="form-control") }}
                 </div>
 
-                <div class="form-group col-md-12" class="location">
-                    {{ render_field(form.foodType, class_="form-control") }}
+                <div class="form-group col-md-12" class="eventAddress">
+                    {{ render_field(form.eventAddress, class_="form-control") }}
                 </div>
 
-                <div class="form-group col-md-12" class="type">
-                    {{ render_field(form.price, class_="form-control") }}
+                <div class="form-group col-md-6" class="startDate">
+                    {{ render_field(form.startDate, class_="form-control") }}
                 </div>
 
-                <div class="form-group col-md-12" class="price">
-                     {{ render_field(form.openH, class_="form-control") }}
+                <div class="form-group col-md-6" class="endDate">
+                    {{ render_field(form.endDate, class_="form-control") }}
                 </div>
 
-                <div class="form-group col-md-12" class="openhr">
-                    {{ render_field(form.closingH, class_="form-control") }}
+                 <div class="form-group col-md-6" class="startTime">
+                    {{ render_field(form.startTime, class_="form-control") }}
                 </div>
 
+                 <div class="form-group col-md-6" class="startTimeMin">
+                    {{ render_field(form.startTimeMin, class_="form-control") }}
+                </div>
 
+                 <div class="form-group col-md-6" class="endTime">
+                    {{ render_field(form.endTime, class_="form-control") }}
+                </div>
+
+                 <div class="form-group col-md-6" class="endTimeMin">
+                    {{ render_field(form.endTimeMin, class_="form-control") }}
+                </div>
+
+                <div class="form-group col-md-12" class="ticket">
+                    {{ render_field(form.ticket, class_="form-control") }}
+                </div>
                 <br>
                 <br>
                     <div class="form-group">
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                    <div class='btn-toolbar'>
-                        <br>
-                        <button type="submit" class="btn btn-success btn-lg " id="editbutton" onclick="myFunction()">Save Changes</button>
+                                <div class='btn-toolbar'>
+
+                        <button type="submit" class="btn btn-primary btn-lg upload-group text-center" id="uploadButton" onclick="myFunction()">Organize</button>
                     </div>
                              </div>
                         </div>
@@ -66,14 +81,13 @@
               </div>
             </div>
         </div>
-        </form>
+            </div>
 
-
-    </div>
-
+              </form>
 </div>
 
-    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+
+          <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
 <script>
    function myFunction() {
 
@@ -94,6 +108,7 @@
       readURL2(this);
     });
     function readURL(input) {
+
       if (input.files && input.files[0]) {
         var reader = new FileReader();
 
@@ -136,15 +151,18 @@
         var elem2 = document.getElementById("myBar2");
 
 
-        if(document.getElementById( 'img' ).src != "{{ restPic }}"){
+        if(document.getElementById( 'img' ).src != "https://thedanamariner.com/wp-content/uploads/2017/12/Events.jpg"){
             var filename = selectedFile.name;
+
         }
         else{
                 var postData = {
-                    urlRest:"{{ restPic }}",
+                    urlEvent:"https://thedanamariner.com/wp-content/uploads/2017/12/Events.jpg",
+                    Name:'placeholder'
+
                 };
 
-                firebase.database().ref().child('/restaurants/{{ restid }}').update(postData)
+                firebase.database().ref().child('/events/event{{ numEvent }}').update(postData)
 
         }
 
@@ -165,10 +183,10 @@
         }, function () {
             var downloadURL = uploadTask.snapshot.downloadURL;
             var postData = {
-                urlRest: downloadURL,
+                urlEvent: downloadURL,
+                Name:'placeholder'
             };
-
-            firebase.database().ref().child('/restaurants/{{ restid }}').update(postData)
+            firebase.database().ref().child('/events/event{{ numEvent }}').update(postData)
         });
     })
 
@@ -176,48 +194,52 @@
         </script>
 
 <style>
- #view{
-         display: block;
+ #file{
+         margin-left:350px;
+
+    }
+
+    #img{
+    margin-left:300px;
+}
+
+#add{
+     display: block;
     font-size: 150%;
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: .1em;
-    text-align:center;
-    }
-
-#img{
-    height:300px;
-    width:580px;
-    margin-left:230px;
-
+ text-align: center;
 }
 
-#file{
-    margin-left:270px;
-    text-align:center;
-}
-
-  #editbutton{
+#uploadButton{
+         border-radius: 4px;
+    background-color: darkred;
+    border: 0;
+    color: #fff!important;
+    display: inline-block;
+    font-size: 14px;
+    text-align: center;
+        height: 42px;
         width:50%;
     }
 
-@media(max-width:991px){
+ @media(max-width:991px){
     #img{
         margin-left:0px;
     }
     #file{
         margin-left:0px;
     }
-     #editbutton{
-        width:100%;
+    .edit{
+        float:left;
     }
-     .btn-toolbar br{
-         display:none;
-     }
 
+   #uploadButton{
+   width:100%;}
 }
 
-</style>
 
-    {% endblock %}
+</style>
+{% endblock %}
