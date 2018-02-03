@@ -27,7 +27,7 @@
 <div class="col-md-12">
  <br>
     <div class="col-md-12">
-        <div class="col-md-5">
+        <div class="col-md-5" id="col-md-5">
         <h1 id="restnames">{{ i['Name'] }}</h1>
          <img id="detailimg" class="img-responsive" src={{ i['urlEvent'] }}>
             <br>
@@ -37,7 +37,7 @@
         <a class="viewbtn"  href="/eventDet/{{ i['Name'] }}">know More</a>
         <div class="col-md-5">
             <br><br>
-        <p id="description"> {{ i['Description'] }} regvtrebvarebvaewbvawebrbrbrertybntyerbn etrbn teyregvtrebvaewbvawebrbrbrertybntyerbn etrbn teyregvtrebvaewbvawebrbrbrertybntyerbn etrbn tey</p>
+        <p id="description"> {{ i['Description'] }}</p>
          <br>
             <span id="avgra">Number of people going: {{ i['People'] }}/5</span>
            <br>
@@ -139,13 +139,6 @@
     font-weight:800;
 }
 
-
-
-
-
-
-
-
 #avg {
     float:right;
 }
@@ -182,6 +175,10 @@
          display:block;
        margin-left:30px;
          margin-right:30px;
+     }
+
+     #col-md-5 br{
+         display:none;
      }
 
 
