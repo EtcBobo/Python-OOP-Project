@@ -1,7 +1,7 @@
 <!--<link rel=stylesheet type=text/css href="\static\css\home.css">-->
 {% extends 'layout.html' %}
 {% block body %}
-
+{#<br><br><br>#}
     <div class="jumbotron text-center" id="banner">
         <h1 id="bannerWord">Welcome To The Foodie</h1>
     </div>
@@ -32,12 +32,9 @@
 		<div class="w3-container" style="width:100%;height:300px;background-color:#97d2a3;">
             <br>
 {#          <img class="icon-img" src="http://www.free-css.com/assets/files/free-css-templates/preview/page185/bliss/images/icon1.png" style="margin-left:130px;">#}
-         <p class="popline">{{ hnp[2]['Name'] }}</p>
+            <p class="popline"><a href="/restDet/{{ hnp[2]['Name'] }}">{{ hnp[2]['Name'] }}</a></p>
             <br>
-        <div class="homedesc" style="width:300px;height:50px;"> {{ hnp[2]['Description'] }}</div>
-          <br><br>
-          <p class="more"></p>
-           <a class="knowmore" style="height:10px!important;" href="/restDet/{{ hnp[2]['Name'] }}">know More</a>
+        <div class="homedesc" style="width:100%;height:40%;"> {{ hnp[2]['Description'] }} </div>
         </div>
         </div>
 
@@ -48,15 +45,13 @@
       <div class="w3-container" style="width:100%;height:300px;background-color:#86cdd7">
           <br>
 {#          <img class="icon-img" src="http://www.jakesfinerfoods.com/wp-content/uploads/2012/07/cloche-icon-white.png" style="height:80px;width:100px;margin-left:100px;">#}
-         <p class="popline">{{ hnp[1]['Name'] }}</p>
+          <p class="popline"><a  href="/restDet/{{ hnp[1]['Name'] }}">{{ hnp[1]['Name'] }}</a></p>
           <br>
-        <div class="homedesc" style="width:300px;height:50px;"> {{ hnp[1]['Description'] }}</div>
-          <br><br>
-          <p class="more"></p>
-           <a class="knowmore" href="/restDet/{{ hnp[1]['Name'] }}">know More</a>
-      </div>
+        <div class="homedesc" style="width:100%;height:50%;"> {{ hnp[1]['Description'] }}</div>
+         </div>
           <img class="img responsive" src={{ hnp[1]['urlRest'] }}  style="width:100%;height:300px;">
-        </div>
+
+      </div>
 
 
 
@@ -65,12 +60,12 @@
       <div class="w3-container" style="width:100%;height:300px;background-color:#e8b867">
           <br>
 {#          <img class="icon-img" src="http://www.free-css.com/assets/files/free-css-templates/preview/page185/bliss/images/icon1.png"  style="margin-left:130px;">#}
-         <p class="popline">{{ hnp[0]['Name'] }}</p>
+          <p class="popline"><a href="/restDet/{{ hnp[0]['Name'] }}">{{ hnp[0]['Name'] }}</a></p>
           <br>
-        <p class="homedesc" style="width:300px;height:50px;"> {{ hnp[0]['Description'] }}</p>
-          <br><br>
-          <p class="more"></p>
-           <a class="knowmore" href="/restDet/{{ hnp[0]['Name'] }}">know More</a>
+        <p class="homedesc" style="width:100%;height:40%;"> {{ hnp[0]['Description'] }}</p>
+{#          <br><br>#}
+{#          <p class="more"></p>#}
+{#           <a class="knowmore" href="/restDet/{{ hnp[0]['Name'] }}">know More</a>#}
       </div>
         </div>
 
@@ -222,9 +217,9 @@
         text-align: center;
     }
     #bannerWord{
-        z-index: 10;
+        z-index: 8;
         bottom: 3rem;
-        text-shadow: 2px 2px 0px #000
+        text-shadow: 2px 2px 0px #000;
     }
     #searchbtn{
     margin-top: 21px;
@@ -277,7 +272,7 @@
  .popline, .popline a{
       display: block;
      color:white!important;
-    font-size: 130%;
+    font-size: 115%;
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     text-transform: uppercase;
@@ -377,7 +372,6 @@ h3{
     #searchbtn{
         margin-top: 20px;
         margin-left: 130px;}
-
     #search_box{
         width:360px;
         margin-left: 220px;}
@@ -385,7 +379,6 @@ h3{
 @media (max-width: 768px) {
     #searchbtn{
         margin-left: 290px;}
-
     #search_box{
         width:420px;
         margin-left: 130px;}
@@ -396,7 +389,6 @@ h3{
     }
     #searchbtn{
         margin-left: 100px;}
-
     #search_box{
         width:230px;
         margin-left: 30px;}
@@ -407,7 +399,6 @@ h3{
     }
     #searchbtn{
         margin-left: 140px;}
-
     #search_box{
         width:280px;
         margin-left: 25px;}
@@ -418,7 +409,6 @@ h3{
     }
     #searchbtn{
         margin-left: 140px;}
-
     #search_box{
         width:260px;
         margin-left: 50px;}
@@ -429,20 +419,19 @@ h3{
     }
     #searchbtn{
         margin-left: 140px;}
-
     #search_box{
         width:260px;
         margin-left: 40px;}
 }
 
 @media (max-width: 991px){
-    {##searchbox{#}
-    {#    margin-right:550px;#}
-
-    #featured{
-        width:100%;
-        height:300px;
+    #searchbox {
+        margin-right: 550px;
     }
+
+   .homedesc{
+       width:100%!important;
+   }
 
 }
 
@@ -456,18 +445,6 @@ h3{
     opacity: 0.9;
 }
 
-
-
-
-
-@media(max-width:991px){
-    #featuredimg{
-        width:400px;
-
-
-
-    }
-}
 
 
 
