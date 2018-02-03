@@ -1,0 +1,134 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+     <div class="container" id="filterdiv">
+
+     <h1 id="findme">Restaurants Near me</h1>
+    <br>
+ <div id="map" ></div>
+<script>
+    function initMap() {
+        //------------------------Display Map------------------------
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 13,
+          center: {lat: 1.372121, lng: 103.846678}
+        });
+
+
+        infoWindow = new google.maps.InfoWindow;
+        //------------------------Geolocation------------------------
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+
+                infoWindow.setPosition(pos);
+                infoWindow.setContent('Your Location');
+                infoWindow.open(map);
+                map.setCenter(pos);
+
+            }, function () {
+                handleLocationError(true, infoWindow, map.getCenter());
+            });
+        } else {
+            // Browser doesn't support Geolocation
+            handleLocationError(false, infoWindow, map.getCenter());
+        }
+
+
+        var geocoder = new google.maps.Geocoder();
+        var data_xyz = {{s_data|tojson}};
+
+        var json_string = JSON.parse(data_xyz);     //convert text into a JavaScript object
+
+        for (var i=0; i<json_string.length; i++) {
+            for (var name in json_string[i]) {
+                let address = json_string[i][name].Address;
+                let description = json_string[i][name].Description;
+                let restName = json_string[i][name].Name;
+                console.log(restName);
+
+            //------------------------Geocoder------------------------
+                geocoder.geocode({'address': address}, function(results, status) {
+            if (status === 'OK') {
+              map.setCenter(results[0].geometry.location);
+
+              let position = results[0].geometry.location;
+
+            //------------------------Create Markers------------------------
+              let marker = new google.maps.Marker({
+                map: map,
+                position: position,
+                  title:restName    //when you hover each marker, can see restaurant name
+              });
+              //------------------------InfoWindow for Markers------------------------
+              google.maps.event.addListener(marker, 'click', function () {
+                  let infowindow = new google.maps.InfoWindow({
+                  content: "<h3>" +restName +"</h3>" + '<p>' + address + '<br>' + '<br>' + "Description: " + description + '</p>' });  //information about restaurant
+              infowindow.open(map, marker);
+          });
+
+
+            } else {
+              alert('Geocode was not successful for the following reason: ' + status);
+            }
+          });
+      }
+
+
+
+
+
+            }
+        }
+
+
+
+</script>
+     </div>
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrGeXVb96USi1ujzqQ7wlCwc_8LzUB-yY&callback=initMap" async defer></script>
+    <style>
+    #map {
+        height: 470px;
+        width: 1110px;
+        margin:auto;
+        border-style: solid;
+        border-color: white;
+    }
+{#    body{#}
+{#        background:url("http://hotmillion.ca/wp-content/uploads/2015/03/Best-Indian-Food-Wallpaper.jpg");#}
+{#        background-color: rgba(255,255,255,0.2);#}
+{#        background-blend-mode: lighten;#}
+{#        background-repeat: no-repeat;#}
+{#         background-size: cover;#}
+{#        opacity:0.9;#}
+
+
+     #findme{
+         display: block;
+    font-size: 150%;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+         text-align:center;
+    }
+
+    #filterdiv{
+         align: center;
+         background-color: white;
+         display:block;
+    }
+
+    @media(max-width: 991px){
+        #map{
+            width:100%;
+
+        }
+    }
+</style>
+
+{% endblock %}
+
