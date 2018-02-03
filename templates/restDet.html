@@ -208,7 +208,7 @@ function send() {
     firebase.initializeApp(config);
     database = firebase.database();
     var postData = {
-    "{{ restDetail['Name'] }}":"{{ restDetail['Name'] }}"
+    "{{ restid }}":"{{ restDetail['Name'] }}"
 
     };
     firebase.database().ref().child('/fav/{{ session['username'] }}').update(postData)

@@ -161,6 +161,10 @@ class EventForm(Form):
                             choices= [('00', '00'), ('05', '05'), ('10', '10'), ('15', '15'), ('20', '20'), ('25', '25'), ('30', '30'), ('35', '35'),
                                       ('40', '40'), ('45', '45'), ('50', '50'), ('55','55')])
 
+class Forget(Form):
+    name = StringField('Username', [validators.DataRequired()])
+    email = EmailField("Email", [validators.DataRequired()])
+
 # @app.route("/location")
 # def mapview():
 #     map = Map(
@@ -954,6 +958,73 @@ def bmi():
 	                        bmi=bmi, result=result)
 
 
+@app.route('/forget',methods=['POST','GET'])
+def forget():
+    try:
+        proPic = session['proPic']
+    except KeyError:
+        proPic =''
+
+    form = Forget(request.form)
+    if request.method == 'POST' and form.validate():
+        name = form.name.data
+        email = form.email.data
+
+        theCheck = False
+
+        allUserr = root.child('allUsers')
+        allUserg = allUserr.get()
+        for key in allUserg:
+            if allUserg[key]['Username'] == name and allUserg[key]['Email'] == email:
+                theCheck = True
+
+                code = 123
+
+
+                email_user = 'thefoodie.newsletter@gmail.com'
+                email_password = 'foodie123'
+                email_send = email
+
+                subject = 'Request for The Foodie account Password Reset'
+
+                msg = MIMEMultipart()
+                msg['From'] = email_user
+                msg['To'] = email_send
+                msg['Subject'] = subject
+
+                # body = '\n Hi ' + name + '. A password reset request has been activated for your account. No Changes have been made to your account yet'\
+                #                          '\n \nPlease key in this confirmation code below in our webpage to verify the password reset request:'\
+                #                          '\nThe code is:'+code+ '\''\'\n \n \n Sincerely,'\
+                #                                                 '\n \nTheFoodie Team'
+
+                msg.attach(MIMEText(body, 'plain'))
+
+                filename = 'promo.jpg'
+                attachment = open(filename, 'rb')
+
+                part = MIMEBase('application', 'octet-stream')
+                part.set_payload((attachment).read())
+                encoders.encode_base64(part)
+                part.add_header('Content-Disposition', "attachment; filename= " + filename)
+
+                msg.attach(part)
+                text = msg.as_string()
+                server = smtplib.SMTP('smtp.gmail.com', 587)
+                server.starttls()
+                server.login(email_user, email_password)
+
+                server.sendmail(email_user, email_send, text)
+                server.quit()
+
+
+
+        if theCheck == False:
+            flash(u'Your Username and Email does not match','error')
+            return redirect(url_for('/forget'))
+
+    return render_template('forget.html', form=form,proPic=proPic)
+
+
 
 @app.route('/userLogin',methods=['POST','GET'])
 def userLogin():
@@ -1175,12 +1246,12 @@ def restPage(restName):
 
 
             return render_template('restDet.html', restDetail=restDetail, form=form, comments=allComments, users=allUsers,
-                                   ratings=allRatings, proPic=proPic, pic=allPic,commentLen=commentLen)
+                                   ratings=allRatings, proPic=proPic, pic=allPic,commentLen=commentLen,restid=restid)
         except:
             flash(u'You must login to be able to comment or rate restaurants','error')
-            return render_template('restDet.html',restDetail = restDetail, form=form,comments=allComments,users=allUsers,ratings=allRatings,proPic=proPic, pic=allPic,commentLen=commentLen)
+            return render_template('restDet.html',restDetail = restDetail, form=form,comments=allComments,users=allUsers,ratings=allRatings,proPic=proPic, pic=allPic,commentLen=commentLen,restid=restid)
 
-    return render_template('restDet.html',restDetail = restDetail, form=form,comments=allComments,users=allUsers,ratings=allRatings,proPic=proPic, pic=allPic,commentLen=commentLen)
+    return render_template('restDet.html',restDetail = restDetail, form=form,comments=allComments,users=allUsers,ratings=allRatings,proPic=proPic, pic=allPic,commentLen=commentLen,restid=restid)
 
 
 
