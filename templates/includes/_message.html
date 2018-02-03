@@ -1,23 +1,31 @@
 {% with errors = get_flashed_messages(category_filter=["error"]) %}
 {% if errors %}
-<div class="container">
-  <a class="close" href="#">×</a>
+<div class="container" id="error">
     {%- for msg in errors %}
     <h5 style="color:red;"><img src="https://cdn2.iconfinder.com/data/icons/duo-toolbar-signs/512/error-512.png" style="height:30px;width:30px;">  {{ msg }}</h5>
     {% endfor -%}
 
+
 </div>
+    <script>
+    function close(){
+        var e = document.getElementById('error');
+        e.style.display = 'none';
+    }
+</script>
 {% endif %}
 {% endwith %}
+
 {% with success = get_flashed_messages(category_filter=["success"]) %}
 {% if success %}
-<div class="container">
-  <a class="close" href="#">×</a>
+<div class="container" id="success">
 
     {%- for msg in success %}
-    <h3>{{ msg }} S</h3>
+    <h5><img src="https://image.flaticon.com/icons/png/128/291/291201.png" style="height:30px;width:30px;">  {{ msg }} </h5>
     {% endfor -%}
 
+
 </div>
+
 {% endif %}
 {% endwith %}

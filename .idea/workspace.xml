@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="31b0ad24-9715-4fb3-ac4e-f17ab7a95e70" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/The Foodie.py" afterPath="$PROJECT_DIR$/The Foodie.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/denied.html" afterPath="$PROJECT_DIR$/templates/denied.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/eventDet.html" afterPath="$PROJECT_DIR$/templates/eventDet.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/includes/_message.html" afterPath="$PROJECT_DIR$/templates/includes/_message.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/restDet.html" afterPath="$PROJECT_DIR$/templates/restDet.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/viewRest.html" afterPath="$PROJECT_DIR$/templates/viewRest.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,11 +21,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="The Foodie.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="The Foodie.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/The Foodie.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="1609" column="0" lean-forward="true" selection-start-line="1609" selection-start-column="0" selection-end-line="1609" selection-end-column="0" />
+            <state relative-caret-position="0">
+              <caret line="1603" column="0" lean-forward="true" selection-start-line="1603" selection-start-column="0" selection-end-line="1603" selection-end-column="0" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -33,7 +38,15 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="424">
               <caret line="115" column="20" lean-forward="false" selection-start-line="115" selection-start-column="20" selection-end-line="115" selection-end-column="20" />
-              <folding />
+              <folding>
+                <marker date="1517677619503" expanded="true" signature="3591:3909" ph="..." />
+                <marker date="1517677619503" expanded="true" signature="3605:3706" ph="{...}" />
+                <marker date="1517677619503" expanded="true" signature="3714:3739" ph="{...}" />
+                <marker date="1517677619503" expanded="true" signature="3767:3809" ph="{...}" />
+                <marker date="1517677619503" expanded="true" signature="3779:3807" ph="{...}" />
+                <marker date="1517677619503" expanded="true" signature="3820:3857" ph="{...}" />
+                <marker date="1517677619503" expanded="true" signature="3872:3894" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -54,13 +67,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="denied.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="denied.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/denied.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="6" column="49" lean-forward="false" selection-start-line="6" selection-start-column="49" selection-end-line="6" selection-end-column="49" />
+            <state relative-caret-position="63">
+              <caret line="3" column="27" lean-forward="false" selection-start-line="3" selection-start-column="27" selection-end-line="3" selection-end-column="27" />
               <folding>
+                <element signature="n#style#0;n#h3#0;n#div#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#h3#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#h3#1;n#div#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#a#0;n#h3#1;n#div#0;n#div#0;n#!!top" expanded="true" />
               </folding>
             </state>
@@ -200,7 +215,6 @@
         <option value="$PROJECT_DIR$/templates/viewallRest.html" />
         <option value="$PROJECT_DIR$/templates/userLogin.html" />
         <option value="$PROJECT_DIR$/templates/layout.html" />
-        <option value="$PROJECT_DIR$/The Foodie.py" />
         <option value="$PROJECT_DIR$/templates/viewEvent.html" />
         <option value="$PROJECT_DIR$/templates/eventDet.html" />
         <option value="$PROJECT_DIR$/templates/restDet.html" />
@@ -211,6 +225,7 @@
         <option value="$PROJECT_DIR$/templates/findEvent.html" />
         <option value="$PROJECT_DIR$/templates/events.html" />
         <option value="$PROJECT_DIR$/templates/home.html" />
+        <option value="$PROJECT_DIR$/The Foodie.py" />
         <option value="$PROJECT_DIR$/templates/denied.html" />
       </list>
     </option>
@@ -533,7 +548,14 @@
       <option name="project" value="LOCAL" />
       <updated>1517677410792</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="update">
+      <created>1517677598993</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1517677598993</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -594,9 +616,9 @@
     <MESSAGE value="ratings" />
     <MESSAGE value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;templates/userProfile.html" />
     <MESSAGE value="Merge branch 'master' of https://github.com/EtcBobo/Python-OOP-Project&#10;&#10;# Conflicts:&#10;#&#9;templates/restDet.html" />
-    <MESSAGE value="update" />
     <MESSAGE value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;templates/events.html" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;templates/events.html" />
+    <MESSAGE value="update" />
+    <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -907,7 +929,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="424">
           <caret line="115" column="20" lean-forward="false" selection-start-line="115" selection-start-column="20" selection-end-line="115" selection-end-column="20" />
-          <folding />
+          <folding>
+            <marker date="1517677619503" expanded="true" signature="3591:3909" ph="..." />
+            <marker date="1517677619503" expanded="true" signature="3605:3706" ph="{...}" />
+            <marker date="1517677619503" expanded="true" signature="3714:3739" ph="{...}" />
+            <marker date="1517677619503" expanded="true" signature="3767:3809" ph="{...}" />
+            <marker date="1517677619503" expanded="true" signature="3779:3807" ph="{...}" />
+            <marker date="1517677619503" expanded="true" signature="3820:3857" ph="{...}" />
+            <marker date="1517677619503" expanded="true" signature="3872:3894" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -999,23 +1029,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/denied.html">
+    <entry file="file://$PROJECT_DIR$/The Foodie.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="6" column="49" lean-forward="false" selection-start-line="6" selection-start-column="49" selection-end-line="6" selection-end-column="49" />
+        <state relative-caret-position="0">
+          <caret line="1603" column="0" lean-forward="true" selection-start-line="1603" selection-start-column="0" selection-end-line="1603" selection-end-column="0" />
           <folding>
-            <element signature="n#style#0;n#h3#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#h3#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="e#0#21#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/The Foodie.py">
+    <entry file="file://$PROJECT_DIR$/templates/denied.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="1609" column="0" lean-forward="true" selection-start-line="1609" selection-start-column="0" selection-end-line="1609" selection-end-column="0" />
+        <state relative-caret-position="63">
+          <caret line="3" column="27" lean-forward="false" selection-start-line="3" selection-start-column="27" selection-end-line="3" selection-end-column="27" />
           <folding>
-            <element signature="e#0#21#0" expanded="true" />
+            <element signature="n#style#0;n#h3#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h3#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#h3#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#h3#1;n#div#0;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
