@@ -1602,7 +1602,7 @@ def addEvent():
         session['proPic'] =''
 
     try:
-        testUser = session['username']
+        user = session['username']
     except:
         return redirect(url_for('denied'))
 
