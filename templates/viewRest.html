@@ -26,29 +26,29 @@
 
     {% for i in Restaurant %}
 
-    <div class="row">
-
-            <div class="col-sm-5">
+    <div class="form-group col-md-12">
+            <div class="col-md-5">
                 <h1 id="restnames">{{ i['Name'] }}</h1>
                 <img id="detailimg" class="img-responsive" src={{ i['urlRest'] }}>
                 <br>
                 <br>
             </div>
 
-            <div class="col-sm-5">
+            <div class="col-md-5">
                 <br><br>
-                <p id="description"> {{ i['Description'] }}</p>
-                <div id="r">
+                <p id="description" style="margin-bottom:5px;"> {{ i['Description'] }}</p>
+                <div>
                     <span id="avgra">Average ratings: {{ i['Average Rating'] }}/5</span>
                     <br>
                     <span>Average Price: $4</span>
                 </div>
             </div>
 
-            <div class="col-sm-2" id="knowbtn">
+            <div class="col-md-2" id="knowbtn">
                 <a id="knowtxt" href="/restDet/{{ i['Name'] }}">Know More</a>
             </div>
     </div>
+        <br><br><br>
     {% endfor %}
   </div>
 
@@ -107,7 +107,7 @@
     }
 
     #r{
-       height:20px;
+       height:15px;
     }
 
     #sortbtn{
@@ -143,9 +143,8 @@
     #knowbtn{
         margin-top: 250px;
         border: 1px solid #969696;
-        width: 120px;
-        padding-top: 5px;
-        padding-bottom: 5px;
+        width: 180px;
+        padding: 5px 45px 11px;
     }
     #knowtxt:hover{
         text-decoration:none;
@@ -186,12 +185,14 @@
         float:left;
     }
 
-     .viewbtn{
-        text-align:center;
-        display:block;
-        margin-left:30px;
-        margin-right:30px;
+     .col-md-5 br{
+         display:none;
      }
+
+    #knowbtn{
+        margin-top:0px;
+        float:right;
+    }
 
      #description{
          height:100%;

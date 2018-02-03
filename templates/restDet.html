@@ -79,10 +79,10 @@
 
           <div class="form-group col-md-6" id="commentbox">
                 {{ render_field(form.comments, class_="form-control") }}
-                </div>
+          </div>
                     <div class="form-group col-md-12">
                         <input type="submit" value="Submit" class="btn btn-info" id="submitbtn"/>
-                </div>
+                    </div>
       </div>
 </div>
 </form>
@@ -381,6 +381,12 @@ function send() {
 .recentc{
    float:right;
 }
+
+   @media(max-width:991px){
+       #heart{
+           float:right;
+       }
+   }
 
 
 

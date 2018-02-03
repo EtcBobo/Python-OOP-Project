@@ -43,10 +43,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         {% if session['logged_in'] %}
-                    <li>
-                   <img id ='profileimg' class="img-circle" style="width:40px;height:40px;display:inline-block;margin-top:5px;" src={{ proPic }}>
-                        </li>
-                    <li><a href="/userProfile">{{ session['username'] }}</a></li>
+                    <li><img id ='profileimg' class="img-circle" style="width:40px;height:40px;display:inline-block;margin-top:5px;" src={{ proPic }}></li>
+                    <li class="prof"><a href="/userProfile">{{ session['username'] }}</a></li>
                     <li><a href="/logout" >Logout</a></li>
                 {% else %}
                     <li><a href="/userLogin">Login</a></li>
@@ -121,56 +119,11 @@ font-size:10px;
 {#}#}
 
 @media (max-width:991px){
-#profileimg{
-
+    #profileimg {
+    margin-left:20px;
 }
-    }
-
-/* Add padding to container elements */
-.container {
-    padding: 16px;
-}
-
-#img{
- float:left;
-
-}
-
-#choose{
-margin-left:20px;
-width:150px;
-
-}
-
-@media screen and (max-width: 991px) {
-   #signupmodal{
-	text-align:center;
-	width:100%;
-   }
-    #loginbtn {
-       width:100%;
-    }
-
-    .info{
-        width:100%;
-    }
-
-    #signbtn{
-        width:100%;
-        text-align:center;
 
     }
-
-    .logininfo{
-        width:100%;
-    }
-}
-
-
-#loginbtn{
-    background-color:darkred;
-    width:100%;
-}
 
 
 

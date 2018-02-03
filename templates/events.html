@@ -4,7 +4,7 @@
         {% from "includes/_formhelper.html" import render_field %}
 
 
-{#<br><br><br>#}
+<br><br><br>
 <section id="photo" src="https://prods3.imgix.net/images/articles/2016_01/Hero-Dinner-Party-Papdi-Chaat-Babu-Ji-NYC-East-Village-Melbourne-Indian-Recipes-Tamarind-Nachos-Yogurt-Mint.jpg?auto=format,compress">
 <div class="text-container" id="eventheader">
 <h2 id="eventsheader">Events</h2>
@@ -25,41 +25,20 @@
 
   <div class="tab-content  clearfix">
   <div class="tab-pane active" id="ongoingEvent">
-      <br>
     {% for i in ongoing %}
       <div class="col-md-12">
           <div class="col-md-4">
               <br>
                 <br>
               <br>
-             <h3 class="eventTitle"><a href="/eventDet/{{ i['Name'] }}">{{ i['Name'] }}</a> <span class="label label-success">Ongoing</span></h3>
-              <br>
+               <small> {{ i['People'] }} people interested in going</small>
               <img id='eventimg' class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
           </div>
           <div class="col-md-4" id="eventdesc">
-              <br><br><br><br><br><br>
+              <br><br><br>
+              <h3 class="eventTitle"><a href="/eventDet/{{ i['Name'] }}">{{ i['Name'] }}</a> <span class="label label-success">Ongoing</span></h3>
+              <br>
               <span class="desctext">{{ i['Description'] }}</span>
-{#              <br>#}
-{#              <br>#}
-{#                <span class="glyphicon glyphicon-map-marker"> {{ i['Location'] }}</span>#}
-{#              <br>#}
-{#              <br>#}
-{#                <span class="glyphicon glyphicon-globe"> {{ i['Address'] }}</span>#}
-{#              <br>#}
-{#              <br>#}
-{#                <span class="glyphicon glyphicon-tag"> ${{ i['ticket'] }}</span>#}
-{#              <br>#}
-{#              <br>#}
-{#              <span class="glyphicon glyphicon-calendar"> {{ i['Start'] }} to {{ i['End'] }} </span>#}
-{#              <br>#}
-{#              <br>#}
-{#              <span class="glyphicon glyphicon-time"> {{ i['Time Start'] }} - {{ i['Time End'] }}</span>#}
-          </div>
-          <div class="col-md-4">
-              <br>
-              <br>
-              <br>
-               <small> {{ i['People'] }} people interested in going</small>
           </div>
           </div>
 
@@ -85,7 +64,7 @@
           </div>
           <div class="col-md-8" id="eventdesc">
               <br><br><br>
-              <h3 class="eventTitle"><a href="/eventDet/{{ i['Name'] }}">{{ i['Name'] }}</a> <span class="label label-danger"> <span class="glyphicon glyphicon-fire"></span> Popular</span></h3>
+              <h3 class="eventTitle"><a href="/eventDet/{{ i['Name'] }}">{{ i['Name'] }}</a> <span class="label label-danger"><span class="glyphicon glyphicon-fire"></span> Popular</span></h3>
               <br>
               <span class="desctext" style="float:left;"> {{ i['Description'] }} </span>
           </div>
@@ -102,22 +81,18 @@
               <br>
                 <br>
               <br>
-             <h3 class="eventTitle"><a href="/eventDet/{{ i['Name'] }}">{{ i['Name'] }}</a> <span class="label label-warning">Upcoming</span></h3>
-              <br>
+              <small> {{ i['People'] }} people interested in going</small>
               <img id='eventimg' class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
           </div>
-          <div class="col-md-5" id="eventdesc">
-              <br><br><br><br><br><br>
-              <span class="desctext">{{ i['Description'] }}</span>
-          </div>
-          <div class="col-md-3">
+          <div class="col-md-8" id="eventdesc">
               <br><br><br>
-               <small> {{ i['People'] }} people interested in going</small>
+               <h3 class="eventTitle"><a href="/eventDet/{{ i['Name'] }}">{{ i['Name'] }}</a> <span class="label label-warning">Upcoming</span></h3>
+              <br>
+              <span class="desctext">{{ i['Description'] }}</span>
           </div>
           </div>
         {% endfor %}
-
-          </div>
+  </div>
 
 
 {#      ended event tab#}
@@ -128,40 +103,21 @@
               <br>
                 <br>
               <br>
-             <h3 class="eventTitle"><a href="/eventDet/{{ i['Name'] }}">{{ i['Name'] }}</a> <span class="label label-default">Ended</span></h3>
-              <br>
+              <small> {{ i['People'] }} people interested in going</small>
               <img id='eventimg' class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
+              <br><br>
           </div>
-          <div class="col-md-6" id="eventdesc">
-              <br><br><br><br><br><br>
+          <div class="col-md-8" id="eventdesc">
+              <br><br><br>
+                <h3 class="eventTitle"><a href="/eventDet/{{ i['Name'] }}">{{ i['Name'] }}</a> <span class="label label-default">Ended</span></h3>
+              <br>
               <span class="desctext">{{ i['Description'] }}</span>
-{#              <br>#}
-{#              <br>#}
-{#                <span class="glyphicon glyphicon-map-marker"> {{ i['Location'] }}</span>#}
-{#              <br>#}
-{#              <br>#}
-{#                <span class="glyphicon glyphicon-globe"> {{ i['Address'] }}</span>#}
-{#              <br>#}
-{#              <br>#}
-{#                <span class="glyphicon glyphicon-tag"> ${{ i['ticket'] }}</span>#}
-{#              <br>#}
-{#              <br>#}
-{#              <span class="glyphicon glyphicon-calendar"> {{ i['Start'] }} to {{ i['End'] }} </span>#}
-{#              <br>#}
-{#              <br>#}
-{#              <span class="glyphicon glyphicon-time"> {{ i['Time Start'] }} - {{ i['Time End'] }}</span>#}
-          </div>
-          <div class="col-md-3">
-              <br>
-              <br>
-              <br>
-               <small> {{ i['People'] }} people interested in going</small>
           </div>
           </div>
         {% endfor %}
        </div>
   </div>
-     </div>
+
 
 
 <style>
@@ -171,7 +127,7 @@ background-repeat: no-repeat;
 background-size: cover;
 background-position:center;
 width:100%;
-height:620px;
+height:550px;
 }
 
 #eventheader{
@@ -187,7 +143,15 @@ text-shadow: 2px 2px 0px #000;
     text-justify: auto;
 }
 
+@media(max-width:991px){
+    #eventdesc br{
+        display:none;
+    }
 
+    .eventTitle br{
+        display:inline-block;
+    }
+}
 
 
 #eventimg{

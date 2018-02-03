@@ -49,7 +49,6 @@
          <div class="col-md-3">
              <br><br><br>
          <img id="detailimg" class="img-responsive" src={{ i['urlRest'] }}>
-            <br>
          </div>
         <div class="col-md-7">
             <br><br>
@@ -70,13 +69,11 @@
 
           <div class="col-md-12">
      <div class="col-md-3">
-<br>
- <br>
+    <br><br><br>
          <img id="detailimg" class="img-responsive" src={{ i['urlEvent'] }}>
-     <br>
      </div>
      <div class="col-md-7">
-         <br>
+         <br><br>
      <h1><a href="/events/{{ i['Name'] }}">{{ i['Name'] }}</a></h1>
         <p> {{ i['Description'] }}</p>
      </div>
@@ -86,7 +83,7 @@
         <span><small>status: interested in going</small></span>
     </div>
           </div>
-        <hr>
+
     {% endfor %}
 </div>
 
@@ -118,17 +115,15 @@
 
        <div class="col-md-12">
          <div class="col-md-3">
-            <br>
-             <br>
+            <br><br><br>
          <img id="detailimg" class="img-responsive" src={{ i['urlEvent'] }}>
-            <br>
          </div>
-        <div class="col-md-8">
-            <br>
+        <div class="col-md-7">
+            <br><br>
           <h1><a href="/events/{{ i['Name'] }}">{{ i['Name'] }}</a> </h1>
           <p> {{ i['Description'] }}</p>
         </div>
-        <div class="col-md-1">
+        <div class="col-md-2">
         <br>
         <br>
          <a href="/eventEdit/{{ i['Name'] }}"><button id="editrest" >Edit Event</button></a>
