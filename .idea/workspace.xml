@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="31b0ad24-9715-4fb3-ac4e-f17ab7a95e70" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/The Foodie.py" afterPath="$PROJECT_DIR$/The Foodie.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/denied.html" afterPath="$PROJECT_DIR$/templates/denied.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/eventDet.html" afterPath="$PROJECT_DIR$/templates/eventDet.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/includes/_message.html" afterPath="$PROJECT_DIR$/templates/includes/_message.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/restDet.html" afterPath="$PROJECT_DIR$/templates/restDet.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/viewRest.html" afterPath="$PROJECT_DIR$/templates/viewRest.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,15 +13,15 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Python_OOP_Project$The_Foodie.coverage" NAME="The Foodie Coverage Results" MODIFIED="1517676819352" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Python_OOP_Project$The_Foodie.coverage" NAME="The Foodie Coverage Results" MODIFIED="1517677762775" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file leaf-file-name="The Foodie.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/The Foodie.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="1603" column="0" lean-forward="true" selection-start-line="1603" selection-start-column="0" selection-end-line="1603" selection-end-column="0" />
+            <state relative-caret-position="420">
+              <caret line="1623" column="29" lean-forward="true" selection-start-line="1623" selection-start-column="29" selection-end-line="1623" selection-end-column="29" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -70,12 +66,11 @@
       <file leaf-file-name="denied.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/denied.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="63">
-              <caret line="3" column="27" lean-forward="false" selection-start-line="3" selection-start-column="27" selection-end-line="3" selection-end-column="27" />
+            <state relative-caret-position="70">
+              <caret line="8" column="91" lean-forward="true" selection-start-line="8" selection-start-column="91" selection-end-line="8" selection-end-column="91" />
               <folding>
                 <element signature="n#style#0;n#h3#0;n#div#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#h3#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#h3#1;n#div#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#a#0;n#h3#1;n#div#0;n#div#0;n#!!top" expanded="true" />
               </folding>
             </state>
@@ -555,7 +550,14 @@
       <option name="project" value="LOCAL" />
       <updated>1517677598993</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="update">
+      <created>1517677679336</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1517677679336</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -568,7 +570,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17873304" sideWeight="0.72717506" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32918552" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30882353" sideWeight="0.46348011" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30882353" sideWeight="0.46348011" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973147" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -890,6 +892,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1031,8 +1034,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/The Foodie.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="1603" column="0" lean-forward="true" selection-start-line="1603" selection-start-column="0" selection-end-line="1603" selection-end-column="0" />
+        <state relative-caret-position="420">
+          <caret line="1623" column="29" lean-forward="true" selection-start-line="1623" selection-start-column="29" selection-end-line="1623" selection-end-column="29" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
@@ -1041,12 +1044,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/denied.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="3" column="27" lean-forward="false" selection-start-line="3" selection-start-column="27" selection-end-line="3" selection-end-column="27" />
+        <state relative-caret-position="70">
+          <caret line="8" column="91" lean-forward="true" selection-start-line="8" selection-start-column="91" selection-end-line="8" selection-end-column="91" />
           <folding>
             <element signature="n#style#0;n#h3#0;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#h3#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#h3#1;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#a#0;n#h3#1;n#div#0;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
