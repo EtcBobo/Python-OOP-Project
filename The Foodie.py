@@ -20,6 +20,7 @@ from flask_share import Share
 import json
 import datetime
 import feedparser
+import string
 
 
 #pip install flask-socketio
@@ -53,13 +54,15 @@ class RegisterForm(Form):
         validators.EqualTo('confirm', message='Passwords must match')
     ])
     confirm = PasswordField('Repeat Password')
-    minPrice = IntegerField('Minimum Meal Budget (in Dollars)')
-    maxPrice = IntegerField('Maximum Meal Budget (in Dollars)')
+    minPrice = IntegerField('Minimum Meal Budget (in Dollars)',[validators.DataRequired()])
+    maxPrice = IntegerField('Maximum Meal Budget (in Dollars)',[validators.DataRequired()])
     foodType = SelectField(u'Preferred Food Type',
                            choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'), ('Western Food', 'Western Food'),
                                     ('Chinese Food', 'Chinese Food'), ('Healthy Food', 'Healthy Food'),
                                     ('None', 'None')])
-    email = EmailField("Email")
+    email = EmailField("Email",[validators.DataRequired()])
+    sub = SelectMultipleField('Subsciption to weekly newsletter from The Foodie',
+                               choices=[('I wish to receive weekly email from The Foodie.', 'I wish to receive weekly email from The Foodie.')],option_widget=widgets.CheckboxInput(),widget=widgets.ListWidget(prefix_label=False))
 
 
 
@@ -160,6 +163,21 @@ class EventForm(Form):
     endTimeMin = SelectField(u'End Time(Min)*',
                             choices= [('00', '00'), ('05', '05'), ('10', '10'), ('15', '15'), ('20', '20'), ('25', '25'), ('30', '30'), ('35', '35'),
                                       ('40', '40'), ('45', '45'), ('50', '50'), ('55','55')])
+
+class Forget(Form):
+    name = StringField('Username', [validators.DataRequired()])
+    email = EmailField("Email", [validators.DataRequired()])
+
+class Forgetc(Form):
+    code = StringField('Enter the validation code', [validators.DataRequired()])
+
+class Reset(Form):
+    password = PasswordField('New Password', [
+        validators.Length(min=8),
+        validators.DataRequired(),
+        validators.EqualTo('confirm', message='Passwords must match')
+    ])
+    confirm = PasswordField('Repeat Password')
 
 # @app.route("/location")
 # def mapview():
@@ -421,6 +439,7 @@ class theSearch(Form):
     plswork = StringField('try')
 
 
+
 @app.route('/filter',methods=['POST','GET'])
 def filter():
     try:
@@ -429,7 +448,7 @@ def filter():
         proPic =''
     filterList = []
     form = FilterForm(request.form)
-    if request.method == 'POST':
+    if request.method == 'POST' and form.validate():
         location = form.fLocation.data
         pricef = form.pricef.data
         foodType = form.foodType.data
@@ -858,12 +877,16 @@ def userRegister():
         maxPrice = form.maxPrice.data
         foodType = form.foodType.data
         email = form.email.data
-
-
+        sub = form.sub.data
 
         if minPrice > maxPrice:
             flash(u'The Minumum budget cannot exceed the Maximum budget','error')
             return redirect(url_for('userRegister'))
+
+        if sub == 'I wish to receive weekly email from The Foodie.':
+            sub = 'Yes'
+        else:
+            sub = 'No'
 
 
 
@@ -878,7 +901,7 @@ def userRegister():
                 flash(u'This email has already been used','error')
                 return redirect(url_for('userRegister'))
 
-        if email != '':
+        if email == 'Yes':
 
             email_user = 'thefoodie.newsletter@gmail.com'
             email_password = 'foodie123'
@@ -922,7 +945,8 @@ def userRegister():
             'minPrice': reg.get_minPrice(),
             'maxPrice':reg.get_maxPrice(),
             'Food Types': reg.get_foodType(),
-            'Email':reg.get_email()
+            'Email':reg.get_email(),
+            'sub':sub
         })
 
         flash(u'You have succesfully registered!','success')
@@ -952,6 +976,128 @@ def bmi():
             result = "You are healthy!"
     return render_template("bmi_calc.html",
 	                        bmi=bmi, result=result)
+
+
+@app.route('/forget',methods=['POST','GET'])
+def forget():
+    try:
+        proPic = session['proPic']
+    except KeyError:
+        proPic =''
+
+    form = Forget(request.form)
+    if request.method == 'POST' and form.validate():
+        name = form.name.data
+        email = form.email.data
+
+        theCheck = False
+
+        allUserr = root.child('allUsers')
+        allUserg = allUserr.get()
+        for key in allUserg:
+            if allUserg[key]['Username'] == name and allUserg[key]['Email'] == email:
+                theCheck = True
+
+        if theCheck == False:
+            flash(u'Your Username and Email does not match', 'error')
+            return redirect(url_for('forget'))
+
+
+
+        def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
+            return ''.join(random.choice(chars) for _ in range(size))
+
+        code = id_generator()
+
+        session['userReset'] = name
+
+
+        email_user = 'omgnooopython@gmail.com'
+        email_password = 'pythonnopython'
+        email_send = email
+
+        subject = 'Request for The Foodie account Password Reset'
+
+        msg = MIMEMultipart()
+        msg['From'] = email_user
+        msg['To'] = email_send
+        msg['Subject'] = subject
+
+        body = '\n Hi ' + name + '. A password reset request has been activated for your account. No Changes have been made to your account yet'\
+                                 '\n \nPlease key in this confirmation code below in our webpage to verify the password reset request:'\
+                                 '\nThe code is:'+code+'\n\nIf you did notrequest for a new password. Please ignore this email and contact us at thefoodie.newsletter@gmail.com''\n\nYours sincerely,''\n\nThe Foodie'
+
+        msg.attach(MIMEText(body, 'plain'))
+
+        filename = 'promo.jpg'
+        attachment = open(filename, 'rb')
+
+        part = MIMEBase('application', 'octet-stream')
+        part.set_payload((attachment).read())
+        encoders.encode_base64(part)
+        part.add_header('Content-Disposition', "attachment; filename= " + filename)
+
+        msg.attach(part)
+        text = msg.as_string()
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login(email_user, email_password)
+
+        server.sendmail(email_user, email_send, text)
+        server.quit()
+
+        session['code'] = code
+
+        return redirect(url_for('forgetc'))
+
+    return render_template('forget.html', form=form,proPic=proPic)
+
+
+@app.route('/forgetc', methods=['POST', 'GET'])
+def forgetc():
+    try:
+        proPic = session['proPic']
+    except KeyError:
+        proPic = ''
+
+
+    form = Forgetc(request.form)
+    if request.method == 'POST':
+        code = form.code.data
+
+        if code == session['code']:
+            return redirect(url_for('resetPass'))
+        else:
+            flash(u'Incorrect Validation Code','error')
+            return redirect(url_for('forgetc'))
+
+
+    return render_template('forgetc.html', form=form, proPic=proPic)
+
+
+@app.route('/resetPass', methods=['POST', 'GET'])
+def resetPass():
+    try:
+        proPic = session['proPic']
+    except KeyError:
+        proPic = ''
+
+    form = Reset(request.form)
+    if request.method == 'POST' and form.validate():
+        password = form.password.data
+
+        allUserr = root.child('allUsers')
+        allUserg = allUserr.get()
+        for key in allUserg:
+            if allUserg[key]['Username'] == session['userReset']:
+                theUserr = root.child('allUsers/'+key)
+        theUserr.update({
+            'Password':password
+        })
+        flash(u'You have successfully changed your password','success')
+        return redirect(url_for('home'))
+
+    return render_template('resetPass.html', form=form, proPic=proPic)
 
 
 
@@ -1175,12 +1321,12 @@ def restPage(restName):
 
 
             return render_template('restDet.html', restDetail=restDetail, form=form, comments=allComments, users=allUsers,
-                                   ratings=allRatings, proPic=proPic, pic=allPic,commentLen=commentLen)
+                                   ratings=allRatings, proPic=proPic, pic=allPic,commentLen=commentLen,restid=restid)
         except:
             flash(u'You must login to be able to comment or rate restaurants','error')
-            return render_template('restDet.html',restDetail = restDetail, form=form,comments=allComments,users=allUsers,ratings=allRatings,proPic=proPic, pic=allPic,commentLen=commentLen)
+            return render_template('restDet.html',restDetail = restDetail, form=form,comments=allComments,users=allUsers,ratings=allRatings,proPic=proPic, pic=allPic,commentLen=commentLen,restid=restid)
 
-    return render_template('restDet.html',restDetail = restDetail, form=form,comments=allComments,users=allUsers,ratings=allRatings,proPic=proPic, pic=allPic,commentLen=commentLen)
+    return render_template('restDet.html',restDetail = restDetail, form=form,comments=allComments,users=allUsers,ratings=allRatings,proPic=proPic, pic=allPic,commentLen=commentLen,restid=restid)
 
 
 
@@ -1322,10 +1468,7 @@ def restEdit(restName):
                                choices=[('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),
                                         ('Central', 'Central')],default=theRestg['Location'])
 
-        price = SelectField(u'Price Range',
-                            choices=[(80, 80), ('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5'), ('6', '6'),
-                                     ('7', '7'), ('8', '8'), ('9', '9'), ('10', '10'), ('11', '11'), ('12', '12'),
-                                     ('13', '13'), ('14', '14'), ('15', '15'), ('16', '16')],default=theRestg['Price'])
+        price = IntegerField(u'Average Meal Price (in Dollars)',default=theRestg['Price'])
         foodType = SelectField(u'Food Types',
                                choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'),
                                         ('Western Food', 'Western Food'),
@@ -1394,14 +1537,19 @@ def userEdit():
             validators.EqualTo('confirm', message='Passwords must match')
         ])
         confirm = PasswordField('Repeat Password')
-        minPrice = IntegerField('Minimum Meal Budget',default=session['userDetail']['minPrice'])
-        maxPrice = IntegerField('Maximum Meal Budget', default=session['userDetail']['maxPrice'])
+        minPrice = IntegerField('Minimum Meal Budget',[validators.DataRequired()],default=session['userDetail']['minPrice'])
+        maxPrice = IntegerField('Maximum Meal Budget',[validators.DataRequired()], default=session['userDetail']['maxPrice'])
         foodType = SelectField(u'Preferred Food Type',
                                choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'),
                                         ('Western Food', 'Western Food'),
                                         ('Chinese Food', 'Chinese Food'), ('Healthy Food', 'Healthy Food'),
                                         ('None', 'None')], default=session['userDetail']['Food Types'])
-        email = EmailField("Email", [validators.optional()], default=session['userDetail']['Email'])
+        email = EmailField("Email", [validators.DataRequired()], default=session['userDetail']['Email'])
+        sub = SelectMultipleField('Subsciption to weekly newsletter from The Foodie',
+                                  choices=[('I wish to receive weekly email from The Foodie.',
+                                            'I wish to receive weekly email from The Foodie.')],
+                                  option_widget=widgets.CheckboxInput(), widget=widgets.ListWidget(prefix_label=False))
+
     form = UserEdit(request.form)
     allUserr = root.child('allUsers')
     allUserg= allUserr.get()
@@ -1416,6 +1564,11 @@ def userEdit():
         maxPrice = form.maxPrice.data
         foodType = form.foodType.data
         password = form.password.data
+        sub = form.sub.data
+        if sub == 'I wish to receive weekly email from The Foodie.':
+            sub = 'Yes'
+        else:
+            sub = 'No'
 
         if minPrice > maxPrice:
             flash(u'The Minumum budget cannot exceed the Maximum budget','error')
@@ -1434,7 +1587,8 @@ def userEdit():
             'maxPrice':maxPrice,
             'Food Types': foodType,
             'Email': email,
-            'Password': password
+            'Password': password,
+            'sub':sub
         })
         flash(u'You have succesfully edited your profile!','success')
         allUserr = root.child('allUsers')
