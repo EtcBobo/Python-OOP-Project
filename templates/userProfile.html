@@ -98,22 +98,21 @@
        {% for i in allEdit %}
            <div class="col-md-12">
      <div class="col-md-3">
-<br><br>
-         <img id="detailimg" class="img-responsive" src={{ i['urlRest'] }}>
-         </div>
+        <br><br>
+        <img id="detailimg" class="img-responsive" src={{ i['urlRest'] }}>
+     </div>
      <div class="col-md-7">
-         <br>
-     <h1><a href="/restDet/{{ i['Name'] }}">{{ i['Name'] }}</a> </h1>
+        <br>
+        <h1><a href="/restDet/{{ i['Name'] }}">{{ i['Name'] }}</a> </h1>
         <p> {{ i['Description'] }}</p>
      </div>
      <div class="col-md-2">
         <br>
         <br>
-         <a href="/restEdit/{{ i['Name'] }}"><button id="editrest" >Edit Restaurant</button></a>
+        <a href="/restEdit/{{ i['Name'] }}"><button id="editrest" >Edit Restaurant</button></a>
+     </div>
          </div>
-         </div>
-<hr>
-
+           
         {% endfor %}
     </div>
 
@@ -176,17 +175,31 @@
      }
 
 
-#edit, #editrest{
+#edit{
      background-color: darkred;
     border: 0;
     color: #fff!important;
     display: inline-block;
     font-size: 14px;
     text-align: center;
-        height: 42px;
-        width:250px;
+    height: 42px;
+    width:180px;
     float:right;
     overflow:auto;
+    margin-top: 50px;
+}
+#editrest{
+    background-color: darkred;
+    border: 0;
+    color: #fff!important;
+    display: inline-block;
+    font-size: 14px;
+    text-align: center;
+    height: 42px;
+    width:180px;
+    float:right;
+    overflow:auto;
+    margin-top: 40px;
 }
 
 
