@@ -297,7 +297,6 @@ def home():
             if name.lower() in fireData_low:                    #if user input is same with words in firebase, the result will come out
                 nameList.append(firebaseData[key])
 
-
             #---------------------------------Old Codes---------------------------------------------------------#
             # fireData_sep = fireData_low.split()                 #split lowercase (for name that got space)
             # fireData_sep_first = fireData_low.split()[0]        #get first split value
@@ -326,6 +325,10 @@ def home():
 
 @app.route('/newsFeed')
 def newsFeed():
+    try:
+        proPic = session['proPic']
+    except KeyError:
+        proPic = ''
 
     def parseRSS(rss_url):
         return feedparser.parse(rss_url)
@@ -364,7 +367,7 @@ def newsFeed():
         news = {'title': title, 'link': link, 'date': date, 'image':image}
         container.append(news)
 
-    return render_template('newsFeed.html', container=container )
+    return render_template('newsFeed.html', container=container,proPic=proPic )
 
 
 @app.route('/chat')
@@ -480,31 +483,45 @@ def filter():
 def uploadtest():
     return render_template('uploadtest.html')
 
-
-@app.route('/data')
-def data():
+@app.route('/map')
+def map():
     try:
         proPic = session['proPic']
     except KeyError:
         proPic =''
-    list =[]
-    # data = firebase.FirebaseApplication("https://jsmap-a2929.firebaseio.com/")
-    # firebaseData = data.get('location', None)
+    list = []
 
     data = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
-    firebaseData = data.get('locations', None)
+    firebaseData = data.get('restaurants', None)
 
     list.append(firebaseData)
-
-    # for key in firebaseData:
-    #     data = firebaseData[key]
-    #     list.append(data)
-
     json_string = json.dumps(list)
+    return render_template('map.html' , s_data = json_string, proPic=proPic)
 
-
-
-    return render_template('data.html' , s_data = json_string, proPic = 'proPic')
+# @app.route('/data')
+# def data():
+#     try:
+#         proPic = session['proPic']
+#     except KeyError:
+#         proPic =''
+#     list =[]
+#     # data = firebase.FirebaseApplication("https://jsmap-a2929.firebaseio.com/")
+#     # firebaseData = data.get('location', None)
+#
+#     data = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
+#     firebaseData = data.get('locations', None)
+#
+#     list.append(firebaseData)
+#
+#     # for key in firebaseData:
+#     #     data = firebaseData[key]
+#     #     list.append(data)
+#
+#     json_string = json.dumps(list)
+#
+#
+#
+#     return render_template('data.html' , s_data = json_string, proPic = 'proPic')
 
 
 @app.route('/viewallRest',methods=['POST','GET'])
