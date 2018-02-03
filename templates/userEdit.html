@@ -2,21 +2,21 @@
 
 {% block body %}
     {% from "includes/_formhelper.html" import render_field %}
-    <div class="container" id="profilediv">
-    <br>
-        <br>
+    <div class="container">
     <h1 id="register">Edit Your Profile</h1>
     <br>
     <form method=post>
             <div class="row">
-            <div  class="col-md-8 col-md-offset-2" class="edit">
-                <img id = 'img' class="img-responsive" style="width: 275px; height: 275px;" src={{ proPic }}>
-                <br>
+            <div class="col-md-8 col-md-offset-2" class="edit">
+                   <br><br>
+                <div class="col-md-12">
+               <img id='img' class="img-responsive" style="width: 275px; height: 240px;" src={{ proPic }}>
                 <br>
                 <input type="file" id="file"/>
                 <br>
                 <br>
                 <br>
+                </div>
                  {{ render_field(form.password, class_="form-control") }}
                 <br>
                    {{ render_field(form.confirm, class_="form-control") }}
@@ -31,9 +31,7 @@
                 <br>
                 <br>
                <div class='btn-toolbar'>
-                   <button type="submit" class="btn btn-primary btn-lg upload-group text-center" id="uploadButton" onclick="myFunction()">Save Changes</button>
-
-                <input class="btn btn-Basic" type="submit" value="Cancel" id="cancelbtn"/>
+                   <button type="submit" class="btn btn-success btn-lg" id="editButton" onclick="myFunction()">Save Changes</button>
                 </div>
             </div>
             </div>
@@ -151,66 +149,47 @@
 
 <style>
     #register{
-         font-weight: bold;
-    font-style: italic;
-    border-bottom: 2px solid darkred;
-    margin-bottom:20px;
-    font-size: 15px;
-    padding-bottom: 3px;
-    font-size:200%;
-
+        display: block;
+    font-size: 150%;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+ text-align: center;
     }
 
 
-    #uploadButton{
-        border-radius: 4px;
-    border: 0;
-    color: #fff!important;
-    display: inline-block;
-    font-size: 14px;
-    text-align: center;
-        height: 42px;
-        width:370px;
-        font-size:120%;
-
-    }
-
-.row img{
-    margin-left:200px;
+#img{
+    margin-left:240px;
 }
 
- #profilediv {
-         align: center;
-         background-color: white;
-         display:block;
-     }
 
-.edit{
-   margin-left:120px;
-}
+
 
 #file{
-    margin-top:300px;
-
+    margin-left:270px;
+    text-align:center;
 }
 
-#cancelbtn{
-     text-align: center;
-        height: 42px;
-        width:370px;
-        font-size:120%;
-    float:right;
-
-}
+ #editButton{
+        width:50%;
+    }
 
 @media (max-width: 991px) {
-    .row img{
-        float:left;
+    #img{
         margin-left:0px;
     }
 
-    #file{
-        margin-left:100px;
+      #file{
+        margin-left:0px;
+    }
+
+       .btn-toolbar br{
+         display:none;
+     }
+
+        #editButton{
+        width:100%;
     }
 
 }

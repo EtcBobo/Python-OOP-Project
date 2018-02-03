@@ -43,27 +43,24 @@
             </div>
     </div>
 
-     <div class="tab-pane" id="tab2">
-         {% for i in favRest %}
+    <div class="tab-pane" id="tab2">
+          {% for i in favRest %}
          <div class="col-md-12">
          <div class="col-md-3">
-            <br>
-             <br>
+             <br><br><br>
          <img id="detailimg" class="img-responsive" src={{ i['urlRest'] }}>
             <br>
          </div>
-        <div class="col-md-8">
-            <br>
+        <div class="col-md-7">
+            <br><br>
           <h1><a href="/restDet/{{ i['Name'] }}">{{ i['Name'] }}</a></h1>
           <p> {{ i['Description'] }}</p>
         </div>
         <div class="col-md-1">
-        <br>
-        <br>
-        <span class="glyphicon glyphicon-heart"></span>
+        <br><br><br>
+        <span id="abc" class="glyphicon glyphicon-heart"></span>
          </div>
          </div>
-    <hr>
          {% endfor %}
 
      </div>
@@ -98,11 +95,11 @@
        {% for i in allEdit %}
            <div class="col-md-12">
      <div class="col-md-3">
-        <br><br>
+        <br><br><br>
         <img id="detailimg" class="img-responsive" src={{ i['urlRest'] }}>
      </div>
      <div class="col-md-7">
-        <br>
+        <br><br>
         <h1><a href="/restDet/{{ i['Name'] }}">{{ i['Name'] }}</a> </h1>
         <p> {{ i['Description'] }}</p>
      </div>
@@ -208,6 +205,11 @@
     font-size:300%;
 }
 
+h1 a:hover{
+    text-decoration: underline;
+    color:black!important;
+}
+
 @media(max-width:991px) {
     #edit {
         width: 60%;
@@ -223,6 +225,14 @@
         width:60%;
         margin-left:80px;
     }
+
+   #abc{
+        display:none!important;
+    }
+
+   .col-md-7 br, .col-md-2 br{
+       display:none;
+   }
 
 
 
