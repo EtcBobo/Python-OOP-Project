@@ -18,13 +18,13 @@
   <div class="tab-content  clearfix">
   <div class="tab-pane active" id="tab1">
     <div class="col-md-12">
-      <figure class="col-md-4">
+      <div class="col-md-4">
         <br>
           <br>
           <br>
              <img src={{ proPic }} class="img-responsive" id="profilepic">
-            <p id="profilename"> {{ user['Username'] }} </p>
-        </figure>
+            <p id="profilename" style="text-align:center;"> {{ user['Username'] }} </p>
+        </div>
         <div class="col-md-6">
             <br>
             <br>
@@ -43,27 +43,24 @@
             </div>
     </div>
 
-     <div class="tab-pane" id="tab2">
-         {% for i in favRest %}
+    <div class="tab-pane" id="tab2">
+          {% for i in favRest %}
          <div class="col-md-12">
          <div class="col-md-3">
-            <br>
-             <br>
+             <br><br><br>
          <img id="detailimg" class="img-responsive" src={{ i['urlRest'] }}>
             <br>
          </div>
-        <div class="col-md-8">
-            <br>
+        <div class="col-md-7">
+            <br><br>
           <h1><a href="/restDet/{{ i['Name'] }}">{{ i['Name'] }}</a></h1>
           <p> {{ i['Description'] }}</p>
         </div>
         <div class="col-md-1">
-        <br>
-        <br>
-        <span class="glyphicon glyphicon-heart"></span>
+        <br><br><br>
+        <span id="abc" class="glyphicon glyphicon-heart"></span>
          </div>
          </div>
-    <hr>
          {% endfor %}
 
      </div>
@@ -98,21 +95,20 @@
        {% for i in allEdit %}
            <div class="col-md-12">
      <div class="col-md-3">
-<br><br>
-         <img id="detailimg" class="img-responsive" src={{ i['urlRest'] }}>
-         </div>
+        <br><br><br>
+        <img id="detailimg" class="img-responsive" src={{ i['urlRest'] }}>
+     </div>
      <div class="col-md-7">
-         <br>
-     <h1><a href="/restDet/{{ i['Name'] }}">{{ i['Name'] }}</a> </h1>
+        <br><br>
+        <h1><a href="/restDet/{{ i['Name'] }}">{{ i['Name'] }}</a> </h1>
         <p> {{ i['Description'] }}</p>
      </div>
      <div class="col-md-2">
         <br>
         <br>
-         <a href="/restEdit/{{ i['Name'] }}"><button id="editrest" >Edit Restaurant</button></a>
+        <a href="/restEdit/{{ i['Name'] }}"><button id="editrest" >Edit Restaurant</button></a>
+     </div>
          </div>
-         </div>
-<hr>
 
         {% endfor %}
     </div>
@@ -138,7 +134,6 @@
          <a href="/eventEdit/{{ i['Name'] }}"><button id="editrest" >Edit Event</button></a>
          </div>
          </div>
-    <hr>
 {% endfor %}
   </div>
 
@@ -176,17 +171,31 @@
      }
 
 
-#edit, #editrest{
+#edit{
      background-color: darkred;
     border: 0;
     color: #fff!important;
     display: inline-block;
     font-size: 14px;
     text-align: center;
-        height: 42px;
-        width:250px;
+    height: 42px;
+    width:180px;
     float:right;
     overflow:auto;
+    margin-top: 50px;
+}
+#editrest{
+    background-color: darkred;
+    border: 0;
+    color: #fff!important;
+    display: inline-block;
+    font-size: 14px;
+    text-align: center;
+    height: 42px;
+    width:180px;
+    float:right;
+    overflow:auto;
+    margin-top: 40px;
 }
 
 
@@ -194,6 +203,11 @@
 #profilename{
     font-weight:bold;
     font-size:300%;
+}
+
+h1 a:hover{
+    text-decoration: underline;
+    color:black!important;
 }
 
 @media(max-width:991px) {
@@ -211,6 +225,14 @@
         width:60%;
         margin-left:80px;
     }
+
+   #abc{
+        display:none!important;
+    }
+
+   .col-md-7 br, .col-md-2 br{
+       display:none;
+   }
 
 
 
