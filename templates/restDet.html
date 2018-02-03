@@ -168,7 +168,7 @@
 
 
 
-                <button class='recentc' type="submit" onclick="show()">view older comments  </button>
+                <a onclick="show()" style="cursor: pointer;">view older comments  </a>
         {% endif %}
 
 
@@ -209,7 +209,7 @@ function send() {
     firebase.initializeApp(config);
     database = firebase.database();
     var postData = {
-    favRest:"{{ restDetail['Name'] }}"
+    "{{ restDetail['Name'] }}":"{{ restDetail['Name'] }}"
 
     };
     firebase.database().ref().child('/fav/{{ session['username'] }}').update(postData)

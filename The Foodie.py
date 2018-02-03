@@ -1457,7 +1457,7 @@ def userEdit():
 @app.route('/logout')
 def logout():
     session.clear()
-    flash('You are now logged out', 'success')
+    flash('You have successfully logged out', 'success')
     return redirect(url_for('userLogin'))
 
 @app.route('/userProfile')
@@ -1768,6 +1768,7 @@ def eventDet(eventName):
     for key in currEventg:
         if currEventg[key]['Name'] == eventName:
             currEvent = currEventg[key]
+            eventKey = key
 
     form = EventForm(request.form)
     if request.method == 'POST':
@@ -1776,7 +1777,7 @@ def eventDet(eventName):
         except:
             flash(u'You must be logged in to sign up for the event','error')
             return render_template('eventDet.html', currEventg=currEventg, proPic=proPic)
-        goingEventr = root.child('events/'+eventName+'/Going')
+        goingEventr = root.child('events/'+eventKey+'/Going')
         goingEventr.update({
             session['username']:session['username']
         })
