@@ -4,6 +4,8 @@ from firebase import firebase
 import firebase_admin
 from firebase_admin import credentials, db
 import datetime
+import string
+import random
 app = Flask(__name__)
 app.secret_key = 'secret123'
 cred = credentials.Certificate('cred/python-oop-firebase-adminsdk-87ty7-eefcb6bc40.json')
@@ -32,8 +34,12 @@ print(year+1)
 # 'test': '123',
 #
 # })
+def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
 
-mydict = {'carl':40,'danny':3,'alan':2,'bob':1}
+
+code = id_generator()
+print(code)
 
 
 restFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
