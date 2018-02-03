@@ -1,17 +1,14 @@
 <!--<link rel=stylesheet type=text/css href="\static\css\home.css">-->
 {% extends 'layout.html' %}
 {% block body %}
-<br>
-<br>
-    {% from "includes/_formhelper.html" import render_field %}
-    <form method=post>
-     <br>
-        <br>
+
     <div class="jumbotron text-center" id="banner">
         <h1 id="bannerWord">Welcome To The Foodie</h1>
     </div>
 
 {#--------------------------Search--------------------------#}
+    {% from "includes/_formhelper.html" import render_field %}
+    <form method=post>
         <div class="container">
                 <h3 id="tag">Search For Restaurants & Events</h3>
                 <br>
