@@ -311,11 +311,22 @@ def home():
         data = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
 
         firebaseData = data.get('restaurants', None)
+        firebaseDataEvent = data.get('events', None)
+
+        for key in firebaseDataEvent:
+            fireData = firebaseDataEvent[key]['Name']
+
+            fireData_low = fireData.lower()
+
+            if name.lower() in fireData_low:                    # if user input is same with words in firebase, the result will come out
+                nameList.append(firebaseDataEvent[key])
+
+
 
         for key in firebaseData:
-            fireData = firebaseData[key]['Name']                #get restaurant names only
+            fireData = firebaseData[key]['Name']
 
-            fireData_low = fireData.lower()                     #lowercase
+            fireData_low = fireData.lower()
 
             if name.lower() in fireData_low:                    #if user input is same with words in firebase, the result will come out
                 nameList.append(firebaseData[key])
