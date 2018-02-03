@@ -1,23 +1,23 @@
-{% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-    {% for category, message in messages %}
-      <div class="alert alert-{{ category }} alert-dismissable" style="border:2px solid lightgreen;border-radius: 8px;background-color:lightgreen;color:black;">
-                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-          {{ message }}
+{% with errors = get_flashed_messages(category_filter=["error"]) %}
+{% if errors %}
+<div class="container">
+  <a class="close" href="#">×</a>
+    {%- for msg in errors %}
+    <h5 style="color:red;"><img src="https://cdn2.iconfinder.com/data/icons/duo-toolbar-signs/512/error-512.png" style="height:30px;width:30px;">  {{ msg }}</h5>
+    {% endfor -%}
 
-      </div>
-    {% endfor %}
-  {% endif %}
+</div>
+{% endif %}
 {% endwith %}
+{% with success = get_flashed_messages(category_filter=["success"]) %}
+{% if success %}
+<div class="container">
+  <a class="close" href="#">×</a>
 
-{% if error %}
-      <div class="alert alert-{{ category }} alert-dismissable" style="border:2px solid lightgreen;border-radius: 8px;background-color:black;color:red;">
-             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-      {{error}}</div>
-{% endif %}
+    {%- for msg in success %}
+    <h3>{{ msg }} S</h3>
+    {% endfor -%}
 
-{% if msg %}
-  <div class="alert alert-success alert-dismissable w3-container w3-border w3-round-xlarge">
-             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-      {{msg}}</div>
+</div>
 {% endif %}
+{% endwith %}
