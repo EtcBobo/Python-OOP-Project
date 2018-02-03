@@ -33,14 +33,12 @@
 
        <img id='restimg' class='img-responsive' src={{ i['urlRest'] }}>
        <h1 class="restname">{{i['Name'] }}</h1>
-       <h5 id="restdesc" style="text-align:justify;word-wrap: break-word;"> {{ i['Description'] }}
-       Aguaviva specializes in the freshest fish and seafood prepared with
-Latino – Caribbean flair, and features a wonderful oyster</h5>
-           <br>
+       <h5 id="restdesc" style="text-align:justify;word-wrap: break-word;"> {{ i['Description'] }}</h5>
+
        <h6>Average Rating: {{ i['Average Rating'] }} out of 5 </h6>
        <h6>Price Range: ${{ i['Price'] }}</h6>
        <a class='recbtn' href="/restDet/{{ i['Name'] }}">know more</a>
-<br><br><br>
+<br><br>
 
     </div>
  {% endfor %}
