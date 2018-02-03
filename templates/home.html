@@ -8,32 +8,33 @@
      <br>
         <br>
     <div class="jumbotron text-center" id="banner">
-        <h1>Welcome To The Foodie</h1>
+        <h1 id="bannerWord">Welcome To The Foodie</h1>
     </div>
 
-
-<div class="container">
+    <div class="container">
         <h3 id="tag">Search For Restaurants</h3>
         <br>
-{#        <div id='searchthing' class="form-group col-md-6">#}
-{#            <div class="form-group col-md-8">#}
-
-{#    <div id='searchF' class="form-group col-md-6">#}
-{#        {{ render_field(form.name, class_="form-control") }}</div>#}
-{#        <div class="form-group col-md-6">#}
-{#        <input type="submit" value="Search" class="btn btn-info" id="searchbtn"/>#}
-{##}
-{#    </div>#}
-
-
-        <div id='searchF' class="form-group col-md-6">
-            {{ render_field(form.name,  id='search_box', class_="form-control") }}</div>
+        <div id='searchF' class="float-left">
+            {{ render_field(form.name,  id='search_box', class_="form-control") }}
+        </div>
         <div  class="form-group col-md-6">
-        <input type="submit" value="Search" class="btn btn-info" id="searchbtn"/>
-
-    </div>
+            <input type="submit" value="Search" class="btn btn-info" id="searchbtn"/>
+        </div>
 
 </div>
+
+{#<div class="container">#}
+{#        <h3 id="tag">Search For Restaurants</h3>#}
+{#        <br>#}
+{#        <div id='searchF' class="form-group col-md-6">#}
+{#            {{ render_field(form.name,  id='search_box', class_="form-control") }}#}
+{#        </div>#}
+{#        <div  class="form-group col-md-6">#}
+{#            <input type="submit" value="Search" class="btn btn-info" id="searchbtn"/>#}
+{#        </div>#}
+{##}
+{#</div>#}
+
 {#        <div class="form-group col-md-4">#}
 {##}
 {#        </div>#}
@@ -238,6 +239,11 @@
     #date{
         text-align: center;
     }
+    #bannerWord{
+        z-index: 10;
+        bottom: 3rem;
+        text-shadow: 2px 2px 0px #000
+    }
 
 
 .icon-img{
@@ -257,7 +263,7 @@
     font-size: 80%;
     font-family: 'Montserrat', sans-serif;
     letter-spacing: .1em;
-     float:left;
+    float:left;
     height:50px;
 }
 
