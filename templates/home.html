@@ -11,34 +11,17 @@
         <h1 id="bannerWord">Welcome To The Foodie</h1>
     </div>
 
-    <div class="container">
-        <h3 id="tag">Search For Restaurants</h3>
-        <br>
-        <div id='searchF' class="float-left">
-            {{ render_field(form.name,  id='search_box', class_="form-control") }}
+{#--------------------------Search--------------------------#}
+        <div class="container">
+                <h3 id="tag">Search For Restaurants & Events</h3>
+                <br>
+                <div id='searchF' class="form-group col-md-6">
+                    {{ render_field(form.name,  id='search_box', class_="form-control") }}
+                </div>
+                <div  class="form-group col-md-6">
+                    <input type="submit" value="Search" class="btn btn-info" id="searchbtn"/>
+                </div>
         </div>
-        <div  class="form-group col-md-6">
-            <input type="submit" value="Search" class="btn btn-info" id="searchbtn"/>
-        </div>
-
-</div>
-
-{#<div class="container">#}
-{#        <h3 id="tag">Search For Restaurants</h3>#}
-{#        <br>#}
-{#        <div id='searchF' class="form-group col-md-6">#}
-{#            {{ render_field(form.name,  id='search_box', class_="form-control") }}#}
-{#        </div>#}
-{#        <div  class="form-group col-md-6">#}
-{#            <input type="submit" value="Search" class="btn btn-info" id="searchbtn"/>#}
-{#        </div>#}
-{##}
-{#</div>#}
-
-{#        <div class="form-group col-md-4">#}
-{##}
-{#        </div>#}
-</div>
     </form>
 
 
@@ -246,6 +229,13 @@
         bottom: 3rem;
         text-shadow: 2px 2px 0px #000
     }
+    #searchbtn{
+    margin-top: 21px;
+    margin-left: 210px;
+    }
+    #search_box{
+        margin-left:230px;
+    }
 
 
 .icon-img{
@@ -346,14 +336,7 @@
 {##}
 {# }#}
 
-#searchbtn{
-    margin-top: 21px;
-    margin-left: 180px;}
 
-#search_box{
-    margin-left:200px;
-
-}
 
 .recname{
       display: block;
