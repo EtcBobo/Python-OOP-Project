@@ -784,7 +784,7 @@ def addRest():
         proPic =''
 
     try:
-        testUser = session['username']
+        user = session['username']
     except:
         return redirect(url_for('denied'))
     form = RestForm(request.form)
@@ -836,7 +836,7 @@ def addRest():
             'Number of Raters':0,
             'Days':days
         })
-        flash('You have added a new Restaurant!')
+        flash(u'You have added a new Restaurant!','success')
 
         return redirect(url_for('home'))
     return render_template('addRest.html', form=form,proPic=proPic,user=user,count=str(count))
@@ -868,7 +868,7 @@ def userRegister():
 
 
         if minPrice > maxPrice:
-            flash('The Minumum budget cannot exceed the Maximum budget')
+            flash(u'The Minumum budget cannot exceed the Maximum budget','error')
             return redirect(url_for('userRegister'))
 
 
@@ -878,10 +878,10 @@ def userRegister():
 
         for key in allUserg:
             if allUserg[key]['Username'] == user:
-                flash('This username has already been used')
+                flash(u'This username has already been used','error')
                 return redirect(url_for('userRegister'))
             if allUserg[key]['Email'] == email and email != '':
-                flash('This email has already been used')
+                flash(u'This email has already been used','error')
                 return redirect(url_for('userRegister'))
 
         if email != '':
@@ -931,7 +931,7 @@ def userRegister():
             'Email':reg.get_email()
         })
 
-        flash('You have succesfully registered!')
+        flash(u'You have succesfully registered!','success')
 
         return redirect(url_for('home'))
     return render_template('userRegister.html', form=form,proPic=proPic,count=str(count))
@@ -979,7 +979,7 @@ def userLogin():
             if password == totalUsers[key]['Password'] and user == totalUsers[key]['Username']:
                 session['logged_in'] = True
                 session['username'] = totalUsers[key]['Username']
-                flash('You are successfully logged in')
+                flash(u'You are successfully logged in','success')
                 session['userPref'] = totalUsers[key]
                 session['userDetail'] = totalUsers[key]
                 session['proPic'] = totalUsers[key]['urlProfile']
@@ -1183,7 +1183,7 @@ def restPage(restName):
             return render_template('restDet.html', restDetail=restDetail, form=form, comments=allComments, users=allUsers,
                                    ratings=allRatings, proPic=proPic, pic=allPic,commentLen=commentLen)
         except:
-            flash('You must login to be able to comment or rate restaurants')
+            flash(u'You must login to be able to comment or rate restaurants','error')
             return render_template('restDet.html',restDetail = restDetail, form=form,comments=allComments,users=allUsers,ratings=allRatings,proPic=proPic, pic=allPic,commentLen=commentLen)
 
     return render_template('restDet.html',restDetail = restDetail, form=form,comments=allComments,users=allUsers,ratings=allRatings,proPic=proPic, pic=allPic,commentLen=commentLen)
@@ -1266,11 +1266,11 @@ def eventEdit(eventName):
                 theCheck = False
 
             if theCheck == False:
-                flash('The End Date cannot be before the Start Date')
+                flash(u'The End Date cannot be before the Start Date','error')
                 return render_template('eventEdit.html', form=form, proPic=session['proPic'], eventName=eventName,eventid =eventid,
                                        theEvent=theEvent)
         except:
-            flash('Please follow the example date format')
+            flash(u'Please follow the example date format','error')
             return render_template('eventEdit.html', form=form, proPic=session['proPic'], eventName=eventName,theEvent=theEvent,eventid =eventid,)
 
         if ticket == '':
@@ -1292,7 +1292,7 @@ def eventEdit(eventName):
             'People': theEvent['People'],
             'User': theEvent['User']
         })
-        flash('You have successfully edited your Event!')
+        flash(u'You have successfully edited your Event!','success')
         return redirect(url_for('home'))
 
     return render_template('eventEdit.html', form=form, proPic=session['proPic'], eventName=eventName,theEvent=theEvent, eventid=eventid)
@@ -1381,7 +1381,7 @@ def restEdit(restName):
             'Number of Raters': theRestg['Number of Raters'],
             'Days': theRestg['Days']
         })
-        flash('You have successfully edited your restaurant!')
+        flash(u'You have successfully edited your restaurant!','success')
 
 
         return redirect(url_for('home'))
@@ -1424,13 +1424,13 @@ def userEdit():
         password = form.password.data
 
         if minPrice > maxPrice:
-            flash('The Minumum budget cannot exceed the Maximum budget')
+            flash(u'The Minumum budget cannot exceed the Maximum budget','error')
             return redirect(url_for('userEdit'))
 
         for key in allUserg:
             if allUserg[key]['Username'] != session['username']:
                 if allUserg[key]['Email'] == email and email != '':
-                    flash('This Email has already been used')
+                    flash(u'This Email has already been used','error')
                     return redirect(url_for('userEdit'))
 
         userr = root.child('allUsers/'+theKey)
@@ -1442,7 +1442,7 @@ def userEdit():
             'Email': email,
             'Password': password
         })
-        flash('You have succesfully edited your profile!')
+        flash(u'You have succesfully edited your profile!','success')
         allUserr = root.child('allUsers')
         allUserg = allUserr.get()
         for key in allUserg:
@@ -1630,7 +1630,7 @@ def addEvent():
         session['proPic'] =''
 
     try:
-        testUser = session['username']
+        user = session['username']
     except:
         return redirect(url_for('denied'))
 
@@ -1674,10 +1674,10 @@ def addEvent():
                 theCheck = False
 
             if theCheck == False:
-                flash('The End Date cannot be before the Start Date')
+                flash(u'The End Date cannot be before the Start Date','error')
                 return redirect(url_for('addEvent'))
         except:
-            flash('Please follow the example date format')
+            flash(u'Please follow the example date format','error')
             return redirect(url_for('addEvent'))
 
         if startTime == '12 AM':
@@ -1700,11 +1700,11 @@ def addEvent():
 
         if startDate == endDate:
             if startHour > endHour:
-                flash('The Start Time cannot be later than the End Time!')
+                flash(u'The Start Time cannot be later than the End Time!','error')
                 return redirect(url_for('addEvent'))
             elif startHour == endHour:
                 if int(startTimeMin) > int(endTimeMin):
-                    flash('The Start Time cannot be later than the End Time!')
+                    flash(u'The Start Time cannot be later than the End Time!','error')
                     return redirect(url_for('addEvent'))
 
         if ticket == '':
@@ -1717,7 +1717,7 @@ def addEvent():
         try:
             for key in allEventg:
                 if eventName.lower == allEventg[key]['Name'].lower:
-                    flash('This event already exist')
+                    flash(u'This event already exist','error')
                     return redirect(url_for('addRest'))
         except:
             pass
@@ -1751,7 +1751,7 @@ def addEvent():
             'People': 0,
             'User': user
         })
-        flash('You have added a new event!')
+        flash(u'You have added a new event!','success')
         return redirect(url_for('home'))
     return render_template('addEvent.html', form=form,proPic=session['proPic'], numEvent=str(numEvent))
 
@@ -1774,13 +1774,13 @@ def eventDet(eventName):
         try:
             user = session['username']
         except:
-            flash('You must be logged in to sign up for the event')
+            flash(u'You must be logged in to sign up for the event','error')
             return render_template('eventDet.html', currEventg=currEventg, proPic=proPic)
         goingEventr = root.child('events/'+eventName+'/Going')
         goingEventr.update({
             session['username']:session['username']
         })
-        flash('The event has been added to your profile successfully!')
+        flash(u'The event has been added to your profile successfully!','success')
         return redirect(url_for('userProfile'))
     return render_template('eventDet.html',currEventg=currEvent,proPic=proPic)
 

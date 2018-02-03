@@ -22,7 +22,19 @@
     <div class="col-md-7">
        <div class="col-md-12">
            <br>
-           <h3 class="eventTitle"> {{ currEventg['Name'] }} <span class="label label-success">{{ currEventg['Status'] }}</span></h3>
+           <h3 class="eventTitle"> {{ currEventg['Name'] }}   
+
+           {% if currEventg['Status'] == 'Upcoming' %}
+           <span class="label label-warning">Upcoming</span>
+
+           {% elif currEventg['Status'] == 'Ongoing' %}
+           <span class="label label-success">Ongoing</span>
+
+           {% else %}
+           <span class="label label-default">Ended</span>
+           {% endif %}
+           </h3>
+
        </div>
         <br>
     <img id='eventimg' class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">

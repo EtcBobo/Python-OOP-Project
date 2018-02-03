@@ -11,7 +11,7 @@
     <div class="form-group col-md-12">
          <div class="row">
             <div  class="col-md-8 col-md-offset-2" class="edit">
-                <img id = 'img' style="width: 275px; height: 275px;" src={{ theEvent['urlEvent'] }}>
+                <img id = 'img' style="width: 275px; height: 275px;" src="{{ theEvent['urlEvent'] }}">
                 <br>
                 <input type="file" id="file"/>
                 <br>
@@ -79,12 +79,7 @@
 
 
 </div>
-</div>
 
-
-    </div>
-
-</div>
 
    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
 <script>
@@ -107,7 +102,6 @@
       readURL2(this);
     });
     function readURL(input) {
-    alert('ok')
       if (input.files && input.files[0]) {
         var reader = new FileReader();
 
@@ -132,7 +126,7 @@
         messagingSenderId: "397421551766"
       };
       firebase.initializeApp(config);
-    var fileButton = document.getElementById('uploadButton');
+    var fileButton = document.getElementById('editbutton');
     $("#file").on("change",function (event) {
         selectedFile=event.target.files[0];
 
@@ -187,7 +181,6 @@
 
 
         </script>
-
 
 
 <style>

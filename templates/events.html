@@ -78,35 +78,21 @@
               <br>
                 <br>
               <br>
-              <h3 class="eventTitle"><a href="/events/{{ i['Name'] }}">{{ i['Name'] }}</a> <span class="label label-danger"><span class="glyphicon glyphicon-fire"></span> Popular</span></h3>
-              <br>
-              <img id='eventimg' class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
-          </div>
-          <div class="col-md-5" id="eventdesc">
-              <br><br><br><br><br><br>
-              <span class="desctext">{{ i['Description'] }} this is a pen. jehnvcui rijhnie fnewvj nervkev
-              iehynbacvfienviaernviakjerwnviaej rbvbebf nvijrufnhre vrrgiaernfhaueriv bnrejver vujer bnvaeurifnaerufnerjfe rgerfuernfguiernfgerf ergf beruferuger bgfer gerbferygfer
-              qwe this is a pen. jehnvcui rijhnie fnewvj nervkev rvbtrbrtb iehynbacvfienviaernviakjerwnviaej rbvbebf nvijrufnhre viaernfhaueriv bnrejver vujer bnvaeurifnaerufnerjfe rgerfuernfguiernfgerf ergf beruferuger bgfer gerbferygferqwe this is a pen. jehnvcui rijhnie fnewvj nervkev iehynbacvfienviaernviakjerwnviaej rbvbebf nvijrufnhre viaernfhaueriv bnrejver vujer bnvaeurifnaerufnerjfe rgerfuernfguiernfgerf ergf beruferuger bgfer gerbferygfer</span>
-{#              <br>#}
-{#              <br>#}
-{#                <span class="glyphicon glyphicon-map-marker"> {{ i['Location'] }}</span>#}
-{#              <br>#}
-{#              <br>#}
-{#                <span class="glyphicon glyphicon-globe"> {{ i['Address'] }}</span>#}
-{#              <br>#}
-{#              <br>#}
-{#                <span class="glyphicon glyphicon-tag"> ${{ i['ticket'] }}</span>#}
-{#              <br>#}
-{#              <br>#}
-{#              <span class="glyphicon glyphicon-calendar"> {{ i['Start'] }} to {{ i['End'] }} </span>#}
-{#              <br>#}
-{#              <br>#}
-{#              <span class="glyphicon glyphicon-time"> {{ i['Time Start'] }} - {{ i['Time End'] }}</span>#}
 
-          </div>
-          <div class="col-md-3">
-              <br><br><br>
+              <h3 class="eventTitle"><a href="/eventDet/{{ i['Name'] }}">{{ i['Name'] }}</a> <span class="label label-danger"><span class="glyphicon glyphicon-fire"></span> Popular</span></h3>
+
+              <br>
                <small> {{ i['People'] }} people interested in going</small>
+              <img id='eventimg'class="img-responsive" align="left" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
+                  <br>
+              <a class='recbtn' href="/events/{{ i['Name'] }}">know more</a>
+              <br>
+          </div>
+          <div class="col-md-8" id="eventdesc">
+              <br><br><br><br>
+              <h3 class="eventTitle">{{ i['Name'] }}<span class="label label-danger"><span class="glyphicon glyphicon-fire"></span> Popular</span></h3>
+              <br>
+              <span class="desctext" style="float:left;"> {{ i['Description'] }} </span>
           </div>
           </div>
   {% endfor %}
@@ -127,22 +113,7 @@
           </div>
           <div class="col-md-5" id="eventdesc">
               <br><br><br><br><br><br>
-              <span class="desctext">{{ i['Description'] }} qwe this is a pen. jehnvcui rijhnie fnewvj nervkev iehynbacvfienviaernviakjerwnviaej rbvbebf nvijrufnhre vrrgiaernfhaueriv bnrejver vujer bnvaeurifnaerufnerjfe rgerfuernfguiernfgerf ergf beruferuger bgfer gerbferygfer qwe this is a pen. jehnvcui rijhnie fnewvj nervkev rvbtrbrtb iehynbacvfienviaernviakjerwnviaej rbvbebf nvijrufnhre viaernfhaueriv bnrejver vujer bnvaeurifnaerufnerjfe rgerfuernfguiernfgerf ergf beruferuger bgfer gerbferygferqwe this is a pen. jehnvcui rijhnie fnewvj nervkev iehynbacvfienviaernviakjerwnviaej rbvbebf nvijrufnhre viaernfhaueriv bnrejver vujer fbveagvbreg bnvaeurifnaerufnerjfe rgerfuernfguiernfgerf ergf beruferuger bgfer gerbferygfer</span>
-{#              <br>#}
-{#              <br>#}
-{#                <span class="glyphicon glyphicon-map-marker"> {{ i['Location'] }}</span>#}
-{#              <br>#}
-{#              <br>#}
-{#                <span class="glyphicon glyphicon-globe"> {{ i['Address'] }}</span>#}
-{#              <br>#}
-{#              <br>#}
-{#                <span class="glyphicon glyphicon-tag"> ${{ i['ticket'] }}</span>#}
-{#              <br>#}
-{#              <br>#}
-{#              <span class="glyphicon glyphicon-calendar"> {{ i['Start'] }} to {{ i['End'] }} </span>#}
-{#              <br>#}
-{#              <br>#}
-{#              <span class="glyphicon glyphicon-time"> {{ i['Time Start'] }} - {{ i['Time End'] }}</span>#}
+              <span class="desctext">{{ i['Description'] }}</span>
           </div>
           <div class="col-md-3">
               <br><br><br>
@@ -218,11 +189,7 @@ color:white;
 }
 
 
-@media (max-width: 991px) {
-    #eventdesc br{
-        display:none;
-    }
-}
+
 
 #eventimg{
     width:500px;
@@ -233,8 +200,23 @@ color:white;
     color:black!important;
 }
 
+.recbtn{
+     text-align:center;
+    border: 1px solid #969696;
+    color: #969696;
+    margin-top: 80px;
+    display:block;
+    padding: 5px 32px 11px;
+    height:50px;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
 
-
+}
+.recbtn:hover{
+   text-decoration:none;
+    color:black!important;
+    font-weight:bold;
+}
 
 #eventsheader{
     text-align:center;
