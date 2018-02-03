@@ -53,8 +53,8 @@ class RegisterForm(Form):
         validators.EqualTo('confirm', message='Passwords must match')
     ])
     confirm = PasswordField('Repeat Password')
-    minPrice = IntegerField('Minimum Meal Budget')
-    maxPrice = IntegerField('Maximum Meal Budget')
+    minPrice = IntegerField('Minimum Meal Budget (in Dollars)')
+    maxPrice = IntegerField('Maximum Meal Budget (in Dollars)')
     foodType = SelectField(u'Preferred Food Type',
                            choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'), ('Western Food', 'Western Food'),
                                     ('Chinese Food', 'Chinese Food'), ('Healthy Food', 'Healthy Food'),
@@ -68,12 +68,12 @@ class RestForm(Form):
     desc = TextAreaField('Desciption')
     location = SelectField(u'Location', choices=[('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),('Central','Central')])
 
-    price = IntegerField(u'Price Range (in Dollars)',[validators.DataRequired()])
+    price = IntegerField(u'Average Meal Price (in Dollars)',[validators.DataRequired()])
 
     foodType = SelectField(u'Food Types',
                            choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'), ('Western Food', 'Western Food'),
                                     ('Chinese Food', 'Chinese Food'), ('Healthy Food', 'Healthy Food'),
-                                    ('None', 'None')])
+                                    ('Any', 'Any')])
     openH = SelectField(u'Opening Hours (12am to 12am means 24 hours)',
                            choices=[('12 AM', '12 AM'),('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'), ('4 AM', '4 AM'),
                                     ('5 AM', '5 AM'), ('6 AM', '6 AM'), ('7 AM', '7 AM'), ('8 AM', '8 AM'),
@@ -96,12 +96,7 @@ class FilterForm(Form):
     fLocation = SelectField(u'Location',
                            choices=[('Any','Any'),('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),
                                     ('Central', 'Central')])
-    pricef = SelectField(u'Price Range (Below selected price)',
-                         choices=[('05', '05'), ('10', '10'), ('15', '15'), ('20', '20'), ('25', '25'),
-                                  ('30', '30'), ('35', '35'),
-                                  ('40', '40'), ('45', '45'), ('50', '50'), ('55', '55'), ('60', '60'),
-                                  ('65', '65'), ('70', '70'), ('75', '75'), ('80', '80'), ('85', '85'),
-                                  ('90', '95'), ('100', '100')])
+    pricef = IntegerField(u'Below input Price (in Dollars)',[validators.DataRequired()])
     openT = SelectField(u'Preferred Meal Time',
                         choices=[('12 PM', '12 PM'), ('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'),
                                  ('4 AM', '4 AM'),
@@ -111,10 +106,9 @@ class FilterForm(Form):
                                  ('5 PM', '5 PM'), ('6 PM', '6 PM'), ('7 PM', '7 PM'),
                                  ('8 PM', '8 PM'), ('9 PM', '9 PM'), ('10 PM', '10 PM'), ('11 PM', '11 PM')])
     foodType = SelectField(u'Food Types',
-                           choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'),
+                           choices=[('Any', 'Any'),('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'),
                                     ('Western Food', 'Western Food'),
-                                    ('Chinese Food', 'Chinese Food'), ('Healthy Food', 'Healthy Food'),
-                                    ('None', 'None')])
+                                    ('Chinese Food', 'Chinese Food'), ('Healthy Food', 'Healthy Food')])
 
 
 class EventFilter(Form):
@@ -498,7 +492,7 @@ def filter():
 
             print(filterList)
 
-        if foodType != 'None':
+        if foodType != 'Any':
             i = 0
             while i < len(filterList):
                 if filterList[i]['Food Type'] != foodType:
@@ -1336,7 +1330,7 @@ def restEdit(restName):
                                choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'),
                                         ('Western Food', 'Western Food'),
                                         ('Chinese Food', 'Chinese Food'), ('Healthy Food', 'Healthy Food'),
-                                        ('None', 'None')],default=theRestg['Food Type'])
+                                        ('Any', 'Any')],default=theRestg['Food Type'])
         openH = SelectField(u'Opening Hours',
                             choices=[('12 AM', '12 AM'), ('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'),
                                      ('4 AM', '4 AM'),
