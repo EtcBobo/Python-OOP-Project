@@ -184,51 +184,6 @@ class Bmi(Form):
     weight = IntegerField("Enter your Weight (in Kg)", [validators.DataRequired()])
 
 
-# @app.route("/location")
-# def mapview():
-#     map = Map(
-#         identifier="map",
-#         style=(
-#             "height:50%;"
-#             "width:100%;"
-#             "top:100px;"
-#             "position:absolute;"
-#         ),
-#         lat=1.3786539,
-#         lng=103.8493234,
-#         markers=[
-#             {
-#                 'lat':  1.372121,
-#                 'lng':  103.846678,
-#                 'infobox': (
-#                     "<h3>Ang Mo Kio Market & Food Centre</h3>"
-#                     "<p>Address: 724 Ang Mo Kio Ave 6, Singapore 560724</p>"
-#                     "<p>Hours: 7AM–9PM</p>"
-#                     "<p>Phone: 6225 5632</p>"
-#                     "<img src='//placehold.it/50'>")
-#             },
-#             {
-#                 'lat': 1.380936,
-#                 'lng': 103.840664,
-#                 'infobox': (
-#                     "<h3>Ang Mo Kio 628 Market</h3>"
-#                     "<p>Address: 724 Ang Mo Kio Ave 6, Singapore 560724</p>"
-#                     "<p>Hours: Wednesday\t6:30AM–1:30PM</p>"
-#                     "<p>Thursday\t6:30AM–1:30PM</p>"
-#                     "<p>Friday\t6:30AM–1:30PM</p>"
-#                     "<p>Saturday\t6:30AM–1:30PM</p>"
-#                     "<p>Sunday\t6:30AM–1:30PM</p>"
-#                     "<p>Monday\tClosed</p>"
-#                     "<p>Tuesday\t6:30AM–1:30PM</p>"
-#                     "<p>Phone: 9067 5142</p>"
-#                     "<img src='//placehold.it/50'>"
-#                 )
-#             }
-#         ]
-#     )
-#     return render_template('location.html', map=map)
-
-
 @app.route('/', methods=['POST', 'GET'])
 def home():
     try:
@@ -287,9 +242,6 @@ def home():
             headlines.append(newsitem)
         return headlines
 
-
-
-
     allheadlines = []
 
     newsurls = {'ladyiron':'http://www.ladyironchef.com/rss'}
@@ -319,7 +271,9 @@ def home():
 
 
     # ------------------------------ Search ------------------------------
-    nameList = []
+    nameListR = []
+    nameListE = []
+
     form = theSearch(request.form)
     if request.method == 'POST':
 
@@ -336,7 +290,7 @@ def home():
             fireData_low = fireData.lower()
 
             if name.lower() in fireData_low:                    # if user input is same with words in firebase, the result will come out
-                nameList.append(firebaseDataEvent[key])
+                nameListE.append(firebaseDataEvent[key])
 
 
 
@@ -346,30 +300,20 @@ def home():
             fireData_low = fireData.lower()
 
             if name.lower() in fireData_low:                    #if user input is same with words in firebase, the result will come out
-                nameList.append(firebaseData[key])
+                nameListR.append(firebaseData[key])
 
-            #---------------------------------Old Codes---------------------------------------------------------#
-            # fireData_sep = fireData_low.split()                 #split lowercase (for name that got space)
-            # fireData_sep_first = fireData_low.split()[0]        #get first split value
-            # fireData_2words = fireData_sep_first[0:2]           #get frist 2 words
-            # fireData_3words = fireData_sep_first[0:3]           #get first 3 words
-            # fireData_4words = fireData_sep_first[0:4]           #get first 4 words
-            # fireData_5words = fireData_sep_first[0:5]           # get first 4 words
-            # if fireData_low == name.lower():                    #exact match
-            #     nameList.append(firebaseData[key])
-            # if name.lower() in fireData_sep:                    #split value
-            #     nameList.append(firebaseData[key])
-            # if name.lower() in fireData_2words:                 #first 2 words
-            #     nameList.append(firebaseData[key])
-            # elif name.lower() in fireData_3words:               #first 3 words if use if got two same results
-            #     nameList.append(firebaseData[key])
-            # elif name.lower() in fireData_4words:               #first 4 words
-            #     nameList.append(firebaseData[key])
-            # elif name.lower() in fireData_5words:               #first 4 words
-            #     nameList.append(firebaseData[key])
 
-        session['filtered'] = nameList
-        return redirect(url_for('view'))
+        session['filteredR'] = nameListR
+        session['filteredE'] = nameListE
+
+        session['empty'] = False
+        if nameListR == [] and nameListE == []:
+            session['empty'] = True
+
+
+        return redirect(url_for('viewAll'))
+
+
     return render_template('home.html', recommend=randRec , form=form, proPic = proPic, hnp=list, container=container)
 
 
@@ -524,6 +468,8 @@ def filter():
                     i = i - 1
                 i = i + 1
 
+        if filterList == []:
+            return redirect(url_for('empty'))
 
         session['filtered'] = filterList
         print(session['filtered'])
@@ -572,7 +518,8 @@ def findEvent():
             i = i + 1
 
 
-
+        if filterList == []:
+            return redirect(url_for('empty'))
 
         session['efiltered'] = filterList
         print(session['efiltered'])
@@ -591,6 +538,7 @@ def viewEvent():
         proPic =''
     list = session['efiltered']
     listLen = len(list)
+
 
 
     form = eSort(request.form)
@@ -632,6 +580,7 @@ def viewEvent():
                     if key[0] == key2['Name']:
                         newList2.insert(0,key2)
             list = newList2
+
 
         return render_template('viewEvent.html', events=list, lengthList=listLen, proPic=proPic, form=form)
     return render_template('viewEvent.html', events=list, lengthList = listLen,proPic=proPic,form=form)
@@ -791,6 +740,19 @@ def view():
 
         return render_template('viewRest.html', Restaurant=list, lengthList=listLen, proPic=proPic, form=form)
     return render_template('viewRest.html', Restaurant=list, lengthList = listLen,proPic=proPic,form=form)
+
+@app.route('/viewAll',methods=['POST','GET'])
+def viewAll():
+    try:
+        proPic = session['proPic']
+    except KeyError:
+        proPic =''
+    listE = session['filteredE']
+    listR = session['filteredR']
+    listLen = len(listE)  + len(listR)
+
+    return render_template('viewAll.html', listE=listE,listR=listR, lengthList = listLen,proPic=proPic)
+
 
 
 @app.route('/addRest',methods=['POST','GET'])
@@ -1193,34 +1155,6 @@ def denied():
 
 
     return render_template('denied.html',proPic=proPic)
-
-@app.route('/heatmap')
-def heatmap():
-    centralmap1 = Map(
-        identifier="D10map",
-        lat=1.3343035,
-        lng=103.85632650000002,
-        markers=[
-            {
-                'icon': 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
-                'lat': 1.324914617739032,
-                'lng': 103.85094881057739,
-                'infobox': "<b>360 Balestier Rd, Singapore"
-            },
-            {
-                'icon': 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
-                'lat': 1.3209138285600572,
-                'lng': 103.89117121696472,
-                'infobox': "<b>70a Paya Lebar Rd, Singapore</b>"
-            }
-
-        ]
-    )
-
-
-    return render_template('heatmap.html', Centralmap1= centralmap1)
-
-
 
 
 @app.route('/restDet/<restName>',methods=['POST','GET'])
