@@ -1,1 +1,1 @@
-web: gunicorn Foodie.py:chiabobo
+web: gunicorn Foodie:chiabobo
