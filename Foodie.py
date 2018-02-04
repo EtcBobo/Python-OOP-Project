@@ -14,7 +14,7 @@ from email.mime.base import MIMEBase
 from email import encoders
 from flask_socketio import SocketIO, emit
 import random
-from flask_googlemaps import GoogleMaps
+# from flask_googlemaps import GoogleMaps
 from flask_googlemaps import Map
 from flask_share import Share
 import json
@@ -42,7 +42,7 @@ share = Share(app)
 
 # GoogleMaps(app, key="AIzaSyAN-25Ihf-_ndHtyzHEXF2SGjI6U-WqQKc")
 
-GoogleMaps(app, key="AIzaSyCrGeXVb96USi1ujzqQ7wlCwc_8LzUB-yY")
+# GoogleMaps(app, key="AIzaSyCrGeXVb96USi1ujzqQ7wlCwc_8LzUB-yY")
 
 
 
