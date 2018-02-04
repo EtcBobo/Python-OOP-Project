@@ -1,0 +1,187 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+  <div class="container" id="filterdiv">
+    <h1 id="view">Results</h1>
+     {% for i in listR %}
+
+    <div class="form-group col-md-12">
+            <div class="col-md-5">
+                <h1 id="restnames">{{ i['Name'] }}</h1>
+                <img id="detailimg" class="img-responsive" src={{ i['urlRest'] }}>
+                <br>
+                <br>
+            </div>
+
+            <div class="col-md-5">
+                <br><br>
+                <p id="description" style="margin-bottom:5px;"> {{ i['Description'] }}</p>
+                <div class="avg">
+                    <span id="avgra">Average ratings: {{ i['Average Rating'] }}/5</span>
+                    <br>
+                    <span>Average Price: $4</span>
+                    <br>
+                    <span>Food Type: {{ i['Food Type'] }}</span>
+                </div>
+            </div>
+            <div class="col-md-2" id="knowbtn">
+                <a id="knowtxt" href="/restDet/{{ i['Name'] }}">Know More</a>
+            </div>
+    </div>
+        <br><br><br>
+    {% endfor %}
+
+
+
+  {% for i in listE %}
+
+    <div class="col-md-12">
+        <div class="col-md-5" id="col-md-5">
+            <h1 id="restnames">{{ i['Name'] }}</h1>
+            <img id="detailimg" class="img-responsive" src={{ i['urlEvent'] }}>
+            <br>
+            <br>
+        </div>
+        <div class="col-md-5">
+            <br><br>
+            <p id="description"> {{ i['Description'] }}</p>
+            <br>
+            <span id="avgra">Number of people going: {{ i['People'] }}</span>
+            <br>
+            <span>Admission Fee: ${{ i['ticket'] }}</span>
+        </div>
+        <div class="col-md-2" id="knowbtn">
+            <a id="knowtxt"  href="/eventDet/{{ i['Name'] }}">know More</a>
+        </div>
+   </div>
+        <br><br><br>
+    {% endfor %}
+  </div>
+
+<style>
+   #detailimg {
+       width: 500px;
+       height: 230px;
+   }
+
+    #view{
+        display: block;
+        font-size: 150%;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: .1em;
+        text-align:center;
+    }
+
+    #sort{
+        font-weight: bold;
+    }
+
+    #r{
+       height:15px;
+    }
+
+    #sortbtn{
+        border-radius: 4px;
+        background-color: darkred;
+        border: 0;
+        color: #fff!important;
+        display: inline-block;
+        font-size: 14px;
+        text-align: center;
+        height: 36px;
+        width:150px;
+        float:left;
+        margin-top:25px;
+    }
+
+    #restnames{
+        display: block;
+        font-size: 120%;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align:center;
+    }
+
+    #description{
+        font-weight:normal;
+        font-size:110%;
+        word-wrap: break-word;
+        height:175px;
+    }
+    {#--------------Know More button--------------#}
+    #knowbtn{
+        margin-top: 250px;
+        border: 1px solid #969696;
+        width: 180px;
+        padding: 5px 45px 11px;
+    }
+    #knowtxt:hover{
+        text-decoration:none;
+        color:darkred!important;
+        font-weight:800;
+    }
+    #knowtxt{
+        text-align:center;
+        color: black;
+        font-size:80%;
+        text-transform: uppercase;
+        font-family: 'Montserrat', sans-serif;
+        text-decoration:none;
+    }
+
+{#--------------Number of Result--------------#}
+    #lengthlist{
+        float:right;
+        margin-right:100px;
+    }
+
+
+
+@media(max-width:991px){
+    #sortbtn{
+        width:100%;
+        margin-bottom:100px;
+    }
+
+    #lengthlist{
+       margin-right:0px;
+
+    }
+
+    .col-md-3 br, #avg br{
+        display:none;
+    }
+
+     .col-md-3 span{
+        display:block!important;
+        float:left;
+    }
+
+     .col-md-5 br{
+         display:none;
+     }
+
+    #knowbtn{
+        margin-top:15px;
+        float:right;
+    }
+
+     #description{
+         height:100%;
+     }
+
+     .avg br{
+         display:block;
+     }
+
+
+
+
+}
+</style>
+
+{% endblock %}
