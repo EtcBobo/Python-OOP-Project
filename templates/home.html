@@ -1,7 +1,5 @@
-<!--<link rel=stylesheet type=text/css href="\static\css\home.css">-->
 {% extends 'layout.html' %}
 {% block body %}
-<br><br><br>
     <div class="jumbotron text-center" id="banner">
         <h1 id="bannerWord">Welcome To The Foodie</h1>
     </div>
@@ -21,164 +19,96 @@
         </div>
     </form>
 
-
- <div class="container">
-<br><br><br>
-      <div class="form-group col-md-12" id="popular">Hot & Popular restaurants</div>
-<br><br><br>
+    <br><br><br>
+{#------------------------------------------Hot & Popular restaurants------------------------------------------#}
+    <div class="container">
+        <div class="form-group col-md-12" id="popular">Hot & Popular restaurants</div>
+        <br><br><br>
         <div class="form-group col-md-12">
-        <div class="form-group col-md-4">
-		<img class="img responsive" src={{ hnp[2]['urlRest'] }} style="width:100%;height:300px;">
-		<div class="w3-container" style="width:100%;height:300px;background-color:#97d2a3;overflow:scroll;">
-            <br>
-{#          <img class="icon-img" src="http://www.free-css.com/assets/files/free-css-templates/preview/page185/bliss/images/icon1.png" style="margin-left:130px;">#}
-            <p class="popline"><a href="/restDet/{{ hnp[2]['Name'] }}">{{ hnp[2]['Name'] }}</a></p>
-            <br>
-        <div class="homedesc" style="width:100%;height:40%;"> {{ hnp[2]['Description'] }}</div>
-        </div>
-        </div>
+            <div class="form-group col-md-4">
+                <img class="img responsive" id='popImg' src={{ hnp[2]['urlRest'] }}>
+                <div class="w3-container" style="width:100%;height:300px;background-color:#97d2a3;">
+                    <br>
+                    <p class="popline"><a href="/restDet/{{ hnp[2]['Name'] }}">{{ hnp[2]['Name'] }}</a></p>
+                    <br>
+                    <div id="popDesc"> {{ hnp[2]['Description'] }}</div>
+                </div>
+            </div>
 
+            <div class="form-group col-md-4">
+                <img class="img responsive" id='popImg' src={{ hnp[1]['urlRest'] }} >
+                <div class="w3-container" style="width:100%;height:300px;background-color:#86cdd7;">
+                    <br>
+                    <p class="popline"><a  href="/restDet/{{ hnp[1]['Name'] }}">{{ hnp[1]['Name'] }}</a></p>
+                    <br>
+                    <div id="popDesc"> {{ hnp[1]['Description'] }}</div>
+                </div>
+            </div>
 
-
-
-      <div class="form-group col-md-4">
-      <div class="w3-container" style="width:100%;height:300px;background-color:#86cdd7;overflow:scroll;">
-          <br>
-{#          <img class="icon-img" src="http://www.jakesfinerfoods.com/wp-content/uploads/2012/07/cloche-icon-white.png" style="height:80px;width:100px;margin-left:100px;">#}
-          <p class="popline"><a  href="/restDet/{{ hnp[1]['Name'] }}">{{ hnp[1]['Name'] }}</a></p>
-          <br>
-        <div class="homedesc" style="width:100%;height:50%;"> {{ hnp[1]['Description'] }}</div>
-         </div>
-          <img class="img responsive" src={{ hnp[1]['urlRest'] }}  style="width:100%;height:300px;">
-
-      </div>
-
-
-
-      <div class="form-group col-md-4">
-                 <img class="img responsive" src={{ hnp[0]['urlRest'] }} style="width:100%;height:300px;">
-      <div class="w3-container" style="width:100%;height:300px;background-color:#e8b867;overflow:scroll;">
-          <br>
-{#          <img class="icon-img" src="http://www.free-css.com/assets/files/free-css-templates/preview/page185/bliss/images/icon1.png"  style="margin-left:130px;">#}
-          <p class="popline"><a href="/restDet/{{ hnp[0]['Name'] }}">{{ hnp[0]['Name'] }}</a></p>
-          <br>
-        <p class="homedesc" style="width:100%;height:40%;"> {{ hnp[0]['Description'] }}</p>
-{#          <br><br>#}
-{#          <p class="more"></p>#}
-{#           <a class="knowmore" href="/restDet/{{ hnp[0]['Name'] }}">know More</a>#}
-      </div>
-        </div>
-
-
-
+            <div class="form-group col-md-4">
+                <img class="img responsive" id='popImg' src={{ hnp[0]['urlRest'] }}>
+                <div class="w3-container" style="width:100%;height:300px;background-color:#e8b867;">
+                    <br>
+                    <p class="popline"><a href="/restDet/{{ hnp[0]['Name'] }}">{{ hnp[0]['Name'] }}</a></p>
+                    <br>
+                    <p id="popDesc"> {{ hnp[0]['Description'] }}</p>
+                </div>
+            </div>
         </div>
     </div>
 
-    {#<section style="background-color:#F5F3EE;">#}
-{#<div class="container" style="background-color:#F5F3EE;">#}
-{#<br><br><br>#}
-{#      <div class="form-group col-md-12" id="popular">Hot & Popular restaurants</div>#}
-{##}
-{#<div class="w3-row-padding w3-margin-top">#}
-{#  <div class="w3-full">#}
-{#         <br>#}
-{#    <br>#}
-{#    <div class="w3-card">#}
-{#      <img class='img-responsive' src="https://creatily.net/wp-content/uploads/2016/08/Discount-BBQ-Restaurant-Voucher.jpg" style="width:100%;height:400px;">#}
-{#      <div class="w3-container" style="background-color: white;">#}
-{#        <h3 class="popline"><a href="/restDet/{{ hnp[2]['Name'] }}">{{ hnp[2]['Name'] }}</a></h3>#}
-{#        <p>Description Of Restaurant: {{ hnp[2]['Description'] }}</p>#}
-{#      </div>#}
-{#    </div>#}
-
-{#  <div class="w3-half">#}
-{#         <br>#}
-{#    <br>#}
-{#    <div class="w3-card">#}
-{#      <img class='img-responsive' src="http://images.dailyhive.com/20160804161755/TaKo_Vancouver_Tacos_Korean.jpg" style="width:100%;height:400px;">#}
-{#      <div class="w3-container" style="background-color: white;">#}
-{#        <h3 class="popline"><a href="/restDet/{{ hnp[1]['Name'] }}">{{ hnp[1]['Name'] }}</a></h3>#}
-{#        <p>Description Of Restaurant:  {{ hnp[1]['Description'] }}</p>#}
-{#      </div>#}
-{#    </div>#}
-{#  </div>#}
-{##}
-{#  <div class="w3-half">#}
-{#         <br>#}
-{#    <br>#}
-{#    <div class="w3-card">#}
-{#      <img class='img-responsive' src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=67fb2e7b1fbe39b18b51146234ef38aa&dpr=1&auto=format&fit=crop&w=376&h=251&q=60&cs=tinysrgb" style="width:100%;height:400px;">#}
-{#      <div class="w3-container" style="background-color: white;">#}
-{#        <p class="popline"><a href="/restDet/{{ hnp[0]['Name'] }}">{{ hnp[0]['Name'] }}</a></p>#}
-{#        <p>Description Of Restaurant:  {{ hnp[0]['Description'] }}</p>#}
-{#      </div>#}
-{#    </div>#}
-{##}
-{##}
-{##}
-{#  </div>#}
-{#        </div>#}
-{#</section>#}
-
-
-  <br><br><br>
+    <br><br><br>
+{#------------------------------------------Latest News------------------------------------------#}
     <div class="container">
-<div id='news' class="form-group col-md-12">Latest News</div>
-    {% for news in container %}
-{#    <div class="form-group col-md-4"><img id='NewsImage' class="img-responsive" src="https://image.freepik.com/foto-gratis/diferentes-especias-ingredientes-de-alimentos-cuchara-de-madera-sobre-fondo-blancotable_1220-1704.jpg" alt="NewsImage">#}
-                       <div class="form-group col-md-4">
-                        <br><br>
-                           <img id='NewsImage' class="img-responsive" src={{ news['image'] }} alt="NewsImage">
-                    <h3 id="title"><a href= {{ news['link']}}>{{ news['title'] }}</a></h3>
-                    <footer id="date">{{ news['date'] }}</footer>
-                    <p></p>
-                </div>
-    {% endfor %}
-
-</div>
-    <br><br><br><br>
-
-
-   <div class="container">
- <div class="form-group col-md-12" id="recommend">Our Recommendations</div>
-
-
-
-  <div class="form-group col-md-12">
-<br><br>
-   <div class="form-group col-md-4">
-       <div style="height:450px;width:100%;overflow:scroll;">
-       <img class="img-responsive" style="height:350px;width:500px;" src={{ recommend[0]['urlRest'] }}>
-       <h1 class="recname">{{ recommend[0]['Name'] }}</h1>
-        <h6 class="recdesc">{{ recommend[0]['Description'] }}</h6>
-       <br>
-       </div>
-       <br>
-       <a class="recbtn" href="/restDet/{{ recommend[0]['Name'] }}">know more</a>
-                </div>
-
-          <div class="form-group col-md-4">
-               <div style="height:450px;width:100%;overflow:scroll;">
-              <img class="img-responsive" style="height:350px;width:500px;" src={{ recommend[1]['urlRest'] }}>
-              <h1 class="recname">{{ recommend[1]['Name'] }}</h1>
-              <h6 class="recdesc">{{ recommend[1]['Description'] }}</h6>
-              <br>
-               </div>
-              <br>
-               <a class='recbtn' href="/restDet/{{ recommend[1]['Name'] }}">know more</a>
-          </div>
-
-
-          <div class="form-group col-md-4">
-               <div style="height:450px;width:100%;overflow:scroll;">
-              <img class="img-responsive" style="height:350px;width:500px;" src={{ recommend[2]['urlRest'] }}>
-              <h1 class="recname">{{ recommend[2]['Name'] }}</h1>
-              <h6 class="recdesc">{{ recommend[2]['Description'] }}</h6>
-                    <br>
-              </div>
-              <br>
-               <a class='recbtn' href="/restDet/{{ recommend[2]['Name'] }}">know more</a>
+        <div id='news' class="form-group col-md-12">Latest News</div>
+        {% for news in container %}
+            <div class="form-group col-md-4">
+                <br><br>
+                <img class="img-responsive" id='NewsImage' src={{ news['image'] }} alt="NewsImage">
+                <h3 id="title"><a href= {{ news['link']}}>{{ news['title'] }}</a></h3>
+                <footer id="date">{{ news['date'] }}</footer>
             </div>
+        {% endfor %}
+    </div>
+
+    <br><br><br>
+
+{#------------------------------------------Our Recommendations------------------------------------------#}
+    <div class="container">
+        <div class="form-group col-md-12" id="recommend">Our Recommendations</div>
+        <br><br>
+        <div class="form-group col-md-4">
+            <div id="recRest">
+                <img class="img-responsive" id="recRestImg" src={{ recommend[0]['urlRest'] }}>
+                <h1 class="recname">{{ recommend[0]['Name'] }}</h1>
+                <h6 id="recDesc">{{ recommend[0]['Description'] }}</h6>
+            </div>
+            <div id="knowbtn">
+                <a id="knowtxt" href="/restDet/{{ recommend[0]['Name'] }}">Know More</a>
+            </div>
+        </div>
+
+        <div class="form-group col-md-4">
+            <div id="recRest">
+                <img class="img-responsive" id="recRestImg" src={{ recommend[1]['urlRest'] }}>
+                <h1 class="recname">{{ recommend[1]['Name'] }}</h1>
+                <h6 id="recDesc">{{ recommend[1]['Description'] }}</h6>
+            </div>
+            <div id="knowbtn">
+                <a id="knowtxt" href="/restDet/{{ recommend[1]['Name'] }}">Know More</a>
+            </div>
+        </div>
+
+        <div class="form-group col-md-4">
+            <div id="recRest">
+                <img class="img-responsive" id="recRestImg" src={{ recommend[2]['urlRest'] }}>
+                <h1 class="recname">{{ recommend[2]['Name'] }}</h1>
+                <h6 id="recDesc">{{ recommend[2]['Description'] }}</h6>
+            </div>
+            <div id="knowbtn">
+                <a id="knowtxt" href="/restDet/{{ recommend[2]['Name'] }}">Know More</a>
+            </div>
+        </div>
 
 
 {#                <div class="form-group col-md-4"><img class="homerec" class="img responsive" src={{ recommend[0]['urlRest'] }}>#}
@@ -201,12 +131,103 @@
 {##}
 {#          </div>#}
   </div>
-</div>
-</div>
 
 
 
 <style>
+{#---------------- Banner ----------------#}
+    #banner{
+        background-image: url("http://lindyslanding.com/wp-content/uploads/2017/03/dining-food-Banner-1920-x-750.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 450px;
+        width:100%;
+        opacity: 0.9;
+    }
+
+    #bannerWord{
+        padding-top:120px;
+        text-shadow: 3px 3px 0px #000;
+        color:white;
+        text-align:center;
+        font-size:63px;
+        z-index: 8;
+        bottom:1000rem;
+
+    }
+
+{#---------------- NewsFeed ----------------#}
+
+    #date ,#title{
+        text-align: center;
+    }
+    #NewsImage{
+        width:330px;
+        height:220px;
+    }
+
+
+{#---------------- Search ----------------#}
+
+    #searchbtn{
+        margin-top: 21px;
+        margin-left: 210px;
+    }
+
+    #search_box{
+        margin-left:230px;
+    }
+{#--------------Hot n Popular Restaurants--------------#}
+    #popImg{
+        width:100%;
+        height:250px;
+    }
+
+    #popDesc{
+        width:100%;
+        height:250px;
+        color:white;
+        text-align: justify;
+    }
+{#--------------Recommand Restaurants--------------#}
+    #recRestImg{
+        width:330px;
+        height:220px;
+    }
+
+    #recDesc{
+        display: block;
+        font-size: 105%;
+        font-family: 'Montserrat', sans-serif;
+        letter-spacing: .1em;
+        float:left;
+        height: 50px !important;
+        text-align: justify;
+    }
+
+    #knowbtn{
+        margin-top:150px;
+        margin-left: 80px;
+        border: 1px solid #969696;
+        width: 180px;
+        padding: 5px 45px 11px;
+    }
+
+    #knowtxt:hover{
+        text-decoration:none;
+        color:darkred!important;
+        font-weight:800;
+    }
+
+    #knowtxt{
+        text-align:center;
+        color: black;
+        font-size:80%;
+        text-transform: uppercase;
+        font-family: 'Montserrat', sans-serif;
+        text-decoration:none;
+    }
+
     #features{
         margin-top: 5px;
         margin-left: -5px;
@@ -221,107 +242,99 @@
         color: #fff;
         text-align: center;
     }
-    #NewsImage{
-        padding: 5px 5px 5px 5px;
+
+    .icon-img{
+        margin-left:130px;
     }
-    #date{
+
+    #popular, #recommend, #news, #tag{
+        display: block;
+        font-size: 150%;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: .1em;
         text-align: center;
     }
-    #bannerWord{
-        z-index: 8;
-        bottom: 3rem;
-        text-shadow: 2px 2px 0px #000;
+
+    .popline, .popline a{
+        display: block;
+        color:white!important;
+        font-size: 115%;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: .1em;
+        text-align: center;
+        bottom:0;
     }
-    #searchbtn{
-    margin-top: 21px;
-    margin-left: 210px;
+
+    .knowmore{
+        display: block;
+        color:white!important;
+        font-size: 130%;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: .1em;
+        text-align: center;
+        bottom:0;
     }
-    #search_box{
-        margin-left:230px;
+
+    .homedesc{
+        {# display: block;#}
+        color:white;
+        font-size: 95%;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bold;
+        {#    letter-spacing: .1em;#}
+        float:left;
     }
 
-
-.icon-img{
-    margin-left:130px;
-
-}
-
-@media(max-width:1366px){
-    .icon-img{
-
-        justify-content: center;
-    }
-}
-
-.recdesc{
-     display: block;
-    font-size: 105%;
-    font-family: 'Montserrat', sans-serif;
-    letter-spacing: .1em;
-     float:left;
-    height: 50px !important;
-}
-
- #popular, #recommend, #news, #tag{
-      display: block;
-    font-size: 150%;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: .1em;
- text-align: center;
- }
-
- #banner{
-     text-align:center;
-    font-size:63px;
-    padding:128px;
- }
-
-
-
- .popline, .popline a{
-      display: block;
-     color:white!important;
-    font-size: 115%;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: .1em;
- text-align: center;
-     bottom:0;
- }
-
- .knowmore{
-      display: block;
-     color:white!important;
-    font-size: 130%;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: .1em;
- text-align: center;
-     bottom:0;
- }
-
- .homedesc{
-{#     display: block;#}
-    color:white;
-    font-size: 95%;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-{#    letter-spacing: .1em;#}
-     float:left;
-
- }
-
- .more {border-top-style: dashed;
+    .more {border-top-style: dashed;
         border-top-color:white;
         text-align:center;
-     margin-bottom:20px;
-     margin-top:90px;
+        margin-bottom:20px;
+        margin-top:90px;
+    }
 
-                 }
+    .recname{
+        display: block;
+        font-size: 150%;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: .1em;
+        text-align:center;
+        height:50px;
+    }
+
+    .recbtn{
+        text-align:center;
+        border: 1px solid #969696;
+        color: #969696;
+        display:block;
+        padding: 5px 32px 11px;
+        height:50px;
+        text-transform: uppercase;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    .recbtn:hover{
+        text-decoration:none;
+        color:darkred!important;
+        font-weight:bold;
+    }
+
+    a:hover{
+        color:black;
+    }
+
+    h3{
+        text-align: center;
+        font-family: "hgw-HelveticaNeueBold",Arial,sans-serif;
+        font-weight: bold;
+    }
 
 {# #popular::before, #recommend::before{#}
 {#      content: '';#}
@@ -340,45 +353,13 @@
 {# }#}
 
 
-
-.recname{
-      display: block;
-    font-size: 150%;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: .1em;
-         text-align:center;
-    height:50px;
+@media(max-width:1366px){
+    .icon-img{
+        justify-content: center;
+    }
 }
 
-.recbtn{
-     text-align:center;
-    border: 1px solid #969696;
-    color: #969696;
-    display:block;
-    padding: 5px 32px 11px;
-    height:50px;
-    text-transform: uppercase;
-    font-family: 'Montserrat', sans-serif;
 
-
-}
-.recbtn:hover{
-   text-decoration:none;
-    color:darkred!important;
-    font-weight:bold;
-}
-
-a:hover{
-    color:black;
-}
-
-h3{
-    text-align: center;
-    font-family: "hgw-HelveticaNeueBold",Arial,sans-serif;
-    font-weight: bold;
-}
 @media (max-width: 1024px) {
     #searchbtn{
         margin-top: 20px;
@@ -387,6 +368,7 @@ h3{
         width:360px;
         margin-left: 220px;}
 }
+
 @media (max-width: 768px) {
     #searchbtn{
         margin-left: 290px;}
@@ -394,6 +376,7 @@ h3{
         width:420px;
         margin-left: 130px;}
 }
+
 @media (max-width: 375px) {
     #tag{
         margin-left: 30px;
@@ -404,6 +387,7 @@ h3{
         width:230px;
         margin-left: 30px;}
 }
+
 @media (max-width: 414px) {
     #tag{
         margin-left: 15px;
@@ -414,6 +398,7 @@ h3{
         width:280px;
         margin-left: 25px;}
 }
+
 @media (max-width: 412px) {
     #tag{
         margin-left: 50px;
@@ -424,6 +409,7 @@ h3{
         width:260px;
         margin-left: 50px;}
 }
+
 @media (max-width: 360px) {
     #tag{
         margin-left: 50px;
@@ -443,23 +429,7 @@ h3{
    .homedesc{
       font-size:100%;
    }
-
 }
-
-#banner{
-     background-image: url("http://lindyslanding.com/wp-content/uploads/2017/03/dining-food-Banner-1920-x-750.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    color:white;
-      height:550px;
-    width:100%;
-    opacity: 0.9;
-}
-
-
-
-
-
 
 </style>
 
