@@ -3,7 +3,11 @@
 {% block body %}
 
   <div class="container" id="filterdiv">
+  <br><br>
     <h1 id="view">Results</h1>
+<br><br><br>
+  <h4 class="namee">Restaurants</h4>
+  <br><br>
      {% for i in listR %}
 
     <div class="form-group col-md-12">
@@ -32,8 +36,9 @@
         <br><br><br>
     {% endfor %}
 
-
-
+<br><br><br>
+<h4 class="namee">Events</h4>
+  <br><br>
   {% for i in listE %}
 
     <div class="col-md-12">
@@ -75,6 +80,14 @@
         text-align:center;
     }
 
+    .namee{
+        font-size:150%;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bold;
+         text-align:center;
+        text-decoration:underline;
+    }
+
     #sort{
         font-weight: bold;
     }
@@ -110,7 +123,7 @@
         font-weight:normal;
         font-size:110%;
         word-wrap: break-word;
-        height:175px;
+        height:150px;
     }
     {#--------------Know More button--------------#}
     #knowbtn{
