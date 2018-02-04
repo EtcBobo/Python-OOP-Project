@@ -1969,6 +1969,6 @@ def bmid():
 
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    socketio.run(app,port=80, debug=True)
 
 
