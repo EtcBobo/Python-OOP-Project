@@ -524,6 +524,8 @@ def filter():
                     i = i - 1
                 i = i + 1
 
+        if filterList == []:
+            return redirect(url_for('empty'))
 
         session['filtered'] = filterList
         print(session['filtered'])
@@ -572,7 +574,8 @@ def findEvent():
             i = i + 1
 
 
-
+        if filterList == []:
+            return redirect(url_for('empty'))
 
         session['efiltered'] = filterList
         print(session['efiltered'])
@@ -591,6 +594,7 @@ def viewEvent():
         proPic =''
     list = session['efiltered']
     listLen = len(list)
+
 
 
     form = eSort(request.form)
@@ -632,6 +636,7 @@ def viewEvent():
                     if key[0] == key2['Name']:
                         newList2.insert(0,key2)
             list = newList2
+
 
         return render_template('viewEvent.html', events=list, lengthList=listLen, proPic=proPic, form=form)
     return render_template('viewEvent.html', events=list, lengthList = listLen,proPic=proPic,form=form)
@@ -1194,34 +1199,6 @@ def denied():
 
 
     return render_template('denied.html',proPic=proPic)
-
-@app.route('/heatmap')
-def heatmap():
-    centralmap1 = Map(
-        identifier="D10map",
-        lat=1.3343035,
-        lng=103.85632650000002,
-        markers=[
-            {
-                'icon': 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
-                'lat': 1.324914617739032,
-                'lng': 103.85094881057739,
-                'infobox': "<b>360 Balestier Rd, Singapore"
-            },
-            {
-                'icon': 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
-                'lat': 1.3209138285600572,
-                'lng': 103.89117121696472,
-                'infobox': "<b>70a Paya Lebar Rd, Singapore</b>"
-            }
-
-        ]
-    )
-
-
-    return render_template('heatmap.html', Centralmap1= centralmap1)
-
-
 
 
 @app.route('/restDet/<restName>',methods=['POST','GET'])
