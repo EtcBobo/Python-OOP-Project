@@ -1,147 +1,164 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-        {% from "includes/_formhelper.html" import render_field %}
 
 
-<br><br><br>
 <section id="photo" src="https://prods3.imgix.net/images/articles/2016_01/Hero-Dinner-Party-Papdi-Chaat-Babu-Ji-NYC-East-Village-Melbourne-Indian-Recipes-Tamarind-Nachos-Yogurt-Mint.jpg?auto=format,compress">
-<div class="text-container" id="eventheader">
-<h2 id="eventsheader">Events</h2>
-</div>
+    <div class="text-container" id="eventsHeaderBox">
+        <h2 id="eventsHeader">Events</h2>
+    </div>
 </section>
-     <div class="container" id="profilediv">
-    <br>
-    <br>
-    <ul class="nav nav-tabs nav-justified" role="tablist">
-    <li class="active"><a href="#ongoingEvent" data-toggle="tab">Ongoing</a></li>
-    <li><a href="#popularEvent" data-toggle="tab">Popular</a></li>
-    <li><a href="#upcomingEvent" data-toggle="tab">Upcoming</a></li>
-    <li><a href="#endedEvent" data-toggle="tab">Ended</a></li>
-{#    <li><a href="#addEvent" data-toggle="tab">Organize Events!</a></li>#}
-  </ul>
+    {% from "includes/_formhelper.html" import render_field %}
+    <div class="container" id="profilediv">
+        <br><br>
+        <ul class="nav nav-tabs nav-justified" role="tablist">
+            <li class="active"><a href="#ongoingEvent" data-toggle="tab">Ongoing</a></li>
+            <li><a href="#popularEvent" data-toggle="tab">Popular</a></li>
+            <li><a href="#upcomingEvent" data-toggle="tab">Upcoming</a></li>
+            <li><a href="#endedEvent" data-toggle="tab">Ended</a></li>
+            {#    <li><a href="#addEvent" data-toggle="tab">Organize Events!</a></li>#}
+        </ul>
 
-{#    home tab#}
 
-  <div class="tab-content  clearfix">
-  <div class="tab-pane active" id="ongoingEvent">
-    {% for i in ongoing %}
-      <div class="col-md-12">
-          <div class="col-md-4">
-              <br>
-                <br>
-              <br>
-               <small> {{ i['People'] }} people interested in going</small>
-              <img id='eventimg' class="img-responsive" src={{ i['urlEvent'] }}>
+
+      <div class="tab-content  clearfix">
+        {#--------------home tab--------------#}
+          <div class="tab-pane active" id="ongoingEvent">
+            {% for i in ongoing %}
+              <div class="col-md-12">
+                  <div class="col-md-4">
+                    <br><br>
+                    <small> {{ i['People'] }} people interested in going</small>
+                    <img id='eventimg' class="img-responsive" src={{ i['urlEvent'] }}>
+                  </div>
+                  <div class="col-md-4" id="eventdesc">
+                      <br><br><br>
+                      <h3 class="eventTitle"><a href="/eventDet/{{ i['Name'] }}">{{ i['Name'] }}</a> <span class="label label-success">Ongoing</span></h3>
+                      <br>
+                      <span class="desctext">{{ i['Description'] }}</span>
+                  </div>
+              </div>
+            {% endfor %}
           </div>
-          <div class="col-md-4" id="eventdesc">
-              <br><br><br>
-              <h3 class="eventTitle"><a href="/eventDet/{{ i['Name'] }}">{{ i['Name'] }}</a> <span class="label label-success">Ongoing</span></h3>
-              <br>
-              <span class="desctext">{{ i['Description'] }}</span>
-          </div>
-          </div>
 
-  {% endfor %}
+        {#--------------popular tab--------------#}
+        <div class="tab-pane" id="popularEvent">
+
+            {% for i in popEvent %}
+            <div class="col-md-12">
+                <div class="col-md-4">
+                    <br><br>
+                    <small> {{ i['People'] }} people interested in going</small>
+                    <img id='eventimg'class="img-responsive" align="left" src={{ i['urlEvent'] }}>
+                    <br>
+                    <br>
+                </div>
+                <div class="col-md-8" id="eventdesc">
+                    <br><br><br>
+                    <h3 class="eventTitle"><a href="/eventDet/{{ i['Name'] }}">{{ i['Name'] }}</a> <span class="label label-danger"><span class="glyphicon glyphicon-fire"></span> Popular</span></h3>
+                    <br>
+                    <span class="desctext" style="float:left;"> {{ i['Description'] }} </span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        {#--------------upcoming tab--------------#}
+        <div class="tab-pane" id="upcomingEvent">
+            {% for i in upcoming %}
+            <div class="col-md-12">
+                <div class="col-md-4">
+                    <br><br>
+                    <small> {{ i['People'] }} people interested in going</small>
+                    <img id='eventimg' class="img-responsive" src={{ i['urlEvent'] }}>
+                </div>
+                <div class="col-md-8" id="eventdesc">
+                    <br><br>
+                    <h3 class="eventTitle"><a href="/eventDet/{{ i['Name'] }}">{{ i['Name'] }}</a> <span class="label label-warning">Upcoming</span></h3>
+                    <br>
+                    <span class="desctext">{{ i['Description'] }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
 
 
+        {#--------------ended tab--------------#}
+        <div class="tab-pane" id="endedEvent">
+            {% for i in ended %}
+            <div class="col-md-12">
+                <div class="col-md-4">
+                    <br><br>
+                    <small> {{ i['People'] }} people interested in going</small>
+                    <img id='eventimg' class="img-responsive" src={{ i['urlEvent'] }}>
+                    <br><br>
+                </div>
+                <div class="col-md-8" id="eventdesc">
+                    <br><br>
+                    <h3 class="eventTitle"><a href="/eventDet/{{ i['Name'] }}">{{ i['Name'] }}</a> <span class="label label-default">Ended</span></h3>
+                    <br>
+                    <span class="desctext">{{ i['Description'] }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
       </div>
-
-
-{#        popular events tab#}
-  <div class="tab-pane" id="popularEvent">
-
-    {% for i in popEvent %}
-      <div class="col-md-12">
-          <div class="col-md-4">
-              <br>
-                <br>
-              <br>
-               <small> {{ i['People'] }} people interested in going</small>
-              <img id='eventimg'class="img-responsive" align="left" src={{ i['urlEvent'] }}>
-                  <br>
-              <br>
-          </div>
-          <div class="col-md-8" id="eventdesc">
-              <br><br><br>
-              <h3 class="eventTitle"><a href="/eventDet/{{ i['Name'] }}">{{ i['Name'] }}</a> <span class="label label-danger"><span class="glyphicon glyphicon-fire"></span> Popular</span></h3>
-              <br>
-              <span class="desctext" style="float:left;"> {{ i['Description'] }} </span>
-          </div>
-          </div>
-  {% endfor %}
-
-</div>
-
-{#    upcoming event tab#}
-  <div class="tab-pane" id="upcomingEvent">
-             {% for i in upcoming %}
-      <div class="col-md-12">
-          <div class="col-md-4">
-              <br>
-                <br>
-              <br>
-              <small> {{ i['People'] }} people interested in going</small>
-              <img id='eventimg' class="img-responsive" src={{ i['urlEvent'] }}>
-          </div>
-          <div class="col-md-8" id="eventdesc">
-              <br><br><br>
-               <h3 class="eventTitle"><a href="/eventDet/{{ i['Name'] }}">{{ i['Name'] }}</a> <span class="label label-warning">Upcoming</span></h3>
-              <br>
-              <span class="desctext">{{ i['Description'] }}</span>
-          </div>
-          </div>
-        {% endfor %}
-  </div>
-
-
-{#      ended event tab#}
-       <div class="tab-pane" id="endedEvent">
-                   {% for i in ended %}
-      <div class="col-md-12">
-          <div class="col-md-4">
-              <br>
-                <br>
-              <br>
-              <small> {{ i['People'] }} people interested in going</small>
-              <img id='eventimg' class="img-responsive" src={{ i['urlEvent'] }}>
-              <br><br>
-          </div>
-          <div class="col-md-8" id="eventdesc">
-              <br><br><br>
-                <h3 class="eventTitle"><a href="/eventDet/{{ i['Name'] }}">{{ i['Name'] }}</a> <span class="label label-default">Ended</span></h3>
-              <br>
-              <span class="desctext">{{ i['Description'] }}</span>
-          </div>
-          </div>
-        {% endfor %}
-       </div>
-  </div>
-
+    </div>
 
 
 <style>
-#photo{
-background-image: url("https://prods3.imgix.net/images/articles/2016_01/Hero-Dinner-Party-Papdi-Chaat-Babu-Ji-NYC-East-Village-Melbourne-Indian-Recipes-Tamarind-Nachos-Yogurt-Mint.jpg?auto=format,compress");
-background-repeat: no-repeat;
-background-size: cover;
-background-position:center;
-width:100%;
-height:550px;
-}
+{#-------------------Photo-------------------#}
+    #photo {
+        background-image: url("https://prods3.imgix.net/images/articles/2016_01/Hero-Dinner-Party-Papdi-Chaat-Babu-Ji-NYC-East-Village-Melbourne-Indian-Recipes-Tamarind-Nachos-Yogurt-Mint.jpg?auto=format,compress");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        width: 100%;
+        height: 450px;
+    }
 
-#eventheader{
-align:center;
-color:white;
-z-index: 10;
-bottom: 3rem;
-text-shadow: 2px 2px 0px #000;
-}
+    #eventsHeader{
+        text-align:center;
+        color:white;
+        text-shadow: 2px 2px 0px #000;
+        font-size:63px;
+    }
 
-.desctext{
-    height: 200px !important;
-    text-justify: auto;
-}
+    #eventsHeaderBox{
+        padding-top: 160px;
+    }
+{#--------------------------------------#}
+    #eventimg{
+        width:500px;
+        height:230px;
+    }
+
+    .desctext{
+        height: 200px !important;
+        text-justify: auto;
+    }
+
+    .eventTitle a:hover{
+        color:black!important;
+    }
+
+    .eventbtn{
+        text-align:center;
+        border: 1px solid #969696;
+        color: #969696;
+        margin-top: 80px;
+        display:block;
+        padding: 5px 32px 11px;
+        text-transform: uppercase;
+        font-family: 'Montserrat', sans-serif;
+
+    }
+
+    .eventbtn:hover{
+        text-decoration:none;
+        color:black!important;
+        font-weight:bold;
+    }
 
 @media(max-width:991px){
     #eventdesc br{
@@ -152,41 +169,6 @@ text-shadow: 2px 2px 0px #000;
         display:inline-block;
     }
 }
-
-
-#eventimg{
-    width:500px;
-    height:300px;
-}
-
-.eventTitle a:hover{
-    color:black!important;
-}
-
-.eventbtn{
-     text-align:center;
-    border: 1px solid #969696;
-    color: #969696;
-    margin-top: 80px;
-    display:block;
-    padding: 5px 32px 11px;
-    text-transform: uppercase;
-    font-family: 'Montserrat', sans-serif;
-
-}
-.eventbtn:hover{
-   text-decoration:none;
-    color:black!important;
-    font-weight:bold;
-}
-
-#eventsheader{
-    text-align:center;
-    font-size:63px;
-    padding:128px;
-    text-shadow: 2px 2px 0px #000;
-}
-
 
 </style>
 
