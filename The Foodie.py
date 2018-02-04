@@ -976,28 +976,27 @@ def bmiCalc():
     return render_template("bmiCalc.html",form=form)
 
 
-@app.route('/bmiDisp', methods=['GET', 'POST'])
-def bmiDisp():
-    try:
-        proPic = session['proPic']
-    except KeyError:
-        proPic =''
-    healthy = []
-
-    allRestr = root.child('restaurants')
-    allRestg = allRestr.get()
-    for key in allRestg:
-        if allRestg[key]['Food Type'] == 'Healthy Food':
-            healthy.append()
-
-    randHea =[]
-
-    option1, option2, option3 = random.sample(range(0, len(healthy)), 3)
-    randHea.append(healthy[option1])
-    randHea.append(healthy[option2])
-    randHea.append(healthy[option3])
-
-    return render_template("bmiDisp.html",randHea=randHea,status=session['uStatus'] )
+# @app.route('/bmiDisp', methods=['GET', 'POST'])
+# def bmiDisp():
+#     try:
+#         proPic = session['proPic']
+#     except KeyError:
+#         proPic =''
+#     healthy = []
+#
+#     allRestr = root.child('restaurants')
+#     allRestg = allRestr.get()
+#     for key in allRestg:
+#         if allRestg[key]['Food Type'] == 'Healthy Food':
+#             healthy.append()
+#
+#     randHea =[]
+#
+#     option1, option2, option3 = random.sample(range(0, len(healthy)), 3)
+#     randHea.append(healthy[option1])
+#     randHea.append(healthy[option2])
+#     randHea.append(healthy[option3])
+#     return render_template("bmiDisp.html", randHea=randHea, status=session['uStatus'])
 
 
 @app.route('/forget',methods=['POST','GET'])
@@ -1941,6 +1940,10 @@ def eventDet(eventName):
         flash(u'The event has been added to your profile successfully!','success')
         return redirect(url_for('events'))
     return render_template('eventDet.html',currEventg=currEvent,proPic=proPic)
+
+@app.route('/bmiDisp')
+def bmid():
+    return render_template('bmiDisp.html')
 
 
 if __name__ == '__main__':
