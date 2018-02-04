@@ -3,11 +3,10 @@
 {% block body %}
         {% from "includes/_formhelper.html" import render_field %}
 <div class="container">
-
-
+<button type="submit" class="box-btn" onclick="send()"><span id="heart" class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span></button>
+    <br><br>
     <h1 id="view">Details of {{ restDetail['Name'] }}</h1>
-        <button type="submit" class="box-btn" onclick="send()"><span id="heart" class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span></button>
- <div class="container">
+        <div class="container">
     <div class="form-group col-md-12">
         <br><br>
         <h5 class="desc">Description Of Restaurant: <br><br> {{ restDetail['Description'] }}</h5>
