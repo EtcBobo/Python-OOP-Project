@@ -1,1 +1,1 @@
-web: gunicorn OOP:chiabobo
+web: gunicorn Python-OOP-Project:chiabobo
