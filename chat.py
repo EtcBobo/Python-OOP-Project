@@ -5,7 +5,6 @@ from flask import Flask, render_template, request, flash, redirect, url_for, ses
 from wtforms import Form, StringField, TextAreaField, RadioField, SelectField, PasswordField, IntegerField, validators, SelectMultipleField
 from firebase import firebase
 from Restaurant import Restaurant
-from flask_googlemaps import GoogleMaps,Map
 from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
