@@ -179,6 +179,11 @@ class Reset(Form):
     ])
     confirm = PasswordField('Repeat Password')
 
+class Bmi(Form):
+    height = IntegerField('Enter your Height (in cm)', [validators.DataRequired()])
+    weight = IntegerField("Enter your Weight (in Kg)", [validators.DataRequired()])
+
+
 # @app.route("/location")
 # def mapview():
 #     map = Map(
@@ -883,7 +888,9 @@ def userRegister():
             flash(u'The Minumum budget cannot exceed the Maximum budget','error')
             return redirect(url_for('userRegister'))
 
-        if sub == 'I wish to receive weekly email from The Foodie.':
+        print(sub)
+
+        if sub == ['I wish to receive weekly email from The Foodie.']:
             sub = 'Yes'
         else:
             sub = 'No'
@@ -897,11 +904,11 @@ def userRegister():
             if allUserg[key]['Username'] == user:
                 flash(u'This username has already been used','error')
                 return redirect(url_for('userRegister'))
-            if allUserg[key]['Email'] == email and email != '':
+            if allUserg[key]['Email'] == email:
                 flash(u'This email has already been used','error')
                 return redirect(url_for('userRegister'))
 
-        if email == 'Yes':
+        if sub == 'Yes':
 
             email_user = 'thefoodie.newsletter@gmail.com'
             email_password = 'foodie123'
@@ -955,27 +962,70 @@ def userRegister():
     return render_template('userRegister.html', form=form,proPic=proPic,count=str(count))
 
 
-@app.route('/bmi_calc', methods=['GET', 'POST'])
-def bmi():
-    def calc_bmi(weight, height):
-        return round((weight / ((height / 100) ** 2)), 2)
+@app.route('/bmiCalc', methods=['GET', 'POST'])
+def bmiCalc():
+    try:
+        proPic = session['proPic']
+    except KeyError:
+        proPic =''
 
-    bmi = ''
-    result = ''
-    if request.method == 'POST' and 'weight' in request.form:
-        weight = float(request.form.get('weight'))
-        height = float(request.form.get('height'))
-        bmi = calc_bmi(weight, height)
+    form = Bmi(request.form)
+    if request.method == 'POST' and form.validate():
+        height = form.height.data
+        weight = form.weight.data
+
+        bmi = weight / ((height / 100) ** 2)
+
         if bmi < 18.5:
-            result = "yOU ARE underweight!!"
+            status = "under"
         elif bmi > 25 and bmi < 30:
-            result= "YoU are OverWeight!"
+            status= "over"
         elif bmi > 30:
-            result = "You are obese!"
+            status = "obese"
         else:
-            result = "You are healthy!"
-    return render_template("bmi_calc.html",
-	                        bmi=bmi, result=result)
+            status = "healthy"
+
+        session['uStatus'] = status
+
+        try:
+            theUser = session['username']
+        except:
+            theUser = ''
+
+        if theUser != '':
+            allUserr = root.child('allUsers')
+            allUserg = allUserr.get()
+            for key in allUserg:
+                if allUserg[key]['Username'] == theUser:
+                    theUserr = root.child('allUsers/'+key)
+            theUserr.update({
+                'Status':status
+            })
+    return render_template("bmiCalc.html",form=form)
+
+
+@app.route('/bmiDisp', methods=['GET', 'POST'])
+def bmiDisp():
+    try:
+        proPic = session['proPic']
+    except KeyError:
+        proPic =''
+    healthy = []
+
+    allRestr = root.child('restaurants')
+    allRestg = allRestr.get()
+    for key in allRestg:
+        if allRestg[key]['Food Type'] == 'Healthy Food':
+            healthy.append()
+
+    randHea =[]
+
+    option1, option2, option3 = random.sample(range(0, len(healthy)), 3)
+    randHea.append(healthy[option1])
+    randHea.append(healthy[option2])
+    randHea.append(healthy[option3])
+
+    return render_template("bmiDisp.html",randHea=randHea,status=session['uStatus'] )
 
 
 @app.route('/forget',methods=['POST','GET'])
@@ -1932,7 +1982,7 @@ def eventDet(eventName):
             session['username']:session['username']
         })
         flash(u'The event has been added to your profile successfully!','success')
-        return redirect(url_for('userProfile'))
+        return redirect(url_for('events'))
     return render_template('eventDet.html',currEventg=currEvent,proPic=proPic)
 
 

@@ -1,154 +1,124 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-        {% from "includes/_formhelper.html" import render_field %}
   <div class="container" id="filterdiv">
     <h1 id="view">Results</h1>
+    {% from "includes/_formhelper.html" import render_field %}
 
-<form method="post">
-    <br><br>
-      <div class="form-group col-md-12">
+    <form method="post">
+        <div class="form-group col-md-12">
             <p id="lengthlist">{{ lengthList }} results</p>
-          <br>
-      </div>
-    <div class="form-group col-md-12">
-    <div class="form-group col-md-4" id="sortdiv">
-        {{ render_field(form.sort, class_="form-control") }}
+            <br>
         </div>
-        <div class="form-group col-md-4">
-            <button type="submit" id="sortbtn">Sort</button>
+        <div class="form-group col-md-12">
+            <div class="form-group col-md-4" id="sortdiv">
+                {{ render_field(form.sort, class_="form-control") }}
+            </div>
+            <div class="form-group col-md-4">
+                <button type="submit" id="sortbtn">Sort</button>
+            </div>
         </div>
-           </div>
-</form>
-<br><br>
+    </form>
+    {% for i in events %}
 
-        {% for i in events %}
-
-<div class="col-md-12">
- <br>
     <div class="col-md-12">
         <div class="col-md-5" id="col-md-5">
-        <h1 id="restnames">{{ i['Name'] }}</h1>
-         <img id="detailimg" class="img-responsive" src={{ i['urlEvent'] }}>
+            <h1 id="restnames">{{ i['Name'] }}</h1>
+            <img id="detailimg" class="img-responsive" src={{ i['urlEvent'] }}>
             <br>
             <br>
-             </div>
-
-        <a class="viewbtn"  href="/eventDet/{{ i['Name'] }}">know More</a>
+        </div>
         <div class="col-md-5">
             <br><br>
-        <p id="description"> {{ i['Description'] }}</p>
-         <br>
+            <p id="description"> {{ i['Description'] }}</p>
+            <br>
             <span id="avgra">Number of people going: {{ i['People'] }}</span>
-           <br>
-             <span>Admission Fee: ${{ i['ticket'] }}</span>
-    </div>
-
-        <br><br>
-
+            <br>
+            <span>Admission Fee: ${{ i['ticket'] }}</span>
         </div>
-
-
-         <div class="col-md-4" id="avg">
-             <br><br>
-
+        <div class="col-md-2" id="knowbtn">
+            <a id="knowtxt"  href="/eventDet/{{ i['Name'] }}">know More</a>
         </div>
-        <br><br>
+   </div>
+        <br><br><br>
+    {% endfor %}
+  </div>
 
-</div>
-
-
-
-        {% endfor %}
-</div>
-
-</div>
-    </div>
 <style>
-   #detailimg{
-       width:500px;
-       height:300px;
-   }
+    #detailimg {
+        width: 500px;
+        height: 250px;
+    }
 
     #view{
         display: block;
-    font-size: 150%;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: .1em;
-         text-align:center;
-
+        font-size: 150%;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: .1em;
+        text-align:center;
     }
 
     #sort{
         font-weight: bold;
-
-
     }
 
     #sortbtn{
-         border-radius: 4px;
-    background-color: darkred;
-    border: 0;
-    color: #fff!important;
-    display: inline-block;
-    font-size: 14px;
-    text-align: center;
+        border-radius: 4px;
+        background-color: darkred;
+        border: 0;
+        color: #fff!important;
+        display: inline-block;
+        font-size: 14px;
+        text-align: center;
         height: 36px;
         width:150px;
         float:left;
         margin-top:25px;
     }
 
+    #restnames{
+        display: block;
+        font-size: 120%;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align:center;
+    }
 
+    #description{
+        font-weight:normal;
+        font-size:110%;
+        word-wrap: break-word;
+        height:175px;
+    }
 
- #restnames{
-      display: block;
-    font-size: 120%;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-    text-transform: uppercase;
-         text-align:center;
- }
-
-
-
-
-#description{
-    font-weight:normal;
-    font-size:120%;
-    word-wrap: break-word;
-
-}
-
-.viewbtn{
-     text-align:center;
-    border: 1px solid #969696;
-   color: #969696;
-    margin-top: 24px;
-    padding: 5px 32px 11px;
-    text-transform: uppercase;
-    font-family: 'Montserrat', sans-serif;
-    font-size:80%;
-}
-
-.viewbtn:hover{
-   text-decoration:none;
-    color:darkred!important;
-    font-weight:800;
-}
-
-#avg {
-    float:right;
-}
-
-
-
-#lengthlist{
-    float:right;
-    margin-right:220px;
-}
+{#--------------Know More button--------------#}
+    #knowbtn{
+        margin-top: 250px;
+        border: 1px solid #969696;
+        width: 180px;
+        padding: 5px 45px 11px;
+    }
+    #knowtxt:hover{
+        text-decoration:none;
+        color:darkred!important;
+        font-weight:800;
+    }
+    #knowtxt{
+        text-align:center;
+        color: black;
+        font-size:80%;
+        text-transform: uppercase;
+        font-family: 'Montserrat', sans-serif;
+        text-decoration:none;
+    }
+{#--------------Number of Result--------------#}
+    #lengthlist{
+        float:right;
+        margin-right:100px;
+    }
 
 @media(max-width:991px){
     #sortbtn{
@@ -180,10 +150,7 @@
      #col-md-5 br{
          display:none;
      }
-
-
 }
-
 
 </style>
 
