@@ -34,6 +34,8 @@
             <br><br>
              <span class="info2"><p class="glyphicon glyphicon-star"></p> {{ restDetail['Average Rating'] }} / 5</span>
             <br><br>
+                 <span class="info2"><p class="glyphicon glyphicon-earphone"></p> +6512345678 </span>
+            <br><br>
           <span class="info2"><p class="glyphicon glyphicon-map-marker"></p> {{ restDetail['Location'] }}</span>
 {#         <span class="verticalLine"></span>#}<br><br>
           <span class="info2"><p class="glyphicon glyphicon-globe"></p> {{ restDetail['Address'] }}</span>
@@ -88,8 +90,8 @@
 </div>
 </form>
 {#Social Media#}
-<div class="container" id="filterdiv">
-<div class="form-group col-md-12">
+<div class="container">
+<div class="form-group col-md-12" style="margin-left:20px;">
     {{ share.create(title='Share with: ') }}
 {#-----------------------------------------------------------------------------#}
 <br>
@@ -327,8 +329,8 @@ function send() {
    #detailimg{
         display: inline-block;
         float: left;
-        height:380px;
-        width:650px;
+        height:430px;
+        width:750px;
 
    }
 
