@@ -606,7 +606,7 @@ def viewEvent():
         elif sort == 'Lowest Price':
             allPrice = {}
             for key in list:
-                allPrice[key['Name']] = int(key['Price'])
+                allPrice[key['Name']] = int(key['ticket'])
 
             newList = [(k, allPrice[k]) for k in sorted(allPrice, key=allPrice.get)]
             newList2 = []
