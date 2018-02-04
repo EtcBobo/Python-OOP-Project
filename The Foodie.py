@@ -1185,7 +1185,17 @@ def restPage(restName):
 
     allUserr =root.child('allUsers')
     allUserg = allUserr.get()
+    fav = False
+    try:
+        favUser = session['username']
+    except:
+        favUser = ''
 
+    allFavr = root.child('fav/'+favUser)
+    allFavg = allFavr.get()
+    for key in allFavg:
+        if restName == allFavg[key]:
+            fav = True
 
 
     """load all comments and ratings, and put all comments into a list"""
@@ -1272,6 +1282,18 @@ def restPage(restName):
             allUserr = root.child('allUsers')
             allUserg = allUserr.get()
 
+            fav = False
+            try:
+                favUser = session['username']
+            except:
+                favUser = ''
+
+            allFavr = root.child('fav/' + favUser)
+            allFavg = allFavr.get()
+            for key in allFavg:
+                if restName == allFavg[key]:
+                    fav = True
+
 
 
             try:
@@ -1316,12 +1338,12 @@ def restPage(restName):
 
 
             return render_template('restDet.html', restDetail=restDetail, form=form, comments=allComments, users=allUsers,
-                                   ratings=allRatings, proPic=proPic, pic=allPic,commentLen=commentLen,restid=restid)
+                                   ratings=allRatings, proPic=proPic, pic=allPic,commentLen=commentLen,restid=restid,fav=fav)
         except:
             flash(u'You must login to be able to comment or rate restaurants','error')
-            return render_template('restDet.html',restDetail = restDetail, form=form,comments=allComments,users=allUsers,ratings=allRatings,proPic=proPic, pic=allPic,commentLen=commentLen,restid=restid)
+            return render_template('restDet.html',restDetail = restDetail, form=form,comments=allComments,users=allUsers,ratings=allRatings,proPic=proPic, pic=allPic,commentLen=commentLen,restid=restid,fav=fav)
 
-    return render_template('restDet.html',restDetail = restDetail, form=form,comments=allComments,users=allUsers,ratings=allRatings,proPic=proPic, pic=allPic,commentLen=commentLen,restid=restid)
+    return render_template('restDet.html',restDetail = restDetail, form=form,comments=allComments,users=allUsers,ratings=allRatings,proPic=proPic, pic=allPic,commentLen=commentLen,restid=restid,fav=fav)
 
 
 

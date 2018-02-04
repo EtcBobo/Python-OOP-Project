@@ -3,7 +3,11 @@
 {% block body %}
         {% from "includes/_formhelper.html" import render_field %}
 <div class="container">
+{% if fav == False %}
 <button type="submit" class="box-btn" onclick="send()"><span id="heart" class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span></button>
+    {% else %}
+    <button type="submit" class="box-btn"><span id="heart" class="glyphicon glyphicon-heart red" aria-hidden="true"></span></button>
+    {% endif %}
     <br><br>
     <h1 id="view">Details of {{ restDetail['Name'] }}</h1>
         <div class="container">
@@ -186,13 +190,10 @@ function show() {
           e.style.display = 'block';
     }
 
-$(function($) {
-  $(document).on('click', '.box-btn', function(event) {
-    $(this).find('.glyphicon').toggleClass('red').toggleClass('glyphicon-heart-empty glyphicon-heart');
-  });
-});
 
 function send() {
+
+    document.getElementById("heart").className = "glyphicon glyphicon-heart red";
 
     var config = {
         apiKey: "AIzaSyAbX0KjCpu-WKGrnj9snTRolEqomOXy0oA",
