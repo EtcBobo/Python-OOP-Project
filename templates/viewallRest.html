@@ -9,7 +9,7 @@
       <form method="post">
       <div class="form-group col-md-12">
           <div class="form-group col-md-4">
-          <p id="lengthlist">{{ lengthList }} results</p></div>
+          <p id="lengthlist">Number of Results: {{ lengthList }}</p></div>
       </div>
 
           <div class="form-group col-md-12">
@@ -38,7 +38,7 @@
             <h5 id="restdesc" style="text-align:justify;word-wrap: break-word;"> {{ i['Description'] }}</h5>
            </div>
             <h6>Average Rating: {{ i['Average Rating'] }} out of 5 </h6>
-            <h6>Price Range: ${{ i['Price'] }}</h6>
+            <h6>Average Meal Price: ${{ i['Price'] }}</h6>
        <a class='recbtn' href="/restDet/{{ i['Name'] }}">know more</a>
 <br><br>
 

@@ -1,28 +1,40 @@
 {% extends 'layout.html' %}
 
 {% block body %}
+
   <div class="container" id="filterdiv">
-  <br><br>
     <h1 id="view">Results</h1>
-    {% from "includes/_formhelper.html" import render_field %}
+     {% for i in listR %}
 
-    <form method="post">
-        <div class="form-group col-md-12">
-            <div class="form-group col-md-4">
-            <p id="lengthlist">Number of Results: {{ lengthList }}</p>
+    <div class="form-group col-md-12">
+            <div class="col-md-5">
+                <h1 id="restnames">{{ i['Name'] }}</h1>
+                <img id="detailimg" class="img-responsive" src={{ i['urlRest'] }}>
+                <br>
+                <br>
             </div>
-        </div>
 
-        <div class="form-group col-md-12">
-            <div class="form-group col-md-4" id="sortdiv">
-                {{ render_field(form.sort, class_="form-control") }}
+            <div class="col-md-5">
+                <br><br>
+                <p id="description" style="margin-bottom:5px;"> {{ i['Description'] }}</p>
+                <div class="avg">
+                    <span id="avgra">Average ratings: {{ i['Average Rating'] }}/5</span>
+                    <br>
+                    <span>Average Price: $4</span>
+                    <br>
+                    <span>Food Type: {{ i['Food Type'] }}</span>
+                </div>
             </div>
-            <div class="form-group col-md-4">
-                <button type="submit" id="sortbtn">Sort</button>
+            <div class="col-md-2" id="knowbtn">
+                <a id="knowtxt" href="/restDet/{{ i['Name'] }}">Know More</a>
             </div>
-        </div>
-    </form>
-    {% for i in events %}
+    </div>
+        <br><br><br>
+    {% endfor %}
+
+
+
+  {% for i in listE %}
 
     <div class="col-md-12">
         <div class="col-md-5" id="col-md-5">
@@ -48,10 +60,10 @@
   </div>
 
 <style>
-    #detailimg {
-        width: 500px;
-        height: 230px;
-    }
+   #detailimg {
+       width: 500px;
+       height: 230px;
+   }
 
     #view{
         display: block;
@@ -65,6 +77,10 @@
 
     #sort{
         font-weight: bold;
+    }
+
+    #r{
+       height:15px;
     }
 
     #sortbtn{
@@ -96,8 +112,7 @@
         word-wrap: break-word;
         height:175px;
     }
-
-{#--------------Know More button--------------#}
+    {#--------------Know More button--------------#}
     #knowbtn{
         margin-top: 250px;
         border: 1px solid #969696;
@@ -117,7 +132,13 @@
         font-family: 'Montserrat', sans-serif;
         text-decoration:none;
     }
+
 {#--------------Number of Result--------------#}
+    #lengthlist{
+        float:right;
+        margin-right:100px;
+    }
+
 
 
 @media(max-width:991px){
@@ -127,8 +148,7 @@
     }
 
     #lengthlist{
-       margin-right:100px;
-        float:right;
+       margin-right:0px;
 
     }
 
@@ -138,27 +158,30 @@
 
      .col-md-3 span{
         display:block!important;
-         float:left;
+        float:left;
     }
 
-     #knowbtn{
-        margin-top: 15px;
-    float: right;
-     }
-
-     #col-md-5 br{
+     .col-md-5 br{
          display:none;
      }
 
-     #description br{
-         display:none;
-     }
+    #knowbtn{
+        margin-top:15px;
+        float:right;
+    }
 
-      #description{
+     #description{
          height:100%;
      }
-}
 
+     .avg br{
+         display:block;
+     }
+
+
+
+
+}
 </style>
 
 {% endblock %}
