@@ -1,1 +1,1 @@
-web: gunicorn TheFoodie:chiabobo
+web: gunicorn Foodie:chiabobo
