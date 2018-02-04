@@ -169,7 +169,7 @@ class Forget(Form):
     email = EmailField("Email", [validators.DataRequired()])
 
 class Forgetc(Form):
-    code = StringField('Enter the validation code', [validators.DataRequired()])
+    code = StringField('Please enter the validation code that was received via email ', [validators.DataRequired()])
 
 class Reset(Form):
     password = PasswordField('New Password', [
@@ -1012,8 +1012,8 @@ def forget():
         session['userReset'] = name
 
 
-        email_user = 'omgnooopython@gmail.com'
-        email_password = 'pythonnopython'
+        email_user = 'thefoodie.newsletter@gmail.com'
+        email_password = 'foodie123'
         email_send = email
 
         subject = 'Request for The Foodie account Password Reset'
@@ -1025,19 +1025,21 @@ def forget():
 
         body = '\n Hi ' + name + '. A password reset request has been activated for your account. No Changes have been made to your account yet'\
                                  '\n \nPlease key in this confirmation code below in our webpage to verify the password reset request:'\
-                                 '\nThe code is:'+code+'\n\nIf you did notrequest for a new password. Please ignore this email and contact us at thefoodie.newsletter@gmail.com''\n\nYours sincerely,''\n\nThe Foodie'
+                                 '\nThe code is:  ' +code+ ' \n\nIf you did not request for a new password. Please ignore this email and contact us at thefoodie.newsletter@gmail.com ' \
+                                 '\n \n \n Sincerely, ' \
+                                 '\n \nTheFoodie Team'
 
         msg.attach(MIMEText(body, 'plain'))
 
-        filename = 'promo.jpg'
-        attachment = open(filename, 'rb')
+        # filename = 'promo.jpg'
+        # attachment = open(filename, 'rb')
+        #
+        # part = MIMEBase('application', 'octet-stream')
+        # part.set_payload((attachment).read())
+        # encoders.encode_base64(part)
+        # part.add_header('Content-Disposition', "attachment; filename= " + filename)
 
-        part = MIMEBase('application', 'octet-stream')
-        part.set_payload((attachment).read())
-        encoders.encode_base64(part)
-        part.add_header('Content-Disposition', "attachment; filename= " + filename)
-
-        msg.attach(part)
+        # msg.attach(part)
         text = msg.as_string()
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()

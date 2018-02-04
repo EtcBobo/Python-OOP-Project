@@ -4,10 +4,50 @@
         {% from "includes/_formhelper.html" import render_field %}
 
 
+    <div class="container">
+    <br><br>
+    <button id="backbtn" class="btn btn-basic" style="float:left;margin-left:30px;"><a href="/events" class="back"> << view other events</a></button>
+        <h1 id="view">Details of  {{ currEventg['Name'] }}
+     {% if currEventg['Status'] == 'Upcoming' %}
+           <span class="label label-warning">Upcoming</span>
 
- <div class="container" id="profilediv">
-      <div class="col-md-12">
-                    {% if currEventg['Status'] !='Ended' %}
+           {% elif currEventg['Status'] == 'Ongoing' %}
+           <span class="label label-success">Ongoing</span>
+
+           {% else %}
+           <span class="label label-default">Ended</span>
+           {% endif %}</h1>
+
+ <div class="container">
+    <div class="form-group col-md-12">
+        <br><br>
+        <h5 class="desc">Description Of Event: <br><br> {{ currEventg['Description'] }}  </h5>
+    </div>
+ </div>
+</div>
+
+<div class="container">
+    <div class="form-group col-md-12">
+        <div class="form-group col-md-5">
+    <img id='eventimg' class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
+            </div>
+        <div class="form-group col-md-4">
+             <span class="icons"><p class="glyphicon glyphicon-map-marker"></p> {{ currEventg['Location'] }}</span>
+              <br>
+              <br>
+               <span class="icons"> <p class="glyphicon glyphicon-globe"></p> {{ currEventg['Address'] }} </span>
+              <br>
+              <br>
+               <span class="icons"> <p class="glyphicon glyphicon-tag"></p> ${{ currEventg['ticket'] }} </span>
+              <br>
+              <br>
+             <span class="icons"> <p class="glyphicon glyphicon-calendar"></p> {{ currEventg['Start'] }} to {{ currEventg['End'] }}  </span>
+              <br>
+              <br>
+             <span class="icons"> <p class="glyphicon glyphicon-time"></p> {{ currEventg['Time Start'] }} - {{ currEventg['Time End'] }} </span>
+            </div>
+        <div class="form-group col-md-3">
+                                {% if currEventg['Status'] !='Ended' %}
           <form method="post">
           <div>
               <button type="submit" class="btn btn-primary" style="float:right;">I'm Interested In Going</button></div></form>
@@ -19,83 +59,17 @@
           {% endif %}
               <br>
 
-    <div class="col-md-7">
-       <div class="col-md-12">
-           <br>
-           <h3 class="eventTitle"> {{ currEventg['Name'] }}
-
-           {% if currEventg['Status'] == 'Upcoming' %}
-           <span class="label label-warning">Upcoming</span>
-
-           {% elif currEventg['Status'] == 'Ongoing' %}
-           <span class="label label-success">Ongoing</span>
-
-           {% else %}
-           <span class="label label-default">Ended</span>
-           {% endif %}
-           </h3>
-
-       </div>
-        <br>
-    <img id='eventimg' class="img-responsive" src="http://austrianfoodtasting.com/mozarts/wp-content/uploads/2016/05/Cest-la-Vie.jpg">
     </div>
-          <div class="col-md-4" id="eventdesc">
-             <div id="br"> <br><br><br> </div>
-              <div id="height">
-            <span>{{ currEventg['Description'] }}</span>
-                  <br><br>
-                  <div id="font">
-                <span class="glyphicon glyphicon-map-marker"> {{ currEventg['Location'] }}</span>
-              <br>
-              <br>
-                <span class="glyphicon glyphicon-globe"> {{ currEventg['Address'] }}</span>
-              <br>
-              <br>
-                <span class="glyphicon glyphicon-tag"> ${{ currEventg['ticket'] }}</span>
-              <br>
-              <br>
-              <span class="glyphicon glyphicon-calendar"> {{ currEventg['Start'] }} to {{ currEventg['End'] }} </span>
-              <br>
-              <br>
-              <span class="glyphicon glyphicon-time"> {{ currEventg['Time Start'] }} - {{ currEventg['Time End'] }}</span>
-                      </div>
-                  </div>
-              </div>
+    </div>
+</div>
 
 
-{#          {% if currEventg['Status'] !='Ended' %}#}
-{#          <form method="post">#}
-{#       <button type="submit" class="btn btn-primary" class="int">I'm Interested In Going</button>#}
-{#          </form>#}
-{#          {% endif %}#}
-{#              <br>#}
-{#               <small> {{ currEventg['People'] }} people interested in going</small>#}
 
       </form>
 
-{#     <div class="col-md-12">#}
-{#         <div class="col-md-8">#}
-{#         <span> {{ currEventg['Description'] }}</span>#}
-{#              <br>#}
-{#              <br>#}
-{#                <span class="glyphicon glyphicon-map-marker"> {{ currEventg['Location'] }}</span>#}
-{#              <br>#}
-{#              <br>#}
-{#                <span class="glyphicon glyphicon-globe"> {{ currEventg['Address'] }}</span>#}
-{#              <br>#}
-{#              <br>#}
-{#                <span class="glyphicon glyphicon-tag"> {{ currEventg['ticket'] }}</span>#}
-{#              <br>#}
-{#              <br>#}
-{#              <span class="glyphicon glyphicon-calendar"> {{ currEventg['Start'] }} to {{ currEventg['End'] }} </span>#}
-{#              <br>#}
-{#              <br>#}
-{#              <span class="glyphicon glyphicon-time"> {{ currEventg['Time Start'] }} - {{ currEventg['Time End'] }}</span>#}
-{#    </div>#}
 
+</div>
      </div>
-
-
 
 
 
@@ -106,33 +80,48 @@
 </div>
 <style>
 
- #height   {
-        height: 200px !important;
-        word-wrap: break-word ;
-        text-justify: auto;
-    }
+.icons{
+    font-size:110%;
 
- #font{
-     font-size:110%;
+
+}
+
+ #view{
+      display: block;
+    font-size: 150%;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+ text-align: center;
  }
 
 @media (max-width: 991px) {
     #br br{
         display:none
     }
+
+    #backbtn{
+        display:none;
+    }
 }
 
 #eventimg{
-    width:100%;
-    height:400px;
+    width:650px;
+    height:380px;
+}
+
+.back:hover{
+    color:black;
 }
 
 
 
 
-#eventdesc{
-    display:block;
-}
+
+
+
+
 
 
 
