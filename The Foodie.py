@@ -1190,12 +1190,14 @@ def restPage(restName):
         favUser = session['username']
     except:
         favUser = ''
-
-    allFavr = root.child('fav/'+favUser)
-    allFavg = allFavr.get()
-    for key in allFavg:
-        if restName == allFavg[key]:
-            fav = True
+    try:
+        allFavr = root.child('fav/'+favUser)
+        allFavg = allFavr.get()
+        for key in allFavg:
+            if restName == allFavg[key]:
+                fav = True
+    except:
+        pass
 
 
     """load all comments and ratings, and put all comments into a list"""
@@ -1288,12 +1290,14 @@ def restPage(restName):
             except:
                 favUser = ''
 
-            allFavr = root.child('fav/' + favUser)
-            allFavg = allFavr.get()
-            for key in allFavg:
-                if restName == allFavg[key]:
-                    fav = True
-
+            try:
+                allFavr = root.child('fav/' + favUser)
+                allFavg = allFavr.get()
+                for key in allFavg:
+                    if restName == allFavg[key]:
+                        fav = True
+            except:
+                pass
 
 
             try:
@@ -1969,6 +1973,6 @@ def bmid():
 
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    socketio.run(app,debug=True)
 
 
