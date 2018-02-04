@@ -29,7 +29,7 @@
 <div class="container">
     <div class="form-group col-md-12">
         <div class="form-group col-md-5">
-    <img id='eventimg' class="img-responsive" src={{ currEventg['Location'] }}>
+    <img id='eventimg' class="img-responsive" src={{ currEventg['urlEvent'] }}>
             </div>
         <div class="form-group col-md-4">
              <span class="icons"><p class="glyphicon glyphicon-map-marker"></p> {{ currEventg['Location'] }}</span>
@@ -38,7 +38,7 @@
                <span class="icons"> <p class="glyphicon glyphicon-globe"></p> {{ currEventg['Address'] }} </span>
               <br>
               <br>
-               <span class="icons"> <p class="glyphicon glyphicon-tag"></p> ${{ currEventg['ticket'] }} </span>
+               <span class="icons"> <p class="glyphicon glyphicon-tag"></p>Admission Fee: ${{ currEventg['ticket'] }} </span>
               <br>
               <br>
              <span class="icons"> <p class="glyphicon glyphicon-calendar"></p> {{ currEventg['Start'] }} to {{ currEventg['End'] }}  </span>
