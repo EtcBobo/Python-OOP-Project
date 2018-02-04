@@ -3,6 +3,7 @@
 {% block body %}
         {% from "includes/_formhelper.html" import render_field %}
   <div class="container">
+  <br><br>
     <h1 id="view">View All Restaurants</h1>
 
       <form method="post">
@@ -33,10 +34,11 @@
 
        <img id='restimg' class='img-responsive' src={{ i['urlRest'] }}>
        <h1 class="restname">{{i['Name'] }}</h1>
-       <h5 id="restdesc" style="text-align:justify;word-wrap: break-word;"> {{ i['Description'] }}</h5>
-<br>
-       <h6>Average Rating: {{ i['Average Rating'] }} out of 5 </h6>
-       <h6>Price Range: ${{ i['Price'] }}</h6>
+        <div style="width:100%;height:120px;overflow:auto;">
+            <h5 id="restdesc" style="text-align:justify;word-wrap: break-word;"> {{ i['Description'] }}</h5>
+           </div>
+            <h6>Average Rating: {{ i['Average Rating'] }} out of 5 </h6>
+            <h6>Price Range: ${{ i['Price'] }}</h6>
        <a class='recbtn' href="/restDet/{{ i['Name'] }}">know more</a>
 <br><br>
 
