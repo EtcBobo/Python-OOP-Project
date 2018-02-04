@@ -3,12 +3,14 @@
 {% block body %}
 
   <div class="container" id="filterdiv">
+  <br><br>
     <h1 id="view">Results</h1>
     {% from "includes/_formhelper.html" import render_field %}
     <form method="post">
         <div class="form-group col-md-12">
+            <div class="form-group col-md-4">
             <p id="lengthlist">{{ lengthList }} results</p>
-            <br>
+            </div>
         </div>
 
         <div class="form-group col-md-12">
@@ -161,10 +163,7 @@
         text-decoration:none;
     }
 
-    #lengthlist{
-        float:right;
-        margin-right:220px;
-    }
+{#--------------Number of Result--------------#}
 
 
 
