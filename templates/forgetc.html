@@ -3,38 +3,38 @@
 {% block body %}
        {% from "includes/_formhelper.html" import render_field %}
 <div class="container">
-     <div class="form-group col-md-12" id="add">Validation Code</div>
+<br>
     <br>
-    <br>
+     <div class="form-group col-md-12" id="add">enter Validation Code</div>
+
     <form method='POST' >
          <div class="form-group col-md-12">
             <div class="row">
-            <div  class="col-md-8 col-md-offset-2" class="edit">
-
+            <div  class="col-md-8 col-md-offset-2">
+                 <br>
+    <br>
                 <div class="form-group col-md-12">
                     {{ render_field(form.code, class_="form-control") }}
                 </div>
 
+  <div class="form-group">
+            <div class="form-row">
+                <div class="form-group col-md-11">
 
 
-
-                    <div class="form-group">
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <br>
-                    <div class='btn-toolbar'>
-                        <button type="submit" class="btn btn-primary btn-lg upload-group text-center" id="uploadButton">Confirm</button>
-                    </div>
-                             </div>
-                        </div>
-                    </div>
-              </div>
+ </div>
+                <div class="form-group col-md-12">
+                    <button type="submit" id="btn">Confirm</button>
+                </div>
             </div>
         </div>
 
+            </div>
+        </div>
+        </div>
     </form>
+    </div>
 
-</div>
 
     <style>
       #add{
@@ -48,10 +48,24 @@
      }
 
 
-
-    form{
-        display: inline-block;
+    #btn{
+         background-color: darkred;
+    border: 0;
+    color: #fff!important;
+    display: inline-block;
+    font-size: 14px;
+    text-align: center;
+        height: 42px;
+        width:50%;
     }
+
+        @media(max-width:991px){
+        #btn{
+            width:100%;
+        }
+    }
+
+
 
 
 

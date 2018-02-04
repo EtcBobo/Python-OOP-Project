@@ -3,14 +3,17 @@
 {% block body %}
        {% from "includes/_formhelper.html" import render_field %}
 <div class="container">
-     <div class="form-group col-md-12" id="add">Reset Your Password</div>
-    <br>
-    <br>
+<br><br>
+     <div class="form-group col-md-12" id="add">Forgot your password?</div>
+
     <form method='POST' >
          <div class="form-group col-md-12">
             <div class="row">
-            <div  class="col-md-8 col-md-offset-2" class="edit">
-
+            <div class="col-md-8 col-md-offset-2" class="edit">
+                <br><br>
+                <div class="form-group col-md-12">If you do not have an account, <a href="/userRegister" style="color:blue;">click here</a> to set up a new account(is free). Enter your username and email below to receive your validation code by <b>email</b>
+                    <br><br>
+                 </div>
                 <div class="form-group col-md-12">
                     {{ render_field(form.name, class_="form-control") }}
                 </div>
@@ -20,24 +23,40 @@
                 </div>
 
 
+              <div class="form-group">
+            <div class="form-row">
+                <div class="form-group col-md-11">
 
 
-                    <div class="form-group">
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <br>
-                    <div class='btn-toolbar'>
-                        <button type="submit" class="btn btn-primary btn-lg upload-group text-center" id="uploadButton">Continue</button>
-                    </div>
-                             </div>
-                        </div>
-                    </div>
-              </div>
+ </div>
+                <div class="form-group col-md-12">
+                    <button type="submit" id="btn">Send me a validation code</button>
+                </div>
             </div>
         </div>
 
+            </div>
+        </div>
+        </div>
     </form>
-</div>
+    </div>
+
+{#                    <div class="form-group">#}
+{#                        <div class="form-row">#}
+{#                            <div class="form-group col-md-12">#}
+{#                                <br>#}
+{#                    <div class='btn-toolbar'>#}
+{#                        <button type="submit" class="btn btn-success btn-lg" id="uploadButton">Send Me Validation Code</button>#}
+{#                    </div>#}
+{#                             </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#              </div>#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#    </form>#}
+{#</div>#}
     <style>
       #add{
           display: block;
@@ -51,9 +70,24 @@
 
 
 
-    form{
-        display: inline-block;
+   #btn{
+        background-color: darkred;
+    border: 0;
+    color: #fff!important;
+    display: inline-block;
+    font-size: 14px;
+    text-align: center;
+        height: 42px;
+        width:50%;
+   }
+
+    @media(max-width:991px){
+        #btn{
+            width:100%;
+        }
     }
+
+
 
 
 

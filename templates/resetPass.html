@@ -3,12 +3,14 @@
 {% block body %}
        {% from "includes/_formhelper.html" import render_field %}
 <div class="container">
+<br><br>
      <div class="form-group col-md-12" id="add">Enter New Password</div>
     <br>
     <br>
     <form method='POST' >
          <div class="form-group col-md-12">
             <div class="row">
+                <br><br>
             <div  class="col-md-8 col-md-offset-2" class="edit">
 
                 <div class="form-group col-md-12">
@@ -21,23 +23,23 @@
 
 
 
-                    <div class="form-group">
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <br>
-                    <div class='btn-toolbar'>
-                        <button type="submit" class="btn btn-primary btn-lg upload-group text-center" id="uploadButton">Reset</button>
-                    </div>
-                             </div>
-                        </div>
-                    </div>
-              </div>
+                      <div class="form-group">
+            <div class="form-row">
+                <div class="form-group col-md-11">
+
+
+ </div>
+                <div class="form-group col-md-12">
+                    <button type="submit" id="btn">Reset my password</button>
+                </div>
             </div>
         </div>
 
+            </div>
+        </div>
+        </div>
     </form>
-
-</div>
+    </div>
     
     <style>
       #add{
@@ -52,9 +54,23 @@
 
 
 
-    form{
-        display: inline-block;
+     #btn{
+        background-color: darkred;
+    border: 0;
+    color: #fff!important;
+    display: inline-block;
+    font-size: 14px;
+    text-align: center;
+        height: 42px;
+        width:50%;
+   }
+
+    @media(max-width:991px){
+        #btn{
+            width:100%;
+        }
     }
+
 
 
     

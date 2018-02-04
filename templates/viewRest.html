@@ -37,13 +37,14 @@
             <div class="col-md-5">
                 <br><br>
                 <p id="description" style="margin-bottom:5px;"> {{ i['Description'] }}</p>
-                <div>
+                <div class="avg">
                     <span id="avgra">Average ratings: {{ i['Average Rating'] }}/5</span>
                     <br>
                     <span>Average Price: $4</span>
+                    <br>
+                    <span>Food Type: {{ i['Food Type'] }}</span>
                 </div>
             </div>
-
             <div class="col-md-2" id="knowbtn">
                 <a id="knowtxt" href="/restDet/{{ i['Name'] }}">Know More</a>
             </div>
@@ -137,7 +138,7 @@
         font-weight:normal;
         font-size:110%;
         word-wrap: break-word;
-        height:200px;
+        height:175px;
     }
     {#--------------Know More button--------------#}
     #knowbtn{
@@ -165,6 +166,8 @@
         margin-right:220px;
     }
 
+
+
 @media(max-width:991px){
     #sortbtn{
         width:100%;
@@ -190,13 +193,21 @@
      }
 
     #knowbtn{
-        margin-top:0px;
+        margin-top:15px;
         float:right;
     }
 
      #description{
          height:100%;
      }
+
+     .avg br{
+         display:block;
+     }
+
+
+
+
 }
 </style>
 

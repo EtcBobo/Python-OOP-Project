@@ -16,7 +16,9 @@
                 </div>
                 <div class="form-group col-md-12"><span class="glyphicon glyphicon-lock"></span>
                     {{ render_field(form.password, class_="form-control") }}
+                    <span><a class='forgetpw' href="/forget">forget password?</a></span>
                 </div>
+
 
                 <div class="form-group">
             <div class="form-row">
@@ -25,7 +27,7 @@
 
  </div>
                 <div class="form-group col-md-12">
-                    <input type="submit" value="login" class="btn btn-info" id="loginbtn"/>
+                    <input type="submit" value="Login" class="btn btn-info" id="loginbtn"/>
                 </div>
             </div>
         </div>
@@ -72,6 +74,10 @@
         height: 42px;
         width:50%;
     }
+
+.forgetpw:hover{
+    color:black;
+     }
 
 @media(max-width: 991px){
 #loginbtn{
