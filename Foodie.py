@@ -14,8 +14,6 @@ from email.mime.base import MIMEBase
 from email import encoders
 from flask_socketio import SocketIO, emit
 import random
-# from flask_googlemaps import GoogleMaps
-from flask_googlemaps import Map
 from flask_share import Share
 import json
 import datetime
