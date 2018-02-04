@@ -1024,9 +1024,9 @@ def forget():
         msg['Subject'] = subject
 
         body = '\n Hi ' + name + '. A password reset request has been activated for your account. No Changes have been made to your account yet'\
-                                 '\n \nPlease key in this confirmation code below in our webpage to verify the password reset request:'\
-                                 '\nThe code is:  ' +code+ ' \n\nIf you did not request for a new password. Please ignore this email and contact us at thefoodie.newsletter@gmail.com ' \
-                                 '\n \n \n Sincerely, ' \
+                                 '\n \nPlease key in this verification code below in our webpage to verify the password reset request:'\
+                                 '\n \n \nThe code is:  ' +code+ ' \n\n\nIf you did not make this request please ignore this email :) ' \
+                                 '\n \n \nSincerely, ' \
                                  '\n \nTheFoodie Team'
 
         msg.attach(MIMEText(body, 'plain'))

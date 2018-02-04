@@ -4,14 +4,7 @@
     <list default="true" id="31b0ad24-9715-4fb3-ac4e-f17ab7a95e70" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/The Foodie.py" afterPath="$PROJECT_DIR$/The Foodie.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/denied.html" afterPath="$PROJECT_DIR$/templates/denied.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/eventDet.html" afterPath="$PROJECT_DIR$/templates/eventDet.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/forget.html" afterPath="$PROJECT_DIR$/templates/forget.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/forgetc.html" afterPath="$PROJECT_DIR$/templates/forgetc.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/resetPass.html" afterPath="$PROJECT_DIR$/templates/resetPass.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/restDet.html" afterPath="$PROJECT_DIR$/templates/restDet.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/userLogin.html" afterPath="$PROJECT_DIR$/templates/userLogin.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/viewRest.html" afterPath="$PROJECT_DIR$/templates/viewRest.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/home.html" afterPath="$PROJECT_DIR$/templates/home.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,15 +14,15 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Python_OOP_Project$The_Foodie.coverage" NAME="The Foodie Coverage Results" MODIFIED="1517745777791" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Python_OOP_Project$The_Foodie.coverage" NAME="The Foodie Coverage Results" MODIFIED="1517749489947" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file leaf-file-name="The Foodie.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/The Foodie.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="1551" column="44" lean-forward="true" selection-start-line="1551" selection-start-column="44" selection-end-line="1551" selection-end-column="44" />
+            <state relative-caret-position="230">
+              <caret line="1029" column="54" lean-forward="true" selection-start-line="1029" selection-start-column="54" selection-end-line="1029" selection-end-column="54" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -52,9 +45,19 @@
       <file leaf-file-name="home.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/home.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="246">
-              <caret line="347" column="14" lean-forward="false" selection-start-line="344" selection-start-column="4" selection-end-line="352" selection-end-column="42" />
-              <folding />
+            <state relative-caret-position="399">
+              <caret line="40" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#1;n#div#1;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#2;n#div#1;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#1;n#div#0;n#div#2;n#div#1;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#3;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#1;n#div#1;n#div#3;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#2;n#div#1;n#div#3;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -149,11 +152,8 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>.more</find>
-      <find>.homedesc</find>
       <find>recentc</find>
       <find>more</find>
-      <find>recbtn</find>
       <find>rec</find>
       <find>file</find>
       <find>.eve</find>
@@ -169,7 +169,6 @@
       <find>pho</find>
       <find>validation code</find>
       <find>code</find>
-      <find>smtp</find>
       <find>weekly</find>
       <find>avgra</find>
       <find>#desci</find>
@@ -179,6 +178,10 @@
       <find>info2</find>
       <find>img</find>
       <find>backbtn</find>
+      <find>smtp</find>
+      <find>recbtn</find>
+      <find>recdesc</find>
+      <find>homedesc</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -206,18 +209,18 @@
         <option value="$PROJECT_DIR$/templates/findEvent.html" />
         <option value="$PROJECT_DIR$/templates/userProfile.html" />
         <option value="$PROJECT_DIR$/templates/addEvent.html" />
-        <option value="$PROJECT_DIR$/templates/home.html" />
         <option value="$PROJECT_DIR$/templates/events.html" />
         <option value="$PROJECT_DIR$/templates/includes/_navbar.html" />
         <option value="$PROJECT_DIR$/templates/denied.html" />
         <option value="$PROJECT_DIR$/templates/userLogin.html" />
         <option value="$PROJECT_DIR$/templates/forgetc.html" />
-        <option value="$PROJECT_DIR$/The Foodie.py" />
         <option value="$PROJECT_DIR$/templates/forget.html" />
         <option value="$PROJECT_DIR$/templates/resetPass.html" />
         <option value="$PROJECT_DIR$/templates/viewRest.html" />
         <option value="$PROJECT_DIR$/templates/restDet.html" />
         <option value="$PROJECT_DIR$/templates/eventDet.html" />
+        <option value="$PROJECT_DIR$/The Foodie.py" />
+        <option value="$PROJECT_DIR$/templates/home.html" />
       </list>
     </option>
   </component>
@@ -567,7 +570,14 @@
       <option name="project" value="LOCAL" />
       <updated>1517686215269</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="update">
+      <created>1517746073295</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1517746073296</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1002,14 +1012,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="347" column="14" lean-forward="false" selection-start-line="344" selection-start-column="4" selection-end-line="352" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/restDet.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="546">
@@ -1030,10 +1032,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="40" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#1;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#2;n#div#1;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#1;n#div#0;n#div#2;n#div#1;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#3;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#1;n#div#3;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#2;n#div#1;n#div#3;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/The Foodie.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="1551" column="44" lean-forward="true" selection-start-line="1551" selection-start-column="44" selection-end-line="1551" selection-end-column="44" />
+        <state relative-caret-position="230">
+          <caret line="1029" column="54" lean-forward="true" selection-start-line="1029" selection-start-column="54" selection-end-line="1029" selection-end-column="54" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>

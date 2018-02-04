@@ -29,12 +29,12 @@
         <div class="form-group col-md-12">
         <div class="form-group col-md-4">
 		<img class="img responsive" src={{ hnp[2]['urlRest'] }} style="width:100%;height:300px;">
-		<div class="w3-container" style="width:100%;height:300px;background-color:#97d2a3;">
+		<div class="w3-container" style="width:100%;height:300px;background-color:#97d2a3;overflow:scroll;">
             <br>
 {#          <img class="icon-img" src="http://www.free-css.com/assets/files/free-css-templates/preview/page185/bliss/images/icon1.png" style="margin-left:130px;">#}
             <p class="popline"><a href="/restDet/{{ hnp[2]['Name'] }}">{{ hnp[2]['Name'] }}</a></p>
             <br>
-        <div class="homedesc" style="width:100%;height:40%;"> {{ hnp[2]['Description'] }} </div>
+        <div class="homedesc" style="width:100%;height:40%;"> {{ hnp[2]['Description'] }}</div>
         </div>
         </div>
 
@@ -42,7 +42,7 @@
 
 
       <div class="form-group col-md-4">
-      <div class="w3-container" style="width:100%;height:300px;background-color:#86cdd7">
+      <div class="w3-container" style="width:100%;height:300px;background-color:#86cdd7;overflow:scroll;">
           <br>
 {#          <img class="icon-img" src="http://www.jakesfinerfoods.com/wp-content/uploads/2012/07/cloche-icon-white.png" style="height:80px;width:100px;margin-left:100px;">#}
           <p class="popline"><a  href="/restDet/{{ hnp[1]['Name'] }}">{{ hnp[1]['Name'] }}</a></p>
@@ -57,7 +57,7 @@
 
       <div class="form-group col-md-4">
                  <img class="img responsive" src={{ hnp[0]['urlRest'] }} style="width:100%;height:300px;">
-      <div class="w3-container" style="width:100%;height:300px;background-color:#e8b867">
+      <div class="w3-container" style="width:100%;height:300px;background-color:#e8b867;overflow:scroll;">
           <br>
 {#          <img class="icon-img" src="http://www.free-css.com/assets/files/free-css-templates/preview/page185/bliss/images/icon1.png"  style="margin-left:130px;">#}
           <p class="popline"><a href="/restDet/{{ hnp[0]['Name'] }}">{{ hnp[0]['Name'] }}</a></p>
@@ -147,28 +147,39 @@
   <div class="form-group col-md-12">
 <br><br>
    <div class="form-group col-md-4">
+       <div style="height:450px;width:100%;overflow:scroll;">
        <img class="img-responsive" style="height:350px;width:500px;" src={{ recommend[0]['urlRest'] }}>
        <h1 class="recname">{{ recommend[0]['Name'] }}</h1>
-                    <h6 class="recdesc">{{ recommend[0]['Description'] }}</h6>
+        <h6 class="recdesc">{{ recommend[0]['Description'] }}</h6>
+       <br>
+       </div>
        <br>
        <a class="recbtn" href="/restDet/{{ recommend[0]['Name'] }}">know more</a>
                 </div>
 
           <div class="form-group col-md-4">
+               <div style="height:450px;width:100%;overflow:scroll;">
               <img class="img-responsive" style="height:350px;width:500px;" src={{ recommend[1]['urlRest'] }}>
               <h1 class="recname">{{ recommend[1]['Name'] }}</h1>
-              <h5 class="recdesc">{{ recommend[1]['Description'] }}</h5>
+              <h6 class="recdesc">{{ recommend[1]['Description'] }}</h6>
+              <br>
+               </div>
               <br>
                <a class='recbtn' href="/restDet/{{ recommend[1]['Name'] }}">know more</a>
           </div>
 
 
           <div class="form-group col-md-4">
+               <div style="height:450px;width:100%;overflow:scroll;">
               <img class="img-responsive" style="height:350px;width:500px;" src={{ recommend[2]['urlRest'] }}>
               <h1 class="recname">{{ recommend[2]['Name'] }}</h1>
               <h6 class="recdesc">{{ recommend[2]['Description'] }}</h6>
-               <br>
+                    <br>
+              </div>
+              <br>
                <a class='recbtn' href="/restDet/{{ recommend[2]['Name'] }}">know more</a>
+            </div>
+
 
 {#                <div class="form-group col-md-4"><img class="homerec" class="img responsive" src={{ recommend[0]['urlRest'] }}>#}
 {#                    <h1><a href="/restDet/{{ recommend[0]['Name'] }}">{{ recommend[0]['Name'] }}</a></h1>#}
@@ -244,7 +255,7 @@
 
 .recdesc{
      display: block;
-    font-size: 80%;
+    font-size: 105%;
     font-family: 'Montserrat', sans-serif;
     letter-spacing: .1em;
      float:left;
@@ -345,12 +356,12 @@
      text-align:center;
     border: 1px solid #969696;
     color: #969696;
-    margin-top: 80px;
     display:block;
     padding: 5px 32px 11px;
     height:50px;
     text-transform: uppercase;
     font-family: 'Montserrat', sans-serif;
+
 
 }
 .recbtn:hover{
@@ -430,7 +441,7 @@ h3{
     }
 
    .homedesc{
-       width:100%!important;
+      font-size:100%;
    }
 
 }
