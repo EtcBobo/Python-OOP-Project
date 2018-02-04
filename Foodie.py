@@ -180,8 +180,8 @@ class Reset(Form):
     confirm = PasswordField('Repeat Password')
 
 class Bmi(Form):
-    height = IntegerField('Enter your Height (in cm)', [validators.DataRequired()])
-    weight = IntegerField("Enter your Weight (in Kg)", [validators.DataRequired()])
+    height = IntegerField('Enter your Height (in cm)', [validators.DataRequired(),validators.NumberRange(min=0,max=250,message='Please enter a valid height')])
+    weight = IntegerField("Enter your Weight (in Kg)", [validators.DataRequired(),validators.NumberRange(min=0,max=150,message='Please enter a valid weight')])
 
 
 @app.route('/', methods=['POST', 'GET'])
@@ -947,15 +947,16 @@ def bmiCalc():
         bmi = weight / ((height / 100) ** 2)
 
         if bmi < 18.5:
-            status = "under"
+            status = "Underweight"
         elif bmi > 25 and bmi < 30:
-            status= "over"
+            status= "Overweight"
         elif bmi > 30:
-            status = "obese"
+            status = "Obese"
         else:
-            status = "healthy"
+            status = "Healthy"
 
         session['uStatus'] = status
+        session['bmi'] = round(bmi, 2)
 
         try:
             theUser = session['username']
@@ -971,30 +972,31 @@ def bmiCalc():
             theUserr.update({
                 'Status':status
             })
-    return render_template("bmiCalc.html",form=form)
+        return redirect('bmiDisp')
+    return render_template("bmiCalc.html",form=form,proPic=proPic)
 
 
-# @app.route('/bmiDisp', methods=['GET', 'POST'])
-# def bmiDisp():
-#     try:
-#         proPic = session['proPic']
-#     except KeyError:
-#         proPic =''
-#     healthy = []
-#
-#     allRestr = root.child('restaurants')
-#     allRestg = allRestr.get()
-#     for key in allRestg:
-#         if allRestg[key]['Food Type'] == 'Healthy Food':
-#             healthy.append()
-#
-#     randHea =[]
-#
-#     option1, option2, option3 = random.sample(range(0, len(healthy)), 3)
-#     randHea.append(healthy[option1])
-#     randHea.append(healthy[option2])
-#     randHea.append(healthy[option3])
-#     return render_template("bmiDisp.html", randHea=randHea, status=session['uStatus'])
+@app.route('/bmiDisp', methods=['GET', 'POST'])
+def bmiDisp():
+    try:
+        proPic = session['proPic']
+    except KeyError:
+        proPic =''
+    healthy = []
+
+    allRestr = root.child('restaurants')
+    allRestg = allRestr.get()
+    for key in allRestg:
+        if allRestg[key]['Food Type'] == 'Healthy Food':
+            healthy.append(allRestg[key])
+
+    randHea =[]
+
+    option1, option2, option3 = random.sample(range(0, len(healthy)), 3)
+    randHea.append(healthy[option1])
+    randHea.append(healthy[option2])
+    randHea.append(healthy[option3])
+    return render_template("bmiDisp.html", randHea=randHea, status=session['uStatus'],bmi=session['bmi'],proPic=proPic)
 
 
 @app.route('/forget',methods=['POST','GET'])
@@ -1686,8 +1688,48 @@ def userProfile():
         print(favRest)
     except:
         pass
+    try:
+        status = theUser['Status']
+    except:
+        status = ''
 
-    return render_template('userProfile.html' , user = theUser, proPic = session['proPic'],allEdit=allEdit,allEvent=allEvent,goingEvent=goingEvent,favRest=favRest)
+
+    if status == 'Healthy':
+        randmsg = ['Now for the hardest part, remaining healthy!', 'Good job! keep burning those unwanted fats!',
+                   'Woooo you go girl! Or guy...fit body for the win!',
+                   'Temptations are everywhere! Keep doing what you are doing!',
+                   'Remember to exercise? Remember to have regular meals? Of cos you do :D']
+    elif status =='Obese':
+        randmsg = [
+            'Starchy carbohydrates should make up just over one third of the food you eat e.g. potatoes, bread, rice, pasta and cereals.',
+            'Cut down on Saturated Fat in your diet as it can increase your risk of developing heart diseases',
+            'Eat no more than 6g of salt per day burn calories by boosting exercise and not eating too little. Starvation is not the healthy answer!',
+            'Follow a healthy diet, reduce your daily intake by 500 calories for weight loss',
+            'change to healthy recipes that are quick to make and delicious too. Look for recipes which are lower in fat, particularly saturated fat']
+    elif status == 'Overweight':
+        randmsg = [
+            'you should eat at least five portions of a variety of fruit and vegetables every day.Go for a run with a fitness friend :)',
+            'Curb your sweeth tooth. remember "fruits first before sweets"',
+            'Set reasonable limits on the amount of time you spend watching TV, playing video games.',
+            'Be sure to set aside enough time to exercise every day and get enough sleep.',
+            'avoid energy drinks as they have unpleasant side effects like nervousness, irritability, and rapid heartbeat']
+    elif status == 'Underweight':
+        randmsg = [
+            'Eat healthy, but dense foods that packs a lot of carbohydrates, protein, or fat into a small serving.',
+            'Always aim for at least three food groups.A wider variety provides your body with a broader spectrum of nutrients to work with throughout the day.',
+            'Your body needs a continuous supply of energy since its like an engine thats always turned on, best to not let more than four hours go by without eating.Do not smoke. Smokers tend to weigh less than non-smokers, and quitting smoking often leads to weight gain.',
+            'drink smoothies or healthy shakes made with milk and fresh or frozen fruit']
+
+    if status != '':
+        randRec = []
+        option1 = random.sample(range(0, 5), 1)
+        first = option1[0]
+        randRec.append(randmsg[first])
+    else:
+        randRec = ['']
+
+
+    return render_template('userProfile.html' ,status=status,user = theUser, proPic = session['proPic'],allEdit=allEdit,allEvent=allEvent,goingEvent=goingEvent,favRest=favRest,randRec=randRec)
 
 
 @app.route('/events', methods=['POST','GET'])
@@ -1965,13 +2007,10 @@ def eventDet(eventName):
         return redirect(url_for('events'))
     return render_template('eventDet.html',currEventg=currEvent,proPic=proPic)
 
-@app.route('/bmiDisp')
-def bmid():
-    return render_template('bmiDisp.html')
+
 
 
 if __name__ == '__main__':
-    # socketio.run(app,debug=True)
-    app.run(port=80)
+    socketio.run(app,debug=True)
 
 

@@ -5,60 +5,190 @@
 
     <h3 style="text-align:center;font-size:250%;">Your result is</h3>
     <br>
-    <h3 style="text-align:center;font-size:250%;color:blue;">18.4</h3>
-        <h5 style="text-align:center;font-size:250%;">Your bmi category is <span style="color:greenyellow;font-size:120%;">healthy</span></h5>
+    <h3 style="text-align:center;font-size:250%;color:blue;">{{ bmi }}</h3>
+        <h5 style="text-align:center;font-size:250%;">Your bmi category is <span style="color:greenyellow;font-size:120%;">{{ status }}</span></h5>
 <br><br><br><br>
 
 <div class="form-group col-md-12">
+
+    {% if status == 'healthy' %}
     <img src="https://thumbs.dreamstime.com/b/healthy-boy-energetic-eps-31616887.jpg" style="width:450px;height:350px; display: block;
     margin-left: auto;
     margin-right: auto;">
-<h4 style=" display: block;
-    font-size: 150%;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: .1em;
- text-align: center;">Congratulations for staying <span style="color:greenyellow;font-size:120%;">healthy!</span> Remember to eat more veggies and Be active for 30mins a day! </h4>
+    {% elif status == 'underweight' %}
+    <img src="https://i.imgur.com/pEXlokD.jpg" style="width:450px;height:350px; display: block;
+    margin-left: auto;
+    margin-right: auto;">
+    {% elif status == 'obese' %}
+    <img src="https://i.imgur.com/Y3HxsZE.jpg" style="width:450px;height:350px; display: block;
+    margin-left: auto;
+    margin-right: auto;">
+    {% else %}
+    <img src="https://i.imgur.com/QpDvDbt.png" style="width:450px;height:350px; display: block;
+    margin-left: auto;
+    margin-right: auto;">
+    {% endif %}
+
+
+{% if status == 'healthy' %}
+<h4 style=" display: block;font-size: 150%;font-family: 'Montserrat', sans-serif;font-weight: bold;letter-spacing: .1em;text-align: center;">
+    Congratulations for staying <span style="color:greenyellow;font-size:120%;">healthy!</span> Remember to eat more veggies and Be active for 30mins a day! </h4>
+{% elif status == 'underweight' %}
+<h4 style=" display: block;font-size: 150%;font-family: 'Montserrat', sans-serif;font-weight: bold;letter-spacing: .1em;text-align: center;">
+    You are <span style="color:yellow;font-size:120%;">Underweight!</span> As part of an overall healthy diet, choose whole-grain breads, pastas and cereals; fruits and vegetables; dairy products; lean protein sources; and nuts and seeds. </h4>
+{% elif status == 'obese' %}
+<h4 style=" display: block;font-size: 150%;font-family: 'Montserrat', sans-serif;font-weight: bold;letter-spacing: .1em;text-align: center;">
+    Oh No! You are <span style="color:darkred;font-size:120%;">Obese!</span>Be active for 30mins a day! Activities includes take the dog for a walk, meet a friend for a walk or a bike ride, take the stairs instead of a lift or escalator. </h4>
+{% else %}
+<h4 style=" display: block;font-size: 150%;font-family: 'Montserrat', sans-serif;font-weight: bold;letter-spacing: .1em;text-align: center;">
+    You are <span style="color:red;font-size:120%;">Overweight!</span> Watch your diet! Watch Out for Fats but Don't Eliminate the Good Fats Completely.  </h4>
+{% endif %}
+
+
+
+
+
+
 </div>
     </div>
         <br>
+<br><br><br>
+ <div class="container">
+        <div class="form-group col-md-12" id="randHea">Take a look Below for Healthy Restaurants!</div>
+        <br><br>
+        <div class="form-group col-md-4">
+            <div id="recRest">
+                <img class="img-responsive" id="recRestImg" src={{ randHea[0]['urlRest'] }}>
+                <h1 class="recname">{{ randHea[0]['Name'] }}</h1>
+                <h6 id="recDesc">{{ randHea[0]['Description'] }}</h6>
+            </div>
+            <div id="knowbtn">
+                <a id="knowtxt" href="/restDet/{{ randHea[0]['Name'] }}">Know More</a>
+            </div>
+        </div>
 
-{#        <div class="container">#}
-{#            <div class="form-group col-md-12">#}
-{#                <div class="form-group col-md-12">#}
-{#                <div class="bmidiv" style="margin-left:50px;">#}
-{#         <img class="img-responsive" src="http://www.oogazone.com/wp-content/uploads/best-fitness-family-exercise-clipart-pictures.jpg" style="width:1000px;height:550px;display:block">#}
-{#                    <div class="form-group col-md-6">#}
-{#        <h3 style="font-weight:bold;font-size:120%;text-align:center;">Tip 1</h3>#}
-{#        <span>Be active for 30mins a day. Activities includes take the dog for a walk, meet a friend for a walk or a bike ride, take the stairs                                instead of a lift or escalator etc...</span>#}
-{#                    </div>#}
-{#                 <div class="form-group col-md-6">#}
-{#        <h3 style="font-weight:bold;font-size:120%;text-align:center;">Tip 2</h3>#}
-{#        <span>Big portions pile on extra calories that cause weight gain. choose smaller portions (or share restaurant portions) and go for water or low-fat milk instead of soda.</span>#}
-{#                    </div>#}
-{#                 <div class="form-group col-md-6">#}
-{#        <h3 style="font-weight:bold;font-size:120%;text-align:center;">Tip 3</h3>#}
-{#        <span>Look for recipes which are lower in fat, particularly saturated fat, contains only a moderate amount of added sugar etc..</span>#}
-{#                    </div>#}
-{#                 <div class="form-group col-md-6">#}
-{#        <h3 style="font-weight:bold;font-size:120%;text-align:center;">Tip 4</h3>#}
-{#        <span>limit alcohol intake. Alcohol-related health issues includes sleeping difficulties, liver disease, mental health conditions, overweight and obesity etc..</span>#}
-{#                    </div>#}
-{#                 <div class="form-group col-md-6">#}
-{#        <h3 style="font-weight:bold;font-size:120%;text-align:center;">Tip 5</h3>#}
-{#        <span>Don't skip breakfast. Breakfast kickstarts your metabolism, burning calories from the get-go and giving you energy to do more during the day.</span>#}
-{#                    </div>#}
-{##}
-{#                </div>#}
-{#                </div>#}
-{##}
-{#            </div>#}
-{#        </div>#}
+        <div class="form-group col-md-4">
+            <div id="recRest">
+                <img class="img-responsive" id="recRestImg" src={{ randHea[1]['urlRest'] }}>
+                <h1 class="recname">{{ randHea[1]['Name'] }}</h1>
+                <h6 id="recDesc">{{ randHea[1]['Description'] }}</h6>
+            </div>
+            <div id="knowbtn">
+                <a id="knowtxt" href="/restDet/{{ randHea[1]['Name'] }}">Know More</a>
+            </div>
+        </div>
 
+        <div class="form-group col-md-4">
+            <div id="recRest">
+                <img class="img-responsive" id="recRestImg" src={{ randHea[2]['urlRest'] }}>
+                <h1 class="recname">{{ randHea[2]['Name'] }}</h1>
+                <h6 id="recDesc">{{ randHea[2]['Description'] }}</h6>
+            </div>
+            <div id="knowbtn">
+                <a id="knowtxt" href="/restDet/{{ randHea[2]['Name'] }}">Know More</a>
+            </div>
+        </div>
+ </div>
 
 <style>
+  #recRestImg{
+        width:330px;
+        height:220px;
+    }
 
+    #recDesc{
+        display: block;
+        font-size: 105%;
+        font-family: 'Montserrat', sans-serif;
+        letter-spacing: .1em;
+        float:left;
+        height: 50px !important;
+        text-align: justify;
+    }
+
+    #knowbtn{
+        margin-top:150px;
+        margin-left: 80px;
+        border: 1px solid #969696;
+        width: 180px;
+        padding: 5px 45px 11px;
+    }
+
+    #knowtxt:hover{
+        text-decoration:none;
+        color:darkred!important;
+        font-weight:800;
+    }
+
+    #knowtxt{
+        text-align:center;
+        color: black;
+        font-size:80%;
+        text-transform: uppercase;
+        font-family: 'Montserrat', sans-serif;
+        text-decoration:none;
+    }
+
+
+    #popular, #randHea, #news, #tag{
+        display: block;
+        font-size: 150%;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: .1em;
+        text-align: center;
+    }
+
+    .popline, .popline a{
+        display: block;
+        color:white!important;
+        font-size: 115%;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: .1em;
+        text-align: center;
+        bottom:0;
+    }
+
+    .recname{
+        display: block;
+        font-size: 150%;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: .1em;
+        text-align:center;
+        height:50px;
+    }
+
+    .recbtn{
+        text-align:center;
+        border: 1px solid #969696;
+        color: #969696;
+        display:block;
+        padding: 5px 32px 11px;
+        height:50px;
+        text-transform: uppercase;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    .recbtn:hover{
+        text-decoration:none;
+        color:darkred!important;
+        font-weight:bold;
+    }
+
+    a:hover{
+        color:black;
+    }
+
+    h3{
+        text-align: center;
+        font-family: "hgw-HelveticaNeueBold",Arial,sans-serif;
+        font-weight: bold;
+    }
 
 </style>
 
