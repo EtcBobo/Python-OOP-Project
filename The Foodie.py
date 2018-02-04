@@ -66,6 +66,7 @@ class RegisterForm(Form):
 
 
 
+
 class RestForm(Form):
     name = StringField('Restaurant Name',[validators.DataRequired()])
     desc = TextAreaField('Desciption')
@@ -93,8 +94,9 @@ class RestForm(Form):
     address = TextAreaField('Address')
 
     days = SelectMultipleField('Opened Days',choices=[('Monday', 'Monday'), ('Tuesday', 'Tuesday'), ('Wednesday', 'Wednesday'),  ('Thursday', 'Thursday'), ('Friday', 'Friday'),
-                                    ('Saturday', 'Saturday'), ('Sunday','Sunday')],option_widget=widgets.CheckboxInput(),
+                                    ('Saturday', 'Saturday'), ('Sunday','Sunday'),('Not opened on Public holidays','Not opened on Public holidays')],option_widget=widgets.CheckboxInput(),
         widget=widgets.ListWidget(prefix_label=False))
+    landline = IntegerField('Telephone Number')
 class FilterForm(Form):
     fLocation = SelectField(u'Location',
                            choices=[('Any','Any'),('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),
@@ -306,10 +308,9 @@ def home():
         session['filteredR'] = nameListR
         session['filteredE'] = nameListE
 
-        session['empty'] = False
-        if nameListR == [] and nameListE == []:
-            session['empty'] = True
 
+        if nameListR == [] and nameListE == []:
+            return redirect(url_for('empty'))
 
         return redirect(url_for('viewAll'))
 
@@ -372,6 +373,14 @@ def hello():
     except KeyError:
         proPic = ''
     return render_template( '/chat.html' ,proPic=proPic)
+
+@app.route('/empty')
+def empty():
+    try:
+        proPic = session['proPic']
+    except KeyError:
+        proPic = ''
+    return render_template( 'empty.html' ,proPic=proPic)
 
 
 def messagereceived():
@@ -781,10 +790,13 @@ def addRest():
         closingH = form.closingH.data
         address = form.address.data
         days = form.days.data
+        landline = form.landline.data
 
         if days == []:
             days = {'0':'Everyday'}
             print('this')
+
+
 
         res = Restaurant(name,desc,location,price,foodType,openH,closingH,address)
 
@@ -796,9 +808,6 @@ def addRest():
                     return redirect(url_for('addRest'))
         except:
             pass
-        if user == '':
-            flash(u'You must be logged in to recommend a Restaurant','error')
-            return redirect(url_for('addRest'))
 
 
         restFireu = root.child('restaurants/rest'+str(count))
@@ -814,7 +823,8 @@ def addRest():
             'User':session['username'],
             'Average Rating':0,
             'Number of Raters':0,
-            'Days':days
+            'Days':days,
+            'Landline':landline
         })
         flash(u'You have added a new Restaurant!','success')
 
@@ -1455,6 +1465,7 @@ def restEdit(restName):
                                         ('Central', 'Central')],default=theRestg['Location'])
 
         price = IntegerField(u'Average Meal Price (in Dollars)',default=theRestg['Price'])
+        landline = IntegerField(u'Telephone Number', default=theRestg['Landline'])
         foodType = SelectField(u'Food Types',
                                choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'),
                                         ('Western Food', 'Western Food'),
@@ -1478,6 +1489,14 @@ def restEdit(restName):
                                         ('8 PM', '8 PM'), ('9 PM', '9 PM'), ('10 PM', '10 PM'), ('11 PM', '11 PM'), ],default=theRestg['Closing Hours'])
 
         address = TextAreaField('Address',default=theRestg['Address'])
+        days = SelectMultipleField('Opened Days',
+                                   choices=[('Monday', 'Monday'), ('Tuesday', 'Tuesday'), ('Wednesday', 'Wednesday'),
+                                            ('Thursday', 'Thursday'), ('Friday', 'Friday'),
+                                            ('Saturday', 'Saturday'), ('Sunday', 'Sunday'),
+                                            ('Not opened on Public holidays', 'Not opened on Public holidays')],
+                                   option_widget=widgets.CheckboxInput(),
+                                   widget=widgets.ListWidget(prefix_label=False))
+
 
     form = RestForm2(request.form)
     if request.method == 'POST':
@@ -1489,6 +1508,12 @@ def restEdit(restName):
         openH = form.openH.data
         closingH = form.closingH.data
         address = form.address.data
+        landline = form.landline.data
+        days =form.days.data
+
+        if days == []:
+            days = {'0':'Everyday'}
+
 
         theRestr.update({
             'Name':restName,
@@ -1499,10 +1524,8 @@ def restEdit(restName):
             'Opening Hours': openH,
             'Closing Hours': closingH,
             'Address': address,
-            'User': theRestg['User'],
-            'Average Rating': theRestg['Average Rating'],
-            'Number of Raters': theRestg['Number of Raters'],
-            'Days': theRestg['Days']
+            'Landline':landline,
+            'days':days
         })
         flash(u'You have successfully edited your restaurant!','success')
 
@@ -1551,7 +1574,7 @@ def userEdit():
         foodType = form.foodType.data
         password = form.password.data
         sub = form.sub.data
-        if sub == 'I wish to receive weekly email from The Foodie.':
+        if sub == ['I wish to receive weekly email from The Foodie.']:
             sub = 'Yes'
         else:
             sub = 'No'
@@ -1852,7 +1875,7 @@ def addEvent():
             for key in allEventg:
                 if eventName.lower == allEventg[key]['Name'].lower:
                     flash(u'This event already exist','error')
-                    return redirect(url_for('addRest'))
+                    return redirect(url_for('addEvent'))
         except:
             pass
 
