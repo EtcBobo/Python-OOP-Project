@@ -1,8 +1,8 @@
 {% extends 'layout.html' %}
 {% block body %}
-<br><br><br>
     <div class="container">
-
+    <button id="backbtn" class="btn btn-basic" style="float:left;margin-left:30px;"><a href="/events" class="back"> << go back to your profile</a></button>
+    <br><br><br>
     <h3 style="text-align:center;font-size:250%;">Your result is</h3>
     <br>
     <h3 style="text-align:center;font-size:250%;color:blue;">{{ bmi }}</h3>
@@ -189,6 +189,12 @@
         font-family: "hgw-HelveticaNeueBold",Arial,sans-serif;
         font-weight: bold;
     }
+
+@media(max-width:991px){
+    #backbtn{
+        display:none;
+    }
+}
 
 </style>
 
