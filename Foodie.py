@@ -305,6 +305,7 @@ def home():
 
         session['filteredR'] = nameListR
         session['filteredE'] = nameListE
+        print('the lists',nameListR,nameListE)
 
 
         if nameListR == [] and nameListE == []:
