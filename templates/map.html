@@ -51,6 +51,7 @@
                 let openH = json_string[i][name].openH;
                 let closeH = json_string[i][name].closeH;
                 let img = json_string[i][name].urlRest;
+                let ph = json_string[i][name].Landline;
                 console.log(openH);
 
             //------------------------Geocoder------------------------
@@ -70,9 +71,10 @@
               google.maps.event.addListener(marker, 'click', function () {
                   let infowindow = new google.maps.InfoWindow({
                   content: "<img style='width:130px; height:100px;' src=" +img +'> ' + '<br>' +
-                  "<h3>" +restName +"</h3>" + '<br>' +
-                  '<p>' + address + '<br>' + '<br>' + "Description: " + description + '<br>' + '<br>' +
-                  "Operating Hours: " + openH + ' - ' + closeH + '</p>'});  //information about restaurant
+                    "<h3>" +restName +"</h3>" + '<br>' +
+                    '<p>' + address + '<br>' + '<br>' + "Description: " + description + '<br>' + '<br>' +
+                    "Phone Number: " + ph +  '<br>' + '<br>' +
+                    "Operating Hours: " + openH + ' - ' + closeH + '</p>'});  //information about restaurant
               infowindow.open(map, marker);
           });
 
