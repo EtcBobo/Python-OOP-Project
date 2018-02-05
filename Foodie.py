@@ -417,23 +417,23 @@ def filter():
 
 
         for key in totalRest:
-            if totalRest[key]['Opening Hours'] == '12 PM':
+            if totalRest[key]['openH'] == '12 PM':
                 openH = 12
-            elif totalRest[key]['Opening Hours'] == '12 AM':
+            elif totalRest[key]['openH'] == '12 AM':
                 openH = 0
-            elif totalRest[key]['Opening Hours'][-2:] == 'PM':
-                openH = int(totalRest[key]['Opening Hours'][0:2]) + 12
+            elif totalRest[key]['openH'][-2:] == 'PM':
+                openH = int(totalRest[key]['openH'][0:2]) + 12
             else:
-                openH = int(totalRest[key]['Opening Hours'][0:2])
+                openH = int(totalRest[key]['openH'][0:2])
 
-            if totalRest[key]['Closing Hours'] == '12 PM':
+            if totalRest[key]['closeH'] == '12 PM':
                 closingH = 12
-            elif totalRest[key]['Closing Hours'] == '12 AM':
+            elif totalRest[key]['closeH'] == '12 AM':
                 closingH = 0
-            elif totalRest[key]['Closing Hours'][-2:] == 'PM':
-                closingH = int(totalRest[key]['Closing Hours'][0:2]) + 12
+            elif totalRest[key]['closeH'][-2:] == 'PM':
+                closingH = int(totalRest[key]['closeH'][0:2]) + 12
             else:
-                closingH = int(totalRest[key]['Closing Hours'][0:2])
+                closingH = int(totalRest[key]['closeH'][0:2])
 
             if openT == '12 PM':
                 openT1 = 12
@@ -834,8 +834,8 @@ def addRest():
             'Location': res.get_location(),
             'Price': res.get_price(),
             'Food Type': res.get_foodType(),
-            'Opening Hours': res.get_openH(),
-            'Closing Hours': res.get_closingH(),
+            'openH': res.get_openH(),
+            'closeH': res.get_closingH(),
             'Address': res.get_address(),
             'User':session['username'],
             'Average Rating':0,
@@ -1574,7 +1574,7 @@ def restEdit(restName):
                                      ('9 AM', '9 AM'), ('10 AM', '10 AM'), ('11 AM', '11 AM'), ('12 PM', '12 PM'),
                                      ('1 PM', '1 PM'), ('2 PM', '2 PM'), ('3 PM', '3 PM'), ('4 PM', '4 PM'),
                                      ('5 PM', '5 PM'), ('6 PM', '6 PM'), ('7 PM', '7 PM'),
-                                     ('8 PM', '8 PM'), ('9 PM', '9 PM'), ('10 PM', '10 PM'), ('11 PM', '11 PM')],default=theRestg['Opening Hours'])
+                                     ('8 PM', '8 PM'), ('9 PM', '9 PM'), ('10 PM', '10 PM'), ('11 PM', '11 PM')],default=theRestg['openH'])
         closingH = SelectField(u'Closing Hours',
                                choices=[('12 AM', '12 AM'), ('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'),
                                         ('4 AM', '4 AM'),
@@ -1582,7 +1582,7 @@ def restEdit(restName):
                                         ('9 AM', '9 AM'), ('10 AM', '10 AM'), ('11 AM', '11 AM'), ('12 PM', '12 PM'),
                                         ('1 PM', '1 PM'), ('2 PM', '2 PM'), ('3 PM', '3 PM'), ('4 PM', '4 PM'),
                                         ('5 PM', '5 PM'), ('6 PM', '6 PM'), ('7 PM', '7 PM'),
-                                        ('8 PM', '8 PM'), ('9 PM', '9 PM'), ('10 PM', '10 PM'), ('11 PM', '11 PM'), ],default=theRestg['Closing Hours'])
+                                        ('8 PM', '8 PM'), ('9 PM', '9 PM'), ('10 PM', '10 PM'), ('11 PM', '11 PM'), ],default=theRestg['closeH'])
 
         address = TextAreaField('Address',default=theRestg['Address'])
         days = SelectMultipleField('Opened Days',
@@ -1617,8 +1617,8 @@ def restEdit(restName):
             'Location': location,
             'Price': price,
             'Food Type': foodType,
-            'Opening Hours': openH,
-            'Closing Hours': closingH,
+            'openH': openH,
+            'closeH': closingH,
             'Address': address,
             'Landline':landline,
             'Days':days
