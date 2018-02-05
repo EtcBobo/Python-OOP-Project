@@ -10,7 +10,7 @@
     function initMap() {
         //------------------------Display Map------------------------
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 13,
+          zoom: 12,
           center: {lat: 1.372121, lng: 103.846678}
         });
 
@@ -48,6 +48,7 @@
                 let address = json_string[i][name].Address;
                 let description = json_string[i][name].Description;
                 let restName = json_string[i][name].Name;
+
                 console.log(restName);
 
             //------------------------Geocoder------------------------

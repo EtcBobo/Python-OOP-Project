@@ -2,13 +2,13 @@
 
 {% block body %}
 
-  <div class="container" id="filterdiv">
-  <br><br>
+    <div class="container" id="filterdiv">
+    <br><br>
     <h1 id="view">Results</h1>
-<br><br><br>
-   <h4 class="namee">Restaurants</h4>
-  <br><br>
-     {% for i in listR %}
+    <br><br><br>
+    <h4 class="namee">Restaurants</h4>
+    <br><br>
+    {% for i in listR %}
 
     <div class="form-group col-md-12">
             <div class="col-md-5">
@@ -36,32 +36,32 @@
         <br><br><br>
     {% endfor %}
 
-<br><br><br>
-<h4 class="namee">Events</h4>
-  <br><br>
-  {% for i in listE %}
-    <div class="col-md-12">
-        <div class="col-md-5" id="col-md-5">
-            <h1 id="restnames">{{ i['Name'] }}</h1>
-            <img id="detailimg" class="img-responsive" src={{ i['urlEvent'] }}>
-            <br>
-            <br>
+    <br><br><br>
+    <h4 class="namee">Events</h4>
+    <br><br>
+        {% for i in listE %}
+        <div class="col-md-12">
+            <div class="col-md-5" id="col-md-5">
+                <h1 id="restnames">{{ i['Name'] }}</h1>
+                <img id="detailimg" class="img-responsive" src={{ i['urlEvent'] }}>
+                <br>
+                <br>
+            </div>
+            <div class="col-md-5">
+                <br><br>
+                <p id="description"> {{ i['Description'] }}</p>
+                <br>
+                <span id="avgra">Number of people going: {{ i['People'] }}</span>
+                <br>
+                <span>Admission Fee: ${{ i['ticket'] }}</span>
+            </div>
+            <div class="col-md-2" id="knowbtn">
+                <a id="knowtxt"  href="/eventDet/{{ i['Name'] }}">know More</a>
+            </div>
         </div>
-        <div class="col-md-5">
-            <br><br>
-            <p id="description"> {{ i['Description'] }}</p>
-            <br>
-            <span id="avgra">Number of people going: {{ i['People'] }}</span>
-            <br>
-            <span>Admission Fee: ${{ i['ticket'] }}</span>
-        </div>
-        <div class="col-md-2" id="knowbtn">
-            <a id="knowtxt"  href="/eventDet/{{ i['Name'] }}">know More</a>
-        </div>
-   </div>
-        <br><br><br>
+    <br><br><br>
     {% endfor %}
-  </div>
+    </div>
 
 <style>
    #detailimg {
@@ -189,9 +189,6 @@
      .avg br{
          display:block;
      }
-
-
-
 
 }
 </style>
