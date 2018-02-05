@@ -57,7 +57,7 @@ class RegisterForm(Form):
     foodType = SelectField(u'Preferred Food Type',
                            choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'), ('Western Food', 'Western Food'),
                                     ('Chinese Food', 'Chinese Food'), ('Healthy Food', 'Healthy Food'),
-                                    ('Any', 'Any')])
+                                    ('None', 'None')])
     email = EmailField("Email",[validators.DataRequired()])
     sub = SelectMultipleField('Subsciption to weekly newsletter from The Foodie',
                                choices=[('I wish to receive weekly email from The Foodie.', 'I wish to receive weekly email from The Foodie.')],option_widget=widgets.CheckboxInput(),widget=widgets.ListWidget(prefix_label=False))
@@ -198,7 +198,7 @@ def home():
     restFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
     totalRest = restFire.get('restaurants', None)
     for key in totalRest:
-        if totalRest[key]['Food Type'] == userPref['Food Types'] or userPref['Food Types'] == 'Amy':
+        if totalRest[key]['Food Type'] == userPref['Food Types'] or userPref['Food Types'] == 'None':
             recommend.append(totalRest[key])
     option1, option2, option3 = random.sample(range(0, len(recommend)), 3)
     randRec.append(recommend[option1])
