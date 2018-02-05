@@ -13,17 +13,21 @@
 {#</div>#}
     <br><br>
 <div id='news' class="form-group col-md-12">News</div>
+
     <div class="container">
-<table >
 {% for news in container %}
-
-  <tr>
-    <th><img id='NewsImage' class="img-responsive" src={{ news['image'] }} alt="NewsImage"></th>
-    <td><a href= {{ news['link']}}>{{ news['title'] }}</a></td>
-  </tr>
-
+     <br><br>
+    <div class="from-group col-md-12">
+    <div class="form-group col-md-4">
+    <img class="img-responsive" id='NewsImage' src={{ news['image'] }} alt="NewsImage">
+    </div>
+    <div class="form-group col-md-8" id="textdiv">
+         <br> <br> <br><br>
+        <a class="newstext" href= {{ news['link']}}>{{ news['title'] }}</a>
+    </div>
+    </div>
 {% endfor %}
-</table>
+
     </div>
 
 
@@ -42,7 +46,7 @@
 {#    </div>#}
 <style>
     #NewsImage{
-        width: 300px;
+        width: 350px;
         height: 200px;
         padding: 5px 5px 5px 5px;
     }
@@ -58,6 +62,14 @@
         letter-spacing: .1em;
         text-align: center;
     }
+
+
+
+@media(max-width:991px){
+    #textdiv br{
+        display:none;
+    }
+}
 </style>
 
 {% endblock %}
