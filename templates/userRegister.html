@@ -146,7 +146,8 @@
         else{
 
                 var postData = {
-                    urlProfile:"https://www.revenueriver.co/hs-fs/hub/177047/file-2110622193-png/user_profile_img.png"
+                    urlProfile:"https://www.revenueriver.co/hs-fs/hub/177047/file-2110622193-png/user_profile_img.png",
+                    Username:'placeholder'
                 };
 
                 firebase.database().ref().child('/allUsers/user{{ count }}').update(postData)
@@ -171,6 +172,7 @@
                 var downloadURL = uploadTask.snapshot.downloadURL;
                 var postData = {
                     urlProfile: downloadURL,
+                    Name:'placeholder'
                 };
 
                 firebase.database().ref().child('/allUsers/user{{ count }}').update(postData)

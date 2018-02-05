@@ -770,14 +770,21 @@ def addRest():
     except KeyError:
         proPic =''
 
+    allRestr = root.child('restaurants')
+    allRestg = allRestr.get()
+
+    count = len(allRestg)
+
+    for key in allRestg:
+        if allRestg[key]['Name'] == 'placeholder':
+            count = len(allRestg) - 1
+
     try:
         user = session['username']
     except:
         return redirect(url_for('denied'))
     form = RestForm(request.form)
-    restFirer = root.child('restaurants')
-    restFireg = restFirer.get()
-    count = len(restFireg)
+
     if request.method == 'POST' and form.validate():
         name = form.name.data
         desc = form.desc.data
@@ -800,8 +807,8 @@ def addRest():
 
 
         try:
-            for key in restFireg:
-                if name.lower == restFireg[key]['Name'].lower:
+            for key in allRestg:
+                if name.lower == allRestg[key]['Name'].lower:
                     flash(u'This restaurant already exist','error')
                     return redirect(url_for('addRest'))
         except:
@@ -838,10 +845,18 @@ def userRegister():
         proPic =''
     allUser = root.child('allUsers')
     allUserg = allUser.get()
+
+
     try:
         count = len(allUserg)
     except:
         count = 0
+
+    count = len(allUserg)
+
+    for key in allUserg:
+        if allUserg[key]['Username'] == 'placeholder':
+            count = len(allUserg) - 1
 
 
     form = RegisterForm(request.form)
