@@ -5,17 +5,15 @@
     <div class="col-md-12">
         <br><br>
     <img id="deniedimg" class="img-responsive" align="middle" src="http://i.picresize.com/images/2018/02/04/sT4Yz.png">
-        <h3 style="text-align:center;font-size:200%;">Oops, No Results found</h3>
+        <h3 class="oops">Oops, No Results found</h3>
         <br><br><br>
-    <h3 style="text-align:center;">We have checked our database and there's no such restaurant/event.
+    <h3 class="empty">We have checked our database and there's no such restaurant/event.
         <br>
-        <a href="/" style="font-weight:bold;color:#4a4a4a;">Click here</a> to go back to home page :p </h3>
+        <a href="/" class="here">Click here</a> to go back to home page :p </h3>
         <br>
-        <h3 style="text-align:center;">You can also Recommend a Restaurant <a href="/addRest" style="font-weight:bold;color:#4a4a4a;">here</a> or Organize a new Event <a href="/addEvent" style="font-weight:bold;color:#4a4a4a;">here</a></h3>
+        <h3 class="empty">You can also Recommend a Restaurant <a href="/addRest" class="here">here</a> or Organize a new Event <a href="/addEvent" class="here">here</a></h3>
 
     </div>
-
-
     </div>
 
 
@@ -29,7 +27,20 @@
 
     }
 
-    a:hover{
+    .oops{
+        text-align:center;
+        font-size:200%;
+    }
+
+    .here{
+        font-weight:bold;color:#4a4a4a;
+    }
+
+    .empty{
+        text-align:center;
+    }
+
+    .here:hover{
         color:black;
         font-weight:bold;
     }
