@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="31b0ad24-9715-4fb3-ac4e-f17ab7a95e70" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Foodie.py" afterPath="$PROJECT_DIR$/Foodie.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/bmiDisp.html" afterPath="$PROJECT_DIR$/templates/bmiDisp.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/userProfile.html" afterPath="$PROJECT_DIR$/templates/userProfile.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/includes/_navbar.html" afterPath="$PROJECT_DIR$/templates/includes/_navbar.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/newsFeed.html" afterPath="$PROJECT_DIR$/templates/newsFeed.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,7 +14,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Python_OOP_Project$Foodie.coverage" NAME="Foodie Coverage Results" MODIFIED="1517832911914" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Python_OOP_Project$Foodie.coverage" NAME="Foodie Coverage Results" MODIFIED="1517841182818" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Python_OOP_Project$The_Foodie.coverage" NAME="The Foodie Coverage Results" MODIFIED="1517773128717" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
@@ -23,8 +22,8 @@
       <file leaf-file-name="Foodie.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Foodie.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="134">
-              <caret line="940" column="21" lean-forward="true" selection-start-line="906" selection-start-column="0" selection-end-line="940" selection-end-column="21" />
+            <state relative-caret-position="462">
+              <caret line="972" column="50" lean-forward="true" selection-start-line="972" selection-start-column="50" selection-end-line="972" selection-end-column="50" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -35,9 +34,11 @@
       <file leaf-file-name="_navbar.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/includes/_navbar.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="86" column="11" lean-forward="false" selection-start-line="86" selection-start-column="11" selection-end-line="86" selection-end-column="11" />
-              <folding />
+            <state relative-caret-position="315">
+              <caret line="15" column="7253" lean-forward="false" selection-start-line="15" selection-start-column="7253" selection-end-line="15" selection-end-column="7253" />
+              <folding>
+                <element signature="n#src#0;n#img#0;n#ul#0;n#div#0;n#nav#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -47,11 +48,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="63">
               <caret line="3" column="105" lean-forward="false" selection-start-line="3" selection-start-column="105" selection-end-line="3" selection-end-column="105" />
-              <folding>
-                <element signature="n#style#0;n#button#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#h5#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -59,10 +56,11 @@
       <file leaf-file-name="newsFeed.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/newsFeed.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="924">
-              <caret line="83" column="0" lean-forward="false" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+            <state relative-caret-position="235">
+              <caret line="38" column="69" lean-forward="false" selection-start-line="38" selection-start-column="69" selection-end-line="38" selection-end-column="69" />
               <folding>
-                <marker date="1517830185986" expanded="true" signature="2500:2590" ph="..." />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#h5#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -71,7 +69,7 @@
       <file leaf-file-name="eventDet.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/eventDet.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="172">
+            <state relative-caret-position="2184">
               <caret line="104" column="12" lean-forward="false" selection-start-line="103" selection-start-column="4" selection-end-line="105" selection-end-column="5" />
               <folding />
             </state>
@@ -81,7 +79,7 @@
       <file leaf-file-name="userProfile.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/userProfile.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="172">
+            <state relative-caret-position="1344">
               <caret line="64" column="14" lean-forward="false" selection-start-line="64" selection-start-column="14" selection-end-line="64" selection-end-column="14" />
               <folding>
                 <marker date="1517830812666" expanded="true" signature="2669:2680" ph="..." />
@@ -123,11 +121,38 @@
       <file leaf-file-name="restDet.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/restDet.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
+            <state relative-caret-position="945">
               <caret line="45" column="26" lean-forward="false" selection-start-line="45" selection-start-column="26" selection-end-line="45" selection-end-column="26" />
               <folding>
-                <marker date="1517829071108" expanded="false" signature="3605:3622" ph="..." />
-                <marker date="1517829071108" expanded="false" signature="5785:5801" ph="..." />
+                <marker date="1517839788674" expanded="true" signature="6183:6915" ph="{...}" />
+                <marker date="1517839788674" expanded="true" signature="6377:6676" ph="{&quot;apiKey&quot;: &quot;AIzaSyAbX0KjCpu-WKGrnj9snTRolEqomOXy0oA&quot;...}" />
+                <marker date="1517839788674" expanded="true" signature="6769:6823" ph="{&quot;&quot;&quot;: &quot;{{ restDetail['Name'] }}&quot;...}" />
+                <marker date="1517839788674" expanded="true" signature="6937:9547" ph="..." />
+                <marker date="1517839788674" expanded="true" signature="6950:6990" ph="{...}" />
+                <marker date="1517839788674" expanded="true" signature="7003:7134" ph="{...}" />
+                <marker date="1517839788674" expanded="true" signature="7144:7183" ph="{...}" />
+                <marker date="1517839788674" expanded="true" signature="7195:7224" ph="{...}" />
+                <marker date="1517839788674" expanded="true" signature="7235:7431" ph="{...}" />
+                <marker date="1517839788674" expanded="true" signature="7444:7501" ph="{...}" />
+                <marker date="1517839788674" expanded="true" signature="7520:7695" ph="{...}" />
+                <marker date="1517839788674" expanded="true" signature="7709:7770" ph="{...}" />
+                <marker date="1517839788674" expanded="true" signature="7783:7831" ph="{...}" />
+                <marker date="1517839788674" expanded="true" signature="7846:8072" ph="{...}" />
+                <marker date="1517839788674" expanded="true" signature="8081:8243" ph="{...}" />
+                <marker date="1517839788674" expanded="true" signature="8258:8304" ph="{...}" />
+                <marker date="1517839788674" expanded="true" signature="8320:8462" ph="{...}" />
+                <marker date="1517839788674" expanded="true" signature="8480:8626" ph="{...}" />
+                <marker date="1517839788674" expanded="true" signature="8638:8696" ph="{...}" />
+                <marker date="1517839788674" expanded="true" signature="8711:8813" ph="{...}" />
+                <marker date="1517839788674" expanded="true" signature="8822:8872" ph="{...}" />
+                <marker date="1517839788674" expanded="true" signature="8887:9089" ph="{...}" />
+                <marker date="1517839788674" expanded="true" signature="9097:9137" ph="{...}" />
+                <marker date="1517839788674" expanded="true" signature="9183:9230" ph="{...}" />
+                <marker date="1517839788674" expanded="true" signature="9245:9299" ph="{...}" />
+                <marker date="1517839788674" expanded="true" signature="9315:9418" ph="{...}" />
+                <marker date="1517839788674" expanded="true" signature="9427:9446" ph="{...}" />
+                <marker date="1517839788674" expanded="true" signature="9474:9528" ph="{...}" />
+                <marker date="1517839788674" expanded="true" signature="9489:9523" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -168,12 +193,12 @@
       <find>listE</find>
       <find>edit</find>
       <find>bmi</find>
-      <find>newsimage</find>
       <find>knowbtn</find>
       <find>detailimg</find>
       <find>eventimg</find>
       <find>backbtn</find>
       <find>smtp</find>
+      <find>newsimage</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -213,14 +238,14 @@
         <option value="$PROJECT_DIR$/templates/eventDet.html" />
         <option value="$PROJECT_DIR$/templates/viewallRest.html" />
         <option value="$PROJECT_DIR$/templates/includes/_footer.html" />
-        <option value="$PROJECT_DIR$/templates/newsFeed.html" />
         <option value="$PROJECT_DIR$/templates/addRest.html" />
         <option value="$PROJECT_DIR$/templates/viewRest.html" />
         <option value="$PROJECT_DIR$/templates/restDet.html" />
-        <option value="$PROJECT_DIR$/templates/includes/_navbar.html" />
         <option value="$PROJECT_DIR$/templates/bmiDisp.html" />
         <option value="$PROJECT_DIR$/templates/userProfile.html" />
         <option value="$PROJECT_DIR$/Foodie.py" />
+        <option value="$PROJECT_DIR$/templates/includes/_navbar.html" />
+        <option value="$PROJECT_DIR$/templates/newsFeed.html" />
       </list>
     </option>
   </component>
@@ -680,24 +705,31 @@
       <option name="project" value="LOCAL" />
       <updated>1517830163320</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="update">
+      <created>1517832954919</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1517832954919</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18313642" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1858217" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30882353" sideWeight="0.5365199" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37556562" sideWeight="0.46348011" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17873304" sideWeight="0.72717506" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32918552" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37556562" sideWeight="0.46348011" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973147" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39932126" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -742,9 +774,9 @@
     <MESSAGE value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;templates/userProfile.html" />
     <MESSAGE value="Merge branch 'master' of https://github.com/EtcBobo/Python-OOP-Project&#10;&#10;# Conflicts:&#10;#&#9;templates/restDet.html" />
     <MESSAGE value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;templates/events.html" />
-    <MESSAGE value="update" />
     <MESSAGE value="footer" />
-    <option name="LAST_COMMIT_MESSAGE" value="footer" />
+    <MESSAGE value="update" />
+    <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1028,21 +1060,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="441">
           <caret line="33" column="8" lean-forward="true" selection-start-line="33" selection-start-column="8" selection-end-line="33" selection-end-column="8" />
-          <folding>
-            <element signature="e#245#251#0#HTML" expanded="false" />
-            <element signature="n#style#0;n#p#2;n#div#0;n#footer#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#span#0;n#p#2;n#div#0;n#footer#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/newsFeed.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="924">
-          <caret line="83" column="0" lean-forward="false" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
-          <folding>
-            <marker date="1517830185986" expanded="true" signature="2500:2590" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1072,26 +1089,45 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/restDet.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
+        <state relative-caret-position="945">
           <caret line="45" column="26" lean-forward="false" selection-start-line="45" selection-start-column="26" selection-end-line="45" selection-end-column="26" />
           <folding>
-            <marker date="1517829071108" expanded="false" signature="3605:3622" ph="..." />
-            <marker date="1517829071108" expanded="false" signature="5785:5801" ph="..." />
+            <marker date="1517839788674" expanded="true" signature="6183:6915" ph="{...}" />
+            <marker date="1517839788674" expanded="true" signature="6377:6676" ph="{&quot;apiKey&quot;: &quot;AIzaSyAbX0KjCpu-WKGrnj9snTRolEqomOXy0oA&quot;...}" />
+            <marker date="1517839788674" expanded="true" signature="6769:6823" ph="{&quot;&quot;&quot;: &quot;{{ restDetail['Name'] }}&quot;...}" />
+            <marker date="1517839788674" expanded="true" signature="6937:9547" ph="..." />
+            <marker date="1517839788674" expanded="true" signature="6950:6990" ph="{...}" />
+            <marker date="1517839788674" expanded="true" signature="7003:7134" ph="{...}" />
+            <marker date="1517839788674" expanded="true" signature="7144:7183" ph="{...}" />
+            <marker date="1517839788674" expanded="true" signature="7195:7224" ph="{...}" />
+            <marker date="1517839788674" expanded="true" signature="7235:7431" ph="{...}" />
+            <marker date="1517839788674" expanded="true" signature="7444:7501" ph="{...}" />
+            <marker date="1517839788674" expanded="true" signature="7520:7695" ph="{...}" />
+            <marker date="1517839788674" expanded="true" signature="7709:7770" ph="{...}" />
+            <marker date="1517839788674" expanded="true" signature="7783:7831" ph="{...}" />
+            <marker date="1517839788674" expanded="true" signature="7846:8072" ph="{...}" />
+            <marker date="1517839788674" expanded="true" signature="8081:8243" ph="{...}" />
+            <marker date="1517839788674" expanded="true" signature="8258:8304" ph="{...}" />
+            <marker date="1517839788674" expanded="true" signature="8320:8462" ph="{...}" />
+            <marker date="1517839788674" expanded="true" signature="8480:8626" ph="{...}" />
+            <marker date="1517839788674" expanded="true" signature="8638:8696" ph="{...}" />
+            <marker date="1517839788674" expanded="true" signature="8711:8813" ph="{...}" />
+            <marker date="1517839788674" expanded="true" signature="8822:8872" ph="{...}" />
+            <marker date="1517839788674" expanded="true" signature="8887:9089" ph="{...}" />
+            <marker date="1517839788674" expanded="true" signature="9097:9137" ph="{...}" />
+            <marker date="1517839788674" expanded="true" signature="9183:9230" ph="{...}" />
+            <marker date="1517839788674" expanded="true" signature="9245:9299" ph="{...}" />
+            <marker date="1517839788674" expanded="true" signature="9315:9418" ph="{...}" />
+            <marker date="1517839788674" expanded="true" signature="9427:9446" ph="{...}" />
+            <marker date="1517839788674" expanded="true" signature="9474:9528" ph="{...}" />
+            <marker date="1517839788674" expanded="true" signature="9489:9523" ph="{...}" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/includes/_navbar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="86" column="11" lean-forward="false" selection-start-line="86" selection-start-column="11" selection-end-line="86" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/eventDet.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
+        <state relative-caret-position="2184">
           <caret line="104" column="12" lean-forward="false" selection-start-line="103" selection-start-column="4" selection-end-line="105" selection-end-column="5" />
           <folding />
         </state>
@@ -1101,17 +1137,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="63">
           <caret line="3" column="105" lean-forward="false" selection-start-line="3" selection-start-column="105" selection-end-line="3" selection-end-column="105" />
-          <folding>
-            <element signature="n#style#0;n#button#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h5#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/userProfile.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
+        <state relative-caret-position="1344">
           <caret line="64" column="14" lean-forward="false" selection-start-line="64" selection-start-column="14" selection-end-line="64" selection-end-column="14" />
           <folding>
             <marker date="1517830812666" expanded="true" signature="2669:2680" ph="..." />
@@ -1119,10 +1151,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/includes/_navbar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="15" column="7253" lean-forward="false" selection-start-line="15" selection-start-column="7253" selection-end-line="15" selection-end-column="7253" />
+          <folding>
+            <element signature="n#src#0;n#img#0;n#ul#0;n#div#0;n#nav#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/newsFeed.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="38" column="69" lean-forward="false" selection-start-line="38" selection-start-column="69" selection-end-line="38" selection-end-column="69" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h5#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Foodie.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="940" column="21" lean-forward="true" selection-start-line="906" selection-start-column="0" selection-end-line="940" selection-end-column="21" />
+        <state relative-caret-position="462">
+          <caret line="972" column="50" lean-forward="true" selection-start-line="972" selection-start-column="50" selection-end-line="972" selection-end-column="50" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>

@@ -31,11 +31,13 @@
     <br><br>
     <div id='news' class="form-group col-md-12">News</div>
     <div class="container">
-        <div class="form-group col-md-12">
+     <div class="form-group col-md-12">
         {% for news in container %}
                 <div class="form-group col-md-4">
                     <img id='NewsImage' class="img-responsive" src={{ news['image'] }} alt="NewsImage">
-                    <h5>{{ news['title'] }}</h5>
+                    <div style="height:60px;width:280px;">
+                    <h5 style="margin-left:10px;">{{ news['title'] }}</h5>
+                    </div>
                     <br><br>
                     <div id="knowbtn">
                         <a id="knowtxt"  href="{{ news['link'] }}">Know More</a>
@@ -43,7 +45,8 @@
                     <br><br>
                 </div>
         {% endfor %}
-        </div>
+     </div>
+
 
     </div>
 
