@@ -1722,6 +1722,7 @@ def userProfile():
     except:
         status = ''
 
+    test = ''
 
     if status == 'Healthy':
         randmsg = ['Now for the hardest part, remaining healthy!', 'Good job! keep burning those unwanted fats!',
