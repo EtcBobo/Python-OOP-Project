@@ -31,7 +31,7 @@
                     <small> {{ i['People'] }} people interested in going</small>
                     <img id='eventimg' class="img-responsive" src={{ i['urlEvent'] }}>
                   </div>
-                  <div class="col-md-4" id="eventdesc">
+                  <div class="col-md-8" id="eventdesc">
                       <br><br><br>
                       <h3 class="eventTitle"><a href="/eventDet/{{ i['Name'] }}">{{ i['Name'] }}</a> <span class="label label-success">Ongoing</span></h3>
                       <br>
@@ -50,11 +50,9 @@
                     <br><br>
                     <small> {{ i['People'] }} people interested in going</small>
                     <img id='eventimg'class="img-responsive" align="left" src={{ i['urlEvent'] }}>
-                    <br>
-                    <br>
                 </div>
                 <div class="col-md-8" id="eventdesc">
-                    <br><br><br>
+                    <br><br>
                     <h3 class="eventTitle"><a href="/eventDet/{{ i['Name'] }}">{{ i['Name'] }}</a> <span class="label label-danger"><span class="glyphicon glyphicon-fire"></span> Popular</span></h3>
                     <br>
                     <span class="desctext" style="float:left;"> {{ i['Description'] }} </span>

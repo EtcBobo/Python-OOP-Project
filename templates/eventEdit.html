@@ -1,11 +1,11 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-        {% from "includes/_formhelper.html" import render_field %}
-<div class="container">
+<div class="container" id="filterdiv">
     <br>
     <br>
          <h1 id="view">Edit {{ eventName }}</h1>
+    {% from "includes/_formhelper.html" import render_field %}
     <form method="post">
 
     <div class="form-group col-md-12">
@@ -71,10 +71,10 @@
         <br>
         <br>
 
-
     </form>
 </div>
-
+</div>
+         </div>
 
 
 
@@ -211,7 +211,7 @@
 
 @media(max-width:991px){
     #img{
-        margin-left:0px;
+        margin-left:3px;
     }
     #file{
         margin-left:0px;

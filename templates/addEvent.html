@@ -1,22 +1,18 @@
 {% extends 'layout.html' %}
-{% block body %}
 
+{% block body %}
     {% from "includes/_formhelper.html" import render_field %}
 
-<div class="'container">
+<div class="'container" id="filterdiv">
 <br>
-
- <div class="form-group col-md-12" id="add">Organize A Event!</div>
-
+ <h1 id="add">Organize A Event!</h1>
           <form method="POST">
         <div class="form-group col-md-12">
             <div class="row">
-            <div  class="col-md-8 col-md-offset-2" class="edit">
-                <div class="form-group col-md-12">
-                    <br>
+            <div class="col-md-8 col-md-offset-2" class="edit">
                     <div class="form-group col-md-12">
+                        <br><br>
                 <img id="img" src="https://thedanamariner.com/wp-content/uploads/2017/12/Events.jpg" width="304" height="304">
-                </div>
                 <input type="file" id="file"/>
                 <br>
                 <br>
@@ -83,7 +79,6 @@
             </div>
         </div>
             </div>
-
               </form>
 </div>
 
@@ -196,12 +191,12 @@
 
 <style>
  #file{
-         margin-left:350px;
-
+         margin-left:380px;
+        margin-top:20px;
     }
 
     #img{
-    margin-left:300px;
+    margin-left:330px;
 }
 
 #add{
@@ -211,7 +206,7 @@
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: .1em;
- text-align: center;
+    text-align:center;
 }
 
 #uploadButton{
@@ -228,10 +223,10 @@
 
  @media(max-width:991px){
     #img{
-        margin-left:0px;
+        margin-left:5px;
     }
     #file{
-        margin-left:0px;
+        margin-left:20px;
     }
     .edit{
         float:left;
