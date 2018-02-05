@@ -192,7 +192,7 @@ def home():
     except KeyError:
         userPref = {'Food Types':'None'}
         proPic =''
-    print(userPref)
+
     recommend = []
     randRec = []
     restFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
@@ -305,9 +305,8 @@ def home():
 
         session['filteredR'] = nameListR
         session['filteredE'] = nameListE
-        print('the lists',nameListR,nameListE)
+        print('e',session['filteredE'])
 
-        test=''
 
 
         if nameListR == [] and nameListE == []:
@@ -757,6 +756,7 @@ def viewAll():
         proPic = session['proPic']
     except KeyError:
         proPic =''
+    print(session['filteredR'])
     listE = session['filteredE']
     listR = session['filteredR']
     listLen = len(listE)  + len(listR)
