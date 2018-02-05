@@ -916,8 +916,8 @@ def userRegister():
         msg['To'] = email_send
         msg['Subject'] = subject
 
-        body = '\n Hi '  + user + '! Thank you for subscribing with TheFoodie Newsletter! \n As a welcome gift, get a free sundae and mcwings by using the codes given below ' \
-               '\n \nPlease continue to look forward to our monthly newsletters and get exclusive promotion codes only for subscribers! ' \
+        body = '\n Hi '  + user + '! Warm Welcome From TheFoodie Team! \n Thank you for signing up, as a welcome gift, get a free sundae and mcwings by using the codes given below.' \
+               '\n\n Enough said, head to our website and look for your desired restaurants now :D'\
                '\n \n \n Sincerely, ' \
                '\n \nTheFoodie Team'
 
@@ -939,6 +939,41 @@ def userRegister():
 
         server.sendmail(email_user, email_send, text)
         server.quit()
+
+        # email_user = 'thefoodie.newsletter@gmail.com'
+        # email_password = 'foodie123'
+        # email_send = email
+        #
+        # subject = 'TheFoodie weekly newsletter!'
+        #
+        # msg = MIMEMultipart()
+        # msg['From'] = email_user
+        # msg['To'] = email_send
+        # msg['Subject'] = subject
+        #
+        # body = '\n Hi jieyin! Thank you for subscribing with TheFoodie Newsletter! \n For this week''s exclusive promotion only for subscribers, we have included free chicken mcbites from Macdonalds for you. Simply show this email and image to the staffs to redeem!' \
+        #                          '\n\n Enough said, Head down to your nearest Macdonalds now :D' \
+        #                          '\n \n \n Sincerely, ' \
+        #                          '\n \nTheFoodie Team'
+        #
+        # msg.attach(MIMEText(body, 'plain'))
+        #
+        # filename = 'freepromo.jpg'
+        # attachment = open(filename, 'rb')
+        #
+        # part = MIMEBase('application', 'octet-stream')
+        # part.set_payload((attachment).read())
+        # encoders.encode_base64(part)
+        # part.add_header('Content-Disposition', "attachment; filename= " + filename)
+        #
+        # msg.attach(part)
+        # text = msg.as_string()
+        # server = smtplib.SMTP('smtp.gmail.com', 587)
+        # server.starttls()
+        # server.login(email_user, email_password)
+        #
+        # server.sendmail(email_user, email_send, text)
+        # server.quit()
 
         theBreak = False
         while theBreak == False:
@@ -1080,7 +1115,7 @@ def forget():
         msg['To'] = email_send
         msg['Subject'] = subject
 
-        body = '\n Hi ' + name + '. A password reset request has been activated for your account. No Changes have been made to your account yet'\
+        body = '\n Hi ' + name + '. A password reset request has been activated for your account. No Changes have been made to your account yet.'\
                                  '\n \nPlease key in this verification code below in our webpage to verify the password reset request:'\
                                  '\n \n \nThe code is:  ' +code+ ' \n\n\nIf you did not make this request please ignore this email :) ' \
                                  '\n \n \nSincerely, ' \

@@ -12,22 +12,21 @@
 {##}
 {#</div>#}
     <br><br>
-<div id='news' class="form-group col-md-12">News</div>
-
+    <div id='news' class="form-group col-md-12">News</div>
     <div class="container">
-{% for news in container %}
-     <br><br>
-    <div class="from-group col-md-12">
-    <div class="form-group col-md-4">
-    <img class="img-responsive" id='NewsImage' src={{ news['image'] }} alt="NewsImage">
-    </div>
-    <div class="form-group col-md-8" id="textdiv">
-         <br> <br> <br><br>
-        <a class="newstext" href= {{ news['link']}}>{{ news['title'] }}</a>
-    </div>
-    </div>
-{% endfor %}
-
+    {% for news in container %}
+        <div class="row">
+            <div class="col-md-4">
+                <img id='NewsImage' class="img-responsive" src={{ news['image'] }} alt="NewsImage">
+            </div>
+            <div class="col-md-8">
+                <h5>{{ news['title'] }}</h5>
+                <div id="knowbtn">
+                    <a id="knowtxt"  href="{{ news['link'] }}">know More</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
     </div>
 
 
@@ -46,7 +45,7 @@
 {#    </div>#}
 <style>
     #NewsImage{
-        width: 350px;
+        width: 300px;
         height: 200px;
         padding: 5px 5px 5px 5px;
     }
@@ -61,6 +60,25 @@
         text-transform: uppercase;
         letter-spacing: .1em;
         text-align: center;
+    }
+    #knowbtn{
+        margin-top: 120px;
+        border: 1px solid #969696;
+        width: 180px;
+        padding: 5px 45px 11px;
+    }
+    #knowtxt:hover{
+        text-decoration:none;
+        color:darkred!important;
+        font-weight:800;
+    }
+    #knowtxt{
+        text-align:center;
+        color: black;
+        font-size:80%;
+        text-transform: uppercase;
+        font-family: 'Montserrat', sans-serif;
+        text-decoration:none;
     }
 
 

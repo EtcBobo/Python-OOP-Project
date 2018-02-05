@@ -1,30 +1,30 @@
 {% extends 'layout.html' %}
 {% block body %}
-<br><br><br>
     <div class="container">
-
+    <button id="backbtn" class="btn btn-basic" style="float:left;margin-left:30px;"><a href="/userProfile" class="back"> << go back to your profile</a></button>
+    <br><br><br>
     <h3 style="text-align:center;font-size:250%;">Your result is</h3>
     <br>
     <h3 style="text-align:center;font-size:250%;color:blue;">{{ bmi }}</h3>
-        <h5 style="text-align:center;font-size:250%;">Your bmi category is <span style="color:greenyellow;font-size:120%;">{{ status }}</span></h5>
+        <h5 style="text-align:center;font-size:200%;text-justify:auto;">Your bmi category is <span style="color:greenyellow;font-size:120%;">{{ status }}</span></h5>
 <br><br><br><br>
 
 <div class="form-group col-md-12">
 
     {% if status == 'Healthy' %}
-    <img src="https://thumbs.dreamstime.com/b/healthy-boy-energetic-eps-31616887.jpg" style="width:450px;height:350px; display: block;
+    <img class="img-responsive" src="https://thumbs.dreamstime.com/b/healthy-boy-energetic-eps-31616887.jpg" style="width:450px;height:350px; display: block;
     margin-left: auto;
     margin-right: auto;">
     {% elif status == 'Underweight' %}
-    <img src="https://i.imgur.com/pEXlokD.jpg" style="width:450px;height:350px; display: block;
+    <img class="img-responsive" src="https://i.imgur.com/pEXlokD.jpg" style="width:450px;height:350px; display: block;
     margin-left: auto;
     margin-right: auto;">
     {% elif status == 'Obese' %}
-    <img src="https://i.imgur.com/Y3HxsZE.jpg" style="width:450px;height:350px; display: block;
+    <img class="img-responsive" src="https://i.imgur.com/Y3HxsZE.jpg" style="width:450px;height:350px; display: block;
     margin-left: auto;
     margin-right: auto;">
     {% else %}
-    <img src="https://i.imgur.com/QpDvDbt.png" style="width:450px;height:350px; display: block;
+    <img class="img-responsive" src="https://i.imgur.com/QpDvDbt.png" style="width:450px;height:350px; display: block;
     margin-left: auto;
     margin-right: auto;">
     {% endif %}
@@ -189,6 +189,12 @@
         font-family: "hgw-HelveticaNeueBold",Arial,sans-serif;
         font-weight: bold;
     }
+
+@media(max-width:991px){
+    #backbtn{
+        display:none;
+    }
+}
 
 </style>
 
