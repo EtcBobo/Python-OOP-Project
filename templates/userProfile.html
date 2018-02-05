@@ -38,12 +38,12 @@
             <br>
             <p class="userinfo">Subscribed: <span style="font-weight: bold;">{{ user['sub']  }} </span></p>
             <br>
-            <p class="userinfo">Bmi Status: <span style="font-weight: bold;">{{ user['Status']  }} </span></p>
+            <p class="userinfo"> Bmi Status: <span style="font-weight: bold;">{{ user['Status']  }} </span> <a href="/bmiCalc" style="font-weight: bold;margin-left:20px;" id="bmi">(Calculate My Bmi!)</a> </p>
             <br>
             <br>
-            <p class="userinfo">Free Health Tip for you!</p>
+            <p class="userinfo">Free Health Tip for you below!</p>
             <br>
-            <p class="userinfo">{{ randRec[0] }}</p>
+            <p class="userinfo" style="font-weight:bold;">{{ randRec[0] }}</p>
             </div>
             <div class="col-md-2"></div>
         <a href="/userEdit">
@@ -163,14 +163,22 @@
 
      #profilepic{
          align:center;
-         width:320px;
-         height:320px;
+         width:380px;
+         height:390px;
      }
 
      #profilediv {
          align: center;
          background-color: white;
          display:block;
+     }
+     #bmi{
+         color:#969696;
+         font-size:105%;
+     }
+     #bmi:hover{
+         font-weight:bold;
+         color:black;
      }
 
 
@@ -187,6 +195,8 @@
     overflow:auto;
     margin-top: 50px;
 }
+
+
 #editrest{
     background-color: darkred;
     border: 0;
