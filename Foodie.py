@@ -306,6 +306,8 @@ def home():
         session['filteredR'] = nameListR
         session['filteredE'] = nameListE
 
+        test=''
+
 
         if nameListR == [] and nameListE == []:
             return redirect(url_for('empty'))
