@@ -806,7 +806,7 @@ def addRest():
         res = Restaurant(name,desc,location,price,foodType,openH,closingH,address)
 
 
-
+        test = ''
         try:
             for key in allRestg:
                 print(allRestg[key]['Name'],name)
