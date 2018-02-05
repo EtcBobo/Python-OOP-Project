@@ -172,7 +172,7 @@
                 var downloadURL = uploadTask.snapshot.downloadURL;
                 var postData = {
                     urlProfile: downloadURL,
-                    Name:'placeholder'
+                    Username:'placeholder'
                 };
 
                 firebase.database().ref().child('/allUsers/user{{ count }}').update(postData)

@@ -52,8 +52,8 @@ class RegisterForm(Form):
         validators.EqualTo('confirm', message='Passwords must match')
     ])
     confirm = PasswordField('Repeat Password')
-    minPrice = IntegerField('Minimum Meal Budget (in Dollars)',[validators.DataRequired()])
-    maxPrice = IntegerField('Maximum Meal Budget (in Dollars)',[validators.DataRequired()])
+    minPrice = IntegerField('Minimum Meal Budget (in $)',[validators.DataRequired()])
+    maxPrice = IntegerField('Maximum Meal Budget (in $)',[validators.DataRequired()])
     foodType = SelectField(u'Preferred Food Type',
                            choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'), ('Western Food', 'Western Food'),
                                     ('Chinese Food', 'Chinese Food'), ('Healthy Food', 'Healthy Food'),
@@ -70,7 +70,7 @@ class RestForm(Form):
     desc = TextAreaField('Desciption')
     location = SelectField(u'Location', choices=[('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),('Central','Central')])
 
-    price = IntegerField(u'Average Meal Price (in Dollars)',[validators.DataRequired()])
+    price = IntegerField(u'Average Meal Price (in $)',[validators.DataRequired()])
 
     foodType = SelectField(u'Food Types',
                            choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'), ('Western Food', 'Western Food'),
@@ -99,7 +99,7 @@ class FilterForm(Form):
     fLocation = SelectField(u'Location',
                            choices=[('Any','Any'),('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),
                                     ('Central', 'Central')])
-    pricef = IntegerField(u'Below input Price (in Dollars)',[validators.DataRequired()])
+    pricef = IntegerField(u'Below input Price (in $)',[validators.DataRequired()])
     openT = SelectField(u'Preferred Meal Time',
                         choices=[('12 PM', '12 PM'), ('1 AM', '1 AM'), ('2 AM', '2 AM'), ('3 AM', '3 AM'),
                                  ('4 AM', '4 AM'),
@@ -123,7 +123,7 @@ class EventFilter(Form):
     status = SelectField(u'Status',
                             choices=[('Any', 'Any'), ('Upcoming', 'Upcoming'), ('Ongoing', 'Ongoing'), ('Ended', 'Ended')])
 
-    maxPrice = IntegerField(u'Maximum Budget (in Dollars)',[validators.DataRequired()])
+    maxPrice = IntegerField(u'Maximum Budget (in $)',[validators.DataRequired()])
 
 class Feedbacks(Form):
     comments = TextAreaField('Comments')
@@ -785,6 +785,7 @@ def addRest():
         return redirect(url_for('denied'))
     form = RestForm(request.form)
 
+
     if request.method == 'POST' and form.validate():
         name = form.name.data
         desc = form.desc.data
@@ -813,6 +814,17 @@ def addRest():
                     return redirect(url_for('addRest'))
         except:
             pass
+
+        theBreak = False
+        while theBreak == False:
+            try:
+                allEventr = root.child('restaurants')
+                allEventg = allEventr.get()
+                for key in allEventg:
+                    if allEventg[key]['Name'] == 'placeholder':
+                        theBreak = True
+            except:
+                pass
 
 
         restFireu = root.child('restaurants/rest'+str(count))
@@ -920,6 +932,17 @@ def userRegister():
 
             server.sendmail(email_user, email_send, text)
             server.quit()
+
+        theBreak = False
+        while theBreak == False:
+            try:
+                allEventr = root.child('allUsers')
+                allEventg = allEventr.get()
+                for key in allEventg:
+                    if allEventg[key]['Username'] == 'placeholder':
+                        theBreak = True
+            except:
+                pass
 
         theUser = root.child('allUsers/user'+str(count))
         theUser.update({
@@ -1495,7 +1518,7 @@ def restEdit(restName):
                                choices=[('North', 'North'), ('West', 'West'), ('East', 'East'), ('South', 'South'),
                                         ('Central', 'Central')],default=theRestg['Location'])
 
-        price = IntegerField(u'Average Meal Price (in Dollars)',default=theRestg['Price'])
+        price = IntegerField(u'Average Meal Price (in $)',default=theRestg['Price'])
         landline = IntegerField(u'Telephone Number', default=theRestg['Landline'])
         foodType = SelectField(u'Food Types',
                                choices=[('Halal', 'Halal'), ('Vegetarian', 'Vegetarian'),
