@@ -14,18 +14,49 @@
     <br><br>
     <div id='news' class="form-group col-md-12">News</div>
     <div class="container">
-        <table >
-        {% for news in container %}
-
-          <tr>
-            <th><img id='NewsImage' class="img-responsive" src={{ news['image'] }} alt="NewsImage"></th>
-            <td><a href= {{ news['link']}}>{{ news['title'] }}</a></td>
-          </tr>
-
-
-        {% endfor %}
-        </table>
+    {% for news in container %}
+        <div class="row">
+            <div class="col-md-4">
+                <img id='NewsImage' class="img-responsive" src={{ news['image'] }} alt="NewsImage">
+            </div>
+            <div class="col-md-8">
+                <h5>{{ news['title'] }}</h5>
+                <div id="knowbtn">
+                    <a id="knowtxt"  href="{{ news['link'] }}">know More</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
     </div>
+
+
+
+
+
+
+
+
+
+{#        <table >#}
+{#        {% for news in container %}#}
+{##}
+{#          <tr>#}
+{#            <th><img id='NewsImage' class="img-responsive" src={{ news['image'] }} alt="NewsImage"></th>#}
+{#            <td><a href= {{ news['link']}}>{{ news['title'] }}</a></td>#}
+{#          </tr>#}
+{##}
+{#            <tr>#}
+{#            <th><img id='NewsImage' class="img-responsive" src={{ news['image'] }} alt="NewsImage"></th>#}
+{#            <td><h5>{{ news['title'] }}</h5></td>#}
+{#            <div id="knowbtn">#}
+{#                <a id="knowtxt"  href="{{ news['link'] }}">know More</a>#}
+{#            </div>#}
+{#          </tr>#}
+{##}
+{##}
+{#        {% endfor %}#}
+{#        </table>#}
+
 
 
 <style>
@@ -45,6 +76,25 @@
         text-transform: uppercase;
         letter-spacing: .1em;
         text-align: center;
+    }
+    #knowbtn{
+        margin-top: 120px;
+        border: 1px solid #969696;
+        width: 180px;
+        padding: 5px 45px 11px;
+    }
+    #knowtxt:hover{
+        text-decoration:none;
+        color:darkred!important;
+        font-weight:800;
+    }
+    #knowtxt{
+        text-align:center;
+        color: black;
+        font-size:80%;
+        text-transform: uppercase;
+        font-family: 'Montserrat', sans-serif;
+        text-decoration:none;
     }
 </style>
 
