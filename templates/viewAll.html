@@ -3,9 +3,12 @@
 {% block body %}
 
     <div class="container" id="filterdiv">
-    <br><br>
+    <br>
     <h1 id="view">Results</h1>
-    <br><br><br>
+    <br><br>
+    {% if listR != [] %}
+       <h4 class="namee">Restaurants</h4>
+    {% endif %}
     <h4 class="namee">Restaurants</h4>
     <br><br>
     {% for i in listR %}
@@ -37,7 +40,9 @@
     {% endfor %}
 
     <br><br><br>
-    <h4 class="namee">Events</h4>
+    {% if listE != [] %}
+        <h4 class="namee">Events</h4>
+    {% endif %}
     <br><br>
         {% for i in listE %}
         <div class="col-md-12">
