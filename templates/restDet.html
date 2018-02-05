@@ -40,9 +40,12 @@
 {#         <span class="verticalLine"></span>#}<br><br>
           <span class="info2"><p class="glyphicon glyphicon-globe"></p> {{ restDetail['Address'] }}</span>
             <br><br>
-             {% for i in (restDetail['Days']) %}
-            <span class="info2"><p class="glyphicon glyphicon-time"></p> Operating Days: {{ i  }}</span>
+
+            <span class="info2"><p class="glyphicon glyphicon-time"></p> Operating Days:
+                {% for i in (restDetail['Days']) %}
+                {{ i  }}
               {% endfor %}
+            </span>
             </div>
     </div>
     </div>

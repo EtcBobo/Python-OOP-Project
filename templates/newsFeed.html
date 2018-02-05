@@ -31,34 +31,18 @@
 
 
 
-
-
-
-
-
-
-{#        <table >#}
-{#        {% for news in container %}#}
+{#<div  id="newsfeed">#}
+{#   <div class="row">#}
 {##}
-{#          <tr>#}
-{#            <th><img id='NewsImage' class="img-responsive" src={{ news['image'] }} alt="NewsImage"></th>#}
-{#            <td><a href= {{ news['link']}}>{{ news['title'] }}</a></td>#}
-{#          </tr>#}
-{##}
-{#            <tr>#}
-{#            <th><img id='NewsImage' class="img-responsive" src={{ news['image'] }} alt="NewsImage"></th>#}
-{#            <td><h5>{{ news['title'] }}</h5></td>#}
-{#            <div id="knowbtn">#}
-{#                <a id="knowtxt"  href="{{ news['link'] }}">know More</a>#}
-{#            </div>#}
-{#          </tr>#}
-{##}
-{##}
-{#        {% endfor %}#}
-{#        </table>#}
+{#        <div class="col-sm-12 " style="background-color: yellow">#}
+{#   {% for news in container %}#}
+{#        <li style="list-style-type: none;"><a href= {{ news['link']}}>{{ news['title'] }}</a></li>#}
+{#       <li style="list-style-type: none;">{{ news['date'] }}</li>#}
+{#   {% endfor %}#}
+{#        </div>#}
 
-
-
+{#   </div>#}
+{#    </div>#}
 <style>
     #NewsImage{
         width: 300px;
@@ -96,6 +80,14 @@
         font-family: 'Montserrat', sans-serif;
         text-decoration:none;
     }
+
+
+
+@media(max-width:991px){
+    #textdiv br{
+        display:none;
+    }
+}
 </style>
 
 {% endblock %}

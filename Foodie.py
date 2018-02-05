@@ -881,6 +881,11 @@ def userRegister():
         email = form.email.data
         sub = form.sub.data
 
+        if sub == ['I wish to receive weekly email from The Foodie.']:
+            sub = 'Yes'
+        else:
+            sub = 'No'
+
         if minPrice > maxPrice:
             flash(u'The Minumum budget cannot exceed the Maximum budget','error')
             return redirect(url_for('userRegister'))
@@ -892,46 +897,48 @@ def userRegister():
             if allUserg[key]['Username'] == user:
                 flash(u'This username has already been used','error')
                 return redirect(url_for('userRegister'))
-            if allUserg[key]['Email'] == email:
-                flash(u'This email has already been used','error')
-                return redirect(url_for('userRegister'))
+            try:
+                if allUserg[key]['Email'] == email:
+                    flash(u'This email has already been used','error')
+                    return redirect(url_for('userRegister'))
+            except:
+                pass
 
-        if sub == 'Yes':
 
-            email_user = 'thefoodie.newsletter@gmail.com'
-            email_password = 'foodie123'
-            email_send = email
+        email_user = 'thefoodie.newsletter@gmail.com'
+        email_password = 'foodie123'
+        email_send = email
 
-            subject = 'Warm welcome from TheFoodie team!'
+        subject = 'Warm welcome from TheFoodie team!'
 
-            msg = MIMEMultipart()
-            msg['From'] = email_user
-            msg['To'] = email_send
-            msg['Subject'] = subject
+        msg = MIMEMultipart()
+        msg['From'] = email_user
+        msg['To'] = email_send
+        msg['Subject'] = subject
 
-            body = '\n Hi '  + user + '! Thank you for subscribing with TheFoodie Newsletter! \n As a welcome gift, get a free sundae and mcwings by using the codes given below ' \
-                   '\n \nPlease continue to look forward to our monthly newsletters and get exclusive promotion codes only for subscribers! ' \
-                   '\n \n \n Sincerely, ' \
-                   '\n \nTheFoodie Team'
+        body = '\n Hi '  + user + '! Thank you for subscribing with TheFoodie Newsletter! \n As a welcome gift, get a free sundae and mcwings by using the codes given below ' \
+               '\n \nPlease continue to look forward to our monthly newsletters and get exclusive promotion codes only for subscribers! ' \
+               '\n \n \n Sincerely, ' \
+               '\n \nTheFoodie Team'
 
-            msg.attach(MIMEText(body, 'plain'))
+        msg.attach(MIMEText(body, 'plain'))
 
-            filename = 'promo.jpg'
-            attachment = open(filename, 'rb')
+        filename = 'promo.jpg'
+        attachment = open(filename, 'rb')
 
-            part = MIMEBase('application', 'octet-stream')
-            part.set_payload((attachment).read())
-            encoders.encode_base64(part)
-            part.add_header('Content-Disposition', "attachment; filename= " + filename)
+        part = MIMEBase('application', 'octet-stream')
+        part.set_payload((attachment).read())
+        encoders.encode_base64(part)
+        part.add_header('Content-Disposition', "attachment; filename= " + filename)
 
-            msg.attach(part)
-            text = msg.as_string()
-            server = smtplib.SMTP('smtp.gmail.com', 587)
-            server.starttls()
-            server.login(email_user, email_password)
+        msg.attach(part)
+        text = msg.as_string()
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login(email_user, email_password)
 
-            server.sendmail(email_user, email_send, text)
-            server.quit()
+        server.sendmail(email_user, email_send, text)
+        server.quit()
 
         theBreak = False
         while theBreak == False:
@@ -1579,7 +1586,7 @@ def restEdit(restName):
             'Closing Hours': closingH,
             'Address': address,
             'Landline':landline,
-            'days':days
+            'Days':days
         })
         flash(u'You have successfully edited your restaurant!','success')
 
@@ -1715,6 +1722,7 @@ def userProfile():
     except:
         status = ''
 
+    test = ''
 
     if status == 'Healthy':
         randmsg = ['Now for the hardest part, remaining healthy!', 'Good job! keep burning those unwanted fats!',
@@ -2020,7 +2028,7 @@ def eventDet(eventName):
             user = session['username']
         except:
             flash(u'You must be logged in to sign up for the event','error')
-            return render_template('eventDet.html', currEventg=currEventg, proPic=proPic)
+            return redirect(url_for('userLogin'))
         goingEventr = root.child('events/'+eventKey+'/Going')
         goingEventr.update({
             session['username']:session['username']
