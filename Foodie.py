@@ -1586,7 +1586,7 @@ def restEdit(restName):
             'Closing Hours': closingH,
             'Address': address,
             'Landline':landline,
-            'days':days
+            'Days':days
         })
         flash(u'You have successfully edited your restaurant!','success')
 
