@@ -1565,12 +1565,6 @@ def userEdit():
     except KeyError:
         session['proPic'] =''
     class UserEdit(Form):
-        password = PasswordField('New Password', [
-            validators.Length(min=8),
-            validators.DataRequired(),
-            validators.EqualTo('confirm', message='Passwords must match')
-        ])
-        confirm = PasswordField('Repeat Password')
         minPrice = IntegerField('Minimum Meal Budget',[validators.DataRequired()],default=session['userDetail']['minPrice'])
         maxPrice = IntegerField('Maximum Meal Budget',[validators.DataRequired()], default=session['userDetail']['maxPrice'])
         foodType = SelectField(u'Preferred Food Type',
@@ -1597,7 +1591,7 @@ def userEdit():
         minPrice = form.minPrice.data
         maxPrice = form.maxPrice.data
         foodType = form.foodType.data
-        password = form.password.data
+
         sub = form.sub.data
         if sub == ['I wish to receive weekly email from The Foodie.']:
             sub = 'Yes'
@@ -1621,7 +1615,6 @@ def userEdit():
             'maxPrice':maxPrice,
             'Food Types': foodType,
             'Email': email,
-            'Password': password,
             'sub':sub
         })
         flash(u'You have succesfully edited your profile!','success')
