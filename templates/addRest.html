@@ -150,7 +150,8 @@
         else{
 
                 var postData = {
-                    urlRest:"http://clipartbarn.com/wp-content/uploads/2016/12/Restaurant-clipart-page-1.jpg"
+                    urlRest:"http://clipartbarn.com/wp-content/uploads/2016/12/Restaurant-clipart-page-1.jpg",
+                    Name:'placeholder'
                 };
 
 
@@ -176,6 +177,7 @@
             var downloadURL = uploadTask.snapshot.downloadURL;
             var postData = {
                 urlRest: downloadURL,
+                Name:'placeholder'
             };
 
             firebase.database().ref().child('/restaurants/rest{{ count }}').update(postData)

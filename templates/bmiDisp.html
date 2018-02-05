@@ -11,15 +11,15 @@
 
 <div class="form-group col-md-12">
 
-    {% if status == 'healthy' %}
+    {% if status == 'Healthy' %}
     <img src="https://thumbs.dreamstime.com/b/healthy-boy-energetic-eps-31616887.jpg" style="width:450px;height:350px; display: block;
     margin-left: auto;
     margin-right: auto;">
-    {% elif status == 'underweight' %}
+    {% elif status == 'Underweight' %}
     <img src="https://i.imgur.com/pEXlokD.jpg" style="width:450px;height:350px; display: block;
     margin-left: auto;
     margin-right: auto;">
-    {% elif status == 'obese' %}
+    {% elif status == 'Obese' %}
     <img src="https://i.imgur.com/Y3HxsZE.jpg" style="width:450px;height:350px; display: block;
     margin-left: auto;
     margin-right: auto;">
@@ -30,13 +30,13 @@
     {% endif %}
 
 
-{% if status == 'healthy' %}
+{% if status == 'Healthy' %}
 <h4 style=" display: block;font-size: 150%;font-family: 'Montserrat', sans-serif;font-weight: bold;letter-spacing: .1em;text-align: center;">
     Congratulations for staying <span style="color:greenyellow;font-size:120%;">healthy!</span> Remember to eat more veggies and Be active for 30mins a day! </h4>
-{% elif status == 'underweight' %}
+{% elif status == 'Underweight' %}
 <h4 style=" display: block;font-size: 150%;font-family: 'Montserrat', sans-serif;font-weight: bold;letter-spacing: .1em;text-align: center;">
     You are <span style="color:yellow;font-size:120%;">Underweight!</span> As part of an overall healthy diet, choose whole-grain breads, pastas and cereals; fruits and vegetables; dairy products; lean protein sources; and nuts and seeds. </h4>
-{% elif status == 'obese' %}
+{% elif status == 'Obese' %}
 <h4 style=" display: block;font-size: 150%;font-family: 'Montserrat', sans-serif;font-weight: bold;letter-spacing: .1em;text-align: center;">
     Oh No! You are <span style="color:darkred;font-size:120%;">Obese!</span>Be active for 30mins a day! Activities includes take the dog for a walk, meet a friend for a walk or a bike ride, take the stairs instead of a lift or escalator. </h4>
 {% else %}
