@@ -48,8 +48,10 @@
                 let address = json_string[i][name].Address;
                 let description = json_string[i][name].Description;
                 let restName = json_string[i][name].Name;
-
-                console.log(restName);
+                let openH = json_string[i][name].openH;
+                let closeH = json_string[i][name].closeH;
+                let img = json_string[i][name].urlRest;
+                console.log(openH);
 
             //------------------------Geocoder------------------------
                 geocoder.geocode({'address': address}, function(results, status) {
@@ -62,12 +64,15 @@
               let marker = new google.maps.Marker({
                 map: map,
                 position: position,
-                  title:restName    //when you hover each marker, can see restaurant name
+                title:restName    //when you hover each marker, can see restaurant name
               });
               //------------------------InfoWindow for Markers------------------------
               google.maps.event.addListener(marker, 'click', function () {
                   let infowindow = new google.maps.InfoWindow({
-                  content: "<h3>" +restName +"</h3>" + '<p>' + address + '<br>' + '<br>' + "Description: " + description + '</p>' });  //information about restaurant
+                  content: "<img style='width:130px; height:100px;' src=" +img +'> ' + '<br>' +
+                  "<h3>" +restName +"</h3>" + '<br>' +
+                  '<p>' + address + '<br>' + '<br>' + "Description: " + description + '<br>' + '<br>' +
+                  "Operating Hours: " + openH + ' - ' + closeH + '</p>'});  //information about restaurant
               infowindow.open(map, marker);
           });
 
