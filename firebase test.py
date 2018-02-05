@@ -37,9 +37,10 @@ print(year+1)
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
-
-code = id_generator()
-print(code)
+first = 'Mega Sushi'
+second = 'Mega Sushi'
+if first.lower == second.lower:
+    print('ok')
 
 
 restFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")

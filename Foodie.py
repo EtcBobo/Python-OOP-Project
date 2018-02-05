@@ -800,16 +800,17 @@ def addRest():
 
         if days == []:
             days = {'0':'Everyday'}
-            print('this')
 
 
 
         res = Restaurant(name,desc,location,price,foodType,openH,closingH,address)
 
 
+
         try:
             for key in allRestg:
-                if name.lower == allRestg[key]['Name'].lower:
+                print(allRestg[key]['Name'],name)
+                if name == allRestg[key]['Name']:
                     flash(u'This restaurant already exist','error')
                     return redirect(url_for('addRest'))
         except:
