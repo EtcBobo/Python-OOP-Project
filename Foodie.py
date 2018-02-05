@@ -858,15 +858,6 @@ def userRegister():
             flash(u'The Minumum budget cannot exceed the Maximum budget','error')
             return redirect(url_for('userRegister'))
 
-        print(sub)
-
-        if sub == ['I wish to receive weekly email from The Foodie.']:
-            sub = 'Yes'
-        else:
-            sub = 'No'
-
-
-
         reg = Registration(user,password,minPrice,maxPrice,foodType,email)
 
 
