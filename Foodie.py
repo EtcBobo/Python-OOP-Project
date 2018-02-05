@@ -192,7 +192,7 @@ def home():
     except KeyError:
         userPref = {'Food Types':'None'}
         proPic =''
-    print(userPref)
+
     recommend = []
     randRec = []
     restFire = firebase.FirebaseApplication("https://python-oop.firebaseio.com/")
@@ -305,6 +305,8 @@ def home():
 
         session['filteredR'] = nameListR
         session['filteredE'] = nameListE
+        print('e',session['filteredE'])
+
 
 
         if nameListR == [] and nameListE == []:
@@ -754,6 +756,7 @@ def viewAll():
         proPic = session['proPic']
     except KeyError:
         proPic =''
+    print(session['filteredR'])
     listE = session['filteredE']
     listR = session['filteredR']
     listLen = len(listE)  + len(listR)
@@ -800,16 +803,17 @@ def addRest():
 
         if days == []:
             days = {'0':'Everyday'}
-            print('this')
 
 
 
         res = Restaurant(name,desc,location,price,foodType,openH,closingH,address)
 
 
+        test = ''
         try:
             for key in allRestg:
-                if name.lower == allRestg[key]['Name'].lower:
+                print(allRestg[key]['Name'],name)
+                if name == allRestg[key]['Name']:
                     flash(u'This restaurant already exist','error')
                     return redirect(url_for('addRest'))
         except:
