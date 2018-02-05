@@ -35,12 +35,15 @@
         {% for news in container %}
                 <div class="form-group col-md-4">
                     <img id='NewsImage' class="img-responsive" src={{ news['image'] }} alt="NewsImage">
-                    <h5>{{ news['title'] }}</h5>
-                    <br><br>
+                    <div>
+                        <h5>{{ news['title'] }}</h5>
+                    </div>
+                    <br>
                     <div id="knowbtn">
                         <a id="knowtxt"  href="{{ news['link'] }}">Know More</a>
+                        <br>
                     </div>
-                    <br><br>
+
                 </div>
         {% endfor %}
         </div>
