@@ -11,46 +11,47 @@
 {#    {% endfor %}#}
 {##}
 {#</div>#}
+{#    <br><br>#}
+{#    <div id='news' class="form-group col-md-12">News</div>#}
+{#    <div class="container">#}
+{#    {% for news in container %}#}
+{#        <div class="row">#}
+{#            <div class="col-md-4">#}
+{#                <img id='NewsImage' class="img-responsive" src={{ news['image'] }} alt="NewsImage">#}
+{#            </div>#}
+{#            <div class="col-md-8">#}
+{#                <h5>{{ news['title'] }}</h5>#}
+{#                <div id="knowbtn">#}
+{#                    <a id="knowtxt"  href="{{ news['link'] }}">know More</a>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    {% endfor %}#}
+{#    </div>#}
     <br><br>
     <div id='news' class="form-group col-md-12">News</div>
     <div class="container">
-    {% for news in container %}
-        <div class="row">
-            <div class="col-md-4">
-                <img id='NewsImage' class="img-responsive" src={{ news['image'] }} alt="NewsImage">
-            </div>
-            <div class="col-md-8">
-                <h5>{{ news['title'] }}</h5>
-                <div id="knowbtn">
-                    <a id="knowtxt"  href="{{ news['link'] }}">know More</a>
+        <div class="form-group col-md-12">
+        {% for news in container %}
+                <div class="form-group col-md-4">
+                    <img id='NewsImage' class="img-responsive" src={{ news['image'] }} alt="NewsImage">
+                    <h5>{{ news['title'] }}</h5>
+                    <br><br>
+                    <div id="knowbtn">
+                        <a id="knowtxt"  href="{{ news['link'] }}">Know More</a>
+                    </div>
+                    <br><br>
                 </div>
-            </div>
+        {% endfor %}
         </div>
-    {% endfor %}
+
     </div>
 
-
-
-{#<div  id="newsfeed">#}
-{#   <div class="row">#}
-{##}
-{#        <div class="col-sm-12 " style="background-color: yellow">#}
-{#   {% for news in container %}#}
-{#        <li style="list-style-type: none;"><a href= {{ news['link']}}>{{ news['title'] }}</a></li>#}
-{#       <li style="list-style-type: none;">{{ news['date'] }}</li>#}
-{#   {% endfor %}#}
-{#        </div>#}
-
-{#   </div>#}
-{#    </div>#}
 <style>
     #NewsImage{
         width: 300px;
         height: 200px;
         padding: 5px 5px 5px 5px;
-    }
-    #date{
-        text-align: right;
     }
     #news{
         display: block;
@@ -62,7 +63,7 @@
         text-align: center;
     }
     #knowbtn{
-        margin-top: 120px;
+        margin-left:60px;
         border: 1px solid #969696;
         width: 180px;
         padding: 5px 45px 11px;
