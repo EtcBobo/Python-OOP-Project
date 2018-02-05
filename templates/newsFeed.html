@@ -12,34 +12,22 @@
 {##}
 {#</div>#}
     <br><br>
-<div id='news' class="form-group col-md-12">News</div>
+    <div id='news' class="form-group col-md-12">News</div>
     <div class="container">
-<table >
-{% for news in container %}
+        <table >
+        {% for news in container %}
 
-  <tr>
-    <th><img id='NewsImage' class="img-responsive" src={{ news['image'] }} alt="NewsImage"></th>
-    <td><a href= {{ news['link']}}>{{ news['title'] }}</a></td>
-  </tr>
+          <tr>
+            <th><img id='NewsImage' class="img-responsive" src={{ news['image'] }} alt="NewsImage"></th>
+            <td><a href= {{ news['link']}}>{{ news['title'] }}</a></td>
+          </tr>
 
-{% endfor %}
-</table>
+
+        {% endfor %}
+        </table>
     </div>
 
 
-
-{#<div  id="newsfeed">#}
-{#   <div class="row">#}
-{##}
-{#        <div class="col-sm-12 " style="background-color: yellow">#}
-{#   {% for news in container %}#}
-{#        <li style="list-style-type: none;"><a href= {{ news['link']}}>{{ news['title'] }}</a></li>#}
-{#       <li style="list-style-type: none;">{{ news['date'] }}</li>#}
-{#   {% endfor %}#}
-{#        </div>#}
-
-{#   </div>#}
-{#    </div>#}
 <style>
     #NewsImage{
         width: 300px;
