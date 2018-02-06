@@ -48,9 +48,15 @@
             </div>
         <div class="form-group col-md-3">
                                 {% if currEventg['Status'] !='Ended' %}
+                                    {% if button == True %}
           <form method="post">
           <div>
+
               <button type="submit" class="btn btn-primary" style="float:right;">I'm Interested In Going</button></div></form>
+                  {% else %}
+                  <button class="btn btn-primary disabled" style="float:right;">I'm Interested In Going</button>
+                  {% endif %}
+
            <br><br>
       <small style="float:right"> {{ currEventg['People'] }} people interested in going</small>
           </div>
@@ -64,8 +70,6 @@
 </div>
 
 
-
-      </form>
 
 
 </div>
@@ -96,6 +100,8 @@
  text-align: center;
  }
 
+
+
 @media (max-width: 991px) {
     #br br{
         display:none
@@ -114,17 +120,6 @@
 .back:hover{
     color:black;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

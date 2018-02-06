@@ -36,6 +36,8 @@
                       <h3 class="eventTitle"><a href="/eventDet/{{ i['Name'] }}">{{ i['Name'] }}</a> <span class="label label-success">Ongoing</span></h3>
                       <br>
                       <span class="desctext">{{ i['Description'] }}</span>
+                      <br><br><br><br>
+                      <span class="desctext">Start Date - End Date: {{ i['Start'] }} to {{ i['End']}}</span>
                   </div>
               </div>
             {% endfor %}

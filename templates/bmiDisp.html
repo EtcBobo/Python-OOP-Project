@@ -6,7 +6,27 @@
     <h3 style="text-align:center;font-size:250%;">Your result is</h3>
     <br>
     <h3 style="text-align:center;font-size:250%;color:blue;">{{ bmi }}</h3>
-        <h5 style="text-align:center;font-size:200%;text-justify:auto;">Your bmi category is <span style="color:greenyellow;font-size:120%;">{{ status }}</span></h5>
+        <h5 style="text-align:center;font-size:200%;text-justify:auto;">Your bmi category is
+
+
+            {% if status == 'Healthy' %}
+    <span style="color:green;font-size:120%;font-weight:bold;">{{ status }}</span>
+    {% elif status == 'Underweight' %}
+    <span style="color:yellow;font-size:120%;font-weight:bold;">{{ status }}</span>
+    {% elif status == 'Obese' %}
+    <span style="color:darkred;font-size:120%;font-weight:bold;">{{ status }}</span>
+    {% else %}
+    <span style="color:red;font-size:120%;font-weight:bold;">{{ status }}</span>
+    {% endif %}
+
+
+
+
+
+
+
+
+        </h5>
 <br><br><br><br>
 
 <div class="form-group col-md-12">
@@ -32,13 +52,13 @@
 
 {% if status == 'Healthy' %}
 <h4 style=" display: block;font-size: 150%;font-family: 'Montserrat', sans-serif;font-weight: bold;letter-spacing: .1em;text-align: center;">
-    Congratulations for staying <span style="color:greenyellow;font-size:120%;">healthy!</span> Remember to eat more veggies and Be active for 30mins a day! </h4>
+    Congratulations for staying <span style="color:green;font-size:120%;">healthy!</span> Remember to eat more veggies and Be active for 30mins a day! </h4>
 {% elif status == 'Underweight' %}
 <h4 style=" display: block;font-size: 150%;font-family: 'Montserrat', sans-serif;font-weight: bold;letter-spacing: .1em;text-align: center;">
     You are <span style="color:yellow;font-size:120%;">Underweight!</span> As part of an overall healthy diet, choose whole-grain breads, pastas and cereals; fruits and vegetables; dairy products; lean protein sources; and nuts and seeds. </h4>
 {% elif status == 'Obese' %}
 <h4 style=" display: block;font-size: 150%;font-family: 'Montserrat', sans-serif;font-weight: bold;letter-spacing: .1em;text-align: center;">
-    Oh No! You are <span style="color:darkred;font-size:120%;">Obese!</span>Be active for 30mins a day! Activities includes take the dog for a walk, meet a friend for a walk or a bike ride, take the stairs instead of a lift or escalator. </h4>
+    Oh No! You are <span style="color:darkred;font-size:120%;">Obese! </span>Be active for 30mins a day! Activities includes take the dog for a walk, meet a friend for a walk or a bike ride, take the stairs instead of a lift or escalator. </h4>
 {% else %}
 <h4 style=" display: block;font-size: 150%;font-family: 'Montserrat', sans-serif;font-weight: bold;letter-spacing: .1em;text-align: center;">
     You are <span style="color:red;font-size:120%;">Overweight!</span> Watch your diet! Watch Out for Fats but Don't Eliminate the Good Fats Completely.  </h4>

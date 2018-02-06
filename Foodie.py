@@ -449,23 +449,23 @@ def filter():
             if openH <= openT1 < closingH or openT1 < closingH < openH or openT1 > openH > closingH or closingH == openH:
                 filterList.append(totalRest[key])
 
-            if location !='Any':
-                i = 0
-                while i < len(filterList):
-                    if filterList[i]['Location'] != location:
-                        del filterList[i]
-                        i = i - 1
-                    i = i + 1
-
-
-
-        if pricef != '':
+        if location !='Any':
             i = 0
             while i < len(filterList):
-                if int(filterList[i]['Price']) > int(pricef):
+                if filterList[i]['Location'] != location:
                     del filterList[i]
                     i = i - 1
                 i = i + 1
+
+
+
+
+        i = 0
+        while i < len(filterList):
+            if int(filterList[i]['Price']) > int(pricef):
+                del filterList[i]
+                i = i - 1
+            i = i + 1
 
             print(filterList)
 
@@ -506,9 +506,12 @@ def findEvent():
         for key in allEventg:
             if status == 'Any':
                 filterList.append(allEventg[key])
+                print('status any')
             else:
                 if allEventg[key]['Status'] == status:
                     filterList.append(allEventg[key])
+
+        print(location,'da location')
 
         if location !='Any':
             i = 0
@@ -531,7 +534,6 @@ def findEvent():
             return redirect(url_for('empty'))
 
         session['efiltered'] = filterList
-        print(session['efiltered'])
         return redirect(url_for('viewEvent'))
     return render_template('findEvent.html', form=form,proPic=proPic)
 
@@ -909,8 +911,8 @@ def userRegister():
                 pass
 
 
-        email_user = 'thefoodie.newsletter@gmail.com'
-        email_password = 'foodie123'
+        email_user = 'omgnooopython@gmail.com'
+        email_password = 'pythonnopython'
         email_send = email
 
         subject = 'Warm welcome from TheFoodie team!'
@@ -1108,8 +1110,8 @@ def forget():
         session['userReset'] = name
 
 
-        email_user = 'thefoodie.newsletter@gmail.com'
-        email_password = 'foodie123'
+        email_user = 'omgnooopython@gmail.com'
+        email_password = 'pythonnopython'
         email_send = email
 
         subject = 'Request for The Foodie account Password Reset'
@@ -1824,7 +1826,7 @@ def events():
                 status.append('Upcoming')
             elif int(allEventg[key]['End'][0:4]) < currYear:
                 status.append('Ended')
-            elif int(allEventg[key]['Start'][0:4]) <= currYear and int(allEventg[key]['End'][0:4]) > currYear:
+            elif int(allEventg[key]['Start'][0:4]) < currYear and int(allEventg[key]['End'][0:4]) > currYear:
                 status.append('Ongoing')
             elif int(allEventg[key]['Start'][0:4]) == currYear:
 
@@ -1832,7 +1834,7 @@ def events():
                     status.append('Upcoming')
                 elif int(allEventg[key]['End'][5:7]) < currMonth:
                     status.append('Ended')
-                elif int(allEventg[key]['Start'][5:7]) <= currMonth and int(allEventg[key]['End'][5:7]) > currMonth:
+                elif int(allEventg[key]['Start'][5:7]) < currMonth and int(allEventg[key]['End'][5:7]) > currMonth:
                     status.append('Ongoing')
                 elif int(allEventg[key]['Start'][5:7]) == currMonth:
 
@@ -2059,6 +2061,18 @@ def eventDet(eventName):
         if currEventg[key]['Name'] == eventName:
             currEvent = currEventg[key]
             eventKey = key
+    button = True
+    try:
+        theEventr = root.child('events/'+eventKey)
+        theEventg = theEventr.get()
+        for key in theEventg:
+            print(theEventg)
+            if session['username'] == theEventg[key]:
+                button = False
+    except:
+        pass
+
+    print('button is',button)
 
     form = EventForm(request.form)
     if request.method == 'POST':
@@ -2067,13 +2081,17 @@ def eventDet(eventName):
         except:
             flash(u'You must be logged in to sign up for the event','error')
             return redirect(url_for('userLogin'))
+
+
+
+
         goingEventr = root.child('events/'+eventKey+'/Going')
         goingEventr.update({
             session['username']:session['username']
         })
         flash(u'The event has been added to your profile successfully!','success')
         return redirect(url_for('events'))
-    return render_template('eventDet.html',currEventg=currEvent,proPic=proPic)
+    return render_template('eventDet.html',currEventg=currEvent,proPic=proPic,button=button)
 
 
 
