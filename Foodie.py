@@ -467,7 +467,7 @@ def filter():
                 i = i - 1
             i = i + 1
 
-            print(filterList)
+
 
         if foodType != 'Any':
             i = 0
@@ -481,7 +481,7 @@ def filter():
             return redirect(url_for('empty'))
 
         session['filtered'] = filterList
-        print(session['filtered'])
+
         return redirect(url_for('view'))
     return render_template('filter.html', form=form,proPic=proPic)
 
@@ -506,12 +506,13 @@ def findEvent():
         for key in allEventg:
             if status == 'Any':
                 filterList.append(allEventg[key])
-                print('status any')
+
             else:
                 if allEventg[key]['Status'] == status:
                     filterList.append(allEventg[key])
 
-        print(location,'da location')
+
+        print(len(filterList))
 
         if location !='Any':
             i = 0
@@ -520,7 +521,7 @@ def findEvent():
                     del filterList[i]
                     i = i - 1
                 i = i + 1
-
+        print('after location',len(filterList))
 
         i = 0
         while i < len(filterList):
@@ -529,11 +530,13 @@ def findEvent():
                 i = i - 1
             i = i + 1
 
+        print(len(filterList))
 
         if filterList == []:
             return redirect(url_for('empty'))
 
-        session['efiltered'] = filterList
+
+        session['elist'] = filterList
         return redirect(url_for('viewEvent'))
     return render_template('findEvent.html', form=form,proPic=proPic)
 
@@ -547,7 +550,10 @@ def viewEvent():
         proPic = session['proPic']
     except KeyError:
         proPic =''
-    list = session['efiltered']
+
+
+
+    list = session['elist']
     listLen = len(list)
 
 
@@ -652,7 +658,6 @@ def viewall():
     allRestg = allRestr.get()
     for key in allRestg:
         list.append(allRestg[key])
-    print(list)
     listLen = len(list)
 
 
@@ -758,7 +763,7 @@ def viewAll():
         proPic = session['proPic']
     except KeyError:
         proPic =''
-    print(session['filteredR'])
+
     listE = session['filteredE']
     listR = session['filteredR']
     listLen = len(listE)  + len(listR)
@@ -814,7 +819,7 @@ def addRest():
         test = ''
         try:
             for key in allRestg:
-                print(allRestg[key]['Name'],name)
+
                 if name == allRestg[key]['Name']:
                     flash(u'This restaurant already exist','error')
                     return redirect(url_for('addRest'))
@@ -2091,7 +2096,7 @@ def eventDet(eventName):
         })
         flash(u'The event has been added to your profile successfully!','success')
         return redirect(url_for('events'))
-    return render_template('eventDet.html',currEventg=currEvent,proPic=proPic,button=button)
+    return render_template('eventDet.html',currEventg=currEvent,proPic=session['proPic'],button=button)
 
 
 
