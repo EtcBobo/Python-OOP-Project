@@ -32,7 +32,7 @@ python-engineio==2.0.1
 python-firebase==1.2
 python-socketio==1.8.4
 requests==2.18.4
-rsa==3.4.2
+rsa==4.7
 six==1.11.0
 urllib3==1.22
 Werkzeug==0.12.2
